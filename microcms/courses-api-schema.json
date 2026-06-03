@@ -1,0 +1,221 @@
+{
+  "apiFields": [
+    {
+      "fieldId": "title",
+      "name": "ゴルフ場名",
+      "kind": "text",
+      "required": true
+    },
+    {
+      "fieldId": "slug",
+      "name": "slug",
+      "kind": "text",
+      "required": true
+    },
+    {
+      "fieldId": "status",
+      "name": "掲載状態",
+      "kind": "select",
+      "required": true,
+      "multipleSelect": false,
+      "selectInitialValue": [
+        "published"
+      ],
+      "selectItems": [
+        {
+          "id": "sel001",
+          "value": "published"
+        },
+        {
+          "id": "sel002",
+          "value": "draft"
+        },
+        {
+          "id": "sel003",
+          "value": "archived"
+        }
+      ]
+    },
+    {
+      "fieldId": "area",
+      "name": "エリア",
+      "kind": "select",
+      "required": true,
+      "multipleSelect": false,
+      "selectInitialValue": [],
+      "selectItems": [
+        {
+          "id": "sel011",
+          "value": "南部"
+        },
+        {
+          "id": "sel012",
+          "value": "中部"
+        },
+        {
+          "id": "sel013",
+          "value": "北部"
+        },
+        {
+          "id": "sel014",
+          "value": "離島"
+        }
+      ]
+    },
+    {
+      "fieldId": "city",
+      "name": "市町村",
+      "kind": "text",
+      "required": true
+    },
+    {
+      "fieldId": "courseType",
+      "name": "種類",
+      "kind": "select",
+      "required": true,
+      "multipleSelect": false,
+      "selectInitialValue": [],
+      "selectItems": [
+        {
+          "id": "sel021",
+          "value": "ロングコース"
+        },
+        {
+          "id": "sel022",
+          "value": "ミドルコース"
+        },
+        {
+          "id": "sel023",
+          "value": "ショートコース"
+        }
+      ]
+    },
+    {
+      "fieldId": "address",
+      "name": "住所",
+      "kind": "text",
+      "required": false
+    },
+    {
+      "fieldId": "phone",
+      "name": "電話番号",
+      "kind": "text",
+      "required": false
+    },
+    {
+      "fieldId": "websiteUrl",
+      "name": "公式サイトURL",
+      "kind": "text",
+      "required": false
+    },
+    {
+      "fieldId": "reservationUrl",
+      "name": "予約URL",
+      "kind": "text",
+      "required": false
+    },
+    {
+      "fieldId": "airportAccess",
+      "name": "那覇空港からの所要時間",
+      "kind": "text",
+      "required": false
+    },
+    {
+      "fieldId": "holes",
+      "name": "ホール数",
+      "kind": "number",
+      "required": false
+    },
+    {
+      "fieldId": "par",
+      "name": "Par",
+      "kind": "number",
+      "required": false
+    },
+    {
+      "fieldId": "summary",
+      "name": "概要",
+      "kind": "textArea",
+      "required": false
+    },
+    {
+      "fieldId": "features",
+      "name": "特徴",
+      "kind": "textArea",
+      "required": false
+    },
+    {
+      "fieldId": "isBeginnerFriendly",
+      "name": "初心者向け",
+      "kind": "boolean",
+      "required": false
+    },
+    {
+      "fieldId": "isTouristFriendly",
+      "name": "観光客向け",
+      "kind": "boolean",
+      "required": false
+    },
+    {
+      "fieldId": "hasPracticeArea",
+      "name": "練習場あり",
+      "kind": "boolean",
+      "required": false
+    },
+    {
+      "fieldId": "isPartnerCandidate",
+      "name": "パートナー候補",
+      "kind": "boolean",
+      "required": false
+    },
+    {
+      "fieldId": "lastChecked",
+      "name": "最終確認日",
+      "kind": "text",
+      "required": false
+    },
+    {
+      "fieldId": "sourceUrl",
+      "name": "情報ソース",
+      "kind": "text",
+      "required": false
+    },
+    {
+      "fieldId": "memo",
+      "name": "メモ",
+      "kind": "textArea",
+      "required": false
+    },
+    {
+      "fieldId": "photo1",
+      "name": "写真1",
+      "kind": "media",
+      "required": false
+    },
+    {
+      "fieldId": "photo2",
+      "name": "写真2",
+      "kind": "media",
+      "required": false
+    },
+    {
+      "fieldId": "photo3",
+      "name": "写真3",
+      "kind": "media",
+      "required": false
+    },
+    {
+      "fieldId": "photo4",
+      "name": "写真4",
+      "kind": "media",
+      "required": false
+    },
+    {
+      "fieldId": "photo5",
+      "name": "写真5",
+      "kind": "media",
+      "required": false
+    }
+  ],
+  "customFields": []
+}

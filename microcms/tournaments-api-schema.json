@@ -1,0 +1,143 @@
+{
+  "apiFields": [
+    {
+      "fieldId": "title",
+      "name": "大会名",
+      "kind": "text",
+      "required": true
+    },
+    {
+      "fieldId": "month",
+      "name": "開催月",
+      "kind": "text",
+      "required": true
+    },
+    {
+      "fieldId": "dateLabel",
+      "name": "開催日",
+      "kind": "text",
+      "required": false
+    },
+    {
+      "fieldId": "venue",
+      "name": "会場",
+      "kind": "text",
+      "required": false
+    },
+    {
+      "fieldId": "area",
+      "name": "地域",
+      "kind": "text",
+      "required": false
+    },
+    {
+      "fieldId": "category",
+      "name": "種別",
+      "kind": "select",
+      "required": false,
+      "multipleSelect": false,
+      "selectInitialValue": [],
+      "selectItems": [
+        {
+          "id": "sel001",
+          "value": "一般"
+        },
+        {
+          "id": "sel002",
+          "value": "シニア"
+        },
+        {
+          "id": "sel003",
+          "value": "女性"
+        },
+        {
+          "id": "sel004",
+          "value": "ジュニア"
+        },
+        {
+          "id": "sel005",
+          "value": "プロ"
+        }
+      ]
+    },
+    {
+      "fieldId": "status",
+      "name": "ステータス",
+      "kind": "select",
+      "required": true,
+      "multipleSelect": false,
+      "selectInitialValue": [
+        "確認中"
+      ],
+      "selectItems": [
+        {
+          "id": "sel011",
+          "value": "募集中"
+        },
+        {
+          "id": "sel012",
+          "value": "開催予定"
+        },
+        {
+          "id": "sel013",
+          "value": "成績あり"
+        },
+        {
+          "id": "sel014",
+          "value": "確認中"
+        },
+        {
+          "id": "sel015",
+          "value": "draft"
+        },
+        {
+          "id": "sel016",
+          "value": "archived"
+        }
+      ]
+    },
+    {
+      "fieldId": "description",
+      "name": "説明文",
+      "kind": "textArea",
+      "required": false
+    },
+    {
+      "fieldId": "entryUrl",
+      "name": "募集要項URL",
+      "kind": "text",
+      "required": false
+    },
+    {
+      "fieldId": "overviewUrl",
+      "name": "大会概要URL",
+      "kind": "text",
+      "required": false
+    },
+    {
+      "fieldId": "resultUrl",
+      "name": "成績URL",
+      "kind": "text",
+      "required": false
+    },
+    {
+      "fieldId": "officialUrl",
+      "name": "公式URL",
+      "kind": "text",
+      "required": false
+    },
+    {
+      "fieldId": "displayOrder",
+      "name": "表示順",
+      "kind": "number",
+      "required": true
+    },
+    {
+      "fieldId": "tags",
+      "name": "検索キーワード",
+      "kind": "text",
+      "required": false
+    }
+  ],
+  "customFields": []
+}

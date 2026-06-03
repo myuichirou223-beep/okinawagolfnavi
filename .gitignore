@@ -1,1 +1,8 @@
 .DS_Store
+node_modules/
+.next/
+out/
+*.zip
+.env.local
+.env*.local
+_archive/

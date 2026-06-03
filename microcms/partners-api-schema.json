@@ -1,0 +1,53 @@
+{
+  "apiFields": [
+    {
+      "fieldId": "name",
+      "name": "パートナー名",
+      "kind": "text",
+      "required": true
+    },
+    {
+      "fieldId": "logo",
+      "name": "ロゴ画像",
+      "kind": "media",
+      "required": false
+    },
+    {
+      "fieldId": "websiteUrl",
+      "name": "公式URL",
+      "kind": "text",
+      "required": false
+    },
+    {
+      "fieldId": "status",
+      "name": "掲載状態",
+      "kind": "select",
+      "required": true,
+      "multipleSelect": false,
+      "selectInitialValue": [
+        "published"
+      ],
+      "selectItems": [
+        {
+          "id": "sel001",
+          "value": "published"
+        },
+        {
+          "id": "sel002",
+          "value": "draft"
+        },
+        {
+          "id": "sel003",
+          "value": "archived"
+        }
+      ]
+    },
+    {
+      "fieldId": "displayOrder",
+      "name": "表示順",
+      "kind": "number",
+      "required": false
+    }
+  ],
+  "customFields": []
+}

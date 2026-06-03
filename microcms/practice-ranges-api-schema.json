@@ -1,0 +1,111 @@
+{
+  "apiFields": [
+    {
+      "fieldId": "name",
+      "name": "施設名",
+      "kind": "text",
+      "required": true
+    },
+    {
+      "fieldId": "category",
+      "name": "カテゴリ",
+      "kind": "select",
+      "required": true,
+      "multipleSelect": false,
+      "selectInitialValue": [],
+      "selectItems": [
+        {
+          "id": "sel001",
+          "value": "屋外"
+        },
+        {
+          "id": "sel002",
+          "value": "屋内"
+        },
+        {
+          "id": "sel003",
+          "value": "レッスン"
+        }
+      ]
+    },
+    {
+      "fieldId": "area",
+      "name": "エリア",
+      "kind": "select",
+      "required": true,
+      "multipleSelect": false,
+      "selectInitialValue": [],
+      "selectItems": [
+        {
+          "id": "sel011",
+          "value": "南部"
+        },
+        {
+          "id": "sel012",
+          "value": "中部"
+        },
+        {
+          "id": "sel013",
+          "value": "北部"
+        },
+        {
+          "id": "sel014",
+          "value": "離島"
+        }
+      ]
+    },
+    {
+      "fieldId": "address",
+      "name": "住所",
+      "kind": "text",
+      "required": false
+    },
+    {
+      "fieldId": "phone",
+      "name": "電話番号",
+      "kind": "text",
+      "required": false
+    },
+    {
+      "fieldId": "url",
+      "name": "公式URL",
+      "kind": "text",
+      "required": false
+    },
+    {
+      "fieldId": "accessFromNaha",
+      "name": "那覇空港から",
+      "kind": "text",
+      "required": false
+    },
+    {
+      "fieldId": "status",
+      "name": "掲載状態",
+      "kind": "select",
+      "required": true,
+      "multipleSelect": false,
+      "selectInitialValue": [
+        "営業確認済み"
+      ],
+      "selectItems": [
+        {
+          "id": "sel021",
+          "value": "営業確認済み"
+        },
+        {
+          "id": "sel022",
+          "value": "確認中"
+        },
+        {
+          "id": "sel023",
+          "value": "draft"
+        },
+        {
+          "id": "sel024",
+          "value": "archived"
+        }
+      ]
+    }
+  ],
+  "customFields": []
+}
