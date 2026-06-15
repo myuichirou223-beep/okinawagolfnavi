@@ -1,10 +1,10 @@
 const navItems = [
-  { label: "大会情報", subtitle: "Tournament", href: "/tournaments", icon: "T", className: "nav-tournament" },
-  { label: "ゴルフ場", subtitle: "Golf Course", href: "/courses", icon: "F", className: "nav-course" },
-  { label: "練習場", subtitle: "Practice Range", href: "/practice", icon: "G", className: "nav-practice" },
-  { label: "イベント", subtitle: "Event", href: "/#quick-search", icon: "E", className: "nav-event" },
-  { label: "レッスン", subtitle: "Lesson", href: "/#practice", icon: "L", className: "nav-lesson" },
-  { label: "ブログ", subtitle: "Blog", href: "/#articles", icon: "B", className: "nav-blog" }
+  { label: "大会情報", subtitle: "Tournament", href: "/tournaments", icon: "杯", className: "nav-tournament" },
+  { label: "ゴルフ場", subtitle: "Golf Course", href: "/courses", icon: "旗", className: "nav-course" },
+  { label: "練習場", subtitle: "Practice Range", href: "/practice", icon: "球", className: "nav-practice" },
+  { label: "イベント", subtitle: "Event", href: "/#quick-search", icon: "予", className: "nav-event" },
+  { label: "レッスン", subtitle: "Lesson", href: "/#practice", icon: "人", className: "nav-lesson" },
+  { label: "ブログ", subtitle: "Blog", href: "/#articles", icon: "筆", className: "nav-blog" }
 ];
 
 export function Header() {
@@ -33,8 +33,9 @@ export function Header() {
             <small>検索</small>
           </a>
           <button className="menu-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="メニューを開く">
-            <span>MENU</span>
             <i aria-hidden="true" />
+            <span className="menu-label-ja">メニュー</span>
+            <span className="menu-label-en">Menu</span>
           </button>
         </div>
       </div>
