@@ -122,7 +122,7 @@ export default async function Home() {
             <h1 id="hero-title">
               沖縄のゴルフ情報を、
               <br />
-              もっと簡単に。
+              <span>もっと簡単に。</span>
             </h1>
             <p>
               大会・ゴルフ場・練習場・イベントを
@@ -212,8 +212,8 @@ export default async function Home() {
             <a className="portal-more-link" href="/tournaments">一覧を見る</a>
           </div>
           <div className="portal-tabs" aria-label="大会の分類">
-            {["開催中", "今月の大会", "来月の大会", "シニア", "ジュニア", "レディス", "プロ"].map((tab, index) => (
-              <button key={tab} className={index === 1 ? "is-active" : ""} type="button">{tab}</button>
+            {["すべて", "一般", "シニア", "女性", "ジュニア"].map((tab, index) => (
+              <button key={tab} className={index === 0 ? "is-active" : ""} type="button">{tab}</button>
             ))}
           </div>
           <div className="tournament-card-grid">
