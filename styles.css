@@ -57,23 +57,47 @@ body {
 
 .site-nav {
   flex: 1;
-  justify-content: center;
-  gap: 4px;
+  justify-content: flex-start;
+  gap: 8px;
 }
 
 .site-nav a {
-  min-height: 38px;
-  padding: 7px 13px;
-  border-radius: 999px;
-  color: var(--portal-text);
+  position: relative;
+  min-height: 42px;
+  padding: 8px 15px;
+  border: 1px solid #cfe9dc;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #ffffff, #ecf8f2);
+  color: var(--portal-green-dark);
   font-size: 14px;
   font-weight: 800;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.95) inset,
+    0 7px 14px rgba(0, 143, 90, 0.08);
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease,
+    background 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease;
 }
 
 .site-nav a:hover,
 .site-nav a:focus-visible {
-  background: #edf8f2;
+  border-color: rgba(0, 143, 90, 0.42);
+  background: linear-gradient(180deg, #f8fffb, #ddf3e8);
   color: var(--portal-green);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.95) inset,
+    0 10px 20px rgba(0, 143, 90, 0.13);
+  transform: translateY(-1px);
+}
+
+.site-nav a:active {
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.7) inset,
+    0 3px 8px rgba(0, 143, 90, 0.12);
+  transform: translateY(2px) scale(0.98);
 }
 
 .header-actions {
@@ -733,9 +757,13 @@ body {
   .site-nav a {
     min-height: 54px;
     justify-content: center;
-    border: 1px solid var(--portal-line);
+    border: 1px solid #cfe9dc;
     border-radius: 12px;
-    background: #ffffff;
+    background: linear-gradient(180deg, #ffffff, #ecf8f2);
+    color: var(--portal-green-dark);
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.95) inset,
+      0 7px 14px rgba(0, 143, 90, 0.08);
     font-size: 17px;
   }
 
