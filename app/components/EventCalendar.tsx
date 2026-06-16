@@ -87,8 +87,8 @@ export function EventCalendar({ events, initialYear, initialMonth }: EventCalend
           <h2 id="event-calendar-title">イベントカレンダー</h2>
         </div>
         <div className="calendar-nav" aria-label="月の切り替え">
-          <button type="button" onClick={() => changeMonth(-1)}>前月</button>
-          <button type="button" onClick={() => changeMonth(1)}>次月</button>
+          <button type="button" aria-label="前月" onClick={() => changeMonth(-1)}>‹</button>
+          <button type="button" aria-label="次月" onClick={() => changeMonth(1)}>›</button>
         </div>
       </div>
       <h3>{calendarMonthTitle(year, month)}</h3>

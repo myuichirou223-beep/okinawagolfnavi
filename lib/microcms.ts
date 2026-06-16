@@ -89,6 +89,27 @@ export type Course = {
   images?: MicroCMSImage[];
 };
 
+export type Facility = {
+  id: string;
+  name: string;
+  slug: string;
+  type?: unknown;
+  status?: unknown;
+  area?: unknown;
+  address?: string;
+  phone?: string;
+  website?: string;
+  summary?: string;
+  airportAccess?: string;
+  gallery?: MicroCMSImage[] | MicroCMSImage;
+  city?: unknown;
+  facilityType?: unknown;
+  holes?: number | string;
+  par?: number | string;
+  reservationUrl?: string;
+  features?: string;
+};
+
 export type PracticeRange = {
   id: string;
   name: string;
@@ -541,6 +562,109 @@ export async function getTournaments() {
     .sort((a, b) => tournamentSortDate(a) - tournamentSortDate(b));
 }
 
+function fieldText(value: unknown): string {
+  if (!value) return "";
+  if (typeof value === "string") return value.trim();
+  if (typeof value === "number") return String(value);
+  if (Array.isArray(value)) return value.map(fieldText).filter(Boolean).join("・");
+  if (typeof value !== "object") return "";
+
+  const field = value as Record<string, unknown>;
+  const candidates = [field.value, field.label, field.name, field.title, field.text, field.type, field.area, field.id];
+
+  for (const candidate of candidates) {
+    const text = fieldText(candidate);
+    if (text) return text;
+  }
+
+  return "";
+}
+
+function numberValue(value: number | string | undefined) {
+  if (typeof value === "number") return value;
+  if (!value) return undefined;
+  const parsed = Number(value);
+  return Number.isFinite(parsed) ? parsed : undefined;
+}
+
+function isPublishedStatus(status: unknown) {
+  const value = fieldText(status);
+  if (!value) return true;
+  return !["draft", "下書き", "archived", "非公開"].includes(value);
+}
+
+function facilityTypeValue(facility: Facility) {
+  return fieldText(facility.type);
+}
+
+function isGolfCourseFacility(facility: Facility) {
+  return facilityTypeValue(facility) === "golf_course";
+}
+
+function isPracticeRangeFacility(facility: Facility) {
+  return ["outdoor_practice_range", "indoor_practice_range"].includes(facilityTypeValue(facility));
+}
+
+function facilityGallery(facility: Facility) {
+  if (!facility.gallery) return [];
+  return Array.isArray(facility.gallery) ? facility.gallery : [facility.gallery];
+}
+
+function facilityToCourse(facility: Facility): Course {
+  const area = fieldText(facility.area);
+  const city = fieldText(facility.city);
+  const facilityType = fieldText(facility.facilityType);
+  const status = fieldText(facility.status);
+
+  return {
+    id: facility.id,
+    title: facility.name,
+    slug: facility.slug,
+    status,
+    area,
+    city,
+    courseType: facilityType,
+    address: facility.address,
+    phone: facility.phone,
+    websiteUrl: facility.website,
+    reservationUrl: facility.reservationUrl,
+    airportAccess: facility.airportAccess,
+    holes: numberValue(facility.holes),
+    par: numberValue(facility.par),
+    summary: facility.summary,
+    features: facility.features,
+    gallery: facilityGallery(facility)
+  };
+}
+
+function facilityToPracticeRange(facility: Facility): PracticeRange {
+  const type = facilityTypeValue(facility);
+  const facilityType = fieldText(facility.facilityType);
+  const category =
+    facilityType ||
+    (type === "indoor_practice_range" ? "屋内" : "屋外");
+
+  return {
+    id: facility.id,
+    name: facility.name,
+    category,
+    area: fieldText(facility.area),
+    address: facility.address,
+    phone: facility.phone,
+    url: facility.website,
+    accessFromNaha: facility.airportAccess,
+    status: fieldText(facility.status)
+  };
+}
+
+export async function getFacilities() {
+  const data = await requestMicroCMS<MicroCMSListResponse<Facility>>(
+    "/facilities?limit=100&orders=area,city"
+  );
+
+  return data?.contents?.length ? data.contents.filter((facility) => isPublishedStatus(facility.status)) : [];
+}
+
 function isPublishedCourse(course: Course) {
   if (!course.status) return true;
   return ["published", "掲載OK", "公開"].includes(course.status);
@@ -557,12 +681,18 @@ function normalizeCourse(course: Course): Course {
 }
 
 export async function getCourses() {
-  const data = await requestMicroCMS<MicroCMSListResponse<Course>>(
-    "/courses?limit=100&orders=area,city"
-  );
+  const facilities = await getFacilities();
+  if (facilities.length) {
+    const courses = facilities
+      .filter(isGolfCourseFacility)
+      .map(facilityToCourse)
+      .map(normalizeCourse)
+      .filter(isPublishedCourse);
 
-  const courses = data?.contents?.length ? data.contents : fallbackCourses;
-  return courses.map(normalizeCourse).filter(isPublishedCourse);
+    if (courses.length) return courses;
+  }
+
+  return fallbackCourses.map(normalizeCourse).filter(isPublishedCourse);
 }
 
 function isPublishedPracticeRange(range: PracticeRange) {
@@ -571,12 +701,17 @@ function isPublishedPracticeRange(range: PracticeRange) {
 }
 
 export async function getPracticeRanges() {
-  const data = await requestMicroCMS<MicroCMSListResponse<PracticeRange>>(
-    "/practice-ranges?limit=100&orders=area,category"
-  );
+  const facilities = await getFacilities();
+  if (facilities.length) {
+    const ranges = facilities
+      .filter(isPracticeRangeFacility)
+      .map(facilityToPracticeRange)
+      .filter(isPublishedPracticeRange);
 
-  const ranges = data?.contents?.length ? data.contents : fallbackPracticeRanges;
-  return ranges.filter(isPublishedPracticeRange);
+    if (ranges.length) return ranges;
+  }
+
+  return fallbackPracticeRanges.filter(isPublishedPracticeRange);
 }
 
 function isPublishedPartner(partner: Partner) {
@@ -592,11 +727,12 @@ export async function getPartners() {
 
 export async function getCourse(slug: string) {
   const normalizedSlug = normalizeSlug(slug);
-  const data = await requestMicroCMS<MicroCMSListResponse<Course>>(
-    `/courses?filters=slug[equals]${encodeURIComponent(normalizedSlug)}&limit=1`
+  const data = await requestMicroCMS<MicroCMSListResponse<Facility>>(
+    `/facilities?filters=slug[equals]${encodeURIComponent(normalizedSlug)}&limit=1`
   );
 
-  const course = data?.contents?.[0] || fallbackCourses.find((item) => item.slug === normalizedSlug) || null;
+  const facility = data?.contents?.find(isGolfCourseFacility);
+  const course = facility ? facilityToCourse(facility) : fallbackCourses.find((item) => item.slug === normalizedSlug) || null;
   if (!course) return null;
 
   const normalizedCourse = normalizeCourse(course);

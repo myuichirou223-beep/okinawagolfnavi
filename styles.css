@@ -5078,3 +5078,474 @@ body {
     font-size: 11px;
   }
 }
+
+/* Mockup alignment pass: brighter compact portal cards. */
+.portal-main {
+  background:
+    linear-gradient(180deg, #ffffff 0, #f7f8f9 430px),
+    #f7f8f9;
+}
+
+.portal-section {
+  width: min(1200px, calc(100% - 48px));
+  margin-top: 54px;
+}
+
+.portal-section-heading h2 {
+  color: #15251d;
+  font-size: 26px;
+  font-weight: 950;
+}
+
+.portal-section-heading.is-centered {
+  margin-bottom: 22px;
+  text-align: center;
+}
+
+.portal-section-heading.is-centered h2 {
+  font-size: 31px;
+}
+
+.portal-hero {
+  min-height: 330px;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.94) 0%, rgba(255, 255, 255, 0.78) 39%, rgba(255, 255, 255, 0.08) 72%),
+    url("/assets/hero-golfer.jpg") right 38% / cover no-repeat;
+}
+
+.portal-hero-copy {
+  padding-top: 42px;
+  padding-bottom: 80px;
+}
+
+.portal-hero h1 {
+  font-size: clamp(44px, 4.6vw, 64px);
+  line-height: 1.18;
+}
+
+.portal-hero p:not(.portal-eyebrow) {
+  margin-top: 18px;
+  font-size: 19px;
+  line-height: 1.65;
+}
+
+.home-search-panel {
+  width: min(1140px, calc(100% - 70px));
+  margin-top: -54px;
+  padding: 22px 26px;
+  border-radius: 12px;
+  box-shadow: 0 16px 34px rgba(28, 44, 37, 0.13);
+}
+
+.home-search-panel h2 {
+  display: none;
+}
+
+.home-search-form {
+  grid-template-columns: minmax(320px, 1.5fr) minmax(170px, 0.55fr) minmax(170px, 0.55fr) 150px;
+  gap: 18px;
+}
+
+.home-search-form input,
+.home-search-form select,
+.home-search-form button {
+  min-height: 46px;
+  border-radius: 7px;
+}
+
+.popular-tags {
+  margin-top: 12px;
+}
+
+.popular-tags a {
+  min-height: 25px;
+  padding: 2px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+}
+
+.quick-search-section {
+  margin-top: 24px;
+}
+
+.quick-search-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 16px;
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.quick-search-card {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  min-height: 62px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 0;
+  box-shadow: 0 12px 22px rgba(28, 44, 37, 0.12);
+}
+
+.quick-search-card:last-child {
+  border-right: 0;
+}
+
+.quick-search-icon {
+  width: 25px;
+  height: 25px;
+}
+
+.quick-search-card strong {
+  font-size: 16px;
+  line-height: 1.1;
+}
+
+.quick-search-card small {
+  margin-top: 4px;
+  font-size: 10px;
+  line-height: 1.3;
+  font-weight: 900;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.home-focus-grid {
+  width: min(1200px, calc(100% - 48px));
+  margin-top: 40px;
+  grid-template-columns: minmax(0, 1.12fr) minmax(410px, 0.88fr);
+  gap: 30px;
+}
+
+.featured-tournament-card {
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.featured-tournament-card .portal-section-heading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0;
+  margin-bottom: 14px;
+}
+
+.featured-tournament-card .portal-eyebrow {
+  display: none;
+}
+
+.featured-tournament-card .portal-section-heading h2 {
+  position: relative;
+  margin: 0;
+  padding-left: 28px;
+  font-size: 27px;
+}
+
+.featured-tournament-card .portal-section-heading h2::before {
+  content: "🔥";
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 20px;
+}
+
+.featured-tournament-card .portal-section-heading h2::after {
+  content: "注目";
+  display: inline-flex;
+  margin-left: 10px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: #ffe4ee;
+  color: #e91f73;
+  font-size: 13px;
+  font-weight: 950;
+  vertical-align: middle;
+}
+
+.featured-tournament-visual {
+  min-height: 350px;
+  margin: 0;
+  border-radius: 14px;
+  background:
+    linear-gradient(100deg, rgba(233, 31, 115, 0.75) 0%, rgba(233, 31, 115, 0.45) 34%, rgba(0, 143, 90, 0.02) 78%),
+    url("/assets/hero-golfer.jpg") right center / cover no-repeat;
+  box-shadow: 0 14px 26px rgba(28, 44, 37, 0.16);
+}
+
+.featured-tournament-visual span {
+  margin: 22px;
+  background: #f25f8b;
+  font-size: 13px;
+}
+
+.featured-tournament-body {
+  position: relative;
+  z-index: 1;
+  max-width: 76%;
+  margin-top: -270px;
+  padding: 0 0 24px 26px;
+  color: #ffffff;
+}
+
+.featured-tournament-body h3 {
+  color: #071a12;
+  font-size: clamp(28px, 3.3vw, 40px);
+  line-height: 1.22;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.22);
+}
+
+.featured-tournament-body p {
+  color: #071a12;
+  font-size: 17px;
+  font-weight: 950;
+}
+
+.featured-stats {
+  max-width: 560px;
+  margin-top: 20px;
+  gap: 12px;
+}
+
+.featured-stats span {
+  min-height: 64px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.93);
+}
+
+.featured-stats strong {
+  color: #e91f73;
+  font-size: 18px;
+}
+
+.featured-tournament-body > a {
+  min-height: 44px;
+  margin-top: 14px;
+  border-radius: 8px;
+  background: #e91f73;
+}
+
+.event-calendar-card {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.calendar-heading {
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.calendar-heading .portal-eyebrow {
+  display: none;
+}
+
+.calendar-heading h2 {
+  font-size: 27px;
+  font-weight: 950;
+}
+
+.calendar-nav button {
+  min-width: 30px;
+  min-height: 30px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  color: #1a2c22;
+  font-size: 30px;
+  line-height: 1;
+}
+
+.event-calendar-card h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 28px;
+}
+
+.calendar-grid {
+  margin-top: 0;
+  border-color: #dfe7e2;
+  border-radius: 10px;
+  background: #ffffff;
+  box-shadow: 0 10px 22px rgba(28, 44, 37, 0.08);
+}
+
+.calendar-grid b,
+.calendar-grid span,
+.calendar-grid a {
+  min-height: 43px;
+  font-size: 13px;
+}
+
+.calendar-legend {
+  justify-content: center;
+  margin-top: 14px;
+}
+
+.calendar-event-list {
+  margin-top: 12px;
+}
+
+.calendar-event-item {
+  min-height: 42px;
+  grid-template-columns: 46px 66px minmax(0, 1fr);
+  border-radius: 9px;
+  box-shadow: 0 8px 18px rgba(28, 44, 37, 0.06);
+}
+
+.portal-section#tournaments,
+#tournaments.portal-section {
+  margin-top: 48px;
+}
+
+#tournaments .portal-section-heading {
+  margin-bottom: 16px;
+}
+
+#tournaments .portal-eyebrow {
+  display: none;
+}
+
+.home-tournament-list {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.home-tournament-item {
+  grid-template-columns: 54px minmax(0, 1fr);
+  gap: 8px 12px;
+  padding: 16px;
+  border-radius: 9px;
+  box-shadow: 0 12px 22px rgba(28, 44, 37, 0.1);
+}
+
+.home-tournament-item time {
+  min-height: 56px;
+  border-radius: 7px;
+  background: #e91f73;
+  font-size: 15px;
+}
+
+.home-tournament-item h3 {
+  font-size: 15px;
+  line-height: 1.35;
+}
+
+.home-tournament-item p {
+  color: #1f2a24;
+  font-size: 12px;
+}
+
+.entry-status {
+  min-height: 31px;
+  border-radius: 4px;
+  background: #dff3e8;
+  font-size: 13px;
+}
+
+.entry-status.is-checking {
+  background: #fff0dd;
+}
+
+.entry-status.is-result {
+  background: #e5efff;
+}
+
+.home-tournament-item > a {
+  display: none;
+}
+
+.portal-card-grid.six {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.pickup-card,
+.blog-card,
+.partner-card {
+  border-radius: 9px;
+  box-shadow: 0 10px 20px rgba(28, 44, 37, 0.08);
+}
+
+@media (max-width: 1040px) {
+  .home-focus-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .featured-tournament-body {
+    max-width: 82%;
+  }
+
+  .quick-search-grid,
+  .home-tournament-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .portal-section,
+  .home-focus-grid {
+    width: min(100% - 24px, 1200px);
+  }
+
+  .home-search-panel {
+    width: min(100% - 24px, 1140px);
+  }
+
+  .quick-search-grid {
+    gap: 10px;
+  }
+
+  .quick-search-card {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    justify-items: center;
+    text-align: center;
+    min-height: 98px;
+    padding: 14px 10px;
+    border-radius: 9px;
+  }
+
+  .quick-search-icon,
+  .quick-search-card strong,
+  .quick-search-card small {
+    grid-column: 1;
+  }
+
+  .quick-search-icon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .quick-search-card small {
+    max-width: 100%;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+  }
+
+  .featured-tournament-visual {
+    min-height: 330px;
+  }
+
+  .featured-tournament-body {
+    max-width: none;
+    margin-top: -250px;
+    padding: 0 18px 20px;
+  }
+
+  .featured-stats,
+  .home-tournament-list,
+  .portal-card-grid.six {
+    grid-template-columns: 1fr;
+  }
+}
