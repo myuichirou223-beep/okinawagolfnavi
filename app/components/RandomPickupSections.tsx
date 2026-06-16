@@ -75,7 +75,7 @@ export function RandomPickupSections({ courses, practiceRanges }: RandomPickupSe
         <div className="portal-section-heading with-link">
           <div>
             <p className="portal-eyebrow">Golf Course</p>
-            <h2 id="courses-title">県内のゴルフ場</h2>
+            <h2 id="courses-title">今週のおすすめゴルフ場</h2>
             <p>沖縄県内のゴルフ場をランダムにピックアップ</p>
           </div>
           <a className="portal-more-link" href="/courses">一覧を見る</a>
@@ -91,7 +91,7 @@ export function RandomPickupSections({ courses, practiceRanges }: RandomPickupSe
         <div className="portal-section-heading with-link">
           <div>
             <p className="portal-eyebrow">Practice Range</p>
-            <h2 id="practice-title">県内の練習場</h2>
+            <h2 id="practice-title">ピックアップ練習場</h2>
             <p>沖縄県内の練習場をランダムにピックアップ</p>
           </div>
           <a className="portal-more-link" href="/practice">一覧を見る</a>

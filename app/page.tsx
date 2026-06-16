@@ -11,10 +11,8 @@ import {
   getPartners,
   getPracticeRanges,
   getTournaments,
-  getTopics,
-  topicCategoryLabel,
-  topicImage,
-  tournamentActionLinks
+  tournamentActionLinks,
+  tournamentSortDate
 } from "../lib/microcms";
 
 export const revalidate = 300;
@@ -44,11 +42,6 @@ function externalLinkProps(url: string) {
   return url.startsWith("http") ? { target: "_blank", rel: "noreferrer" } : {};
 }
 
-function preferredTopicImage(topic: Parameters<typeof topicImage>[0]) {
-  const image = topicImage(topic);
-  return image === "/assets/logo.png" ? fallbackVisual : image;
-}
-
 function compactDate(value?: string) {
   if (!value) return "";
   return formatDate(value).replace("年", ".").replace("月", ".").replace("日", "");
@@ -61,6 +54,51 @@ function firstAvailableTournamentUrl(tournament: Awaited<ReturnType<typeof getTo
 function courseTypeTags(courseType: string, holes?: number) {
   return [courseType, holes ? `${holes}H` : ""].filter(Boolean).slice(0, 2);
 }
+
+function sortDateToDate(value: number) {
+  const text = String(value);
+  if (text.length !== 8) return null;
+  const year = Number(text.slice(0, 4));
+  const month = Number(text.slice(4, 6));
+  const day = Number(text.slice(6, 8));
+  if (!year || !month || !day || day > 31) return null;
+  return new Date(year, month - 1, day);
+}
+
+function tournamentDayLabel(tournament: Awaited<ReturnType<typeof getTournaments>>[number]) {
+  const date = sortDateToDate(tournamentSortDate(tournament));
+  if (!date) return tournament.month || "未定";
+  return `${date.getMonth() + 1}/${date.getDate()}`;
+}
+
+function countdownLabel(tournament: Awaited<ReturnType<typeof getTournaments>>[number]) {
+  const date = sortDateToDate(tournamentSortDate(tournament));
+  if (!date) return "日程確認中";
+  const today = new Date(2026, 5, 16);
+  const days = Math.ceil((date.getTime() - today.getTime()) / 86400000);
+  if (days > 0) return `あと${days}日`;
+  if (days === 0) return "本日開催";
+  return "開催済み";
+}
+
+function tournamentStatusLabel(tournament: Awaited<ReturnType<typeof getTournaments>>[number]) {
+  if (tournament.status?.includes("成績")) return "結果公開中";
+  if (tournament.status?.includes("確認")) return "確認中";
+  return tournament.status || "受付状況確認";
+}
+
+function tournamentStatusClass(tournament: Awaited<ReturnType<typeof getTournaments>>[number]) {
+  const status = tournamentStatusLabel(tournament);
+  if (status.includes("結果")) return "is-result";
+  if (status.includes("確認")) return "is-checking";
+  return "is-open";
+}
+
+function monthTitle() {
+  return "2026年6月";
+}
+
+const calendarDays = Array.from({ length: 30 }, (_, index) => index + 1);
 
 function QuickSearchIcon({ name }: { name: string }) {
   if (name === "trophy") {
@@ -132,18 +170,16 @@ function QuickSearchIcon({ name }: { name: string }) {
 }
 
 export default async function Home() {
-  const [articles, courses, practiceRanges, partners, topics, tournaments] = await Promise.all([
+  const [articles, courses, practiceRanges, partners, tournaments] = await Promise.all([
     getArticles(),
     getCourses(),
     getPracticeRanges(),
     getPartners(),
-    getTopics(),
     getTournaments()
   ]);
 
-  const latestTopics = topics.slice(0, 3);
-  const mainTopic = latestTopics[0];
-  const subTopics = latestTopics.slice(1, 3);
+  const todaySortValue = 20260616;
+  const featuredTournament = tournaments.find((tournament) => tournamentSortDate(tournament) >= todaySortValue) || tournaments[0];
   const monthlyTournaments = tournaments.slice(0, 4);
   const latestArticles = articles.slice(0, 4);
 
@@ -160,7 +196,10 @@ export default async function Home() {
       imageUrl: image,
       area,
       city,
-      tags: courseTypeTags(courseType, course.holes),
+      tags: [
+        course.summary ? course.summary.slice(0, 12) : "",
+        ...courseTypeTags(courseType, course.holes)
+      ].filter(Boolean).slice(0, 3),
       isVisible: course.status ? course.status !== "非公開" : true
     };
   });
@@ -176,7 +215,7 @@ export default async function Home() {
       imageUrl: fallbackVisual,
       area,
       city: "",
-      tags: [category, range.status === "営業確認済み" ? "営業確認済み" : ""].filter(Boolean).slice(0, 2),
+      tags: [category, range.accessFromNaha || "", range.status === "営業確認済み" ? "営業確認済み" : ""].filter(Boolean).slice(0, 3),
       isVisible: range.status ? range.status !== "非公開" : true
     };
   });
@@ -188,31 +227,69 @@ export default async function Home() {
         <section className="portal-hero" aria-labelledby="hero-title">
           <div className="portal-hero-copy">
             <h1 id="hero-title">
-              沖縄のゴルフ情報を、
+              沖縄のゴルフを、
               <br />
-              <span>もっと簡単に。</span>
+              <span>もっと身近に。</span>
             </h1>
             <p>
-              大会・ゴルフ場・練習場・イベントを
+              大会・ゴルフ場・練習場・イベントなど
               <br />
-              ひとつのサイトで検索。
+              沖縄のゴルフ情報をまとめてチェック。
             </p>
           </div>
           <div className="portal-hero-visual" aria-hidden="true" />
         </section>
 
+        <section className="home-search-panel" aria-labelledby="home-search-title">
+          <h2 id="home-search-title">ゴルフ情報を探す</h2>
+          <form className="home-search-form" action="/courses">
+            <label>
+              <span>キーワードで探す</span>
+              <input name="q" type="search" placeholder="ゴルフ場名・大会名・イベント名など" />
+            </label>
+            <label>
+              <span>エリアで探す</span>
+              <select name="area" defaultValue="">
+                <option value="">エリアを選択</option>
+                <option value="南部">南部</option>
+                <option value="中部">中部</option>
+                <option value="北部">北部</option>
+                <option value="離島">離島</option>
+              </select>
+            </label>
+            <label>
+              <span>カテゴリーで探す</span>
+              <select name="category" defaultValue="">
+                <option value="">すべて</option>
+                <option value="tournament">大会</option>
+                <option value="course">ゴルフ場</option>
+                <option value="practice">練習場</option>
+                <option value="event">イベント</option>
+                <option value="lesson">レッスン</option>
+              </select>
+            </label>
+            <button type="submit">検索する</button>
+          </form>
+          <div className="popular-tags" aria-label="人気検索ワード">
+            <strong>人気検索ワード</strong>
+            {["ダイキンオーキッド", "琉球GC", "女子プロ", "ジュニア", "コンペ", "那覇市"].map((tag) => (
+              <a key={tag} href={`/articles?q=${encodeURIComponent(tag)}`}>{tag}</a>
+            ))}
+          </div>
+        </section>
+
         <section id="quick-search" className="portal-section quick-search-section" aria-labelledby="quick-search-title">
           <div className="portal-section-heading is-centered">
-            <h2 id="quick-search-title">何を探していますか？</h2>
+            <h2 id="quick-search-title">カテゴリーから探す</h2>
           </div>
           <div className="quick-search-grid">
             {[
-              ["大会", "大会を探す", "/tournaments", "trophy", "quick-tournament"],
-              ["ゴルフ場", "ゴルフ場を探す", "/courses", "flag", "quick-course"],
-              ["練習場", "練習場を探す", "/practice", "golf", "quick-practice"],
-              ["イベント", "イベントを探す", "/events", "calendar", "quick-event"],
-              ["レッスン", "レッスンを探す", "/lessons", "lesson", "quick-lesson"],
-              ["ブログ", "ブログを読む", "/articles", "blog", "quick-blog"]
+              ["大会情報", "トーナメント・コンペ", "/tournaments", "trophy", "quick-tournament"],
+              ["ゴルフ場", "県内ゴルフ場を探す", "/courses", "flag", "quick-course"],
+              ["練習場", "打ちっぱなし・スクール", "/practice", "golf", "quick-practice"],
+              ["イベント", "試打会・体験会など", "/events", "calendar", "quick-event"],
+              ["レッスン", "スクール・インストラクター", "/lessons", "lesson", "quick-lesson"],
+              ["ブログ", "最新記事・コラム", "/articles", "blog", "quick-blog"]
             ].map(([title, text, href, icon, className]) => (
               <a key={title} className={`quick-search-card ${className}`} href={href}>
                 <span className="quick-search-icon" aria-hidden="true">
@@ -225,72 +302,72 @@ export default async function Home() {
           </div>
         </section>
 
-        <section id="topics" className="portal-section" aria-labelledby="topics-title">
-          <div className="portal-section-heading with-link">
-            <div>
-              <p className="portal-eyebrow">News</p>
-              <h2 id="topics-title">最新情報</h2>
-            </div>
-            <a className="portal-more-link" href="#topics">一覧を見る</a>
-          </div>
-          <div className="featured-news-grid">
-            {mainTopic ? (
-              <article className="featured-news-card">
-                <a href={mainTopic.linkUrl || "#topics"} {...externalLinkProps(mainTopic.linkUrl || "")}>
-                  <img src={preferredTopicImage(mainTopic)} alt="" />
-                  <div className="featured-news-body">
-                    <div className="news-meta">
-                      <span>{topicCategoryLabel(mainTopic)}</span>
-                      {mainTopic.published ? <time dateTime={mainTopic.published}>{compactDate(mainTopic.published)}</time> : null}
-                    </div>
-                    <h3>{mainTopic.title}</h3>
-                    <p>{mainTopic.description || "沖縄県内のゴルフ関連ニュースをお知らせします。"}</p>
-                  </div>
+        <section className="home-focus-grid" aria-label="注目情報">
+          {featuredTournament ? (
+            <article className="featured-tournament-card">
+              <div className="portal-section-heading">
+                <p className="portal-eyebrow">Featured Tournament</p>
+                <h2>今週の注目大会</h2>
+              </div>
+              <div className="featured-tournament-visual">
+                <span>{fieldText(featuredTournament.category) || "大会情報"}</span>
+              </div>
+              <div className="featured-tournament-body">
+                <h3>{featuredTournament.title}</h3>
+                <p>{[featuredTournament.dateLabel, featuredTournament.venue].filter(Boolean).join(" / ") || "詳細確認中"}</p>
+                <div className="featured-stats">
+                  <span><small>開催まで</small><strong>{countdownLabel(featuredTournament)}</strong></span>
+                  <span><small>エントリー締切</small><strong>要確認</strong></span>
+                  <span><small>開催コース</small><strong>{featuredTournament.venue || "確認中"}</strong></span>
+                </div>
+                <a href={firstAvailableTournamentUrl(featuredTournament)} {...externalLinkProps(firstAvailableTournamentUrl(featuredTournament))}>
+                  大会詳細を見る
                 </a>
-              </article>
-            ) : null}
-            <div className="sub-news-list">
-              {subTopics.map((topic) => (
-                <article key={topic.id} className="sub-news-card">
-                  <a href={topic.linkUrl || "#topics"} {...externalLinkProps(topic.linkUrl || "")}>
-                    <img src={preferredTopicImage(topic)} alt="" />
-                    <div>
-                      <div className="news-meta">
-                        <span>{topicCategoryLabel(topic)}</span>
-                        {topic.published ? <time dateTime={topic.published}>{compactDate(topic.published)}</time> : null}
-                      </div>
-                      <h3>{topic.title}</h3>
-                      <p>{topic.description || "詳しい情報を確認できます。"}</p>
-                    </div>
-                  </a>
-                </article>
+              </div>
+            </article>
+          ) : null}
+
+          <aside className="event-calendar-card" aria-labelledby="event-calendar-title">
+            <div className="calendar-heading">
+              <div>
+                <p className="portal-eyebrow">Calendar</p>
+                <h2 id="event-calendar-title">イベントカレンダー</h2>
+              </div>
+              <a href="/events">カレンダーを見る</a>
+            </div>
+            <h3>{monthTitle()}</h3>
+            <div className="calendar-grid" aria-label="2026年6月カレンダー">
+              {["日", "月", "火", "水", "木", "金", "土"].map((day) => <b key={day}>{day}</b>)}
+              {calendarDays.map((day) => (
+                <span key={day} className={[4, 12, 18, 27].includes(day) ? "has-event" : ""}>{day}</span>
               ))}
             </div>
-          </div>
+            <div className="calendar-legend">
+              {["大会", "イベント", "試打会", "コンペ", "レッスン"].map((label) => <span key={label}>{label}</span>)}
+            </div>
+          </aside>
         </section>
 
         <section id="tournaments" className="portal-section" aria-labelledby="tournaments-title">
           <div className="portal-section-heading with-link">
             <div>
               <p className="portal-eyebrow">Tournament</p>
-              <h2 id="tournaments-title">今月の大会</h2>
+              <h2 id="tournaments-title">大会情報</h2>
             </div>
             <a className="portal-more-link" href="/tournaments">一覧を見る</a>
           </div>
-          <div className="portal-tabs" aria-label="大会の分類">
-            {["すべて", "一般", "シニア", "女性", "ジュニア"].map((tab, index) => (
-              <button key={tab} className={index === 0 ? "is-active" : ""} type="button">{tab}</button>
-            ))}
-          </div>
-          <div className="tournament-card-grid">
+          <div className="home-tournament-list">
             {monthlyTournaments.map((tournament) => {
               const href = firstAvailableTournamentUrl(tournament);
               return (
-                <article key={tournament.id} className="mini-tournament-card">
-                  <time>{tournament.month || "未定"}</time>
-                  <h3>{tournament.title}</h3>
-                  <p>{tournament.venue || "会場確認中"}</p>
-                  <a href={href} {...externalLinkProps(href)}>詳細を見る</a>
+                <article key={tournament.id} className="home-tournament-item">
+                  <time>{tournamentDayLabel(tournament)}</time>
+                  <div>
+                    <h3>{tournament.title}</h3>
+                    <p>{tournament.venue || "開催コース確認中"}</p>
+                  </div>
+                  <span className={`entry-status ${tournamentStatusClass(tournament)}`}>{tournamentStatusLabel(tournament)}</span>
+                  <a href={href} {...externalLinkProps(href)} aria-label={`${tournament.title}の詳細を見る`}>詳細</a>
                 </article>
               );
             })}

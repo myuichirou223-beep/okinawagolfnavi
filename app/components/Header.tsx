@@ -89,36 +89,48 @@ function NavIcon({ name }: { name: string }) {
 
 export function Header() {
   return (
-    <header className="site-header">
-      <div className="header-inner">
-        <a className="brand" href="/" aria-label="おきなわGOLFなび トップ">
-          <img className="brand-logo" src="/assets/logo-header.png" alt="おきなわGOLFなび" />
-        </a>
-        <nav id="site-nav" className="site-nav" aria-label="主要メニュー">
-          {navItems.map((item) => (
-            <a key={item.label} className={item.className} href={item.href}>
-              <span className="nav-icon" aria-hidden="true">
-                <NavIcon name={item.icon} />
-              </span>
-              <span className="nav-label">{item.label}</span>
+    <>
+      <header className="site-header">
+        <div className="header-inner">
+          <a className="brand" href="/" aria-label="おきなわGOLFなび トップ">
+            <img className="brand-logo" src="/assets/logo-header.png" alt="おきなわGOLFなび" />
+          </a>
+          <nav id="site-nav" className="site-nav" aria-label="主要メニュー">
+            {navItems.map((item) => (
+              <a key={item.label} className={item.className} href={item.href}>
+                <span className="nav-icon" aria-hidden="true">
+                  <NavIcon name={item.icon} />
+                </span>
+                <span className="nav-label">{item.label}</span>
+              </a>
+            ))}
+          </nav>
+          <div className="header-actions" aria-label="ヘッダー操作">
+            <a className="header-action-link" href="#partners" aria-label="お気に入り">
+              <span aria-hidden="true">♡</span>
+              <small>お気に入り</small>
             </a>
-          ))}
-        </nav>
-        <div className="header-actions" aria-label="ヘッダー操作">
-          <a className="header-action-link" href="#partners" aria-label="お気に入り">
-            <span aria-hidden="true">♡</span>
-            <small>お気に入り</small>
-          </a>
-          <a className="header-action-link" href="#topics" aria-label="検索">
-            <span aria-hidden="true">⌕</span>
-            <small>検索</small>
-          </a>
-          <button className="menu-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="メニューを開く">
-            <i aria-hidden="true" />
-            <span className="menu-label-ja">メニュー</span>
-          </button>
+            <a className="header-action-link" href="#quick-search" aria-label="検索">
+              <span aria-hidden="true">⌕</span>
+              <small>検索</small>
+            </a>
+            <button className="menu-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="メニューを開く">
+              <i aria-hidden="true" />
+              <span className="menu-label-ja">メニュー</span>
+            </button>
+          </div>
         </div>
-      </div>
-    </header>
+      </header>
+      <nav className="mobile-bottom-nav" aria-label="スマホ固定ナビ">
+        {navItems.slice(0, 5).map((item) => (
+          <a key={item.label} className={item.className} href={item.href}>
+            <span className="nav-icon" aria-hidden="true">
+              <NavIcon name={item.icon} />
+            </span>
+            <span>{item.label.replace("情報", "")}</span>
+          </a>
+        ))}
+      </nav>
+    </>
   );
 }
