@@ -316,44 +316,6 @@ export default async function Home() {
           <div className="portal-hero-visual" aria-hidden="true" />
         </section>
 
-        <section className="home-search-panel" aria-labelledby="home-search-title">
-          <h2 id="home-search-title">ゴルフ情報を探す</h2>
-          <form className="home-search-form" action="/courses">
-            <label>
-              <span>キーワードで探す</span>
-              <input name="q" type="search" placeholder="ゴルフ場名・大会名・イベント名など" />
-            </label>
-            <label>
-              <span>エリアで探す</span>
-              <select name="area" defaultValue="">
-                <option value="">エリアを選択</option>
-                <option value="南部">南部</option>
-                <option value="中部">中部</option>
-                <option value="北部">北部</option>
-                <option value="離島">離島</option>
-              </select>
-            </label>
-            <label>
-              <span>カテゴリーで探す</span>
-              <select name="category" defaultValue="">
-                <option value="">すべて</option>
-                <option value="tournament">大会</option>
-                <option value="course">ゴルフ場</option>
-                <option value="practice">練習場</option>
-                <option value="event">イベント</option>
-                <option value="lesson">レッスン</option>
-              </select>
-            </label>
-            <button type="submit">検索する</button>
-          </form>
-          <div className="popular-tags" aria-label="人気検索ワード">
-            <strong>人気検索ワード</strong>
-            {["ダイキンオーキッド", "琉球GC", "女子プロ", "ジュニア", "コンペ", "那覇市"].map((tag) => (
-              <a key={tag} href={`/articles?q=${encodeURIComponent(tag)}`}>{tag}</a>
-            ))}
-          </div>
-        </section>
-
         <section id="quick-search" className="portal-section quick-search-section" aria-labelledby="quick-search-title">
           <div className="portal-section-heading is-centered">
             <h2 id="quick-search-title">カテゴリーから探す</h2>

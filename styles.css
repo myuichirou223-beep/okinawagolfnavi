@@ -2949,6 +2949,11 @@ button:focus-visible,
   height: auto;
 }
 
+.site-footer .footer-brand img {
+  mix-blend-mode: multiply;
+  filter: contrast(1.04) saturate(1.04);
+}
+
 .site-footer p {
   max-width: 480px;
   margin: 0;
@@ -5547,5 +5552,117 @@ body {
   .home-tournament-list,
   .portal-card-grid.six {
     grid-template-columns: 1fr;
+  }
+}
+
+/* Desktop layout repair: keep the mockup feel without oversized text overflow. */
+@media (min-width: 1041px) {
+  .quick-search-section {
+    width: min(1200px, calc(100% - 64px));
+    margin-inline: auto;
+  }
+
+  .quick-search-grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .quick-search-card {
+    grid-template-columns: 30px minmax(0, 1fr);
+    min-height: 82px;
+    padding: 14px 16px;
+    border-radius: 10px;
+    column-gap: 11px;
+  }
+
+  .quick-search-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .quick-search-card strong {
+    font-size: 16px;
+    font-weight: 900;
+    letter-spacing: 0;
+  }
+
+  .quick-search-card small {
+    max-width: 100%;
+    font-size: 11px;
+    font-weight: 800;
+    line-height: 1.25;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+  }
+
+  .home-focus-grid {
+    width: min(1200px, calc(100% - 64px));
+    grid-template-columns: minmax(0, 1.08fr) minmax(380px, 0.92fr);
+    align-items: start;
+  }
+
+  .featured-tournament-visual {
+    min-height: 320px;
+    border-radius: 16px;
+  }
+
+  .featured-tournament-body {
+    max-width: 720px;
+    margin-top: -238px;
+    padding: 0 28px 18px;
+  }
+
+  .featured-tournament-body h3 {
+    max-width: 640px;
+    margin-bottom: 12px;
+    font-size: clamp(26px, 2.45vw, 34px);
+    line-height: 1.18;
+    letter-spacing: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .featured-tournament-body p {
+    max-width: 640px;
+    font-size: 16px;
+    line-height: 1.55;
+  }
+
+  .featured-stats {
+    max-width: 640px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 18px;
+  }
+
+  .featured-stats span {
+    min-width: 0;
+    min-height: 72px;
+    padding: 13px 12px;
+  }
+
+  .featured-stats small {
+    font-size: 12px;
+    line-height: 1.2;
+  }
+
+  .featured-stats strong {
+    max-width: 100%;
+    font-size: clamp(16px, 1.35vw, 20px);
+    line-height: 1.22;
+    overflow-wrap: anywhere;
+  }
+
+  .featured-tournament-body > a {
+    width: fit-content;
+    min-width: 210px;
+    padding-inline: 26px;
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .featured-tournament-card .portal-section-heading h2 {
+    font-size: 31px;
   }
 }
