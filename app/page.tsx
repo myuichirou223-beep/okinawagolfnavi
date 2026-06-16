@@ -62,6 +62,75 @@ function courseTypeTags(courseType: string, holes?: number) {
   return [courseType, holes ? `${holes}H` : ""].filter(Boolean).slice(0, 2);
 }
 
+function QuickSearchIcon({ name }: { name: string }) {
+  if (name === "trophy") {
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M8 21h8" />
+        <path d="M12 17v4" />
+        <path d="M7 4h10v4a5 5 0 0 1-10 0V4Z" />
+        <path d="M5 5H3v3a4 4 0 0 0 4 4" />
+        <path d="M19 5h2v3a4 4 0 0 1-4 4" />
+      </svg>
+    );
+  }
+
+  if (name === "flag") {
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M5 21V4" />
+        <path d="M5 5h12l-1.5 4L17 13H5" />
+      </svg>
+    );
+  }
+
+  if (name === "golf") {
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="11" cy="9" r="5" />
+        <path d="M11 14v7" />
+        <path d="M7 21h8" />
+        <path d="M15.5 5.5 19 2" />
+        <path d="M9 8h.01" />
+        <path d="M12 7h.01" />
+        <path d="M13 10h.01" />
+      </svg>
+    );
+  }
+
+  if (name === "calendar") {
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M7 3v4" />
+        <path d="M17 3v4" />
+        <path d="M4 8h16" />
+        <rect x="4" y="5" width="16" height="16" rx="2" />
+        <path d="M8 12h3" />
+        <path d="M8 16h5" />
+      </svg>
+    );
+  }
+
+  if (name === "lesson") {
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="12" cy="7" r="3" />
+        <path d="M6 21v-2a6 6 0 0 1 12 0v2" />
+        <path d="M18 8h3" />
+        <path d="M21 8v8" />
+      </svg>
+    );
+  }
+
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M4 20h4l10-10a2.8 2.8 0 0 0-4-4L4 16v4Z" />
+      <path d="m13 7 4 4" />
+      <path d="M12 20h8" />
+    </svg>
+  );
+}
+
 export default async function Home() {
   const [articles, courses, practiceRanges, partners, topics, tournaments] = await Promise.all([
     getArticles(),
@@ -118,7 +187,6 @@ export default async function Home() {
       <main id="main" className="portal-main">
         <section className="portal-hero" aria-labelledby="hero-title">
           <div className="portal-hero-copy">
-            <p className="portal-eyebrow">沖縄ゴルフナビ</p>
             <h1 id="hero-title">
               沖縄のゴルフ情報を、
               <br />
@@ -129,10 +197,6 @@ export default async function Home() {
               <br />
               ひとつのサイトで検索。
             </p>
-            <div className="portal-hero-actions">
-              <a className="portal-button portal-button-primary" href="#tournaments">大会を探す</a>
-              <a className="portal-button portal-button-accent" href="#courses">ゴルフ場を探す</a>
-            </div>
           </div>
           <div className="portal-hero-visual" aria-hidden="true" />
         </section>
@@ -143,15 +207,17 @@ export default async function Home() {
           </div>
           <div className="quick-search-grid">
             {[
-              ["大会", "大会を探す", "#tournaments", "大"],
-              ["ゴルフ場", "ゴルフ場を探す", "#courses", "場"],
-              ["練習場", "練習場を探す", "#practice", "練"],
-              ["イベント", "イベントを探す", "#quick-search", "催"],
-              ["レッスン", "レッスンを探す", "#practice", "習"],
-              ["ブログ", "ブログを読む", "#articles", "記"]
-            ].map(([title, text, href, mark]) => (
-              <a key={title} className="quick-search-card" href={href}>
-                <span className="quick-search-icon" aria-hidden="true">{mark}</span>
+              ["大会", "大会を探す", "/tournaments", "trophy", "quick-tournament"],
+              ["ゴルフ場", "ゴルフ場を探す", "/courses", "flag", "quick-course"],
+              ["練習場", "練習場を探す", "/practice", "golf", "quick-practice"],
+              ["イベント", "イベントを探す", "/events", "calendar", "quick-event"],
+              ["レッスン", "レッスンを探す", "/lessons", "lesson", "quick-lesson"],
+              ["ブログ", "ブログを読む", "/articles", "blog", "quick-blog"]
+            ].map(([title, text, href, icon, className]) => (
+              <a key={title} className={`quick-search-card ${className}`} href={href}>
+                <span className="quick-search-icon" aria-hidden="true">
+                  <QuickSearchIcon name={icon} />
+                </span>
                 <strong>{title}</strong>
                 <small>{text}</small>
               </a>

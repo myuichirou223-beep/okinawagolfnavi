@@ -1,13 +1,24 @@
 const navItems = [
+  { label: "ホーム", subtitle: "Home", href: "/", icon: "home", className: "nav-home" },
   { label: "大会情報", subtitle: "Tournament", href: "/tournaments", icon: "trophy", className: "nav-tournament" },
   { label: "ゴルフ場", subtitle: "Golf Course", href: "/courses", icon: "flag", className: "nav-course" },
   { label: "練習場", subtitle: "Practice Range", href: "/practice", icon: "golf", className: "nav-practice" },
-  { label: "イベント", subtitle: "Event", href: "/#quick-search", icon: "calendar", className: "nav-event" },
-  { label: "レッスン", subtitle: "Lesson", href: "/#practice", icon: "lesson", className: "nav-lesson" },
-  { label: "ブログ", subtitle: "Blog", href: "/#articles", icon: "blog", className: "nav-blog" }
+  { label: "イベント", subtitle: "Event", href: "/events", icon: "calendar", className: "nav-event" },
+  { label: "レッスン", subtitle: "Lesson", href: "/lessons", icon: "lesson", className: "nav-lesson" },
+  { label: "ブログ", subtitle: "Blog", href: "/articles", icon: "blog", className: "nav-blog" }
 ];
 
 function NavIcon({ name }: { name: string }) {
+  if (name === "home") {
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="m3 11 9-8 9 8" />
+        <path d="M5 10v10h14V10" />
+        <path d="M9 20v-6h6v6" />
+      </svg>
+    );
+  }
+
   if (name === "trophy") {
     return (
       <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -90,7 +101,6 @@ export function Header() {
                 <NavIcon name={item.icon} />
               </span>
               <span className="nav-label">{item.label}</span>
-              <span className="nav-subtitle">{item.subtitle}</span>
             </a>
           ))}
         </nav>
@@ -106,7 +116,6 @@ export function Header() {
           <button className="menu-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="メニューを開く">
             <i aria-hidden="true" />
             <span className="menu-label-ja">メニュー</span>
-            <span className="menu-label-en">Menu</span>
           </button>
         </div>
       </div>

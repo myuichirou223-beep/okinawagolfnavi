@@ -5,13 +5,13 @@ type FooterProps = {
 const googleFormDirectUrl = "https://forms.gle/SKkamSAieuaUjuTW6";
 
 export function Footer({ articleLink = false }: FooterProps) {
-  const articleHref = articleLink ? "/#articles" : "#articles";
+  const articleHref = "/articles";
   const footerItems = [
     { label: "大会情報", href: "/tournaments" },
     { label: "ゴルフ場", href: "/courses" },
     { label: "練習場", href: "/practice" },
-    { label: "イベント", href: "/#quick-search" },
-    { label: "レッスン", href: "/#practice" },
+    { label: "イベント", href: "/events" },
+    { label: "レッスン", href: "/lessons" },
     { label: "ブログ", href: articleHref },
     { label: "お問い合わせ", href: googleFormDirectUrl, external: true },
     { label: "運営者情報", href: googleFormDirectUrl, external: true },

@@ -17,6 +17,26 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date()
     },
     {
+      url: `${siteUrl}/tournaments`,
+      lastModified: new Date()
+    },
+    {
+      url: `${siteUrl}/courses`,
+      lastModified: new Date()
+    },
+    {
+      url: `${siteUrl}/practice`,
+      lastModified: new Date()
+    },
+    {
+      url: `${siteUrl}/events`,
+      lastModified: new Date()
+    },
+    {
+      url: `${siteUrl}/lessons`,
+      lastModified: new Date()
+    },
+    {
       url: `${siteUrl}/contact`,
       lastModified: new Date()
     },
