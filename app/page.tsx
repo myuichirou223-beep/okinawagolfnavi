@@ -1,5 +1,6 @@
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
+import { EventCalendar, type CalendarEventData } from "./components/EventCalendar";
 import { RandomPickupSections, type PickupCourse, type PickupPracticeRange } from "./components/RandomPickupSections";
 import {
   articlePath,
@@ -11,6 +12,8 @@ import {
   getPartners,
   getPracticeRanges,
   getTournaments,
+  getTopics,
+  topicCategoryLabel,
   tournamentActionLinks,
   tournamentSortDate
 } from "../lib/microcms";
@@ -65,6 +68,16 @@ function sortDateToDate(value: number) {
   return new Date(year, month - 1, day);
 }
 
+function sortDateToCalendarDate(value: number) {
+  const text = String(value);
+  if (text.length !== 8) return null;
+  const year = Number(text.slice(0, 4));
+  const month = Number(text.slice(4, 6));
+  const day = Number(text.slice(6, 8));
+  if (!year || !month || !day) return null;
+  return new Date(year, month - 1, day > 31 ? 1 : day);
+}
+
 function tournamentDayLabel(tournament: Awaited<ReturnType<typeof getTournaments>>[number]) {
   const date = sortDateToDate(tournamentSortDate(tournament));
   if (!date) return tournament.month || "未定";
@@ -94,11 +107,23 @@ function tournamentStatusClass(tournament: Awaited<ReturnType<typeof getTourname
   return "is-open";
 }
 
-function monthTitle() {
-  return "2026年6月";
-}
+type CalendarEvent = {
+  id: string;
+  title: string;
+  date: Date;
+  label: string;
+  type: "tournament" | "event" | "demo" | "competition" | "lesson";
+  href: string;
+  venue?: string;
+};
 
-const calendarDays = Array.from({ length: 30 }, (_, index) => index + 1);
+function calendarEventType(label: string): CalendarEvent["type"] {
+  if (label.includes("試打")) return "demo";
+  if (label.includes("コンペ")) return "competition";
+  if (label.includes("レッスン")) return "lesson";
+  if (label.includes("イベント")) return "event";
+  return "tournament";
+}
 
 function QuickSearchIcon({ name }: { name: string }) {
   if (name === "trophy") {
@@ -170,18 +195,69 @@ function QuickSearchIcon({ name }: { name: string }) {
 }
 
 export default async function Home() {
-  const [articles, courses, practiceRanges, partners, tournaments] = await Promise.all([
+  const [articles, courses, practiceRanges, partners, tournaments, topics] = await Promise.all([
     getArticles(),
     getCourses(),
     getPracticeRanges(),
     getPartners(),
-    getTournaments()
+    getTournaments(),
+    getTopics()
   ]);
 
   const todaySortValue = 20260616;
+  const today = new Date(2026, 5, 16);
   const featuredTournament = tournaments.find((tournament) => tournamentSortDate(tournament) >= todaySortValue) || tournaments[0];
   const monthlyTournaments = tournaments.slice(0, 4);
   const latestArticles = articles.slice(0, 4);
+  const tournamentCalendarEvents: CalendarEvent[] = tournaments
+    .flatMap((tournament) => {
+      const date = sortDateToCalendarDate(tournamentSortDate(tournament));
+      if (!date) return [];
+      const label = fieldText(tournament.category) || "大会";
+      return [{
+        id: `tournament-${tournament.id}`,
+        title: tournament.title,
+        date,
+        label,
+        type: calendarEventType(label),
+        href: firstAvailableTournamentUrl(tournament),
+        venue: tournament.venue
+      } satisfies CalendarEvent];
+    });
+  const topicCalendarEvents: CalendarEvent[] = topics
+    .flatMap((topic) => {
+      if (!topic.published) return [];
+      const date = new Date(topic.published);
+      if (Number.isNaN(date.getTime())) return [];
+      const label = topicCategoryLabel(topic);
+      return [{
+        id: `topic-${topic.id}`,
+        title: topic.title,
+        date,
+        label,
+        type: calendarEventType(label),
+        href: topic.linkUrl || "/events",
+        venue: label
+      } satisfies CalendarEvent];
+    });
+  const allCalendarEvents = [...tournamentCalendarEvents, ...topicCalendarEvents]
+    .filter((event) => event.date >= new Date(2026, 0, 1))
+    .sort((a, b) => a.date.getTime() - b.date.getTime());
+  const currentMonthEvents = allCalendarEvents.filter(
+    (event) => event.date.getFullYear() === today.getFullYear() && event.date.getMonth() === today.getMonth()
+  );
+  const calendarBaseDate = currentMonthEvents.length
+    ? today
+    : allCalendarEvents.find((event) => event.date >= today)?.date || today;
+  const calendarEventData: CalendarEventData[] = allCalendarEvents.map((event) => ({
+    id: event.id,
+    title: event.title,
+    dateIso: event.date.toISOString(),
+    label: event.label,
+    type: event.type,
+    href: event.href,
+    venue: event.venue
+  }));
 
   const pickupCourses: PickupCourse[] = courses.map((course) => {
     const image = courseImages(course)[0]?.url || fallbackVisual;
@@ -327,25 +403,11 @@ export default async function Home() {
             </article>
           ) : null}
 
-          <aside className="event-calendar-card" aria-labelledby="event-calendar-title">
-            <div className="calendar-heading">
-              <div>
-                <p className="portal-eyebrow">Calendar</p>
-                <h2 id="event-calendar-title">イベントカレンダー</h2>
-              </div>
-              <a href="/events">カレンダーを見る</a>
-            </div>
-            <h3>{monthTitle()}</h3>
-            <div className="calendar-grid" aria-label="2026年6月カレンダー">
-              {["日", "月", "火", "水", "木", "金", "土"].map((day) => <b key={day}>{day}</b>)}
-              {calendarDays.map((day) => (
-                <span key={day} className={[4, 12, 18, 27].includes(day) ? "has-event" : ""}>{day}</span>
-              ))}
-            </div>
-            <div className="calendar-legend">
-              {["大会", "イベント", "試打会", "コンペ", "レッスン"].map((label) => <span key={label}>{label}</span>)}
-            </div>
-          </aside>
+          <EventCalendar
+            events={calendarEventData}
+            initialYear={calendarBaseDate.getFullYear()}
+            initialMonth={calendarBaseDate.getMonth()}
+          />
         </section>
 
         <section id="tournaments" className="portal-section" aria-labelledby="tournaments-title">

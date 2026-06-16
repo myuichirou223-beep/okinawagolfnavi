@@ -4495,11 +4495,36 @@ body {
   margin: 0;
 }
 
-.calendar-heading a {
+.calendar-nav {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.calendar-nav button {
+  min-height: 34px;
+  padding: 0 12px;
+  border: 1px solid #cfe6da;
+  border-radius: 999px;
+  background: #ffffff;
   color: #008f5a;
   font-size: 13px;
   font-weight: 950;
-  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 6px 14px rgba(0, 143, 90, 0.08);
+  transition: transform 0.14s ease, background 0.14s ease, box-shadow 0.14s ease;
+}
+
+.calendar-nav button:hover,
+.calendar-nav button:focus-visible {
+  background: #edf8f2;
+  transform: translateY(-1px);
+  box-shadow: 0 9px 18px rgba(0, 143, 90, 0.12);
+}
+
+.calendar-nav button:active {
+  transform: translateY(1px);
+  box-shadow: 0 4px 10px rgba(0, 143, 90, 0.08);
 }
 
 .event-calendar-card h3 {
@@ -4518,27 +4543,40 @@ body {
 }
 
 .calendar-grid b,
-.calendar-grid span {
+.calendar-grid span,
+.calendar-grid a {
   min-height: 48px;
   display: grid;
   place-items: center;
   border-right: 1px solid #edf3ef;
   border-bottom: 1px solid #edf3ef;
+  color: #20372d;
   font-size: 13px;
   font-weight: 850;
+  text-decoration: none;
 }
 
 .calendar-grid b:nth-child(7n),
-.calendar-grid span:nth-child(7n) {
+.calendar-grid span:nth-child(7n),
+.calendar-grid a:nth-child(7n) {
   border-right: 0;
 }
 
-.calendar-grid span.has-event {
+.calendar-grid .has-event {
   position: relative;
   color: #008f5a;
+  background: rgba(0, 143, 90, 0.08);
+  transition: transform 0.14s ease, background 0.14s ease;
 }
 
-.calendar-grid span.has-event::after {
+.calendar-grid .has-event:hover,
+.calendar-grid .has-event:focus-visible {
+  z-index: 1;
+  background: rgba(0, 143, 90, 0.16);
+  transform: scale(1.04);
+}
+
+.calendar-grid .has-event::after {
   content: "";
   position: absolute;
   bottom: 8px;
@@ -4546,6 +4584,56 @@ body {
   height: 7px;
   border-radius: 999px;
   background: currentColor;
+}
+
+.calendar-grid .has-event i {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  min-width: 16px;
+  height: 16px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: currentColor;
+  color: #ffffff;
+  font-size: 10px;
+  font-style: normal;
+  line-height: 1;
+}
+
+.calendar-grid .is-empty {
+  background: #f8fbf9;
+}
+
+.calendar-grid .event-type-tournament,
+.calendar-legend span:nth-child(1)::before,
+.calendar-event-item.event-type-tournament::before {
+  color: #f25f8b;
+}
+
+.calendar-grid .event-type-event,
+.calendar-legend span:nth-child(2)::before,
+.calendar-event-item.event-type-event::before {
+  color: #008f5a;
+}
+
+.calendar-grid .event-type-demo,
+.calendar-legend span:nth-child(3)::before,
+.calendar-event-item.event-type-demo::before {
+  color: #0d6eba;
+}
+
+.calendar-grid .event-type-competition,
+.calendar-legend span:nth-child(4)::before,
+.calendar-event-item.event-type-competition::before {
+  color: #ff7a00;
+}
+
+.calendar-grid .event-type-lesson,
+.calendar-legend span:nth-child(5)::before,
+.calendar-event-item.event-type-lesson::before {
+  color: #8e44ad;
 }
 
 .calendar-legend {
@@ -4569,14 +4657,76 @@ body {
   width: 9px;
   height: 9px;
   border-radius: 999px;
-  background: #008f5a;
+  background: currentColor;
 }
 
-.calendar-legend span:nth-child(1)::before { background: #f25f8b; }
-.calendar-legend span:nth-child(2)::before { background: #008f5a; }
-.calendar-legend span:nth-child(3)::before { background: #0d6eba; }
-.calendar-legend span:nth-child(4)::before { background: #ff7a00; }
-.calendar-legend span:nth-child(5)::before { background: #8e44ad; }
+.calendar-event-list {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.calendar-event-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 52px 72px minmax(0, 1fr);
+  gap: 10px;
+  align-items: center;
+  min-height: 48px;
+  padding: 9px 12px 9px 18px;
+  border: 1px solid #edf3ef;
+  border-radius: 12px;
+  background: #ffffff;
+  color: #20372d;
+  text-decoration: none;
+}
+
+.calendar-event-item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 10px;
+  bottom: 10px;
+  width: 4px;
+  border-radius: 999px;
+  background: currentColor;
+}
+
+.calendar-event-item time {
+  color: #20372d;
+  font-size: 13px;
+  font-weight: 950;
+}
+
+.calendar-event-item span {
+  display: inline-flex;
+  justify-content: center;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: #f2f8f5;
+  color: #4d6258;
+  font-size: 11px;
+  font-weight: 950;
+}
+
+.calendar-event-item strong {
+  overflow: hidden;
+  color: #20372d;
+  font-size: 13px;
+  line-height: 1.35;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.calendar-empty {
+  margin: 0;
+  padding: 12px;
+  border-radius: 12px;
+  background: #f6fbf8;
+  color: #61766c;
+  font-size: 13px;
+  font-weight: 850;
+}
 
 .home-tournament-list {
   display: grid;
@@ -4843,4 +4993,88 @@ body {
   .mobile-bottom-nav .nav-course { background: #0d6eba; }
   .mobile-bottom-nav .nav-practice { background: #00a651; }
   .mobile-bottom-nav .nav-event { background: #4dbd74; }
+}
+
+/* Quick category buttons: balanced icon/text layout. */
+.quick-search-grid {
+  align-items: stretch;
+}
+
+.quick-search-card {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  column-gap: 12px;
+  row-gap: 2px;
+  align-content: center;
+  justify-items: start;
+  min-height: 86px;
+  padding: 16px 18px;
+  text-align: left;
+}
+
+.quick-search-icon {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  align-self: center;
+  width: 30px;
+  height: 30px;
+}
+
+.quick-search-card strong {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: end;
+  font-size: 17px;
+  line-height: 1.12;
+  white-space: nowrap;
+}
+
+.quick-search-card small {
+  grid-column: 2;
+  grid-row: 2;
+  align-self: start;
+  margin-top: 3px;
+  font-size: 12px;
+  line-height: 1.25;
+  white-space: normal;
+}
+
+@media (max-width: 1040px) {
+  .quick-search-card {
+    min-height: 96px;
+  }
+}
+
+@media (max-width: 640px) {
+  .quick-search-card {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    row-gap: 5px;
+    justify-items: center;
+    min-height: 116px;
+    padding: 15px 10px;
+    text-align: center;
+  }
+
+  .quick-search-icon,
+  .quick-search-card strong,
+  .quick-search-card small {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .quick-search-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .quick-search-card strong {
+    font-size: 16px;
+  }
+
+  .quick-search-card small {
+    max-width: 9em;
+    font-size: 11px;
+  }
 }
