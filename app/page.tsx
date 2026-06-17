@@ -1,6 +1,8 @@
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
 import { EventCalendar, type CalendarEventData } from "./components/EventCalendar";
+import { HomeFeatureCarousel } from "./components/HomeFeatureCarousel";
+import { PartnerLogoCarousel } from "./components/PartnerLogoCarousel";
 import { RandomPickupSections, type PickupCourse, type PickupPracticeRange } from "./components/RandomPickupSections";
 import {
   articlePath,
@@ -295,26 +297,49 @@ export default async function Home() {
       isVisible: range.status ? range.status !== "非公開" : true
     };
   });
+  const featureSlides = [
+    {
+      label: "メイン",
+      title: "沖縄のゴルフ情報を\nひとつに。",
+      description: "大会・ゴルフ場・練習場・イベント情報を\nまとめて探せるポータルサイト",
+      imageUrl: pickupCourses[0]?.imageUrl || fallbackVisual,
+      tone: "green" as const,
+      actions: [
+        { label: "大会を探す", href: "/tournaments" },
+        { label: "ゴルフ場を探す", href: "/courses" }
+      ]
+    },
+    {
+      label: "今週の注目大会",
+      title: "県民ゴルフジュニア選手権",
+      description: "エントリー受付中！あと6日",
+      imageUrl: fallbackVisual,
+      tone: "orange" as const,
+      actions: [{ label: "詳しく見る", href: "/tournaments" }]
+    },
+    {
+      label: "PR",
+      title: "PGMゴルフリゾート沖縄",
+      description: "宿泊付きゴルフプランが充実！",
+      imageUrl: pickupCourses[1]?.imageUrl || pickupCourses[0]?.imageUrl || fallbackVisual,
+      tone: "blue" as const,
+      actions: [{ label: "詳しく見る", href: "/courses" }]
+    },
+    {
+      label: "PR",
+      title: "エックスゴルフラボ 那覇小禄店",
+      description: "最新シミュレーターでスコアアップ！",
+      imageUrl: pickupPracticeRanges[0]?.imageUrl || fallbackVisual,
+      tone: "dark" as const,
+      actions: [{ label: "詳しく見る", href: "/practice" }]
+    }
+  ];
 
   return (
     <>
       <Header />
       <main id="main" className="portal-main">
-        <section className="portal-hero" aria-labelledby="hero-title">
-          <div className="portal-hero-copy">
-            <h1 id="hero-title">
-              沖縄のゴルフを、
-              <br />
-              <span>もっと身近に。</span>
-            </h1>
-            <p>
-              大会・ゴルフ場・練習場・イベントなど
-              <br />
-              沖縄のゴルフ情報をまとめてチェック。
-            </p>
-          </div>
-          <div className="portal-hero-visual" aria-hidden="true" />
-        </section>
+        <HomeFeatureCarousel slides={featureSlides} />
 
         <section id="quick-search" className="portal-section quick-search-section" aria-labelledby="quick-search-title">
           <div className="portal-section-heading is-centered">
@@ -327,7 +352,7 @@ export default async function Home() {
               ["練習場", "打ちっぱなし・スクール", "/practice", "golf", "quick-practice"],
               ["イベント", "試打会・体験会など", "/events", "calendar", "quick-event"],
               ["レッスン", "スクール・インストラクター", "/lessons", "lesson", "quick-lesson"],
-              ["ブログ", "最新記事・コラム", "/articles", "blog", "quick-blog"]
+              ["ブログ", "ブログを読む", "/articles", "blog", "quick-blog"]
             ].map(([title, text, href, icon, className]) => (
               <a key={title} className={`quick-search-card ${className}`} href={href}>
                 <span className="quick-search-icon" aria-hidden="true">
@@ -340,39 +365,47 @@ export default async function Home() {
           </div>
         </section>
 
-        <section className="home-focus-grid" aria-label="注目情報">
-          {featuredTournament ? (
-            <article className="featured-tournament-card">
-              <div className="portal-section-heading">
-                <p className="portal-eyebrow">Featured Tournament</p>
-                <h2>今週の注目大会</h2>
-              </div>
-              <div className="featured-tournament-visual">
-                <span>{fieldText(featuredTournament.category) || "大会情報"}</span>
-              </div>
-              <div className="featured-tournament-body">
-                <h3>{featuredTournament.title}</h3>
-                <p>{[featuredTournament.dateLabel, featuredTournament.venue].filter(Boolean).join(" / ") || "詳細確認中"}</p>
-                <div className="featured-stats">
-                  <span><small>開催まで</small><strong>{countdownLabel(featuredTournament)}</strong></span>
-                  <span><small>エントリー締切</small><strong>要確認</strong></span>
-                  <span><small>開催コース</small><strong>{featuredTournament.venue || "確認中"}</strong></span>
-                </div>
-                <a href={firstAvailableTournamentUrl(featuredTournament)} {...externalLinkProps(firstAvailableTournamentUrl(featuredTournament))}>
-                  大会詳細を見る
-                </a>
-              </div>
-            </article>
-          ) : null}
+        <section className="portal-section weekly-tournament-section" aria-labelledby="weekly-tournaments-title">
+          <div className="portal-section-heading with-link">
+            <div>
+              <h2 id="weekly-tournaments-title">🔥 今週の注目大会 <span>NEW</span></h2>
+              <p>エントリー受付中の注目大会をピックアップ！</p>
+            </div>
+            <a className="portal-more-link" href="/tournaments">一覧を見る</a>
+          </div>
+          <div className="weekly-tournament-rail">
+            {monthlyTournaments.map((tournament, index) => {
+              const href = firstAvailableTournamentUrl(tournament);
+              return (
+                <article key={tournament.id} className={`weekly-tournament-card ${index === 0 ? "is-featured" : ""}`}>
+                  <div className="weekly-tournament-image">
+                    <img src={index === 0 ? fallbackVisual : pickupCourses[index % Math.max(pickupCourses.length, 1)]?.imageUrl || fallbackVisual} alt="" loading={index === 0 ? "eager" : "lazy"} />
+                    <span>{fieldText(tournament.category) || "大会"}</span>
+                  </div>
+                  <div className="weekly-tournament-body">
+                    <h3>{tournament.title}</h3>
+                    <p>{tournament.venue || "開催場所確認中"}</p>
+                    <div className="weekly-tournament-meta">
+                      <span><small>開催まで</small><strong>{countdownLabel(tournament)}</strong></span>
+                      <span><small>エントリー締切</small><strong>{tournamentStatusLabel(tournament)}</strong></span>
+                      <span><small>募集カテゴリ</small><strong>{index === 0 ? "ジュニア 37名" : "受付中"}</strong></span>
+                    </div>
+                  </div>
+                  <a href={href} {...externalLinkProps(href)} aria-label={`${tournament.title}の詳細を見る`}>詳細を見る</a>
+                </article>
+              );
+            })}
+          </div>
+        </section>
 
+        <section className="home-focus-grid" aria-label="イベントカレンダーと大会情報">
           <EventCalendar
             events={calendarEventData}
             initialYear={calendarBaseDate.getFullYear()}
             initialMonth={calendarBaseDate.getMonth()}
           />
-        </section>
 
-        <section id="tournaments" className="portal-section" aria-labelledby="tournaments-title">
+          <section id="tournaments" className="home-tournament-panel" aria-labelledby="tournaments-title">
           <div className="portal-section-heading with-link">
             <div>
               <p className="portal-eyebrow">Tournament</p>
@@ -396,6 +429,7 @@ export default async function Home() {
               );
             })}
           </div>
+          </section>
         </section>
 
         <RandomPickupSections courses={pickupCourses} practiceRanges={pickupPracticeRanges} />
@@ -416,7 +450,6 @@ export default async function Home() {
                   <div className="blog-card-body">
                     {article.published ? <time dateTime={article.published}>{compactDate(article.published)}</time> : null}
                     <h3>{article.title}</h3>
-                    <p>{article.description || "沖縄のゴルフをもっと楽しむための記事です。"}</p>
                   </div>
                 </a>
               </article>
@@ -430,18 +463,7 @@ export default async function Home() {
             <h2 id="partners-title">パートナー</h2>
             <p>おきなわGOLFなびは、多くの企業・団体様に支えられて運営しております。</p>
           </div>
-          <div className="partner-card-grid">
-            {partners.map((partner) => {
-              const content = partner.logo?.url ? <img src={partner.logo.url} alt={partner.name} /> : <span>{partner.name}</span>;
-              return partner.websiteUrl ? (
-                <a key={partner.id} className="partner-card" href={partner.websiteUrl} target="_blank" rel="noreferrer">
-                  {content}
-                </a>
-              ) : (
-                <div key={partner.id} className="partner-card">{content}</div>
-              );
-            })}
-          </div>
+          <PartnerLogoCarousel partners={partners} />
         </section>
 
         <section className="portal-cta" aria-labelledby="cta-title">

@@ -31,7 +31,7 @@ type RandomPickupSectionsProps = {
 
 function pickRandomItems<T extends { isVisible?: boolean }>(items: T[]) {
   const visibleItems = items.filter((item) => item.isVisible !== false);
-  return [...visibleItems].sort(() => Math.random() - 0.5).slice(0, 6);
+  return [...visibleItems].sort(() => Math.random() - 0.5).slice(0, 4);
 }
 
 function isExternalUrl(url: string) {
@@ -53,7 +53,6 @@ function PickupCard({ item }: { item: PickupCourse | PickupPracticeRange }) {
               <span key={tag}>{tag}</span>
             ))}
           </div>
-          <strong>詳細を見る</strong>
         </div>
       </a>
     </article>

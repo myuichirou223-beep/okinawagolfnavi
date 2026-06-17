@@ -120,6 +120,28 @@ export function Header() {
             </button>
           </div>
         </div>
+        <dl className="header-stats" aria-label="掲載情報数">
+          <div>
+            <dt>大会情報</dt>
+            <dd>145<span>件</span></dd>
+            <small>開催予定の大会</small>
+          </div>
+          <div>
+            <dt>ゴルフ場</dt>
+            <dd>42<span>件</span></dd>
+            <small>県内ゴルフ場数</small>
+          </div>
+          <div>
+            <dt>練習場</dt>
+            <dd>38<span>件</span></dd>
+            <small>練習場登録数</small>
+          </div>
+          <div>
+            <dt>イベント</dt>
+            <dd>26<span>件</span></dd>
+            <small>開催予定のイベント</small>
+          </div>
+        </dl>
       </header>
       <nav className="mobile-bottom-nav" aria-label="スマホ固定ナビ">
         {navItems.slice(0, 5).map((item) => (
