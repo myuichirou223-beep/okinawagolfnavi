@@ -344,11 +344,15 @@ export default async function Home() {
       actions: [{ label: "詳しく見る", href: "/practice" }]
     }
   ];
+  const sidebarTournaments = monthlyTournaments.slice(0, 3);
+  const sidebarFavorites = pickupCourses.slice(0, 3);
 
   return (
     <>
       <Header />
       <main id="main" className="portal-main">
+        <div className="home-portal-layout">
+          <div className="home-content-column">
         <HomeFeatureCarousel slides={featureSlides} />
 
         <section id="quick-search" className="portal-section quick-search-section" aria-labelledby="quick-search-title">
@@ -406,6 +410,13 @@ export default async function Home() {
               );
             })}
           </div>
+        </section>
+
+        <section className="home-wide-pr-banner" aria-label="パートナー広告">
+          <span>PR</span>
+          <strong>沖縄のゴルフをもっと楽しく、もっと快適に。</strong>
+          <small>OKINAWA GOLF PARTNER</small>
+          <a href={googleFormDirectUrl} target="_blank" rel="noreferrer">詳しくはこちら</a>
         </section>
 
         <section className="home-focus-grid" aria-label="イベントカレンダーと大会情報">
@@ -467,6 +478,13 @@ export default async function Home() {
           </div>
         </section>
 
+        <section className="home-wide-pr-banner is-resort" aria-label="リゾート広告">
+          <span>PR</span>
+          <strong>上質なリゾートステイで、ワンランク上のゴルフ体験を。</strong>
+          <small>OKINAWA GOLF RESORTS</small>
+          <a href={googleFormDirectUrl} target="_blank" rel="noreferrer">詳しくはこちら</a>
+        </section>
+
         <section id="partners" className="portal-section partners-section" aria-labelledby="partners-title">
           <div className="portal-section-heading">
             <p className="portal-eyebrow">Partners</p>
@@ -485,6 +503,74 @@ export default async function Home() {
             <a href={googleFormDirectUrl} target="_blank" rel="noreferrer">イベント情報を受け取る</a>
           </div>
         </section>
+          </div>
+
+          <aside className="home-sidebar" aria-label="サイド情報">
+            <section className="sidebar-box sidebar-hero-ad">
+              <p>PRバナー（ヒーロー右上）</p>
+              <strong>300px × 250px</strong>
+            </section>
+
+            <section className="sidebar-box sidebar-tournament-card" aria-labelledby="sidebar-tournament-title">
+              <div className="sidebar-heading">
+                <h2 id="sidebar-tournament-title">注目大会</h2>
+                <span>PR枠あり</span>
+              </div>
+              <div className="sidebar-tournament-list">
+                {sidebarTournaments.map((tournament) => (
+                  <a key={tournament.id} href={firstAvailableTournamentUrl(tournament)} {...externalLinkProps(firstAvailableTournamentUrl(tournament))}>
+                    <img src={fallbackVisual} alt="" loading="lazy" />
+                    <span>
+                      <strong>{tournament.title}</strong>
+                      <small>{tournament.venue || "開催コース確認中"}</small>
+                    </span>
+                    <em>{countdownLabel(tournament)}</em>
+                  </a>
+                ))}
+              </div>
+            </section>
+
+            <section className="sidebar-box sidebar-pink-pr">
+              <span>PR</span>
+              <strong>あなたの大会・サービスをPRしませんか？</strong>
+              <a href={googleFormDirectUrl} target="_blank" rel="noreferrer">詳しくはこちら</a>
+            </section>
+
+            <section className="sidebar-box sidebar-tall-ad">
+              <span>PR</span>
+              <h2>ゴルフレッスン体験</h2>
+              <strong>3,300円〜</strong>
+              <p>初心者歓迎！手ぶらOK！</p>
+              <a href={googleFormDirectUrl} target="_blank" rel="noreferrer">詳しくはこちら</a>
+            </section>
+
+            <section className="sidebar-box sidebar-sale-ad">
+              <span>PR</span>
+              <h2>ゴルフ用品</h2>
+              <strong>SPECIAL SALE</strong>
+              <p>人気ブランド多数！</p>
+              <a href={googleFormDirectUrl} target="_blank" rel="noreferrer">今すぐチェック</a>
+            </section>
+
+            <section className="sidebar-box sidebar-line-card">
+              <h2>公式LINEで最新情報をお届け！</h2>
+              <p>大会情報やイベント情報をいち早くお届けします。</p>
+              <a href={googleFormDirectUrl} target="_blank" rel="noreferrer">友だち追加</a>
+            </section>
+
+            <section className="sidebar-box sidebar-favorite-card">
+              <div className="sidebar-heading">
+                <h2>お気に入り</h2>
+                <a href="/courses">すべて見る</a>
+              </div>
+              <ul>
+                {sidebarFavorites.map((course) => (
+                  <li key={course.id}><a href={course.href}>{course.title}</a></li>
+                ))}
+              </ul>
+            </section>
+          </aside>
+        </div>
       </main>
       <Footer />
     </>
