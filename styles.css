@@ -6406,7 +6406,7 @@ body {
 .home-feature-carousel {
   width: 100%;
   margin: 0;
-  padding: 0 0 28px;
+  padding: 0;
   background: #ffffff;
 }
 
@@ -6540,8 +6540,8 @@ body {
 .feature-side-stack {
   display: grid;
   grid-template-rows: repeat(3, minmax(0, 1fr));
-  gap: 10px;
-  padding: 14px 16px 14px 0;
+  gap: 0;
+  padding: 0;
   height: 520px;
   background: transparent;
 }
@@ -6549,9 +6549,9 @@ body {
 .feature-side-stack .feature-slide-card {
   min-height: 0;
   height: 100%;
-  border: 2px solid rgba(255, 255, 255, 0.9);
-  border-radius: 10px;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.22);
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
 }
 
 .feature-side-stack .feature-slide-card .feature-slide-overlay {
@@ -6656,7 +6656,7 @@ body {
   display: grid;
   grid-template-columns: repeat(7, minmax(0, 1fr));
   gap: 12px;
-  padding: 20px 8px 0;
+  padding: 0 8px;
 }
 
 .quick-search-card {
@@ -6982,7 +6982,7 @@ body {
 
 @media (max-width: 640px) {
   .home-feature-carousel {
-    padding-bottom: 22px;
+    padding-bottom: 0;
   }
 
   .home-feature-carousel .feature-slide-card.is-main .feature-slide-body {

@@ -1,3 +1,5 @@
+import { getSiteStats } from "../../lib/microcms";
+
 const navItems = [
   { label: "ホーム", subtitle: "Home", href: "/", icon: "home", className: "nav-home" },
   { label: "大会情報", subtitle: "Tournament", href: "/tournaments", icon: "trophy", className: "nav-tournament" },
@@ -87,7 +89,9 @@ function NavIcon({ name }: { name: string }) {
   );
 }
 
-export function Header() {
+export async function Header() {
+  const stats = await getSiteStats();
+
   return (
     <>
       <header className="site-header">
@@ -123,23 +127,23 @@ export function Header() {
         <dl className="header-stats" aria-label="掲載情報数">
           <div>
             <dt>大会情報</dt>
-            <dd>145<span>件</span></dd>
-            <small>開催予定の大会</small>
+            <dd>{stats.tournaments}<span>件</span></dd>
+            <small>登録大会数</small>
           </div>
           <div>
             <dt>ゴルフ場</dt>
-            <dd>42<span>件</span></dd>
+            <dd>{stats.courses}<span>件</span></dd>
             <small>県内ゴルフ場数</small>
           </div>
           <div>
             <dt>練習場</dt>
-            <dd>38<span>件</span></dd>
+            <dd>{stats.practiceRanges}<span>件</span></dd>
             <small>練習場登録数</small>
           </div>
           <div>
             <dt>イベント</dt>
-            <dd>26<span>件</span></dd>
-            <small>開催予定のイベント</small>
+            <dd>{stats.events}<span>件</span></dd>
+            <small>最新情報数</small>
           </div>
         </dl>
       </header>

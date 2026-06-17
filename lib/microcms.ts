@@ -523,6 +523,28 @@ async function requestMicroCMS<T>(path: string) {
   return (await response.json()) as T;
 }
 
+async function requestAllMicroCMS<T>(endpoint: string, query = "") {
+  const limit = 100;
+  const firstSeparator = query ? "&" : "?";
+  const first = await requestMicroCMS<MicroCMSListResponse<T>>(
+    `/${endpoint}${query}${firstSeparator}limit=${limit}&offset=0`
+  );
+
+  if (!first) return null;
+
+  const contents = [...(first.contents || [])];
+  for (let offset = limit; offset < first.totalCount; offset += limit) {
+    const separator = query ? "&" : "?";
+    const next = await requestMicroCMS<MicroCMSListResponse<T>>(
+      `/${endpoint}${query}${separator}limit=${limit}&offset=${offset}`
+    );
+    if (!next?.contents?.length) break;
+    contents.push(...next.contents);
+  }
+
+  return contents;
+}
+
 export async function getArticles() {
   const data = await requestMicroCMS<MicroCMSListResponse<Article>>(
     "/articles?limit=20&orders=-published,-createdAt"
@@ -712,6 +734,31 @@ export async function getPracticeRanges() {
   }
 
   return fallbackPracticeRanges.filter(isPublishedPracticeRange);
+}
+
+export async function getSiteStats() {
+  const [tournaments, facilities, topics] = await Promise.all([
+    requestAllMicroCMS<Tournament>("tournaments", "?orders=displayOrder,-dateLabel"),
+    requestAllMicroCMS<Facility>("facilities", "?orders=area,city"),
+    requestAllMicroCMS<Topic>("topics", "?orders=-published,-createdAt")
+  ]);
+
+  const visibleTournaments = (tournaments || fallbackTournaments).filter(isPublishedTournament);
+  const visibleFacilities = (facilities || []).filter((facility) => isPublishedStatus(facility.status));
+  const visibleTopics = (topics || fallbackTopics).filter(isPublishedTopic);
+  const courseCount = visibleFacilities.length
+    ? visibleFacilities.filter(isGolfCourseFacility).length
+    : fallbackCourses.map(normalizeCourse).filter(isPublishedCourse).length;
+  const practiceRangeCount = visibleFacilities.length
+    ? visibleFacilities.filter(isPracticeRangeFacility).length
+    : fallbackPracticeRanges.filter(isPublishedPracticeRange).length;
+
+  return {
+    tournaments: visibleTournaments.length,
+    courses: courseCount,
+    practiceRanges: practiceRangeCount,
+    events: visibleTopics.length
+  };
 }
 
 function isPublishedPartner(partner: Partner) {

@@ -25,6 +25,18 @@ export const revalidate = 300;
 const googleFormDirectUrl = "https://forms.gle/SKkamSAieuaUjuTW6";
 const fallbackVisual = "/assets/hero-golfer.jpg";
 
+function getJstToday() {
+  const jstNow = new Date(Date.now() + 9 * 60 * 60 * 1000);
+  return new Date(jstNow.getUTCFullYear(), jstNow.getUTCMonth(), jstNow.getUTCDate());
+}
+
+function dateToSortValue(date: Date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return Number(`${year}${month}${day}`);
+}
+
 function fieldText(value: unknown): string {
   if (!value) return "";
   if (typeof value === "string") return value.trim();
@@ -206,10 +218,13 @@ export default async function Home() {
     getTopics()
   ]);
 
-  const todaySortValue = 20260616;
-  const today = new Date(2026, 5, 16);
+  const today = getJstToday();
+  const todaySortValue = dateToSortValue(today);
   const featuredTournament = tournaments.find((tournament) => tournamentSortDate(tournament) >= todaySortValue) || tournaments[0];
-  const monthlyTournaments = tournaments.slice(0, 4);
+  const upcomingTournaments = tournaments
+    .filter((tournament) => tournamentSortDate(tournament) >= todaySortValue)
+    .sort((a, b) => tournamentSortDate(a) - tournamentSortDate(b));
+  const monthlyTournaments = (upcomingTournaments.length ? upcomingTournaments : tournaments).slice(0, 4);
   const latestArticles = articles.slice(0, 4);
   const tournamentCalendarEvents: CalendarEvent[] = tournaments
     .flatMap((tournament) => {
@@ -245,12 +260,7 @@ export default async function Home() {
   const allCalendarEvents = [...tournamentCalendarEvents, ...topicCalendarEvents]
     .filter((event) => event.date >= new Date(2026, 0, 1))
     .sort((a, b) => a.date.getTime() - b.date.getTime());
-  const currentMonthEvents = allCalendarEvents.filter(
-    (event) => event.date.getFullYear() === today.getFullYear() && event.date.getMonth() === today.getMonth()
-  );
-  const calendarBaseDate = currentMonthEvents.length
-    ? today
-    : allCalendarEvents.find((event) => event.date >= today)?.date || today;
+  const calendarBaseDate = today;
   const calendarEventData: CalendarEventData[] = allCalendarEvents.map((event) => ({
     id: event.id,
     title: event.title,
@@ -368,8 +378,8 @@ export default async function Home() {
         <section className="portal-section weekly-tournament-section" aria-labelledby="weekly-tournaments-title">
           <div className="portal-section-heading with-link">
             <div>
-              <h2 id="weekly-tournaments-title">🔥 今週の注目大会 <span>NEW</span></h2>
-              <p>エントリー受付中の注目大会をピックアップ！</p>
+              <h2 id="weekly-tournaments-title">🔥 今後の大会 <span>NEW</span></h2>
+              <p>これから開催される大会を近い順にピックアップ！</p>
             </div>
             <a className="portal-more-link" href="/tournaments">一覧を見る</a>
           </div>
@@ -409,7 +419,7 @@ export default async function Home() {
           <div className="portal-section-heading with-link">
             <div>
               <p className="portal-eyebrow">Tournament</p>
-              <h2 id="tournaments-title">大会情報</h2>
+              <h2 id="tournaments-title">今後の大会情報</h2>
             </div>
             <a className="portal-more-link" href="/tournaments">一覧を見る</a>
           </div>
