@@ -2635,7 +2635,8 @@ button:focus-visible,
 
 .practice-list {
   display: grid;
-  gap: 10px;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 28px 18px;
 }
 
 .practice-directory {
@@ -2705,6 +2706,37 @@ button:focus-visible,
   border-radius: 14px;
   background: #ffffff;
   box-shadow: 0 8px 20px rgba(18, 168, 70, 0.05);
+}
+
+.practice-card {
+  min-width: 0;
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.practice-card h4 {
+  margin: 12px 0 8px;
+  color: var(--category-ink, #124b2f);
+  font-size: 17px;
+  line-height: 1.35;
+}
+
+.practice-card-access {
+  margin: 7px 0 0;
+  color: color-mix(in srgb, var(--category-ink, #124b2f) 68%, #ffffff);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.practice-card .course-card-link:hover h4,
+.practice-card .course-card-link:focus-visible h4 {
+  color: var(--category-dark, #00783a);
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
 
 .practice-row details {
@@ -3284,7 +3316,8 @@ button:focus-visible,
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .course-list {
+  .course-list,
+  .practice-list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -3408,7 +3441,8 @@ button:focus-visible,
     grid-template-columns: 1fr;
   }
 
-  .course-list {
+  .course-list,
+  .practice-list {
     grid-template-columns: 1fr;
   }
 
@@ -3790,7 +3824,7 @@ body {
   flex: 1 1 auto;
   min-width: 320px;
   height: 76px;
-  padding: 0 28px;
+  padding: 0 10px;
   display: flex;
   align-items: center;
   background: #ffffff;
@@ -4052,7 +4086,7 @@ body {
   .brand {
     min-width: 280px;
     height: 70px;
-    padding: 0 20px;
+    padding: 0 8px;
   }
 
   .brand-logo {
@@ -4102,7 +4136,7 @@ body {
     width: calc(100% - 70px);
     min-width: 0;
     min-height: 70px;
-    padding: 7px 12px;
+    padding: 7px 8px;
   }
 
   .brand-logo {
@@ -7041,22 +7075,95 @@ body {
 }
 
 .home-tournament-panel,
-.event-calendar-card {
+.event-calendar-card,
+.home-event-panel {
   border-radius: 14px;
   background: #ffffff;
   box-shadow: 0 8px 22px rgba(12, 36, 28, 0.08);
 }
 
-.home-tournament-panel {
+.home-tournament-panel,
+.home-event-panel {
   padding: 22px;
 }
 
-.home-tournament-panel .portal-section-heading {
+.home-tournament-panel .portal-section-heading,
+.home-event-panel .portal-section-heading {
   margin-bottom: 12px;
 }
 
-.home-tournament-panel .portal-section-heading h2 {
+.home-tournament-panel .portal-section-heading h2,
+.home-event-panel .portal-section-heading h2 {
   font-size: 22px;
+}
+
+.home-event-list {
+  display: grid;
+  gap: 10px;
+}
+
+.home-event-card {
+  overflow: hidden;
+  border: 1px solid #e3ece7;
+  border-radius: 10px;
+  background: #ffffff;
+}
+
+.home-event-card a {
+  height: 104px;
+  display: grid;
+  grid-template-columns: 124px minmax(0, 1fr);
+  color: inherit;
+  text-decoration: none;
+}
+
+.home-event-card img {
+  width: 100%;
+  height: 104px;
+  display: block;
+  object-fit: cover;
+}
+
+.home-event-card a > div {
+  min-width: 0;
+  display: grid;
+  align-content: center;
+  gap: 5px;
+  padding: 11px 13px;
+}
+
+.home-event-card span {
+  width: fit-content;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: #e8f8ef;
+  color: #007a4c;
+  font-size: 10px;
+  font-weight: 950;
+}
+
+.home-event-card h3 {
+  margin: 0;
+  display: -webkit-box;
+  overflow: hidden;
+  color: #173a2a;
+  font-size: 14px;
+  line-height: 1.4;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.home-event-card time {
+  color: #6b7d74;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.home-event-card a:hover h3,
+.home-event-card a:focus-visible h3 {
+  color: #007a4c;
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .home-tournament-list {
@@ -7206,6 +7313,31 @@ body {
 
 .home-content-column {
   min-width: 0;
+}
+
+.home-banner-ad-section {
+  width: min(100% - 40px, 1080px);
+  margin: 18px auto 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.home-banner-ad-slot {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid #dce7e1;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 8px 22px rgba(12, 36, 28, 0.08);
+}
+
+.home-banner-ad-slot img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 430 / 150;
+  display: block;
+  object-fit: cover;
 }
 
 .home-content-column .quick-search-section,
@@ -8451,6 +8583,19 @@ body {
   box-shadow: 0 8px 22px rgba(var(--category-rgb), 0.09);
 }
 
+#practice .practice-card {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+#practice .practice-card .course-image {
+  border-color: rgba(var(--category-rgb), 0.26);
+  background: rgba(var(--category-rgb), 0.1);
+  box-shadow: 0 8px 20px rgba(var(--category-rgb), 0.12);
+}
+
 #practice .practice-open-label {
   background: rgba(var(--category-rgb), 0.11);
   color: var(--category-dark);
@@ -8629,8 +8774,8 @@ body {
     height: 62px;
     min-height: 62px;
     display: flex;
-    justify-content: center;
-    padding: 7px 16px;
+    justify-content: flex-start;
+    padding: 7px 8px;
   }
 
   .brand-logo {
@@ -8675,6 +8820,17 @@ body {
 
   .site-footer > .footer-links {
     display: none;
+  }
+
+  .home-banner-ad-section {
+    width: calc(100% - 24px);
+    margin-top: 14px;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .home-banner-ad-slot {
+    border-radius: 9px;
   }
 
   .home-feature-carousel .feature-slide-grid,
@@ -8723,6 +8879,134 @@ body {
 @media (max-width: 380px) {
   .home-feature-carousel .feature-slide-card.is-main h2 {
     font-size: 32px;
+  }
+}
+
+/* Tablet layout: keep the desktop structure readable without mobile stacking collisions. */
+@media (min-width: 761px) and (max-width: 1180px) {
+  .home-feature-carousel {
+    overflow: hidden;
+  }
+
+  .home-feature-carousel .feature-slide-grid {
+    height: auto;
+    min-height: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 460px 170px;
+  }
+
+  .home-feature-carousel .feature-slide-card,
+  .home-feature-carousel .feature-slide-card.is-main {
+    height: 100%;
+    min-height: 0;
+  }
+
+  .home-feature-carousel .feature-slide-card.is-main .feature-slide-body {
+    width: min(680px, 76%);
+    height: 460px;
+    min-height: 460px;
+    padding: 44px;
+  }
+
+  .home-feature-carousel .feature-slide-card.is-main h2 {
+    font-size: clamp(40px, 5.4vw, 58px);
+  }
+
+  .feature-side-stack {
+    width: 100%;
+    height: 170px;
+    min-height: 170px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-rows: 170px;
+    gap: 0;
+    overflow: hidden;
+    padding: 0;
+  }
+
+  .feature-side-stack .feature-slide-card {
+    width: auto;
+    height: 170px;
+    min-height: 170px;
+    border-right: 1px solid rgba(255, 255, 255, 0.35);
+  }
+
+  .feature-side-stack .feature-slide-body {
+    padding: 15px 18px;
+  }
+
+  .feature-side-stack .feature-slide-body h2 {
+    margin-top: 8px;
+    font-size: clamp(17px, 2vw, 22px);
+  }
+
+  .feature-side-stack .feature-slide-body p {
+    display: -webkit-box;
+    margin-top: 5px;
+    overflow: hidden;
+    font-size: 12px;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .home-feature-carousel .feature-dots {
+    bottom: 190px;
+  }
+
+  .course-directory,
+  .practice-directory {
+    gap: 44px;
+  }
+
+  .course-list,
+  .practice-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px 18px;
+  }
+
+  #courses.section,
+  #practice.section,
+  #events.section,
+  #lessons.section,
+  #articles.section {
+    padding-right: 24px;
+    padding-left: 24px;
+  }
+
+  .home-banner-ad-section {
+    width: calc(100% - 40px);
+  }
+}
+
+@media (min-width: 761px) and (max-width: 900px) {
+  .home-feature-carousel .feature-slide-grid {
+    grid-template-rows: 430px 156px;
+  }
+
+  .home-feature-carousel .feature-slide-card.is-main .feature-slide-body {
+    height: 430px;
+    min-height: 430px;
+    padding: 38px 32px;
+  }
+
+  .feature-side-stack,
+  .feature-side-stack .feature-slide-card {
+    height: 156px;
+    min-height: 156px;
+  }
+
+  .feature-side-stack {
+    grid-template-rows: 156px;
+  }
+
+  .home-feature-carousel .feature-dots {
+    bottom: 176px;
+  }
+
+  .course-list,
+  .practice-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 

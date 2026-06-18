@@ -113,6 +113,7 @@ export type Facility = {
 export type PracticeRange = {
   id: string;
   name: string;
+  imageUrl?: string;
   category?: string;
   area?: string;
   address?: string;
@@ -662,6 +663,7 @@ function facilityToCourse(facility: Facility): Course {
 function facilityToPracticeRange(facility: Facility): PracticeRange {
   const type = facilityTypeValue(facility);
   const facilityType = fieldText(facility.facilityType);
+  const image = facilityGallery(facility)[0];
   const category =
     facilityType ||
     (type === "indoor_practice_range" ? "屋内" : "屋外");
@@ -669,6 +671,7 @@ function facilityToPracticeRange(facility: Facility): PracticeRange {
   return {
     id: facility.id,
     name: facility.name,
+    imageUrl: image?.url,
     category,
     area: fieldText(facility.area),
     address: facility.address,

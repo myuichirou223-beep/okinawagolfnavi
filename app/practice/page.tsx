@@ -101,31 +101,31 @@ export default async function PracticePage() {
                             {groupedRanges.map((range) => {
                               const rangeCategory = fieldText(range.category) || "練習場";
                               const rangeArea = fieldText(range.area) || "沖縄県";
+                              const cardContent = (
+                                <>
+                                  <div className={`course-image${range.imageUrl ? "" : " course-image-fallback"}`}>
+                                    <img src={range.imageUrl || "/assets/hero-golfer.jpg"} alt={range.name} />
+                                  </div>
+                                  <h4>{range.name}</h4>
+                                  <p className="course-card-meta">{[rangeArea, rangeCategory].filter(Boolean).join(" / ")}</p>
+                                  {range.accessFromNaha ? <p className="practice-card-access">{range.accessFromNaha}</p> : null}
+                                </>
+                              );
                               return (
                                 <article
                                   key={range.id}
-                                  className="practice-row searchable"
+                                  className="practice-row practice-card searchable"
                                   data-practice-category={practiceCategoryValue(range.category)}
                                   data-practice-area={areaFilterValue(range.area)}
                                   data-keywords={practiceRangeKeywords(range)}
                                 >
-                                  <details>
-                                    <summary>
-                                      <span className="practice-summary-main">
-                                        <span className="practice-name">{range.name}</span>
-                                        <span className="practice-location-line">{[rangeCategory, rangeArea].filter(Boolean).join(" / ")}</span>
-                                      </span>
-                                      <span className="practice-open-label">詳細</span>
-                                    </summary>
-                                    <div className="practice-detail">
-                                      <p><strong>住所</strong>{range.address || "所在地確認中"}</p>
-                                      {range.accessFromNaha ? <p><strong>アクセス</strong>{range.accessFromNaha}</p> : null}
-                                      <div className="practice-actions">
-                                        {range.phone ? <a className="text-link" href={`tel:${range.phone.replace(/[^0-9+]/g, "")}`}>{range.phone}</a> : null}
-                                        {range.url ? <a className="text-link" href={range.url} target="_blank" rel="noreferrer">公式サイト</a> : null}
-                                      </div>
-                                    </div>
-                                  </details>
+                                  {range.url ? (
+                                    <a className="course-card-link" href={range.url} target="_blank" rel="noreferrer">
+                                      {cardContent}
+                                    </a>
+                                  ) : (
+                                    <div className="course-card-link">{cardContent}</div>
+                                  )}
                                 </article>
                               );
                             })}

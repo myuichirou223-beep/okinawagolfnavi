@@ -5,7 +5,7 @@ const navItems = [
   { label: "練習場", subtitle: "Practice Range", href: "/practice", icon: "golf", className: "nav-practice" },
   { label: "イベント", subtitle: "Event", href: "/events", icon: "calendar", className: "nav-event" },
   { label: "レッスン", subtitle: "Lesson", href: "/lessons", icon: "lesson", className: "nav-lesson" },
-  { label: "ブログ", subtitle: "Blog", href: "/articles", icon: "blog", className: "nav-blog" }
+  { label: "記事", subtitle: "Articles", href: "/articles", icon: "blog", className: "nav-blog" }
 ];
 
 function NavIcon({ name }: { name: string }) {
