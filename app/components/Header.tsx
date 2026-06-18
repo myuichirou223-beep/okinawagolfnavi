@@ -147,16 +147,6 @@ export async function Header() {
           </div>
         </dl>
       </header>
-      <nav className="mobile-bottom-nav" aria-label="スマホ固定ナビ">
-        {navItems.slice(0, 5).map((item) => (
-          <a key={item.label} className={item.className} href={item.href}>
-            <span className="nav-icon" aria-hidden="true">
-              <NavIcon name={item.icon} />
-            </span>
-            <span>{item.label.replace("情報", "")}</span>
-          </a>
-        ))}
-      </nav>
     </>
   );
 }

@@ -24,6 +24,7 @@ type HomeFeatureCarouselProps = {
 export function HomeFeatureCarousel({ slides }: HomeFeatureCarouselProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const touchStartX = useRef<number | null>(null);
+  const thumbnailRefs = useRef<Array<HTMLButtonElement | null>>([]);
 
   if (!slides.length) return null;
 
@@ -58,6 +59,14 @@ export function HomeFeatureCarousel({ slides }: HomeFeatureCarouselProps) {
 
     return () => window.clearInterval(timer);
   }, [slides.length]);
+
+  useEffect(() => {
+    thumbnailRefs.current[activeIndex]?.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+      inline: "center"
+    });
+  }, [activeIndex]);
 
   return (
     <section
@@ -108,6 +117,24 @@ export function HomeFeatureCarousel({ slides }: HomeFeatureCarouselProps) {
             aria-label={`${index + 1}枚目を表示`}
             aria-current={index === activeIndex ? "true" : undefined}
           />
+        ))}
+      </div>
+      <div className="feature-thumbnail-strip" aria-label="注目コンテンツ一覧">
+        {slides.map((slide, index) => (
+          <button
+            key={`${slide.title}-thumb`}
+            ref={(element) => {
+              thumbnailRefs.current[index] = element;
+            }}
+            type="button"
+            className={index === activeIndex ? "is-active" : ""}
+            onClick={() => setActiveIndex(index)}
+            aria-label={`${slide.title.replace(/\n/g, "")}を表示`}
+            aria-current={index === activeIndex ? "true" : undefined}
+          >
+            <img src={slide.imageUrl} alt="" loading="lazy" />
+            <span>{slide.label}</span>
+          </button>
         ))}
       </div>
     </section>

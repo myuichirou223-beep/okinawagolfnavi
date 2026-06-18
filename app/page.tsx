@@ -64,6 +64,13 @@ function compactDate(value?: string) {
   return formatDate(value).replace("年", ".").replace("月", ".").replace("日", "");
 }
 
+function compactMonthDay(value?: string) {
+  if (!value) return "";
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "";
+  return `${date.getMonth() + 1}/${date.getDate()}`;
+}
+
 function firstAvailableTournamentUrl(tournament: Awaited<ReturnType<typeof getTournaments>>[number]) {
   return tournamentActionLinks(tournament).find((link) => link.url)?.url || "/#tournaments";
 }
@@ -226,6 +233,7 @@ export default async function Home() {
     .sort((a, b) => tournamentSortDate(a) - tournamentSortDate(b));
   const monthlyTournaments = (upcomingTournaments.length ? upcomingTournaments : tournaments).slice(0, 4);
   const latestArticles = articles.slice(0, 4);
+  const mobileTopics = topics.slice(0, 5);
   const tournamentCalendarEvents: CalendarEvent[] = tournaments
     .flatMap((tournament) => {
       const date = sortDateToCalendarDate(tournamentSortDate(tournament));
@@ -365,8 +373,8 @@ export default async function Home() {
               ["ゴルフ場", "県内ゴルフ場を探す", "/courses", "flag", "quick-course"],
               ["練習場", "打ちっぱなし・スクール", "/practice", "golf", "quick-practice"],
               ["イベント", "試打会・体験会など", "/events", "calendar", "quick-event"],
-              ["レッスン", "スクール・インストラクター", "/lessons", "lesson", "quick-lesson"],
-              ["ブログ", "ブログを読む", "/articles", "blog", "quick-blog"]
+              ["レッスン・スクール", "レッスンを探す", "/lessons", "lesson", "quick-lesson"],
+              ["記事", "新着情報を発信", "/articles", "blog", "quick-blog"]
             ].map(([title, text, href, icon, className]) => (
               <a key={title} className={`quick-search-card ${className}`} href={href}>
                 <span className="quick-search-icon" aria-hidden="true">
@@ -410,6 +418,35 @@ export default async function Home() {
               );
             })}
           </div>
+        </section>
+
+        <section className="mobile-topic-list" aria-labelledby="mobile-topics-title">
+          <div className="mobile-section-heading with-link">
+            <h2 id="mobile-topics-title">注目情報</h2>
+            <a href="/events">一覧を見る</a>
+          </div>
+          <div className="mobile-topic-rows">
+            {mobileTopics.map((topic) => (
+              <a key={topic.id} href={topic.linkUrl || "/events"} {...externalLinkProps(topic.linkUrl || "/events")}>
+                <span className="mobile-topic-image">
+                  <img
+                    src={topic.image?.url || topic.eyecatch?.url || topic.thumbnail?.url || fallbackVisual}
+                    alt=""
+                    loading="lazy"
+                  />
+                </span>
+                <span className="mobile-topic-copy">
+                  <span className="mobile-topic-meta">
+                    <span className={`mobile-topic-badge is-${topicCategoryLabel(topic)}`}>{topicCategoryLabel(topic)}</span>
+                    <time>{compactMonthDay(topic.published) || "更新"}</time>
+                  </span>
+                  <strong>{topic.title}</strong>
+                </span>
+                <i aria-hidden="true">›</i>
+              </a>
+            ))}
+          </div>
+          <a className="mobile-more-link" href="/events">すべての情報を見る <span aria-hidden="true">›</span></a>
         </section>
 
         <section className="home-wide-pr-banner" aria-label="パートナー広告">
