@@ -60,7 +60,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
   return (
     <>
       <Header />
-      <main id="main" className="article-page">
+      <main id="main" className="article-page article-detail-page">
         <article className="article-body">
           <p className="eyebrow">{article.category || "Article"}</p>
           <h1>{article.title}</h1>

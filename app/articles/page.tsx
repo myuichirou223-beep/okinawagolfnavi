@@ -20,7 +20,7 @@ export default async function ArticlesPage() {
     <>
       <Header />
       <main id="main">
-        <section className="section articles-section" aria-labelledby="articles-page-title">
+        <section id="articles" className="section articles-section" aria-labelledby="articles-page-title">
           <div className="section-heading">
             <p className="eyebrow">Blog</p>
             <h1 id="articles-page-title">ブログ</h1>

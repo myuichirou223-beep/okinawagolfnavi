@@ -11,7 +11,7 @@ export default function EventsPage() {
     <>
       <Header />
       <main id="main">
-        <section className="section" aria-labelledby="events-title">
+        <section id="events" className="section" aria-labelledby="events-title">
           <div className="section-heading">
             <p className="eyebrow">Event</p>
             <h1 id="events-title">イベント</h1>

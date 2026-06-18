@@ -70,7 +70,7 @@ export default async function CoursePage({ params }: CoursePageProps) {
   return (
     <>
       <Header />
-      <main id="main" className="article-page">
+      <main id="main" className="article-page course-detail-page">
         <article className="article-body">
           <p className="eyebrow">Golf Course</p>
           <h1>{course.title}</h1>

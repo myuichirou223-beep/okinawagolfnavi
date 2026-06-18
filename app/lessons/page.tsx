@@ -11,7 +11,7 @@ export default function LessonsPage() {
     <>
       <Header />
       <main id="main">
-        <section className="section" aria-labelledby="lessons-title">
+        <section id="lessons" className="section" aria-labelledby="lessons-title">
           <div className="section-heading">
             <p className="eyebrow">Lesson</p>
             <h1 id="lessons-title">レッスン</h1>

@@ -2312,7 +2312,7 @@ button:focus-visible,
 
 .schedule-item {
   display: grid;
-  grid-template-columns: 72px minmax(220px, 1fr) minmax(360px, auto);
+  grid-template-columns: 72px minmax(220px, 1fr) 360px;
   align-items: center;
   gap: 14px;
   min-height: 72px;
@@ -2348,14 +2348,17 @@ button:focus-visible,
 }
 
 .schedule-actions {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  width: 100%;
+  justify-self: end;
   gap: 8px;
 }
 
 .schedule-action-button {
   display: inline-flex;
+  width: 100%;
+  min-width: 0;
   min-height: 36px;
   align-items: center;
   justify-content: center;
@@ -8107,6 +8110,322 @@ body {
   }
 }
 
+/* Category page color themes, matched to the header category boxes. */
+#courses {
+  --category-color: #006fbd;
+  --category-light: #1388da;
+  --category-dark: #004f94;
+  --category-rgb: 0, 111, 189;
+  --category-ink: #103c5b;
+}
+
+#practice {
+  --category-color: #009f4f;
+  --category-light: #12bf66;
+  --category-dark: #00783a;
+  --category-rgb: 0, 159, 79;
+  --category-ink: #124b2f;
+}
+
+#events {
+  --category-color: #4dbd74;
+  --category-light: #68d48c;
+  --category-dark: #278e4e;
+  --category-rgb: 77, 189, 116;
+  --category-ink: #185334;
+}
+
+#lessons {
+  --category-color: #8e44ad;
+  --category-light: #aa62c7;
+  --category-dark: #6c2f87;
+  --category-rgb: 142, 68, 173;
+  --category-ink: #4e265f;
+}
+
+#articles {
+  --category-color: #f25f8b;
+  --category-light: #ff7da4;
+  --category-dark: #c83e68;
+  --category-rgb: 242, 95, 139;
+  --category-ink: #6d2940;
+}
+
+#courses.section,
+#practice.section,
+#events.section,
+#lessons.section,
+#articles.section {
+  width: 100%;
+  max-width: none;
+  padding-right: max(16px, calc((100% - 1180px) / 2));
+  padding-left: max(16px, calc((100% - 1180px) / 2));
+  background:
+    radial-gradient(circle at 86% 2%, rgba(var(--category-rgb), 0.16), transparent 300px),
+    linear-gradient(180deg, rgba(var(--category-rgb), 0.035), rgba(var(--category-rgb), 0.09) 48%, rgba(var(--category-rgb), 0.04));
+}
+
+#courses .section-heading .eyebrow,
+#practice .section-heading .eyebrow,
+#events .section-heading .eyebrow,
+#lessons .section-heading .eyebrow,
+#articles .section-heading .eyebrow {
+  color: var(--category-color);
+}
+
+#courses .section-heading h1,
+#practice .section-heading h1,
+#events .section-heading h1,
+#lessons .section-heading h1,
+#articles .section-heading h1 {
+  color: var(--category-ink);
+}
+
+#courses .section-heading p:not(.eyebrow),
+#practice .section-heading p:not(.eyebrow),
+#events .section-heading p:not(.eyebrow),
+#lessons .section-heading p:not(.eyebrow),
+#articles .section-heading p:not(.eyebrow) {
+  color: color-mix(in srgb, var(--category-ink) 74%, #ffffff);
+}
+
+#courses .course-filter-groups,
+#practice .course-filter-groups {
+  width: fit-content;
+  max-width: 100%;
+  padding: 8px;
+  border: 1px solid rgba(var(--category-rgb), 0.2);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 10px 26px rgba(var(--category-rgb), 0.09);
+  backdrop-filter: blur(8px);
+}
+
+#courses .filter-bar,
+#practice .filter-bar {
+  gap: 5px;
+}
+
+#courses .filter-bar span,
+#practice .filter-bar span {
+  display: inline-flex;
+  min-height: 40px;
+  align-items: center;
+  padding-inline: 8px;
+  color: var(--category-ink);
+}
+
+#courses .course-filter-button,
+#courses .course-type-filter-button,
+#practice .practice-filter-button,
+#practice .practice-area-filter-button {
+  min-height: 40px;
+  padding: 7px 14px;
+  border-color: transparent;
+  border-radius: 11px;
+  background: transparent;
+  color: var(--category-ink);
+  transition: 160ms ease;
+}
+
+#courses .course-filter-button:hover,
+#courses .course-filter-button:focus-visible,
+#courses .course-type-filter-button:hover,
+#courses .course-type-filter-button:focus-visible,
+#practice .practice-filter-button:hover,
+#practice .practice-filter-button:focus-visible,
+#practice .practice-area-filter-button:hover,
+#practice .practice-area-filter-button:focus-visible {
+  border-color: rgba(var(--category-rgb), 0.25);
+  background: rgba(var(--category-rgb), 0.1);
+  color: var(--category-dark);
+  transform: translateY(-1px);
+}
+
+#courses .course-filter-button.is-active,
+#courses .course-type-filter-button.is-active,
+#practice .practice-filter-button.is-active,
+#practice .practice-area-filter-button.is-active {
+  border-color: var(--category-dark);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.28), transparent 42%),
+    linear-gradient(180deg, var(--category-light), var(--category-color));
+  color: #ffffff;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.28);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    0 3px 0 var(--category-dark),
+    0 5px 10px rgba(var(--category-rgb), 0.2);
+}
+
+#courses .course-image {
+  border-color: rgba(var(--category-rgb), 0.26);
+  background: rgba(var(--category-rgb), 0.1);
+  box-shadow: 0 8px 20px rgba(var(--category-rgb), 0.12);
+}
+
+#courses .course-row h3,
+#practice .practice-name {
+  color: var(--category-ink);
+}
+
+#courses .course-card-meta,
+#practice .practice-location-line,
+#practice .practice-detail {
+  color: color-mix(in srgb, var(--category-ink) 74%, #ffffff);
+}
+
+#courses .course-card-link:hover h3,
+#courses .course-card-link:focus-visible h3,
+#practice .practice-detail strong,
+#practice .practice-actions .text-link {
+  color: var(--category-dark);
+}
+
+#practice .practice-row {
+  border-color: rgba(var(--category-rgb), 0.22);
+  background: rgba(255, 255, 255, 0.86);
+  box-shadow: 0 8px 22px rgba(var(--category-rgb), 0.09);
+}
+
+#practice .practice-open-label {
+  background: rgba(var(--category-rgb), 0.11);
+  color: var(--category-dark);
+}
+
+#events .coming-soon-panel,
+#lessons .coming-soon-panel {
+  border-color: rgba(var(--category-rgb), 0.26);
+  background: rgba(255, 255, 255, 0.84);
+  box-shadow: 0 14px 34px rgba(var(--category-rgb), 0.13);
+}
+
+#events .coming-soon-label,
+#lessons .coming-soon-label {
+  background: rgba(var(--category-rgb), 0.13);
+  color: var(--category-dark);
+}
+
+#events .coming-soon-panel h2,
+#lessons .coming-soon-panel h2 {
+  color: var(--category-ink);
+}
+
+#events .coming-soon-panel .text-link,
+#lessons .coming-soon-panel .text-link {
+  color: var(--category-dark);
+}
+
+#articles .blog-card {
+  border: 1px solid rgba(var(--category-rgb), 0.2);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 8px 22px rgba(var(--category-rgb), 0.1);
+}
+
+#articles .blog-card img {
+  border-bottom: 3px solid var(--category-color);
+}
+
+#articles .blog-card h3 {
+  color: var(--category-ink);
+}
+
+#articles .blog-card time {
+  color: var(--category-dark);
+}
+
+.course-detail-page {
+  --detail-color: #006fbd;
+  --detail-light: #1388da;
+  --detail-dark: #004f94;
+  --detail-rgb: 0, 111, 189;
+  --detail-ink: #103c5b;
+}
+
+.article-detail-page {
+  --detail-color: #f25f8b;
+  --detail-light: #ff7da4;
+  --detail-dark: #c83e68;
+  --detail-rgb: 242, 95, 139;
+  --detail-ink: #6d2940;
+}
+
+.course-detail-page,
+.article-detail-page {
+  width: 100%;
+  max-width: none;
+  padding-right: max(16px, calc((100% - 920px) / 2));
+  padding-left: max(16px, calc((100% - 920px) / 2));
+  background:
+    radial-gradient(circle at 84% 2%, rgba(var(--detail-rgb), 0.15), transparent 300px),
+    linear-gradient(180deg, rgba(var(--detail-rgb), 0.035), rgba(var(--detail-rgb), 0.09));
+}
+
+.course-detail-page .article-body,
+.article-detail-page .article-body {
+  border-color: rgba(var(--detail-rgb), 0.25);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 14px 34px rgba(var(--detail-rgb), 0.12);
+}
+
+.course-detail-page .eyebrow,
+.article-detail-page .eyebrow,
+.course-detail-page .text-link,
+.article-detail-page .text-link {
+  color: var(--detail-dark);
+}
+
+.course-detail-page .article-body h1,
+.course-detail-page .article-body h2,
+.article-detail-page .article-body h1,
+.article-detail-page .article-body h2 {
+  color: var(--detail-ink);
+}
+
+.course-detail-page .article-meta,
+.article-detail-page .article-meta,
+.course-detail-page .article-eyecatch,
+.article-detail-page .article-eyecatch,
+.course-detail-page .course-gallery-slide {
+  border-color: rgba(var(--detail-rgb), 0.24);
+}
+
+.course-detail-page .course-detail-list div {
+  border-color: rgba(var(--detail-rgb), 0.2);
+  background: rgba(var(--detail-rgb), 0.06);
+}
+
+.course-detail-page .button-secondary {
+  background: linear-gradient(180deg, var(--detail-light), var(--detail-color));
+  box-shadow: 0 4px 10px rgba(var(--detail-rgb), 0.2);
+}
+
+@media (max-width: 760px) {
+  #courses.section,
+  #practice.section,
+  #events.section,
+  #lessons.section,
+  #articles.section {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  #courses .course-filter-groups,
+  #practice .course-filter-groups {
+    width: 100%;
+    border-radius: 15px;
+  }
+
+  #courses .course-filter-button,
+  #courses .course-type-filter-button,
+  #practice .practice-filter-button,
+  #practice .practice-area-filter-button {
+    padding-inline: 10px;
+  }
+}
+
 @media (max-width: 420px) {
   .home-feature-carousel .feature-slide-grid,
   .home-feature-carousel .feature-slide-card.is-main,
@@ -8340,16 +8659,45 @@ body {
   }
 
   #tournaments .filter-bar {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 7px;
     margin: 20px 0 18px;
+    padding: 12px 16px;
+    border-block: 1px solid #e3e9e6;
+    background: #f7faf8;
   }
 
   #tournaments .filter-button {
-    min-height: 38px;
-    padding: 7px 13px;
-    border-color: #d9e2dd;
-    border-radius: 999px;
-    font-size: 12px;
+    width: 100%;
+    min-width: 0;
+    min-height: 42px;
+    padding: 6px 3px;
+    border-color: #d4dfd9;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #174c34;
+    font-size: clamp(10px, 2.9vw, 12px);
+    font-weight: 750;
+    line-height: 1.15;
+    box-shadow: 0 2px 5px rgba(20, 58, 42, 0.06);
+  }
+
+  #tournaments .filter-button.is-active {
+    border-color: #d95f00;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.28), transparent 42%),
+      linear-gradient(180deg, #ff9d25, #ff7900);
+    color: #ffffff;
+    text-shadow: 0 1px 1px rgba(110, 40, 0, 0.4);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.5),
+      0 3px 0 #bd5000,
+      0 5px 9px rgba(210, 85, 0, 0.18);
+  }
+
+  #tournaments .filter-button:active {
+    transform: translateY(1px);
   }
 
   #tournaments .sort-bar {
@@ -8527,6 +8875,22 @@ body {
 }
 
 /* Tournament action color system: shared across mobile, tablet and desktop. */
+#tournaments .schedule-item time {
+  padding: 6px;
+  border: 1px solid rgba(190, 78, 0, 0.5);
+  border-radius: 10px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.5), transparent 43%),
+    linear-gradient(145deg, #ffad32, #ff7a00 56%, #d65300);
+  color: #ffffff;
+  font-weight: 950;
+  text-shadow: 0 1px 2px rgba(105, 38, 0, 0.55);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.65),
+    inset 0 -8px 14px rgba(130, 45, 0, 0.22),
+    0 4px 10px rgba(220, 92, 0, 0.24);
+}
+
 #tournaments .schedule-action-button {
   border: 1px solid #006eb8;
   border-radius: 8px;
@@ -8575,4 +8939,288 @@ body {
   color: #8a9890;
   text-shadow: none;
   box-shadow: none;
+}
+
+/* Tournament category theme */
+#tournaments.section {
+  --tournament-orange: #ff7a00;
+  --tournament-orange-light: #ffa51f;
+  --tournament-orange-dark: #c94f00;
+  --tournament-ink: #4a2815;
+  --tournament-muted: #795b48;
+  width: 100%;
+  max-width: none;
+  padding-right: max(16px, calc((100% - 1180px) / 2));
+  padding-left: max(16px, calc((100% - 1180px) / 2));
+  background:
+    radial-gradient(circle at 86% 2%, rgba(255, 165, 31, 0.18), transparent 300px),
+    linear-gradient(180deg, #fffaf4 0%, #fff4e8 48%, #fffaf5 100%);
+}
+
+#tournaments .section-heading .eyebrow {
+  color: var(--tournament-orange);
+}
+
+#tournaments .section-heading h1 {
+  color: var(--tournament-ink);
+}
+
+#tournaments .section-heading p:not(.eyebrow),
+#tournaments .sort-bar span {
+  color: var(--tournament-muted);
+}
+
+#tournaments .filter-button,
+#tournaments .sort-button {
+  border-color: #f2c59f;
+  background: #fffdf9;
+  color: #713510;
+}
+
+#tournaments .filter-bar {
+  width: fit-content;
+  max-width: 100%;
+  gap: 4px;
+  margin-bottom: 24px;
+  padding: 7px;
+  border: 1px solid rgba(217, 95, 0, 0.2);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.68);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 10px 26px rgba(146, 65, 10, 0.08);
+  backdrop-filter: blur(8px);
+}
+
+#tournaments .sort-bar {
+  width: fit-content;
+  gap: 4px;
+  margin: -10px 0 26px;
+  padding: 6px;
+  border: 1px solid rgba(217, 95, 0, 0.18);
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.62);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 8px 20px rgba(146, 65, 10, 0.07);
+  backdrop-filter: blur(8px);
+}
+
+#tournaments .sort-bar span {
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 10px 0 8px;
+  color: #87634d;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+}
+
+#tournaments .sort-button {
+  min-height: 38px;
+  padding: 7px 14px;
+  border-color: transparent;
+  border-radius: 10px;
+  background: transparent;
+  transition:
+    color 160ms ease,
+    background 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
+}
+
+#tournaments .filter-button {
+  min-height: 42px;
+  padding: 8px 15px;
+  border-color: transparent;
+  border-radius: 12px;
+  background: transparent;
+  color: #63351a;
+  transition:
+    color 160ms ease,
+    background 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
+}
+
+#tournaments .filter-button:hover,
+#tournaments .filter-button:focus-visible,
+#tournaments .sort-button:hover,
+#tournaments .sort-button:focus-visible {
+  border-color: var(--tournament-orange);
+  background: #fff0df;
+  color: #9b3d00;
+}
+
+#tournaments .filter-button.is-active,
+#tournaments .sort-button.is-active {
+  border-color: #d95f00;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.28), transparent 42%),
+    linear-gradient(180deg, var(--tournament-orange-light), var(--tournament-orange));
+  color: #ffffff;
+  text-shadow: 0 1px 1px rgba(110, 40, 0, 0.4);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    0 3px 0 #bd5000,
+    0 5px 9px rgba(210, 85, 0, 0.18);
+}
+
+#tournaments .filter-button:hover,
+#tournaments .filter-button:focus-visible {
+  border-color: rgba(217, 95, 0, 0.24);
+  background: #fff2e4;
+  color: #9b3d00;
+  box-shadow: inset 0 0 0 1px rgba(255, 122, 0, 0.05);
+  transform: translateY(-1px);
+}
+
+#tournaments .filter-button.is-active:hover,
+#tournaments .filter-button.is-active:focus-visible {
+  border-color: #d95f00;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.34), transparent 42%),
+    linear-gradient(180deg, var(--tournament-orange-light), var(--tournament-orange));
+  color: #ffffff;
+}
+
+#tournaments .sort-button:hover,
+#tournaments .sort-button:focus-visible {
+  border-color: rgba(217, 95, 0, 0.22);
+  background: #fff2e4;
+  color: #9b3d00;
+  transform: translateY(-1px);
+}
+
+#tournaments .sort-button.is-active:hover,
+#tournaments .sort-button.is-active:focus-visible {
+  border-color: #d95f00;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.34), transparent 42%),
+    linear-gradient(180deg, var(--tournament-orange-light), var(--tournament-orange));
+  color: #ffffff;
+}
+
+#tournaments .annual-schedule {
+  border-color: #f0c8a7;
+  background: linear-gradient(180deg, #fffdf9, #fff7ed);
+  box-shadow: 0 12px 30px rgba(201, 79, 0, 0.1);
+}
+
+#tournaments .schedule-item {
+  border-color: rgba(230, 103, 15, 0.2);
+  background: rgba(255, 255, 255, 0.88);
+}
+
+#tournaments .schedule-item h4 {
+  color: var(--tournament-ink);
+}
+
+#tournaments .schedule-item p {
+  margin-top: 4px;
+  color: #65402a;
+  font-size: 15px;
+  font-weight: 650;
+  line-height: 1.5;
+}
+
+#tournaments .schedule-action-button {
+  border-color: #d95f00;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.3), transparent 42%),
+    linear-gradient(180deg, var(--tournament-orange-light), var(--tournament-orange));
+  color: #ffffff;
+  text-shadow: 0 1px 1px rgba(110, 40, 0, 0.48);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    0 3px 0 #bd5000,
+    0 5px 10px rgba(210, 85, 0, 0.2);
+}
+
+#tournaments a.schedule-action-button:hover,
+#tournaments a.schedule-action-button:focus-visible {
+  border-color: #bd5000;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.38), transparent 42%),
+    linear-gradient(180deg, #ffb13b, #f36c00);
+  color: #ffffff;
+}
+
+#tournaments a.schedule-action-button:active {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    0 1px 0 #a94300;
+}
+
+#tournaments .schedule-action-button.is-disabled {
+  border-color: #e4d4c8;
+  background: #f4eee9;
+  color: #a49387;
+  text-shadow: none;
+  box-shadow: none;
+}
+
+@media (max-width: 760px) {
+  #tournaments.section {
+    padding-right: 0;
+    padding-left: 0;
+    background: linear-gradient(180deg, #fffaf4, #fff4e8);
+  }
+
+  #tournaments .section-heading {
+    border-bottom-color: #efc6a6;
+  }
+
+  #tournaments .filter-bar {
+    width: auto;
+    border-block-color: #efc6a6;
+    margin: 18px 16px;
+    padding: 8px;
+    border: 1px solid #efc6a6;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.72);
+    box-shadow: 0 8px 22px rgba(146, 65, 10, 0.08);
+  }
+
+  #tournaments .filter-button {
+    min-height: 40px;
+    padding: 6px 3px;
+    border-radius: 9px;
+  }
+
+  #tournaments .sort-bar {
+    width: fit-content;
+    margin: 0 16px 20px;
+    padding: 5px;
+    border-radius: 13px;
+  }
+
+  #tournaments .sort-bar span {
+    min-height: 36px;
+    padding-inline: 7px;
+    font-size: 11px;
+  }
+
+  #tournaments .sort-button {
+    min-height: 36px;
+    padding: 6px 11px;
+    border-radius: 8px;
+  }
+
+  #tournaments .annual-schedule {
+    border-top-color: #efc6a6;
+  }
+
+  #tournaments .schedule-item {
+    border-bottom-color: #efc6a6;
+    background: rgba(255, 255, 255, 0.82);
+  }
+
+  #tournaments .schedule-item p {
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.55;
+  }
 }
