@@ -27,7 +27,25 @@ function fieldText(value: unknown): string {
 
 function areaFilterValue(value: unknown): string {
   const area = fieldText(value);
-  return area.startsWith("離島") ? "離島" : area;
+  if (area.startsWith("離島")) return "離島";
+  if (["南部", "中部", "北部"].includes(area)) return area;
+  return "その他";
+}
+
+const areaGroups = ["南部", "中部", "北部", "離島", "その他"] as const;
+const courseTypeGroups = [
+  { value: "long", label: "ロングコース" },
+  { value: "middle", label: "ミドルコース" },
+  { value: "short", label: "ショートコース" },
+  { value: "other", label: "その他のコース" }
+] as const;
+
+function courseTypeFilterValue(value: unknown) {
+  const courseType = fieldText(value);
+  if (courseType.includes("ロング")) return "long";
+  if (courseType.includes("ミドル")) return "middle";
+  if (courseType.includes("ショート")) return "short";
+  return "other";
 }
 
 export default async function CoursesPage() {
@@ -60,32 +78,62 @@ export default async function CoursesPage() {
               <button className="course-type-filter-button" type="button" data-type-filter="short">ショート</button>
             </div>
           </div>
-          <div className="course-list">
-            {courses.map((course) => {
-              const image = courseImages(course)[0];
-              const courseArea = fieldText(course.area);
-              const courseCity = fieldText(course.city);
-              const courseType = fieldText(course.courseType);
+          <div className="course-directory">
+            {areaGroups.map((area) => {
+              const areaCourses = courses.filter((course) => areaFilterValue(course.area) === area);
+              if (!areaCourses.length) return null;
+
               return (
-                <article
-                  key={course.id}
-                  className="course-row searchable"
-                  data-area={areaFilterValue(course.area)}
-                  data-course-type={[
-                    courseType.includes("ロング") ? "long" : "",
-                    courseType.includes("ミドル") ? "middle" : "",
-                    courseType.includes("ショート") ? "short" : ""
-                  ].filter(Boolean).join(" ")}
-                  data-keywords={courseKeywords(course)}
-                >
-                  <a className="course-card-link" href={coursePath(course)}>
-                    <div className={`course-image${image?.url ? "" : " course-image-fallback"}`}>
-                      <img src={image?.url || "/assets/hero-golfer.jpg"} alt={course.title} />
-                    </div>
-                    <h3>{course.title}</h3>
-                    <p className="course-card-meta">{[courseArea, courseCity, courseType].filter(Boolean).join(" / ")}</p>
-                  </a>
-                </article>
+                <section key={area} className="course-area-group" data-course-area-group={area} aria-labelledby={`course-area-${area}`}>
+                  <h2 id={`course-area-${area}`} className="course-area-heading">{area}のゴルフ場</h2>
+                  <div className="course-type-groups">
+                    {courseTypeGroups.map((typeGroup) => {
+                      const groupedCourses = areaCourses.filter(
+                        (course) => courseTypeFilterValue(course.courseType) === typeGroup.value
+                      );
+                      if (!groupedCourses.length) return null;
+
+                      return (
+                        <section
+                          key={typeGroup.value}
+                          className="course-type-group"
+                          data-course-type-group={typeGroup.value}
+                          aria-labelledby={`course-type-${area}-${typeGroup.value}`}
+                        >
+                          <h3 id={`course-type-${area}-${typeGroup.value}`} className="course-type-heading">
+                            {typeGroup.label}
+                            <span>{groupedCourses.length}件</span>
+                          </h3>
+                          <div className="course-list">
+                            {groupedCourses.map((course) => {
+                              const image = courseImages(course)[0];
+                              const courseArea = fieldText(course.area);
+                              const courseCity = fieldText(course.city);
+                              const courseType = fieldText(course.courseType);
+                              return (
+                                <article
+                                  key={course.id}
+                                  className="course-row searchable"
+                                  data-area={areaFilterValue(course.area)}
+                                  data-course-type={courseTypeFilterValue(course.courseType)}
+                                  data-keywords={courseKeywords(course)}
+                                >
+                                  <a className="course-card-link" href={coursePath(course)}>
+                                    <div className={`course-image${image?.url ? "" : " course-image-fallback"}`}>
+                                      <img src={image?.url || "/assets/hero-golfer.jpg"} alt={course.title} />
+                                    </div>
+                                    <h4>{course.title}</h4>
+                                    <p className="course-card-meta">{[courseArea, courseCity, courseType].filter(Boolean).join(" / ")}</p>
+                                  </a>
+                                </article>
+                              );
+                            })}
+                          </div>
+                        </section>
+                      );
+                    })}
+                  </div>
+                </section>
               );
             })}
           </div>

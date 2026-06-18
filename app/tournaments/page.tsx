@@ -61,7 +61,13 @@ export default async function TournamentsPage() {
                   <div className="schedule-actions" aria-label={`${tournament.title}の関連リンク`}>
                     {tournamentActionLinks(tournament).map((link) => (
                       link.url ? (
-                        <a key={link.label} className="schedule-action-button" href={link.url} target="_blank" rel="noreferrer">
+                        <a
+                          key={link.label}
+                          className="schedule-action-button"
+                          href={link.url}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
                           {link.label}
                         </a>
                       ) : (

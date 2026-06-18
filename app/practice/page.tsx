@@ -27,7 +27,19 @@ function fieldText(value: unknown): string {
 
 function areaFilterValue(value: unknown): string {
   const area = fieldText(value);
-  return area.startsWith("離島") ? "離島" : area;
+  if (area.startsWith("離島")) return "離島";
+  if (["南部", "中部", "北部"].includes(area)) return area;
+  return "その他";
+}
+
+const practiceAreaGroups = ["南部", "中部", "北部", "離島", "その他"] as const;
+const practiceCategoryGroups = ["屋内", "屋外", "その他"] as const;
+
+function practiceCategoryValue(value: unknown) {
+  const category = fieldText(value);
+  if (category.includes("屋内")) return "屋内";
+  if (category.includes("屋外")) return "屋外";
+  return "その他";
 }
 
 export default async function PracticePage() {
@@ -59,36 +71,70 @@ export default async function PracticePage() {
               <button className="practice-area-filter-button" type="button" data-practice-area-filter="離島">離島</button>
             </div>
           </div>
-          <div className="practice-list">
-            {practiceRanges.map((range) => {
-              const rangeCategory = fieldText(range.category) || "練習場";
-              const rangeArea = fieldText(range.area) || "沖縄県";
+          <div className="practice-directory">
+            {practiceAreaGroups.map((area) => {
+              const areaRanges = practiceRanges.filter((range) => areaFilterValue(range.area) === area);
+              if (!areaRanges.length) return null;
+
               return (
-                <article
-                  key={range.id}
-                  className="practice-row searchable"
-                  data-practice-category={rangeCategory}
-                  data-practice-area={areaFilterValue(range.area)}
-                  data-keywords={practiceRangeKeywords(range)}
-                >
-                  <details>
-                    <summary>
-                      <span className="practice-summary-main">
-                        <span className="practice-name">{range.name}</span>
-                        <span className="practice-location-line">{[rangeCategory, rangeArea].filter(Boolean).join(" / ")}</span>
-                      </span>
-                      <span className="practice-open-label">詳細</span>
-                    </summary>
-                    <div className="practice-detail">
-                      <p><strong>住所</strong>{range.address || "所在地確認中"}</p>
-                      {range.accessFromNaha ? <p><strong>アクセス</strong>{range.accessFromNaha}</p> : null}
-                      <div className="practice-actions">
-                        {range.phone ? <a className="text-link" href={`tel:${range.phone.replace(/[^0-9+]/g, "")}`}>{range.phone}</a> : null}
-                        {range.url ? <a className="text-link" href={range.url} target="_blank" rel="noreferrer">公式サイト</a> : null}
-                      </div>
-                    </div>
-                  </details>
-                </article>
+                <section key={area} className="practice-area-group" data-practice-area-group={area} aria-labelledby={`practice-area-${area}`}>
+                  <h2 id={`practice-area-${area}`} className="practice-area-heading">{area}の練習場</h2>
+                  <div className="practice-category-groups">
+                    {practiceCategoryGroups.map((category) => {
+                      const groupedRanges = areaRanges.filter(
+                        (range) => practiceCategoryValue(range.category) === category
+                      );
+                      if (!groupedRanges.length) return null;
+
+                      return (
+                        <section
+                          key={category}
+                          className="practice-category-group"
+                          data-practice-category-group={category}
+                          aria-labelledby={`practice-category-${area}-${category}`}
+                        >
+                          <h3 id={`practice-category-${area}-${category}`} className="practice-category-heading">
+                            {category === "その他" ? "その他の練習場" : `${category}練習場`}
+                            <span>{groupedRanges.length}件</span>
+                          </h3>
+                          <div className="practice-list">
+                            {groupedRanges.map((range) => {
+                              const rangeCategory = fieldText(range.category) || "練習場";
+                              const rangeArea = fieldText(range.area) || "沖縄県";
+                              return (
+                                <article
+                                  key={range.id}
+                                  className="practice-row searchable"
+                                  data-practice-category={practiceCategoryValue(range.category)}
+                                  data-practice-area={areaFilterValue(range.area)}
+                                  data-keywords={practiceRangeKeywords(range)}
+                                >
+                                  <details>
+                                    <summary>
+                                      <span className="practice-summary-main">
+                                        <span className="practice-name">{range.name}</span>
+                                        <span className="practice-location-line">{[rangeCategory, rangeArea].filter(Boolean).join(" / ")}</span>
+                                      </span>
+                                      <span className="practice-open-label">詳細</span>
+                                    </summary>
+                                    <div className="practice-detail">
+                                      <p><strong>住所</strong>{range.address || "所在地確認中"}</p>
+                                      {range.accessFromNaha ? <p><strong>アクセス</strong>{range.accessFromNaha}</p> : null}
+                                      <div className="practice-actions">
+                                        {range.phone ? <a className="text-link" href={`tel:${range.phone.replace(/[^0-9+]/g, "")}`}>{range.phone}</a> : null}
+                                        {range.url ? <a className="text-link" href={range.url} target="_blank" rel="noreferrer">公式サイト</a> : null}
+                                      </div>
+                                    </div>
+                                  </details>
+                                </article>
+                              );
+                            })}
+                          </div>
+                        </section>
+                      );
+                    })}
+                  </div>
+                </section>
               );
             })}
           </div>

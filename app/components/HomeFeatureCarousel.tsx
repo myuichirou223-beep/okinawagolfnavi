@@ -24,6 +24,7 @@ type HomeFeatureCarouselProps = {
 export function HomeFeatureCarousel({ slides }: HomeFeatureCarouselProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const touchStartX = useRef<number | null>(null);
+  const thumbnailStripRef = useRef<HTMLDivElement | null>(null);
   const thumbnailRefs = useRef<Array<HTMLButtonElement | null>>([]);
 
   if (!slides.length) return null;
@@ -61,10 +62,14 @@ export function HomeFeatureCarousel({ slides }: HomeFeatureCarouselProps) {
   }, [slides.length]);
 
   useEffect(() => {
-    thumbnailRefs.current[activeIndex]?.scrollIntoView({
-      behavior: "smooth",
-      block: "nearest",
-      inline: "center"
+    const strip = thumbnailStripRef.current;
+    const thumbnail = thumbnailRefs.current[activeIndex];
+    if (!strip || !thumbnail || strip.scrollWidth <= strip.clientWidth) return;
+
+    const centeredLeft = thumbnail.offsetLeft - (strip.clientWidth - thumbnail.offsetWidth) / 2;
+    strip.scrollTo({
+      left: Math.max(0, centeredLeft),
+      behavior: "smooth"
     });
   }, [activeIndex]);
 
@@ -119,7 +124,7 @@ export function HomeFeatureCarousel({ slides }: HomeFeatureCarouselProps) {
           />
         ))}
       </div>
-      <div className="feature-thumbnail-strip" aria-label="注目コンテンツ一覧">
+      <div ref={thumbnailStripRef} className="feature-thumbnail-strip" aria-label="注目コンテンツ一覧">
         {slides.map((slide, index) => (
           <button
             key={`${slide.title}-thumb`}
@@ -133,6 +138,10 @@ export function HomeFeatureCarousel({ slides }: HomeFeatureCarouselProps) {
             aria-current={index === activeIndex ? "true" : undefined}
           >
             <img src={slide.imageUrl} alt="" loading="lazy" />
+            <svg className="feature-thumbnail-progress" viewBox="0 0 40 40" aria-hidden="true">
+              <circle className="feature-thumbnail-progress-track" cx="20" cy="20" r="17" />
+              <circle className="feature-thumbnail-progress-value" cx="20" cy="20" r="17" />
+            </svg>
             <span>{slide.label}</span>
           </button>
         ))}

@@ -1,6 +1,5 @@
-import { getSiteStats } from "../../lib/microcms";
-
 const navItems = [
+  { label: "ホーム", subtitle: "Home", href: "/", icon: "home", className: "nav-home" },
   { label: "大会情報", subtitle: "Tournament", href: "/tournaments", icon: "trophy", className: "nav-tournament" },
   { label: "ゴルフ場", subtitle: "Golf Course", href: "/courses", icon: "flag", className: "nav-course" },
   { label: "練習場", subtitle: "Practice Range", href: "/practice", icon: "golf", className: "nav-practice" },
@@ -88,50 +87,24 @@ function NavIcon({ name }: { name: string }) {
   );
 }
 
-export async function Header() {
-  const stats = await getSiteStats();
-
+export function Header() {
   return (
-    <>
-      <header className="site-header">
-        <div className="header-inner">
-          <a className="brand" href="/" aria-label="おきなわGOLFなび トップ">
-            <img className="brand-logo" src="/assets/logo-header.png" alt="おきなわGOLFなび" />
-          </a>
-          <nav id="site-nav" className="site-nav" aria-label="主要メニュー">
-            {navItems.map((item) => (
-              <a key={item.label} className={item.className} href={item.href}>
-                <span className="nav-icon" aria-hidden="true">
-                  <NavIcon name={item.icon} />
-                </span>
-                <span className="nav-label">{item.label}</span>
-              </a>
-            ))}
-          </nav>
-        </div>
-        <dl className="header-stats" aria-label="掲載情報数">
-          <div>
-            <dt>大会情報</dt>
-            <dd>{stats.tournaments}<span>件</span></dd>
-            <small>登録大会数</small>
-          </div>
-          <div>
-            <dt>ゴルフ場</dt>
-            <dd>{stats.courses}<span>件</span></dd>
-            <small>県内ゴルフ場数</small>
-          </div>
-          <div>
-            <dt>練習場</dt>
-            <dd>{stats.practiceRanges}<span>件</span></dd>
-            <small>練習場登録数</small>
-          </div>
-          <div>
-            <dt>イベント</dt>
-            <dd>{stats.events}<span>件</span></dd>
-            <small>最新情報数</small>
-          </div>
-        </dl>
-      </header>
-    </>
+    <header className="site-header">
+      <div className="header-inner">
+        <a className="brand" href="/" aria-label="おきなわGOLFなび トップ">
+          <img className="brand-logo" src="/assets/logo-header.png" alt="おきなわGOLFなび" />
+        </a>
+        <nav id="site-nav" className="site-nav" aria-label="主要メニュー">
+          {navItems.map((item) => (
+            <a key={item.label} className={item.className} href={item.href}>
+              <span className="nav-icon" aria-hidden="true">
+                <NavIcon name={item.icon} />
+              </span>
+              <span className="nav-label">{item.label}</span>
+            </a>
+          ))}
+        </nav>
+      </div>
+    </header>
   );
 }
