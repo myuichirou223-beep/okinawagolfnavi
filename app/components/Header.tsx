@@ -109,20 +109,6 @@ export async function Header() {
               </a>
             ))}
           </nav>
-          <div className="header-actions" aria-label="ヘッダー操作">
-            <a className="header-action-link" href="#partners" aria-label="お気に入り">
-              <span aria-hidden="true">♡</span>
-              <small>お気に入り</small>
-            </a>
-            <a className="header-action-link" href="#quick-search" aria-label="検索">
-              <span aria-hidden="true">⌕</span>
-              <small>検索</small>
-            </a>
-            <button className="menu-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="メニューを開く">
-              <i aria-hidden="true" />
-              <span className="menu-label-ja">メニュー</span>
-            </button>
-          </div>
         </div>
         <dl className="header-stats" aria-label="掲載情報数">
           <div>

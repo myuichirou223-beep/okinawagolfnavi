@@ -420,6 +420,14 @@ export default async function Home() {
           </div>
         </section>
 
+        <aside className="mobile-inline-ad" aria-label="広告">
+          <a href={googleFormDirectUrl} target="_blank" rel="noreferrer">
+            <span>AD</span>
+            <strong>広告掲載枠</strong>
+            <small>バナー広告のお問い合わせはこちら</small>
+          </a>
+        </aside>
+
         <section className="mobile-topic-list" aria-labelledby="mobile-topics-title">
           <div className="mobile-section-heading with-link">
             <h2 id="mobile-topics-title">注目情報</h2>
@@ -531,15 +539,6 @@ export default async function Home() {
           <PartnerLogoCarousel partners={partners} />
         </section>
 
-        <section className="portal-cta" aria-labelledby="cta-title">
-          <h2 id="cta-title">沖縄のゴルフ情報をいち早くお届け！</h2>
-          <div className="portal-cta-actions">
-            <a href={googleFormDirectUrl} target="_blank" rel="noreferrer">公式LINEに登録</a>
-            <a href={googleFormDirectUrl} target="_blank" rel="noreferrer">Instagramをフォロー</a>
-            <a href={googleFormDirectUrl} target="_blank" rel="noreferrer">大会情報を受け取る</a>
-            <a href={googleFormDirectUrl} target="_blank" rel="noreferrer">イベント情報を受け取る</a>
-          </div>
-        </section>
           </div>
 
           <aside className="home-sidebar" aria-label="サイド情報">
