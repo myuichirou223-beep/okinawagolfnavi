@@ -54,7 +54,7 @@ export default async function TournamentsPage() {
                   data-sort-date={tournamentSortDate(tournament)}
                 >
                   <time>{tournament.month || "未定"}</time>
-                  <div>
+                  <div className="schedule-copy">
                     <h4>{tournament.title}</h4>
                     <p>{[tournament.dateLabel, tournament.venue].filter(Boolean).join(" / ") || "詳細確認中"}</p>
                   </div>

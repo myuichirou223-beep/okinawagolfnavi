@@ -1,7 +1,6 @@
 import { getSiteStats } from "../../lib/microcms";
 
 const navItems = [
-  { label: "ホーム", subtitle: "Home", href: "/", icon: "home", className: "nav-home" },
   { label: "大会情報", subtitle: "Tournament", href: "/tournaments", icon: "trophy", className: "nav-tournament" },
   { label: "ゴルフ場", subtitle: "Golf Course", href: "/courses", icon: "flag", className: "nav-course" },
   { label: "練習場", subtitle: "Practice Range", href: "/practice", icon: "golf", className: "nav-practice" },
