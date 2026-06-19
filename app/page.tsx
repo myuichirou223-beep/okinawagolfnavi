@@ -406,8 +406,9 @@ export default async function Home() {
 
           <aside className="home-sidebar" aria-label="サイド情報">
             <section className="sidebar-box sidebar-hero-ad">
-              <p>PRバナー（ヒーロー右上）</p>
-              <strong>300px × 250px</strong>
+              <a href="https://haisaigolf.com/" target="_blank" rel="noreferrer">
+                <img src="/assets/ads/haisai.png" alt="県内最大の女性ゴルフコミュニティ Haisai Golf Girls" />
+              </a>
             </section>
 
             <section className="sidebar-box sidebar-tournament-card" aria-labelledby="sidebar-tournament-title">
