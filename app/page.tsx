@@ -215,7 +215,6 @@ export default async function Home() {
     }
   ];
   const sidebarTournaments = monthlyTournaments.slice(0, 3);
-  const sidebarFavorites = pickupCourses.slice(0, 3);
 
   return (
     <>
@@ -226,11 +225,23 @@ export default async function Home() {
         <HomeFeatureCarousel slides={featureSlides} />
 
         <section className="home-banner-ad-section" aria-label="広告">
-          <div className="home-banner-ad-slot">
-            <img src="/assets/ads/nuchi-banner.png" alt="NUCHI たった15分で、変わるカラダ。" />
+          <div className="home-banner-ad-slot is-recruiting">
+            <a href={googleFormDirectUrl} target="_blank" rel="noreferrer">
+              <span>広告枠 A</span>
+              <strong>広告掲載パートナー募集中</strong>
+              <small>大会・店舗・サービスをPRしませんか？</small>
+              <em>推奨画像 860 × 300px</em>
+              <b>詳しくはこちら</b>
+            </a>
           </div>
-          <div className="home-banner-ad-slot">
-            <img src="/assets/ads/moanika-banner.png" alt="Moanika RENTACAR 2026年9月中旬オープン" />
+          <div className="home-banner-ad-slot is-recruiting is-secondary">
+            <a href={googleFormDirectUrl} target="_blank" rel="noreferrer">
+              <span>広告枠 B</span>
+              <strong>横長バナー広告 募集中</strong>
+              <small>沖縄のゴルファーへ情報を届けませんか？</small>
+              <em>推奨画像 860 × 300px</em>
+              <b>掲載のお問い合わせ</b>
+            </a>
           </div>
         </section>
 
@@ -269,9 +280,10 @@ export default async function Home() {
 
         <aside className="mobile-inline-ad" aria-label="広告">
           <a href={googleFormDirectUrl} target="_blank" rel="noreferrer">
-            <span>AD</span>
-            <strong>広告掲載枠</strong>
+            <span>広告枠 H</span>
+            <strong>スマホ横長広告 掲載募集中</strong>
             <small>バナー広告のお問い合わせはこちら</small>
+            <em>推奨画像 860 × 300px</em>
           </a>
         </aside>
 
@@ -304,11 +316,11 @@ export default async function Home() {
           <a className="mobile-more-link" href="/events">すべての情報を見る <span aria-hidden="true">›</span></a>
         </section>
 
-        <section className="home-wide-pr-banner" aria-label="パートナー広告">
-          <span>PR</span>
-          <strong>沖縄のゴルフをもっと楽しく、もっと快適に。</strong>
-          <small>OKINAWA GOLF PARTNER</small>
-          <a href={googleFormDirectUrl} target="_blank" rel="noreferrer">詳しくはこちら</a>
+        <section className="home-wide-pr-banner is-recruiting" aria-label="広告枠F">
+          <span>広告枠 F</span>
+          <strong>ワイドバナー広告 掲載募集中</strong>
+          <small>推奨画像 1080 × 184px</small>
+          <a href={googleFormDirectUrl} target="_blank" rel="noreferrer">掲載のお問い合わせ</a>
         </section>
 
         <section className="home-focus-grid" aria-label="近日開催のイベントと大会情報">
@@ -395,11 +407,11 @@ export default async function Home() {
           </div>
         </section>
 
-        <section className="home-wide-pr-banner is-resort" aria-label="リゾート広告">
-          <span>PR</span>
-          <strong>上質なリゾートステイで、ワンランク上のゴルフ体験を。</strong>
-          <small>OKINAWA GOLF RESORTS</small>
-          <a href={googleFormDirectUrl} target="_blank" rel="noreferrer">詳しくはこちら</a>
+        <section className="home-wide-pr-banner is-resort is-recruiting" aria-label="広告枠G">
+          <span>広告枠 G</span>
+          <strong>ワイドバナー広告 掲載募集中</strong>
+          <small>推奨画像 1080 × 92px</small>
+          <a href={googleFormDirectUrl} target="_blank" rel="noreferrer">掲載のお問い合わせ</a>
         </section>
 
           </div>
@@ -431,43 +443,34 @@ export default async function Home() {
             </section>
 
             <section className="sidebar-box sidebar-pink-pr">
-              <span>PR</span>
-              <strong>あなたの大会・サービスをPRしませんか？</strong>
-              <a href={googleFormDirectUrl} target="_blank" rel="noreferrer">詳しくはこちら</a>
+              <span>広告枠 C</span>
+              <strong>スクエア広告<br />掲載パートナー募集中</strong>
+              <small>推奨画像 300 × 142px</small>
+              <a href={googleFormDirectUrl} target="_blank" rel="noreferrer">掲載のお問い合わせ</a>
             </section>
 
-            <section className="sidebar-box sidebar-tall-ad">
-              <span>PR</span>
-              <h2>ゴルフレッスン体験</h2>
-              <strong>3,300円〜</strong>
-              <p>初心者歓迎！手ぶらOK！</p>
-              <a href={googleFormDirectUrl} target="_blank" rel="noreferrer">詳しくはこちら</a>
+            <section className="sidebar-box sidebar-tall-ad is-recruiting">
+              <span>広告枠 D</span>
+              <h2>縦長バナー広告</h2>
+              <strong>掲載パートナー募集中</strong>
+              <p>ゴルフ関連の店舗・サービス・イベントを大きくPRできる広告枠です。</p>
+              <small>推奨画像 300 × 360px</small>
+              <a href={googleFormDirectUrl} target="_blank" rel="noreferrer">掲載のお問い合わせ</a>
             </section>
 
-            <section className="sidebar-box sidebar-sale-ad">
-              <span>PR</span>
-              <h2>ゴルフ用品</h2>
-              <strong>SPECIAL SALE</strong>
-              <p>人気ブランド多数！</p>
-              <a href={googleFormDirectUrl} target="_blank" rel="noreferrer">今すぐチェック</a>
+            <section className="sidebar-box sidebar-sale-ad is-recruiting">
+              <span>広告枠 E</span>
+              <h2>ショップ・商品広告</h2>
+              <strong>広告掲載募集中</strong>
+              <p>ゴルフ用品やキャンペーン情報を効果的にPRできます。</p>
+              <small>推奨画像 300 × 310px</small>
+              <a href={googleFormDirectUrl} target="_blank" rel="noreferrer">掲載のお問い合わせ</a>
             </section>
 
             <section className="sidebar-box sidebar-line-card">
               <h2>公式LINEで最新情報をお届け！</h2>
               <p>大会情報やイベント情報をいち早くお届けします。</p>
               <a href={googleFormDirectUrl} target="_blank" rel="noreferrer">友だち追加</a>
-            </section>
-
-            <section className="sidebar-box sidebar-favorite-card">
-              <div className="sidebar-heading">
-                <h2>お気に入り</h2>
-                <a href="/courses">すべて見る</a>
-              </div>
-              <ul>
-                {sidebarFavorites.map((course) => (
-                  <li key={course.id}><a href={course.href}>{course.title}</a></li>
-                ))}
-              </ul>
             </section>
 
             <section id="partners" className="partners-section sidebar-partners" aria-labelledby="partners-title">
