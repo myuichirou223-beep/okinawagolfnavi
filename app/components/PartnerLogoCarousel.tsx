@@ -8,20 +8,19 @@ type PartnerLogoCarouselProps = {
 
 export function PartnerLogoCarousel({ partners }: PartnerLogoCarouselProps) {
   const visiblePartners = partners.filter((partner) => partner.logo?.url);
-  const carouselPartners = [...visiblePartners, ...visiblePartners];
 
   if (!visiblePartners.length) return null;
 
   return (
     <div className="partner-logo-carousel" aria-label="パートナーロゴ">
       <div className="partner-logo-track">
-        {carouselPartners.map((partner, index) => {
+        {visiblePartners.map((partner) => {
           const logoUrl = partner.logo?.url;
           if (!logoUrl) return null;
           const content = <img src={logoUrl} alt={partner.name} loading="lazy" />;
           return partner.websiteUrl ? (
             <a
-              key={`${partner.id}-${index}`}
+              key={partner.id}
               className="partner-logo-item"
               href={partner.websiteUrl}
               target="_blank"
@@ -30,7 +29,7 @@ export function PartnerLogoCarousel({ partners }: PartnerLogoCarouselProps) {
               {content}
             </a>
           ) : (
-            <div key={`${partner.id}-${index}`} className="partner-logo-item">
+            <div key={partner.id} className="partner-logo-item">
               {content}
             </div>
           );

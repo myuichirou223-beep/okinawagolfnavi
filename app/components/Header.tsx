@@ -92,7 +92,7 @@ export function Header() {
     <header className="site-header">
       <div className="header-inner">
         <a className="brand" href="/" aria-label="おきなわGOLFなび トップ">
-          <img className="brand-logo" src="/assets/logo-header.png" alt="おきなわGOLFなび" />
+          <img className="brand-logo" src="/assets/logo-header-black-green.png" alt="おきなわGOLFなび" />
         </a>
         <nav id="site-nav" className="site-nav" aria-label="主要メニュー">
           {navItems.map((item) => (

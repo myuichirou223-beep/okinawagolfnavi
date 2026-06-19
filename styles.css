@@ -3110,8 +3110,8 @@ button:focus-visible,
 }
 
 .site-footer .footer-brand img {
-  mix-blend-mode: multiply;
-  filter: contrast(1.04) saturate(1.04);
+  mix-blend-mode: normal;
+  filter: none;
 }
 
 .site-footer p {
@@ -8400,6 +8400,49 @@ body {
   }
 }
 
+/* Header branding: black backdrop with the dedicated horizontal logo. */
+.site-header,
+.header-inner,
+.brand {
+  background: #000000;
+}
+
+.site-header {
+  border-bottom-color: rgba(255, 255, 255, 0.12);
+}
+
+.brand {
+  padding-left: 10px;
+}
+
+.brand-logo {
+  width: 250px;
+  max-width: calc(100% - 10px);
+  height: auto;
+}
+
+@media (max-width: 1180px) {
+  .brand {
+    padding-left: 10px;
+  }
+
+  .brand-logo {
+    width: 235px;
+  }
+}
+
+@media (max-width: 760px) {
+  .brand {
+    justify-content: center;
+    padding: 7px 10px;
+  }
+
+  .brand-logo {
+    width: 240px;
+    max-width: calc(100% - 4px);
+  }
+}
+
 /* Category page color themes, matched to the header category boxes. */
 #courses {
   --category-color: #006fbd;
@@ -9302,6 +9345,661 @@ body {
 
   #tournaments .empty-message {
     margin: 18px;
+  }
+}
+
+@media (max-width: 760px) {
+  .site-header .brand {
+    justify-content: center;
+  }
+
+  .site-footer .footer-main {
+    justify-items: center;
+    text-align: center;
+  }
+
+  .site-footer .footer-brand {
+    justify-self: center;
+  }
+}
+
+/* Partner logos: fixed placement without cards or marquee animation. */
+.partner-logo-carousel {
+  overflow: visible;
+  padding: 0;
+  mask-image: none;
+}
+
+.partner-logo-track {
+  width: 100%;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: center;
+  gap: 28px 36px;
+  animation: none;
+  transform: none;
+}
+
+.partner-logo-item,
+.partner-logo-item:hover,
+.partner-logo-item:focus-visible {
+  width: auto;
+  height: 82px;
+  min-width: 0;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  transform: none;
+}
+
+.partner-logo-item img {
+  width: auto;
+  max-width: 100%;
+  max-height: 76px;
+  object-fit: contain;
+}
+
+@media (max-width: 900px) {
+  .partner-logo-track {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+  }
+}
+
+@media (max-width: 520px) {
+  .partner-logo-track {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px 22px;
+  }
+
+  .partner-logo-item {
+    height: 66px;
+  }
+
+  .partner-logo-item img {
+    max-height: 60px;
+  }
+}
+
+/* Home pickup sections: first-view-style carousels. */
+.pickup-carousel {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 10px 28px rgba(12, 36, 28, 0.1);
+}
+
+.pickup-carousel-grid {
+  height: 420px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.9fr) minmax(280px, 0.9fr);
+}
+
+.pickup-carousel-main,
+.pickup-carousel-main a,
+.pickup-carousel-side,
+.pickup-carousel-side button {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.pickup-carousel-main a {
+  height: 420px;
+  display: block;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.pickup-carousel-main img,
+.pickup-carousel-side img,
+.pickup-carousel-thumbnails img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.pickup-carousel-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(0, 37, 68, 0.8), rgba(0, 60, 80, 0.18) 64%, rgba(0, 0, 0, 0.08));
+}
+
+.pickup-carousel-copy {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 38px;
+}
+
+.pickup-carousel-copy p {
+  margin: 0 0 8px;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 14px;
+  font-weight: 850;
+}
+
+.pickup-carousel-copy h3 {
+  max-width: 14em;
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(30px, 3.3vw, 48px);
+  line-height: 1.15;
+  text-shadow: 0 3px 14px rgba(0, 0, 0, 0.35);
+}
+
+.pickup-carousel-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 16px;
+}
+
+.pickup-carousel-tags span {
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.88);
+  color: #075235;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.pickup-carousel-side {
+  display: grid;
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+}
+
+.pickup-carousel-side button {
+  width: 100%;
+  padding: 0;
+  border: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 0;
+  background: #173a2a;
+  color: #ffffff;
+  cursor: pointer;
+  text-align: left;
+}
+
+.pickup-carousel-side .pickup-carousel-overlay {
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.78), rgba(0, 0, 0, 0.2));
+}
+
+.pickup-carousel-side-copy {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  padding: 18px 20px;
+}
+
+.pickup-carousel-side-copy strong {
+  color: #ffffff;
+  font-size: 17px;
+  line-height: 1.3;
+}
+
+.pickup-carousel-side-copy small {
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.pickup-carousel-dots {
+  position: absolute;
+  z-index: 3;
+  bottom: 18px;
+  left: 50%;
+  display: flex;
+  gap: 7px;
+  transform: translateX(-50%);
+}
+
+.pickup-carousel-dots button {
+  width: 11px;
+  min-width: 11px;
+  height: 11px;
+  min-height: 11px;
+  padding: 0;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.45);
+}
+
+.pickup-carousel-dots button.is-active {
+  background: #00a651;
+}
+
+.pickup-carousel-thumbnails {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .pickup-carousel {
+    border-radius: 12px;
+  }
+
+  .pickup-carousel-grid {
+    height: 400px;
+    display: block;
+  }
+
+  .pickup-carousel-main a {
+    height: 400px;
+  }
+
+  .pickup-carousel-side {
+    display: none;
+  }
+
+  .pickup-carousel-copy {
+    padding: 30px 28px 52px;
+  }
+
+  .pickup-carousel-copy h3 {
+    font-size: clamp(30px, 6vw, 44px);
+  }
+
+  .pickup-carousel-dots {
+    bottom: 92px;
+  }
+
+  .pickup-carousel-thumbnails {
+    height: 76px;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    border-top: 3px solid #ffffff;
+  }
+
+  .pickup-carousel-thumbnails button {
+    position: relative;
+    min-width: 0;
+    overflow: hidden;
+    padding: 0;
+    border: 0;
+    border-right: 1px solid rgba(255, 255, 255, 0.55);
+    border-radius: 0;
+    background: #173a2a;
+  }
+
+  .pickup-carousel-thumbnails button::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.34);
+  }
+
+  .pickup-carousel-thumbnails button.is-active::after {
+    background: transparent;
+    box-shadow: inset 0 0 0 3px #00a651;
+  }
+
+  .pickup-carousel-thumbnails span {
+    position: absolute;
+    z-index: 2;
+    right: 5px;
+    bottom: 5px;
+    left: 5px;
+    overflow: hidden;
+    color: #ffffff;
+    font-size: 9px;
+    font-weight: 900;
+    text-align: left;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
+  }
+}
+
+@media (max-width: 520px) {
+  .pickup-carousel-grid,
+  .pickup-carousel-main a {
+    height: 330px;
+  }
+
+  .pickup-carousel-copy {
+    padding: 24px 20px 48px;
+  }
+
+  .pickup-carousel-copy h3 {
+    font-size: 30px;
+  }
+
+  .pickup-carousel-copy p {
+    font-size: 12px;
+  }
+
+  .pickup-carousel-tags {
+    margin-top: 12px;
+  }
+
+  .pickup-carousel-tags span {
+    padding: 4px 8px;
+    font-size: 9px;
+  }
+}
+
+/* Golf-course showcase carousel: large centered card with neighboring previews. */
+.pickup-showcase {
+  overflow: hidden;
+  padding: 8px 0 2px;
+}
+
+.pickup-showcase-viewport {
+  height: 510px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  overflow: hidden;
+}
+
+.pickup-showcase-card {
+  position: relative;
+  flex: 0 0 auto;
+  height: 460px;
+  overflow: hidden;
+  padding: 0;
+  border: 0;
+  border-radius: 28px;
+  background: #133b2b;
+  box-shadow: 0 14px 34px rgba(12, 36, 28, 0.14);
+  color: #ffffff;
+}
+
+.pickup-showcase-card.is-active {
+  width: min(62%, 660px);
+  height: 500px;
+  z-index: 2;
+  animation: pickupShowcaseActiveIn 520ms cubic-bezier(0.22, 0.75, 0.25, 1) both;
+}
+
+.pickup-showcase-card.is-active a {
+  position: absolute;
+  inset: 0;
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.pickup-showcase-card.is-side {
+  width: 27%;
+  cursor: pointer;
+  opacity: 0.9;
+  transform: scale(0.94);
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.pickup-showcase-card.is-previous {
+  animation: pickupShowcasePreviousIn 520ms cubic-bezier(0.22, 0.75, 0.25, 1) both;
+}
+
+.pickup-showcase-card.is-next {
+  animation: pickupShowcaseNextIn 520ms cubic-bezier(0.22, 0.75, 0.25, 1) both;
+}
+
+.pickup-showcase-card.is-side:hover,
+.pickup-showcase-card.is-side:focus-visible {
+  opacity: 1;
+  transform: scale(0.97);
+}
+
+.pickup-showcase-card img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.pickup-showcase-shade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.04) 34%, rgba(0, 25, 18, 0.82) 100%),
+    linear-gradient(90deg, rgba(0, 47, 69, 0.25), transparent 58%);
+}
+
+.pickup-showcase-copy {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  padding: 34px 36px;
+}
+
+.pickup-showcase-copy p {
+  margin: 0 0 7px;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 13px;
+  font-weight: 850;
+}
+
+.pickup-showcase-copy h3 {
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(30px, 3.2vw, 48px);
+  line-height: 1.14;
+  text-shadow: 0 3px 14px rgba(0, 0, 0, 0.4);
+}
+
+.pickup-showcase-side-title {
+  position: absolute;
+  right: 22px;
+  bottom: 28px;
+  left: 22px;
+  z-index: 1;
+  color: #ffffff;
+  font-size: 21px;
+  font-weight: 950;
+  line-height: 1.3;
+  text-align: left;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.55);
+}
+
+.pickup-showcase-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.pickup-showcase-controls button,
+.pickup-showcase-controls a,
+.pickup-showcase-controls span {
+  height: 54px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid #ffffff;
+  border-radius: 18px;
+  background: #332d2a;
+  color: #ffffff;
+  font-weight: 900;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(12, 36, 28, 0.14);
+}
+
+.pickup-showcase-controls button {
+  width: 58px;
+  min-width: 58px;
+  padding: 0;
+}
+
+.pickup-showcase-controls button svg {
+  width: 25px;
+  height: 25px;
+  display: block;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.pickup-showcase-controls a,
+.pickup-showcase-controls span {
+  min-width: 230px;
+  padding: 0 28px;
+  font-size: 15px;
+}
+
+@keyframes pickupShowcaseActiveIn {
+  from {
+    opacity: 0.35;
+    transform: translateX(34px) scale(0.94);
+    filter: blur(3px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes pickupShowcasePreviousIn {
+  from {
+    opacity: 0;
+    transform: translateX(-34px) scale(0.88);
+  }
+
+  to {
+    opacity: 0.9;
+    transform: translateX(0) scale(0.94);
+  }
+}
+
+@keyframes pickupShowcaseNextIn {
+  from {
+    opacity: 0;
+    transform: translateX(34px) scale(0.88);
+  }
+
+  to {
+    opacity: 0.9;
+    transform: translateX(0) scale(0.94);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pickup-showcase-card.is-active,
+  .pickup-showcase-card.is-previous,
+  .pickup-showcase-card.is-next {
+    animation: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .pickup-showcase-viewport {
+    height: 430px;
+    gap: 14px;
+  }
+
+  .pickup-showcase-card.is-active {
+    width: 72%;
+    height: 420px;
+  }
+
+  .pickup-showcase-card.is-side {
+    width: 23%;
+    height: 370px;
+  }
+
+  .pickup-showcase-copy {
+    padding: 28px;
+  }
+
+  .pickup-showcase-side-title {
+    right: 14px;
+    bottom: 20px;
+    left: 14px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 520px) {
+  .pickup-showcase {
+    margin-inline: -12px;
+  }
+
+  .pickup-showcase-viewport {
+    height: 350px;
+    gap: 10px;
+  }
+
+  .pickup-showcase-card {
+    border-radius: 20px;
+  }
+
+  .pickup-showcase-card.is-active {
+    width: 78%;
+    height: 340px;
+  }
+
+  .pickup-showcase-card.is-side {
+    width: 19%;
+    height: 292px;
+  }
+
+  .pickup-showcase-copy {
+    padding: 22px 20px;
+  }
+
+  .pickup-showcase-copy h3 {
+    font-size: 27px;
+  }
+
+  .pickup-showcase-copy .pickup-carousel-tags {
+    display: none;
+  }
+
+  .pickup-showcase-side-title {
+    display: none;
+  }
+
+  .pickup-showcase-controls {
+    gap: 7px;
+    margin-top: 12px;
+  }
+
+  .pickup-showcase-controls button,
+  .pickup-showcase-controls a,
+  .pickup-showcase-controls span {
+    height: 46px;
+    border-width: 2px;
+    border-radius: 14px;
+  }
+
+  .pickup-showcase-controls button {
+    width: 48px;
+    min-width: 48px;
+  }
+
+  .pickup-showcase-controls button svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .pickup-showcase-controls a,
+  .pickup-showcase-controls span {
+    min-width: 190px;
+    padding-inline: 18px;
+    font-size: 13px;
   }
 }
 

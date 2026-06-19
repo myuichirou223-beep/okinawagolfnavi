@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import type React from "react";
+import { useEffect, useRef, useState } from "react";
 
 export type PickupCourse = {
   id: string;
@@ -38,24 +39,197 @@ function isExternalUrl(url: string) {
   return url.startsWith("http");
 }
 
-function PickupCard({ item }: { item: PickupCourse | PickupPracticeRange }) {
-  const externalProps = isExternalUrl(item.href) ? { target: "_blank", rel: "noreferrer" } : {};
+type PickupItem = PickupCourse | PickupPracticeRange;
+
+function PickupCarousel({
+  items,
+  label,
+  layout = "feature",
+  listHref,
+  listLabel = "すべてのゴルフ場",
+  itemLabel = "ゴルフ場"
+}: {
+  items: PickupItem[];
+  label: string;
+  layout?: "feature" | "showcase";
+  listHref?: string;
+  listLabel?: string;
+  itemLabel?: string;
+}) {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const touchStartX = useRef<number | null>(null);
+
+  useEffect(() => {
+    setActiveIndex(0);
+  }, [items]);
+
+  useEffect(() => {
+    if (items.length < 2) return undefined;
+    const timer = window.setInterval(() => {
+      setActiveIndex((current) => (current + 1) % items.length);
+    }, 5000);
+    return () => window.clearInterval(timer);
+  }, [items.length]);
+
+  if (!items.length) return null;
+
+  const activeItem = items[activeIndex] ?? items[0];
+  const sideItems = Array.from({ length: Math.min(3, items.length - 1) }, (_, index) => {
+    const itemIndex = (activeIndex + index + 1) % items.length;
+    return { item: items[itemIndex], index: itemIndex };
+  });
+  const externalProps = isExternalUrl(activeItem.href) ? { target: "_blank", rel: "noreferrer" } : {};
+
+  function changeSlide(direction: number) {
+    setActiveIndex((current) => (current + direction + items.length) % items.length);
+  }
+
+  function handleTouchEnd(event: React.TouchEvent<HTMLElement>) {
+    if (touchStartX.current === null) return;
+    const delta = event.changedTouches[0].clientX - touchStartX.current;
+    touchStartX.current = null;
+    if (Math.abs(delta) < 42) return;
+    changeSlide(delta > 0 ? -1 : 1);
+  }
+
+  if (layout === "showcase") {
+    const previousIndex = (activeIndex - 1 + items.length) % items.length;
+    const nextIndex = (activeIndex + 1) % items.length;
+    const previousItem = items[previousIndex];
+    const nextItem = items[nextIndex];
+
+    return (
+      <div
+        className="pickup-showcase"
+        aria-label={label}
+        onTouchStart={(event) => {
+          touchStartX.current = event.touches[0].clientX;
+        }}
+        onTouchEnd={handleTouchEnd}
+      >
+        <div className="pickup-showcase-viewport" aria-live="polite">
+          <button
+            key={`previous-${previousItem.id}-${activeIndex}`}
+            type="button"
+            className="pickup-showcase-card is-side is-previous"
+            onClick={() => setActiveIndex(previousIndex)}
+            aria-label={`${previousItem.title}を表示`}
+          >
+            <img src={previousItem.imageUrl} alt="" />
+            <span className="pickup-showcase-shade" />
+            <span className="pickup-showcase-side-title">{previousItem.title}</span>
+          </button>
+
+          <article key={`active-${activeItem.id}`} className="pickup-showcase-card is-active">
+            <a href={activeItem.href} {...externalProps}>
+              <img src={activeItem.imageUrl} alt="" />
+              <span className="pickup-showcase-shade" />
+              <div className="pickup-showcase-copy">
+                <p>{[activeItem.area, activeItem.city].filter(Boolean).join(" / ")}</p>
+                <h3>{activeItem.title}</h3>
+                <div className="pickup-carousel-tags">
+                  {activeItem.tags.map((tag) => <span key={tag}>{tag}</span>)}
+                </div>
+              </div>
+            </a>
+          </article>
+
+          <button
+            key={`next-${nextItem.id}-${activeIndex}`}
+            type="button"
+            className="pickup-showcase-card is-side is-next"
+            onClick={() => setActiveIndex(nextIndex)}
+            aria-label={`${nextItem.title}を表示`}
+          >
+            <img src={nextItem.imageUrl} alt="" />
+            <span className="pickup-showcase-shade" />
+            <span className="pickup-showcase-side-title">{nextItem.title}</span>
+          </button>
+        </div>
+
+        <div className="pickup-showcase-controls">
+          <button type="button" onClick={() => changeSlide(-1)} aria-label={`前の${itemLabel}`}>
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="m15 5-7 7 7 7" />
+            </svg>
+          </button>
+          {listHref ? <a href={listHref}>{listLabel}</a> : <span>{label}</span>}
+          <button type="button" onClick={() => changeSlide(1)} aria-label={`次の${itemLabel}`}>
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="m9 5 7 7-7 7" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <article className="pickup-card">
-      <a href={item.href} {...externalProps}>
-        <img src={item.imageUrl} alt="" />
-        <div className="pickup-card-body">
-          <h3>{item.title}</h3>
-          <p>{[item.area, item.city].filter(Boolean).join(" / ")}</p>
-          <div className="pickup-tags">
-            {item.tags.map((tag) => (
-              <span key={tag}>{tag}</span>
-            ))}
-          </div>
+    <div
+      className="pickup-carousel"
+      aria-label={label}
+      onTouchStart={(event) => {
+        touchStartX.current = event.touches[0].clientX;
+      }}
+      onTouchEnd={handleTouchEnd}
+    >
+      <div className="pickup-carousel-grid" aria-live="polite">
+        <article className="pickup-carousel-main">
+          <a href={activeItem.href} {...externalProps}>
+            <img src={activeItem.imageUrl} alt="" />
+            <span className="pickup-carousel-overlay" />
+            <div className="pickup-carousel-copy">
+              <p>{[activeItem.area, activeItem.city].filter(Boolean).join(" / ")}</p>
+              <h3>{activeItem.title}</h3>
+              <div className="pickup-carousel-tags">
+                {activeItem.tags.map((tag) => <span key={tag}>{tag}</span>)}
+              </div>
+            </div>
+          </a>
+        </article>
+        <div className="pickup-carousel-side">
+          {sideItems.map(({ item, index }) => (
+            <button key={item.id} type="button" onClick={() => setActiveIndex(index)} aria-label={`${item.title}を表示`}>
+              <img src={item.imageUrl} alt="" />
+              <span className="pickup-carousel-overlay" />
+              <span className="pickup-carousel-side-copy">
+                <strong>{item.title}</strong>
+                <small>{[item.area, item.city].filter(Boolean).join(" / ")}</small>
+              </span>
+            </button>
+          ))}
         </div>
-      </a>
-    </article>
+      </div>
+      <div className="pickup-carousel-dots" aria-label={`${label}のスライドを選択`}>
+        {items.map((item, index) => (
+          <button
+            key={item.id}
+            type="button"
+            className={index === activeIndex ? "is-active" : ""}
+            onClick={() => setActiveIndex(index)}
+            aria-label={`${index + 1}枚目を表示`}
+            aria-current={index === activeIndex ? "true" : undefined}
+          />
+        ))}
+      </div>
+      <div
+        className="pickup-carousel-thumbnails"
+        style={{ gridTemplateColumns: `repeat(${items.length}, minmax(0, 1fr))` }}
+      >
+        {items.map((item, index) => (
+          <button
+            key={item.id}
+            type="button"
+            className={index === activeIndex ? "is-active" : ""}
+            onClick={() => setActiveIndex(index)}
+            aria-label={`${item.title}を表示`}
+          >
+            <img src={item.imageUrl} alt="" />
+            <span>{item.title}</span>
+          </button>
+        ))}
+      </div>
+    </div>
   );
 }
 
@@ -77,13 +251,8 @@ export function RandomPickupSections({ courses, practiceRanges }: RandomPickupSe
             <h2 id="courses-title">今週のおすすめゴルフ場</h2>
             <p>沖縄県内のゴルフ場をランダムにピックアップ</p>
           </div>
-          <a className="portal-more-link" href="/courses">一覧を見る</a>
         </div>
-        <div className="portal-card-grid six" aria-live="polite">
-          {randomCourses.map((course) => (
-            <PickupCard key={course.id} item={course} />
-          ))}
-        </div>
+        <PickupCarousel items={randomCourses} label="おすすめゴルフ場" layout="showcase" listHref="/courses" />
       </section>
 
       <section id="practice" className="portal-section pickup-section" aria-labelledby="practice-title">
@@ -95,11 +264,14 @@ export function RandomPickupSections({ courses, practiceRanges }: RandomPickupSe
           </div>
           <a className="portal-more-link" href="/practice">一覧を見る</a>
         </div>
-        <div className="portal-card-grid six" aria-live="polite">
-          {randomPracticeRanges.map((range) => (
-            <PickupCard key={range.id} item={range} />
-          ))}
-        </div>
+        <PickupCarousel
+          items={randomPracticeRanges}
+          label="ピックアップ練習場"
+          layout="showcase"
+          listHref="/practice"
+          listLabel="すべての練習場"
+          itemLabel="練習場"
+        />
       </section>
     </>
   );

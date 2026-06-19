@@ -12,17 +12,15 @@ export function Footer({ articleLink = false }: FooterProps) {
     { label: "練習場", href: "/practice" },
     { label: "イベント", href: "/events" },
     { label: "レッスン", href: "/lessons" },
-    { label: "ブログ", href: articleHref },
-    { label: "お問い合わせ", href: googleFormDirectUrl, external: true },
-    { label: "運営者情報", href: googleFormDirectUrl, external: true },
-    { label: "プライバシーポリシー", href: googleFormDirectUrl, external: true }
+    { label: "記事", href: articleHref },
+    { label: "お問い合わせ", href: googleFormDirectUrl, external: true }
   ];
 
   return (
     <footer className="site-footer">
       <div className="footer-main">
         <a className="footer-brand" href="/#main" aria-label="おきなわGOLFなび トップへ">
-          <img src="/assets/logo-header.png" alt="おきなわGOLFなび" />
+          <img src="/assets/logo-footer-blue.png" alt="おきなわGOLFなび" />
         </a>
         <p>沖縄県内の大会、ゴルフ場、練習場、イベント、ブログをわかりやすくまとめる地域ゴルフ情報ポータルです。</p>
       </div>
