@@ -1,5 +1,6 @@
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
+import { DesktopSidebarLayout } from "../components/DesktopSidebarLayout";
 import {
   getTournaments,
   tournamentActionLinks,
@@ -21,7 +22,7 @@ export default async function TournamentsPage() {
   return (
     <>
       <Header />
-      <main id="main">
+      <DesktopSidebarLayout>
         <section id="tournaments" className="section" aria-labelledby="tournament-title">
           <div className="section-heading">
             <p className="eyebrow">Tournament</p>
@@ -82,7 +83,7 @@ export default async function TournamentsPage() {
             </div>
           </div>
         </section>
-      </main>
+      </DesktopSidebarLayout>
       <Footer />
     </>
   );

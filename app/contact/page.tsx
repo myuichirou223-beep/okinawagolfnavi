@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
+import { DesktopSidebarLayout } from "../components/DesktopSidebarLayout";
 
 const googleFormDirectUrl = "https://forms.gle/SKkamSAieuaUjuTW6";
 
@@ -16,7 +17,8 @@ export default function ContactPage() {
   return (
     <>
       <Header />
-      <main id="main" className="article-page contact-page">
+      <DesktopSidebarLayout mainClassName="contact-page-shell">
+        <div className="article-page contact-page">
         <section className="section" aria-labelledby="contact-title">
           <div className="section-heading">
             <p className="eyebrow">Contact</p>
@@ -31,7 +33,8 @@ export default function ContactPage() {
             </div>
           </div>
         </section>
-      </main>
+        </div>
+      </DesktopSidebarLayout>
       <Footer />
     </>
   );

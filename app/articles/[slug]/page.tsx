@@ -2,8 +2,15 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
+import { PortalSidebar } from "../../components/PortalSidebar";
 import { formatArticleBody } from "../../../lib/articleBody";
-import { articlePath, formatDate, getArticle, getArticles } from "../../../lib/microcms";
+import {
+  articlePath,
+  articleRouteSlug,
+  formatDate,
+  getArticle,
+  getArticles
+} from "../../../lib/microcms";
 
 type ArticlePageProps = {
   params: Promise<{
@@ -16,7 +23,7 @@ export const revalidate = 300;
 export async function generateStaticParams() {
   const articles = await getArticles();
   return articles.map((article) => ({
-    slug: `${article.slug}.html`
+    slug: `${articleRouteSlug(article)}.html`
   }));
 }
 
@@ -53,14 +60,9 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
 
 export default async function ArticlePage({ params }: ArticlePageProps) {
   const { slug } = await params;
-  const [article, articles] = await Promise.all([getArticle(slug), getArticles()]);
+  const article = await getArticle(slug);
 
   if (!article) notFound();
-
-  const relatedArticles = articles
-    .filter((item) => item.id !== article.id)
-    .sort((a, b) => Number(b.category === article.category) - Number(a.category === article.category))
-    .slice(0, 4);
 
   return (
     <>
@@ -74,7 +76,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
           <span>{article.category || "記事"}</span>
         </nav>
 
-        <div className="article-detail-layout">
+        <div className="article-detail-layout has-portal-sidebar">
           <article className="article-body">
             <header className="article-header">
               <p className="eyebrow">{article.category || "Article"}</p>
@@ -111,32 +113,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
             </footer>
           </article>
 
-          <aside className="article-sidebar" aria-label="記事サイドバー">
-            <section className="article-sidebar-panel">
-              <p className="article-sidebar-label">RELATED ARTICLES</p>
-              <h2>あわせて読みたい</h2>
-              <div className="article-related-list">
-                {relatedArticles.map((item) => (
-                  <a key={item.id} className="article-related-card" href={articlePath(item)}>
-                    <img src={item.eyecatch?.url || "/assets/logo.png"} alt="" />
-                    <span>
-                      <small>{item.category || "記事"}</small>
-                      <strong>{item.title}</strong>
-                      {item.published ? <time dateTime={item.published}>{formatDate(item.published)}</time> : null}
-                    </span>
-                  </a>
-                ))}
-              </div>
-            </section>
-
-            <section className="article-sidebar-panel article-sidebar-guide">
-              <p className="article-sidebar-label">OKINAWA GOLF NAVI</p>
-              <h2>沖縄のゴルフ情報を探す</h2>
-              <p>大会・ゴルフ場・練習場など、目的に合わせて県内情報を確認できます。</p>
-              <a href="/courses">ゴルフ場を見る</a>
-              <a href="/practice">練習場を見る</a>
-            </section>
-          </aside>
+          <PortalSidebar />
         </div>
       </main>
       <Footer articleLink />

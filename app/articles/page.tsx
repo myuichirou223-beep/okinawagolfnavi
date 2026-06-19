@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { DesktopSidebarLayout } from "../components/DesktopSidebarLayout";
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
 import { articleKeywords, articlePath, formatDate, getArticles } from "../../lib/microcms";
@@ -19,7 +20,7 @@ export default async function ArticlesPage() {
   return (
     <>
       <Header />
-      <main id="main">
+      <DesktopSidebarLayout>
         <section id="articles" className="section articles-section" aria-labelledby="articles-page-title">
           <div className="section-heading">
             <p className="eyebrow">Articles</p>
@@ -41,7 +42,7 @@ export default async function ArticlesPage() {
             ))}
           </div>
         </section>
-      </main>
+      </DesktopSidebarLayout>
       <Footer articleLink />
     </>
   );

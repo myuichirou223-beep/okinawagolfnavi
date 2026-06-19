@@ -7,7 +7,7 @@ export type MicroCMSImage = {
 export type Article = {
   id: string;
   title: string;
-  slug: string;
+  slug?: string;
   category?: string;
   description?: string;
   body?: string;
@@ -795,7 +795,17 @@ export async function getArticle(slug: string) {
     `/articles?filters=slug[equals]${encodeURIComponent(normalizedSlug)}&limit=1`
   );
 
-  return data?.contents?.[0] || fallbackArticles.find((article) => article.slug === normalizedSlug) || null;
+  if (data?.contents?.[0]) return data.contents[0];
+
+  const articleById = await requestMicroCMS<Article>(
+    `/articles/${encodeURIComponent(normalizedSlug)}`
+  );
+
+  return (
+    articleById ||
+    fallbackArticles.find((article) => articleRouteSlug(article) === normalizedSlug) ||
+    null
+  );
 }
 
 export function formatDate(value?: string) {
@@ -810,7 +820,11 @@ export function formatDate(value?: string) {
 }
 
 export function articlePath(article: Article) {
-  return `/articles/${article.slug}.html`;
+  return `/articles/${encodeURIComponent(articleRouteSlug(article))}.html`;
+}
+
+export function articleRouteSlug(article: Article) {
+  return article.slug?.trim() || article.id;
 }
 
 export function coursePath(course: Course) {

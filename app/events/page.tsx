@@ -1,5 +1,6 @@
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
+import { DesktopSidebarLayout } from "../components/DesktopSidebarLayout";
 
 export const metadata = {
   title: "イベント",
@@ -10,7 +11,7 @@ export default function EventsPage() {
   return (
     <>
       <Header />
-      <main id="main">
+      <DesktopSidebarLayout>
         <section id="events" className="section" aria-labelledby="events-title">
           <div className="section-heading">
             <p className="eyebrow">Event</p>
@@ -29,7 +30,7 @@ export default function EventsPage() {
             </a>
           </div>
         </section>
-      </main>
+      </DesktopSidebarLayout>
       <Footer articleLink />
     </>
   );

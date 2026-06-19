@@ -1,5 +1,6 @@
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
+import { DesktopSidebarLayout } from "../components/DesktopSidebarLayout";
 
 export const metadata = {
   title: "レッスン",
@@ -10,7 +11,7 @@ export default function LessonsPage() {
   return (
     <>
       <Header />
-      <main id="main">
+      <DesktopSidebarLayout>
         <section id="lessons" className="section" aria-labelledby="lessons-title">
           <div className="section-heading">
             <p className="eyebrow">Lesson</p>
@@ -29,7 +30,7 @@ export default function LessonsPage() {
             </a>
           </div>
         </section>
-      </main>
+      </DesktopSidebarLayout>
       <Footer articleLink />
     </>
   );

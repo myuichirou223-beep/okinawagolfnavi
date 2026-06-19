@@ -1,5 +1,6 @@
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
+import { DesktopSidebarLayout } from "../components/DesktopSidebarLayout";
 import { courseImages, courseKeywords, coursePath, getCourses } from "../../lib/microcms";
 
 export const revalidate = 300;
@@ -54,7 +55,7 @@ export default async function CoursesPage() {
   return (
     <>
       <Header />
-      <main id="main">
+      <DesktopSidebarLayout>
         <section id="courses" className="section section-muted" aria-labelledby="courses-title">
           <div className="section-heading">
             <p className="eyebrow">Golf Course</p>
@@ -138,7 +139,7 @@ export default async function CoursesPage() {
             })}
           </div>
         </section>
-      </main>
+      </DesktopSidebarLayout>
       <Footer />
     </>
   );

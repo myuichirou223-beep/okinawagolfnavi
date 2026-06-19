@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
 import { PhoneLink } from "../../components/PhoneLink";
+import { DesktopSidebarLayout } from "../../components/DesktopSidebarLayout";
 import { courseDescription, courseImages, coursePath, getCourse, getCourses, googleMapsUrl } from "../../../lib/microcms";
 
 type CoursePageProps = {
@@ -70,7 +71,8 @@ export default async function CoursePage({ params }: CoursePageProps) {
   return (
     <>
       <Header />
-      <main id="main" className="article-page course-detail-page">
+      <DesktopSidebarLayout mainClassName="course-detail-shell">
+        <div className="article-page course-detail-page">
         <article className="article-body">
           <p className="eyebrow">Golf Course</p>
           <h1>{course.title}</h1>
@@ -151,7 +153,8 @@ export default async function CoursePage({ params }: CoursePageProps) {
             <p>宿泊、レンタカー、飲食店、レッスンなど、ゴルフ場と関連性の高い情報を掲載できます。</p>
           </aside>
         </article>
-      </main>
+        </div>
+      </DesktopSidebarLayout>
       <Footer articleLink />
     </>
   );

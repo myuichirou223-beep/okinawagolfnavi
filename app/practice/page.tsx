@@ -1,5 +1,6 @@
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
+import { DesktopSidebarLayout } from "../components/DesktopSidebarLayout";
 import { getPracticeRanges, practiceRangeKeywords } from "../../lib/microcms";
 
 export const revalidate = 300;
@@ -48,7 +49,7 @@ export default async function PracticePage() {
   return (
     <>
       <Header />
-      <main id="main">
+      <DesktopSidebarLayout>
         <section id="practice" className="section" aria-labelledby="practice-title">
           <div className="section-heading">
             <p className="eyebrow">Practice</p>
@@ -139,7 +140,7 @@ export default async function PracticePage() {
             })}
           </div>
         </section>
-      </main>
+      </DesktopSidebarLayout>
       <Footer />
     </>
   );
