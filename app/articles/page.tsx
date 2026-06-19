@@ -5,7 +5,7 @@ import { articleKeywords, articlePath, formatDate, getArticles } from "../../lib
 
 export const metadata: Metadata = {
   title: "記事一覧",
-  description: "沖縄のゴルフ初心者、観光ゴルフ、大会参加に役立つブログ記事一覧です。",
+  description: "沖縄のゴルフ初心者、観光ゴルフ、大会参加に役立つ記事一覧です。",
   alternates: {
     canonical: "/articles"
   }
@@ -22,8 +22,8 @@ export default async function ArticlesPage() {
       <main id="main">
         <section id="articles" className="section articles-section" aria-labelledby="articles-page-title">
           <div className="section-heading">
-            <p className="eyebrow">Blog</p>
-            <h1 id="articles-page-title">ブログ</h1>
+            <p className="eyebrow">Articles</p>
+            <h1 id="articles-page-title">記事</h1>
             <p>沖縄でゴルフを楽しむ人、これから始める人、県外から訪れる人に向けた記事を掲載します。</p>
           </div>
           <div className="portal-card-grid four">
