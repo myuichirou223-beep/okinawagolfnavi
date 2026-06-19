@@ -1,3 +1,7 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+
 const navItems = [
   { label: "ホーム", subtitle: "Home", href: "/", icon: "home", className: "nav-home" },
   { label: "大会情報", subtitle: "Tournament", href: "/tournaments", icon: "trophy", className: "nav-tournament" },
@@ -88,11 +92,46 @@ function NavIcon({ name }: { name: string }) {
 }
 
 export function Header() {
+  const [mobileScrollState, setMobileScrollState] = useState<"normal" | "visible" | "hidden">("normal");
+  const lastScrollY = useRef(0);
+
+  useEffect(() => {
+    const updateHeader = () => {
+      if (window.innerWidth > 760) {
+        setMobileScrollState("normal");
+        lastScrollY.current = window.scrollY;
+        return;
+      }
+
+      const currentScrollY = Math.max(window.scrollY, 0);
+      const previousScrollY = lastScrollY.current;
+
+      if (currentScrollY <= 130) {
+        setMobileScrollState("normal");
+      } else if (currentScrollY < previousScrollY) {
+        setMobileScrollState("visible");
+      } else if (currentScrollY > previousScrollY) {
+        setMobileScrollState("hidden");
+      }
+
+      lastScrollY.current = currentScrollY;
+    };
+
+    lastScrollY.current = window.scrollY;
+    window.addEventListener("scroll", updateHeader, { passive: true });
+    window.addEventListener("resize", updateHeader);
+
+    return () => {
+      window.removeEventListener("scroll", updateHeader);
+      window.removeEventListener("resize", updateHeader);
+    };
+  }, []);
+
   return (
-    <header className="site-header">
+    <header className={`site-header mobile-scroll-${mobileScrollState}`}>
       <div className="header-inner">
         <a className="brand" href="/" aria-label="おきなわGOLFなび トップ">
-          <img className="brand-logo" src="/assets/logo-header-black-green.png" alt="おきなわGOLFなび" />
+          <img className="brand-logo" src="/assets/logo-footer-blue.png" alt="おきなわGOLFなび" />
         </a>
         <nav id="site-nav" className="site-nav" aria-label="主要メニュー">
           {navItems.map((item) => (

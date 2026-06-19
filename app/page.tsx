@@ -402,15 +402,6 @@ export default async function Home() {
           <a href={googleFormDirectUrl} target="_blank" rel="noreferrer">詳しくはこちら</a>
         </section>
 
-        <section id="partners" className="portal-section partners-section" aria-labelledby="partners-title">
-          <div className="portal-section-heading">
-            <p className="portal-eyebrow">Partners</p>
-            <h2 id="partners-title">パートナー</h2>
-            <p>おきなわGOLFなびは、多くの企業・団体様に支えられて運営しております。</p>
-          </div>
-          <PartnerLogoCarousel partners={partners} />
-        </section>
-
           </div>
 
           <aside className="home-sidebar" aria-label="サイド情報">
@@ -476,6 +467,14 @@ export default async function Home() {
                   <li key={course.id}><a href={course.href}>{course.title}</a></li>
                 ))}
               </ul>
+            </section>
+
+            <section id="partners" className="partners-section sidebar-partners" aria-labelledby="partners-title">
+              <div className="portal-section-heading">
+                <p className="portal-eyebrow">Partners</p>
+                <h2 id="partners-title">パートナー</h2>
+              </div>
+              <PartnerLogoCarousel partners={partners} />
             </section>
           </aside>
         </div>

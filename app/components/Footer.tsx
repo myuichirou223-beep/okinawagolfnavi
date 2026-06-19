@@ -22,7 +22,6 @@ export function Footer({ articleLink = false }: FooterProps) {
         <a className="footer-brand" href="/#main" aria-label="おきなわGOLFなび トップへ">
           <img src="/assets/logo-footer-blue.png" alt="おきなわGOLFなび" />
         </a>
-        <p>沖縄県内の大会、ゴルフ場、練習場、イベント、ブログをわかりやすくまとめる地域ゴルフ情報ポータルです。</p>
       </div>
       <nav className="footer-links" aria-label="フッターリンク">
         {footerItems.map((item) => (
@@ -41,6 +40,7 @@ export function Footer({ articleLink = false }: FooterProps) {
           </details>
         ))}
       </div>
+      <p className="footer-description">沖縄県内の大会、ゴルフ場、練習場、イベント、ブログをわかりやすくまとめる地域ゴルフ情報ポータルです。</p>
       <small className="copyright">© 2026 Okinawa Golf Navi All Rights Reserved.</small>
     </footer>
   );
