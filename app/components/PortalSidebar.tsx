@@ -90,7 +90,7 @@ export async function PortalSidebar({
       <section className="sidebar-box sidebar-pink-pr">
         <span>広告枠 C</span>
         <strong>スクエア広告<br />掲載パートナー募集中</strong>
-        <small>推奨画像 300 × 142px</small>
+        <small>推奨画像 300 × 300px</small>
         <a href={googleFormDirectUrl} target="_blank" rel="noreferrer">掲載のお問い合わせ</a>
       </section>
 
@@ -99,7 +99,7 @@ export async function PortalSidebar({
         <h2>縦長バナー広告</h2>
         <strong>掲載パートナー募集中</strong>
         <p>ゴルフ関連の店舗・サービス・イベントを大きくPRできる広告枠です。</p>
-        <small>推奨画像 300 × 360px</small>
+        <small>推奨画像 300 × 300px</small>
         <a href={googleFormDirectUrl} target="_blank" rel="noreferrer">掲載のお問い合わせ</a>
       </section>
 
@@ -108,7 +108,7 @@ export async function PortalSidebar({
         <h2>ショップ・商品広告</h2>
         <strong>広告掲載募集中</strong>
         <p>ゴルフ用品やキャンペーン情報を効果的にPRできます。</p>
-        <small>推奨画像 300 × 310px</small>
+        <small>推奨画像 300 × 300px</small>
         <a href={googleFormDirectUrl} target="_blank" rel="noreferrer">掲載のお問い合わせ</a>
       </section>
 

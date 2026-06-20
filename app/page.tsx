@@ -134,7 +134,7 @@ export default async function Home() {
     .filter((tournament) => tournamentSortDate(tournament) >= todaySortValue)
     .sort((a, b) => tournamentSortDate(a) - tournamentSortDate(b));
   const monthlyTournaments = (upcomingTournaments.length ? upcomingTournaments : tournaments).slice(0, 4);
-  const latestArticles = articles.slice(0, 4);
+  const latestArticles = articles.slice(0, 10);
   const mobileTopics = topics.slice(0, 5);
   const eventTopics = [
     ...topics.filter((topic) => ["イベント", "試打会"].some((label) => topicCategoryLabel(topic).includes(label))),
@@ -154,6 +154,7 @@ export default async function Home() {
       imageUrl: image,
       area,
       city,
+      courseType,
       tags: [
         course.summary ? course.summary.slice(0, 12) : "",
         ...courseTypeTags(courseType, course.holes)
@@ -280,17 +281,16 @@ export default async function Home() {
 
         <aside className="mobile-inline-ad" aria-label="広告">
           <a href={googleFormDirectUrl} target="_blank" rel="noreferrer">
-            <span>広告枠 H</span>
-            <strong>スマホ横長広告 掲載募集中</strong>
-            <small>バナー広告のお問い合わせはこちら</small>
-            <em>推奨画像 860 × 300px</em>
+            <span>広告枠 C</span>
+            <strong>スクエア広告 掲載パートナー募集中</strong>
+            <small>PC・スマホ共通の広告掲載枠です</small>
+            <em>推奨画像 300 × 300px</em>
           </a>
         </aside>
 
         <section className="mobile-topic-list" aria-labelledby="mobile-topics-title">
           <div className="mobile-section-heading with-link">
             <h2 id="mobile-topics-title">注目情報</h2>
-            <a href="/events">一覧を見る</a>
           </div>
           <div className="mobile-topic-rows">
             {mobileTopics.map((topic) => (
@@ -313,8 +313,17 @@ export default async function Home() {
               </a>
             ))}
           </div>
-          <a className="mobile-more-link" href="/events">すべての情報を見る <span aria-hidden="true">›</span></a>
+          <a className="mobile-more-link" href="/events">すべての情報を見る</a>
         </section>
+
+        <aside className="mobile-inline-ad mobile-inline-ad-d" aria-label="広告枠D">
+          <a href={googleFormDirectUrl} target="_blank" rel="noreferrer">
+            <span>広告枠 D</span>
+            <strong>縦長バナー広告 掲載パートナー募集中</strong>
+            <small>ゴルフ関連の店舗・サービス・イベントを大きくPRできる広告枠です</small>
+            <em>推奨画像 300 × 300px</em>
+          </a>
+        </aside>
 
         <section className="home-wide-pr-banner is-recruiting" aria-label="広告枠F">
           <span>広告枠 F</span>
@@ -388,9 +397,8 @@ export default async function Home() {
           <div className="portal-section-heading with-link">
             <div>
               <p className="portal-eyebrow">Blog</p>
-              <h2 id="articles-title">新着ブログ</h2>
+              <h2 id="articles-title">新着記事</h2>
             </div>
-            <a className="portal-more-link" href="/articles">一覧を見る</a>
           </div>
           <div className="portal-card-grid four">
             {latestArticles.map((article) => (
@@ -401,10 +409,12 @@ export default async function Home() {
                     {article.published ? <time dateTime={article.published}>{compactDate(article.published)}</time> : null}
                     <h3>{article.title}</h3>
                   </div>
+                  <i aria-hidden="true">›</i>
                 </a>
               </article>
             ))}
           </div>
+          <a className="home-articles-more" href="/articles">他の記事を見る</a>
         </section>
 
         <section className="home-wide-pr-banner is-resort is-recruiting" aria-label="広告枠G">
@@ -445,7 +455,7 @@ export default async function Home() {
             <section className="sidebar-box sidebar-pink-pr">
               <span>広告枠 C</span>
               <strong>スクエア広告<br />掲載パートナー募集中</strong>
-              <small>推奨画像 300 × 142px</small>
+              <small>推奨画像 300 × 300px</small>
               <a href={googleFormDirectUrl} target="_blank" rel="noreferrer">掲載のお問い合わせ</a>
             </section>
 
@@ -454,7 +464,7 @@ export default async function Home() {
               <h2>縦長バナー広告</h2>
               <strong>掲載パートナー募集中</strong>
               <p>ゴルフ関連の店舗・サービス・イベントを大きくPRできる広告枠です。</p>
-              <small>推奨画像 300 × 360px</small>
+              <small>推奨画像 300 × 300px</small>
               <a href={googleFormDirectUrl} target="_blank" rel="noreferrer">掲載のお問い合わせ</a>
             </section>
 
@@ -463,7 +473,7 @@ export default async function Home() {
               <h2>ショップ・商品広告</h2>
               <strong>広告掲載募集中</strong>
               <p>ゴルフ用品やキャンペーン情報を効果的にPRできます。</p>
-              <small>推奨画像 300 × 310px</small>
+              <small>推奨画像 300 × 300px</small>
               <a href={googleFormDirectUrl} target="_blank" rel="noreferrer">掲載のお問い合わせ</a>
             </section>
 

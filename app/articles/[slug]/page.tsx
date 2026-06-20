@@ -18,6 +18,44 @@ type ArticlePageProps = {
   }>;
 };
 
+const recommendedLinks = [
+  {
+    href: "/courses",
+    label: "ゴルフ場",
+    title: "沖縄県内のゴルフ場をエリア・コース種別から探す",
+    image: "/assets/hero-golfer.jpg"
+  },
+  {
+    href: "/practice",
+    label: "練習場",
+    title: "屋内・屋外の練習場をエリア別にチェック",
+    image: "/assets/hero-golfer.jpg"
+  },
+  {
+    href: "/tournaments",
+    label: "大会情報",
+    title: "これから開催される大会と募集情報を確認する",
+    image: "/assets/hero-golfer.jpg"
+  }
+];
+
+function articleRelatedLinks(category?: string) {
+  const commonLinks = [
+    { href: "/courses", title: "沖縄県内のゴルフ場一覧" },
+    { href: "/practice", title: "沖縄県内の練習場一覧" },
+    { href: "/tournaments", title: "大会スケジュール・募集情報" },
+    { href: "/lessons", title: "ゴルフレッスン情報" }
+  ];
+
+  if (category?.includes("大会")) {
+    return [commonLinks[2], commonLinks[0], { href: "/events", title: "ゴルフイベント情報" }, commonLinks[1]];
+  }
+  if (category?.includes("観光")) {
+    return [commonLinks[0], commonLinks[1], { href: "/events", title: "沖縄のゴルフイベント" }, commonLinks[2]];
+  }
+  return [commonLinks[1], commonLinks[0], commonLinks[3], commonLinks[2]];
+}
+
 export const revalidate = 300;
 
 export async function generateStaticParams() {
@@ -60,9 +98,15 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
 
 export default async function ArticlePage({ params }: ArticlePageProps) {
   const { slug } = await params;
-  const article = await getArticle(slug);
+  const [article, articles] = await Promise.all([getArticle(slug), getArticles()]);
 
   if (!article) notFound();
+
+  const relatedArticles = articles
+    .filter((item) => item.id !== article.id)
+    .sort((a, b) => Number(b.category === article.category) - Number(a.category === article.category))
+    .slice(0, 4);
+  const relatedLinks = articleRelatedLinks(article.category);
 
   return (
     <>
@@ -106,6 +150,55 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
               <strong>記事内容に関連するパートナー掲載枠</strong>
               <p>沖縄県内のゴルフ関連サービスを紹介するスペースです。</p>
             </aside>
+
+            {relatedArticles.length ? (
+              <section className="article-related-section" aria-labelledby="related-articles-title">
+                <div className="article-related-heading">
+                  <p>RELATED ARTICLES</p>
+                  <h2 id="related-articles-title">あわせて読みたい</h2>
+                </div>
+                <div className="article-related-grid">
+                  {relatedArticles.map((item) => (
+                    <a key={item.id} className="article-related-item" href={articlePath(item)}>
+                      <img src={item.eyecatch?.url || "/assets/logo.png"} alt="" loading="lazy" />
+                      <span>
+                        <small>{item.category || "記事"}</small>
+                        <strong>{item.title}</strong>
+                        {item.published ? <time dateTime={item.published}>{formatDate(item.published)}</time> : null}
+                      </span>
+                    </a>
+                  ))}
+                </div>
+                <a className="article-related-more" href="/articles">すべての記事を見る</a>
+              </section>
+            ) : null}
+
+            <section className="article-link-section" aria-labelledby="article-links-title">
+              <h2 id="article-links-title">関連リンク</h2>
+              <div className="article-link-list">
+                {relatedLinks.map((link) => (
+                  <a key={link.href} href={link.href}>
+                    <span>{link.title}</span>
+                    <b aria-hidden="true">›</b>
+                  </a>
+                ))}
+              </div>
+            </section>
+
+            <section className="article-recommend-section" aria-labelledby="article-recommend-title">
+              <h2 id="article-recommend-title">おすすめリンク</h2>
+              <div className="article-recommend-grid">
+                {recommendedLinks.map((link) => (
+                  <a key={link.href} href={link.href}>
+                    <img src={link.image} alt="" loading="lazy" />
+                    <span>
+                      <small>{link.label}</small>
+                      <strong>{link.title}</strong>
+                    </span>
+                  </a>
+                ))}
+              </div>
+            </section>
 
             <footer className="article-footer-nav">
               <p>最後までお読みいただきありがとうございます。</p>

@@ -3,6 +3,8 @@
 import type React from "react";
 import { useEffect, useRef, useState } from "react";
 
+const advertisingContactUrl = "https://forms.gle/SKkamSAieuaUjuTW6";
+
 export type PickupCourse = {
   id: string;
   title: string;
@@ -10,6 +12,7 @@ export type PickupCourse = {
   imageUrl: string;
   area: string;
   city?: string;
+  courseType?: string;
   tags: string[];
   isVisible?: boolean;
 };
@@ -30,9 +33,9 @@ type RandomPickupSectionsProps = {
   practiceRanges: PickupPracticeRange[];
 };
 
-function pickRandomItems<T extends { isVisible?: boolean }>(items: T[]) {
+function pickRandomItems<T extends { isVisible?: boolean }>(items: T[], count = 4) {
   const visibleItems = items.filter((item) => item.isVisible !== false);
-  return [...visibleItems].sort(() => Math.random() - 0.5).slice(0, 4);
+  return [...visibleItems].sort(() => Math.random() - 0.5).slice(0, count);
 }
 
 function isExternalUrl(url: string) {
@@ -235,11 +238,13 @@ function PickupCarousel({
 
 export function RandomPickupSections({ courses, practiceRanges }: RandomPickupSectionsProps) {
   const [randomCourses, setRandomCourses] = useState<PickupCourse[]>([]);
+  const [mobileLongCourses, setMobileLongCourses] = useState<PickupCourse[]>([]);
   const [randomPracticeRanges, setRandomPracticeRanges] = useState<PickupPracticeRange[]>([]);
 
   useEffect(() => {
     setRandomCourses(pickRandomItems(courses));
-    setRandomPracticeRanges(pickRandomItems(practiceRanges));
+    setMobileLongCourses(pickRandomItems(courses.filter((course) => course.courseType?.includes("ロング")), 5));
+    setRandomPracticeRanges(pickRandomItems(practiceRanges, 5));
   }, [courses, practiceRanges]);
 
   return (
@@ -252,7 +257,36 @@ export function RandomPickupSections({ courses, practiceRanges }: RandomPickupSe
             <p>沖縄県内のゴルフ場をランダムにピックアップ</p>
           </div>
         </div>
-        <PickupCarousel items={randomCourses} label="おすすめゴルフ場" layout="showcase" listHref="/courses" />
+        <div className="pickup-course-desktop">
+          <PickupCarousel items={randomCourses} label="おすすめゴルフ場" layout="showcase" listHref="/courses" />
+        </div>
+        <div className="pickup-course-mobile-list">
+          {mobileLongCourses.map((course) => (
+            <a key={course.id} href={course.href}>
+              <span className="pickup-course-mobile-image">
+                <img src={course.imageUrl} alt="" loading="lazy" />
+              </span>
+              <span className="pickup-course-mobile-copy">
+                <small>{[course.area, course.city].filter(Boolean).join(" / ")}</small>
+                <strong>{course.title}</strong>
+                <em>ロングコース</em>
+              </span>
+              <i aria-hidden="true">›</i>
+            </a>
+          ))}
+          <a className="pickup-course-mobile-more" href="/courses">
+            すべてのゴルフ場を見る
+          </a>
+        </div>
+        <aside className="pickup-mobile-ad pickup-mobile-ad-e" aria-label="広告枠E">
+          <a href={advertisingContactUrl} target="_blank" rel="noreferrer">
+            <span>広告枠 E</span>
+            <h2>ショップ・商品広告</h2>
+            <strong>広告掲載募集中</strong>
+            <p>ゴルフ用品やキャンペーン情報を効果的にPRできます。</p>
+            <small>推奨画像 300 × 300px</small>
+          </a>
+        </aside>
       </section>
 
       <section id="practice" className="portal-section pickup-section" aria-labelledby="practice-title">
@@ -262,16 +296,33 @@ export function RandomPickupSections({ courses, practiceRanges }: RandomPickupSe
             <h2 id="practice-title">ピックアップ練習場</h2>
             <p>沖縄県内の練習場をランダムにピックアップ</p>
           </div>
-          <a className="portal-more-link" href="/practice">一覧を見る</a>
         </div>
-        <PickupCarousel
-          items={randomPracticeRanges}
-          label="ピックアップ練習場"
-          layout="showcase"
-          listHref="/practice"
-          listLabel="すべての練習場"
-          itemLabel="練習場"
-        />
+        <div className="pickup-practice-desktop">
+          <PickupCarousel
+            items={randomPracticeRanges}
+            label="ピックアップ練習場"
+            layout="showcase"
+            listHref="/practice"
+            listLabel="すべての練習場"
+            itemLabel="練習場"
+          />
+        </div>
+        <div className="pickup-practice-mobile-list">
+          {randomPracticeRanges.slice(0, 5).map((range) => (
+            <a key={range.id} href={range.href} {...(isExternalUrl(range.href) ? { target: "_blank", rel: "noreferrer" } : {})}>
+              <span className="pickup-practice-mobile-image">
+                <img src={range.imageUrl} alt="" loading="lazy" />
+              </span>
+              <span className="pickup-practice-mobile-copy">
+                <small>{[range.area, range.city].filter(Boolean).join(" / ")}</small>
+                <strong>{range.title}</strong>
+                <em>{range.tags[0] || "練習場"}</em>
+              </span>
+              <i aria-hidden="true">›</i>
+            </a>
+          ))}
+          <a className="pickup-practice-mobile-more" href="/practice">すべての練習場を見る</a>
+        </div>
       </section>
     </>
   );
