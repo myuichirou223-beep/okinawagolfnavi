@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { DesktopSidebarLayout } from "../components/DesktopSidebarLayout";
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
-import { articleKeywords, articlePath, formatDate, getArticles } from "../../lib/microcms";
+import { articlePath, formatDate, getArticles } from "../../lib/microcms";
+import { ArticlesList, type ArticleListItem } from "./ArticlesList";
 
 export const metadata: Metadata = {
   title: "記事一覧",
@@ -16,6 +17,16 @@ export const revalidate = 300;
 
 export default async function ArticlesPage() {
   const articles = await getArticles();
+  const articleListItems: ArticleListItem[] = articles.map((article) => ({
+    id: article.id,
+    title: article.title,
+    category: article.category || "おすすめ",
+    description: article.description || "沖縄のゴルフをもっと楽しむための記事です。",
+    imageUrl: article.eyecatch?.url || "/assets/logo.png",
+    href: articlePath(article),
+    published: article.published || "",
+    publishedLabel: article.published ? formatDate(article.published) : ""
+  }));
 
   return (
     <>
@@ -27,20 +38,7 @@ export default async function ArticlesPage() {
             <h1 id="articles-page-title">記事</h1>
             <p>沖縄でゴルフを楽しむ人、これから始める人、県外から訪れる人に向けた記事を掲載します。</p>
           </div>
-          <div className="portal-card-grid four">
-            {articles.map((article) => (
-              <article key={article.id} className="blog-card searchable" data-keywords={articleKeywords(article)}>
-                <a href={articlePath(article)}>
-                  <img src={article.eyecatch?.url || "/assets/logo.png"} alt="" />
-                  <div className="blog-card-body">
-                    {article.published ? <time dateTime={article.published}>{formatDate(article.published)}</time> : null}
-                    <h3>{article.title}</h3>
-                    <p>{article.description || "沖縄のゴルフをもっと楽しむための記事です。"}</p>
-                  </div>
-                </a>
-              </article>
-            ))}
-          </div>
+          <ArticlesList articles={articleListItems} />
         </section>
       </DesktopSidebarLayout>
       <Footer articleLink />

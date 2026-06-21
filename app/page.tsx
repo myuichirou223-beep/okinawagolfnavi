@@ -88,12 +88,6 @@ function sortDateToDate(value: number) {
   return new Date(year, month - 1, day);
 }
 
-function tournamentDayLabel(tournament: Awaited<ReturnType<typeof getTournaments>>[number]) {
-  const date = sortDateToDate(tournamentSortDate(tournament));
-  if (!date) return tournament.month || "未定";
-  return `${date.getMonth() + 1}/${date.getDate()}`;
-}
-
 function countdownLabel(tournament: Awaited<ReturnType<typeof getTournaments>>[number]) {
   const date = sortDateToDate(tournamentSortDate(tournament));
   if (!date) return "日程確認中";
@@ -108,13 +102,6 @@ function tournamentStatusLabel(tournament: Awaited<ReturnType<typeof getTourname
   if (tournament.status?.includes("成績")) return "結果公開中";
   if (tournament.status?.includes("確認")) return "確認中";
   return tournament.status || "受付状況確認";
-}
-
-function tournamentStatusClass(tournament: Awaited<ReturnType<typeof getTournaments>>[number]) {
-  const status = tournamentStatusLabel(tournament);
-  if (status.includes("結果")) return "is-result";
-  if (status.includes("確認")) return "is-checking";
-  return "is-open";
 }
 
 export default async function Home() {
@@ -249,7 +236,7 @@ export default async function Home() {
         <section className="portal-section weekly-tournament-section" aria-labelledby="weekly-tournaments-title">
           <div className="portal-section-heading with-link">
             <div>
-              <h2 id="weekly-tournaments-title">🔥 今後の大会 <span>NEW</span></h2>
+              <h2 id="weekly-tournaments-title">近日開催の大会</h2>
               <p>これから開催される大会を近い順にピックアップ！</p>
             </div>
             <a className="portal-more-link" href="/tournaments">一覧を見る</a>
@@ -332,7 +319,7 @@ export default async function Home() {
           <a href={googleFormDirectUrl} target="_blank" rel="noreferrer">掲載のお問い合わせ</a>
         </section>
 
-        <section className="home-focus-grid" aria-label="近日開催のイベントと大会情報">
+        <section className="home-focus-grid" aria-label="近日開催のイベント">
           <section className="home-event-panel" aria-labelledby="home-events-title">
             <div className="portal-section-heading with-link">
               <div>
@@ -364,31 +351,6 @@ export default async function Home() {
             </div>
           </section>
 
-          <section id="tournaments" className="home-tournament-panel" aria-labelledby="tournaments-title">
-          <div className="portal-section-heading with-link">
-            <div>
-              <p className="portal-eyebrow">Tournament</p>
-              <h2 id="tournaments-title">今後の大会情報</h2>
-            </div>
-            <a className="portal-more-link" href="/tournaments">一覧を見る</a>
-          </div>
-          <div className="home-tournament-list">
-            {monthlyTournaments.map((tournament) => {
-              const href = firstAvailableTournamentUrl(tournament);
-              return (
-                <article key={tournament.id} className="home-tournament-item">
-                  <time>{tournamentDayLabel(tournament)}</time>
-                  <div>
-                    <h3>{tournament.title}</h3>
-                    <p>{tournament.venue || "開催コース確認中"}</p>
-                  </div>
-                  <span className={`entry-status ${tournamentStatusClass(tournament)}`}>{tournamentStatusLabel(tournament)}</span>
-                  <a href={href} {...externalLinkProps(href)} aria-label={`${tournament.title}の詳細を見る`}>詳細</a>
-                </article>
-              );
-            })}
-          </div>
-          </section>
         </section>
 
         <RandomPickupSections courses={pickupCourses} practiceRanges={pickupPracticeRanges} />
