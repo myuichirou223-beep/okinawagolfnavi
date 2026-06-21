@@ -7568,6 +7568,24 @@ body {
     linear-gradient(145deg, #e93a82, #8d4ac7);
 }
 
+.sidebar-hero-ad a {
+  position: relative;
+  display: block;
+}
+
+.sidebar-ad-slot-label {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 1;
+  padding: 4px 7px;
+  background: rgba(0, 0, 0, 0.72);
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 950;
+  letter-spacing: 0.04em;
+}
+
 .sidebar-pink-pr span,
 .sidebar-tall-ad span,
 .sidebar-sale-ad span {
@@ -7791,7 +7809,7 @@ body {
 
 .home-wide-pr-banner {
   width: min(100% - 40px, 1080px);
-  min-height: 92px;
+  min-height: 148px;
   margin: 28px auto 0;
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto auto;
@@ -7808,7 +7826,12 @@ body {
 }
 
 .home-wide-pr-banner:not(.is-resort) {
-  min-height: 184px;
+  min-height: 148px;
+}
+
+.pickup-between-ad {
+  margin-top: 42px;
+  margin-bottom: 0;
 }
 
 .home-wide-pr-banner.is-recruiting {
@@ -8198,7 +8221,7 @@ body {
 
   .weekly-tournament-section {
     width: calc(100% - 24px) !important;
-    margin: 22px auto 0;
+    margin: 40px auto 20px;
     padding: 0;
   }
 
@@ -10097,11 +10120,11 @@ body {
     font-weight: 900;
   }
 
-  .mobile-inline-ad-d {
-    margin-top: 0;
+  .mobile-inline-ad-e {
+    margin-top: 20px;
   }
 
-  .mobile-inline-ad-d a {
+  .mobile-inline-ad-e a {
     aspect-ratio: 1 / 1;
     grid-template-columns: 1fr;
     grid-template-rows: auto;
@@ -10115,25 +10138,25 @@ body {
     color: #ffffff;
   }
 
-  .mobile-inline-ad-d span {
+  .mobile-inline-ad-e span {
     grid-row: auto;
     background: rgba(255, 255, 255, 0.18);
   }
 
-  .mobile-inline-ad-d strong {
+  .mobile-inline-ad-e strong {
     max-width: 290px;
     font-size: 25px;
     line-height: 1.35;
   }
 
-  .mobile-inline-ad-d small {
+  .mobile-inline-ad-e small {
     max-width: 290px;
     color: #ffffff;
     font-size: 14px;
     line-height: 1.7;
   }
 
-  .mobile-inline-ad-d em {
+  .mobile-inline-ad-e em {
     color: #ffffff;
     font-size: 12px;
   }
@@ -11494,6 +11517,10 @@ body {
     width: 100vw;
     display: block;
     margin: 0 calc(50% - 50vw);
+  }
+
+  .pickup-mobile-ad-f {
+    margin-top: 20px;
   }
 
   .pickup-mobile-ad a {

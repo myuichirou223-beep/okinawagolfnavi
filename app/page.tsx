@@ -228,7 +228,7 @@ export default async function Home() {
         <section className="home-banner-ad-section" aria-label="広告">
           <div className="home-banner-ad-slot is-recruiting">
             <a href={googleFormDirectUrl} target="_blank" rel="noreferrer">
-              <span>広告枠 A</span>
+              <span>広告枠 B</span>
               <strong>広告掲載パートナー募集中</strong>
               <small>大会・店舗・サービスをPRしませんか？</small>
               <em>推奨画像 860 × 300px</em>
@@ -237,7 +237,7 @@ export default async function Home() {
           </div>
           <div className="home-banner-ad-slot is-recruiting is-secondary">
             <a href={googleFormDirectUrl} target="_blank" rel="noreferrer">
-              <span>広告枠 B</span>
+              <span>広告枠 C</span>
               <strong>横長バナー広告 募集中</strong>
               <small>沖縄のゴルファーへ情報を届けませんか？</small>
               <em>推奨画像 860 × 300px</em>
@@ -281,7 +281,7 @@ export default async function Home() {
 
         <aside className="mobile-inline-ad" aria-label="広告">
           <a href={googleFormDirectUrl} target="_blank" rel="noreferrer">
-            <span>広告枠 C</span>
+            <span>広告枠 D</span>
             <strong>スクエア広告 掲載パートナー募集中</strong>
             <small>PC・スマホ共通の広告掲載枠です</small>
             <em>推奨画像 300 × 300px</em>
@@ -316,19 +316,19 @@ export default async function Home() {
           <a className="mobile-more-link" href="/events">すべての情報を見る</a>
         </section>
 
-        <aside className="mobile-inline-ad mobile-inline-ad-d" aria-label="広告枠D">
+        <aside className="mobile-inline-ad mobile-inline-ad-e" aria-label="広告枠E">
           <a href={googleFormDirectUrl} target="_blank" rel="noreferrer">
-            <span>広告枠 D</span>
+            <span>広告枠 E</span>
             <strong>縦長バナー広告 掲載パートナー募集中</strong>
             <small>ゴルフ関連の店舗・サービス・イベントを大きくPRできる広告枠です</small>
             <em>推奨画像 300 × 300px</em>
           </a>
         </aside>
 
-        <section className="home-wide-pr-banner is-recruiting" aria-label="広告枠F">
-          <span>広告枠 F</span>
+        <section className="home-wide-pr-banner is-recruiting" aria-label="広告枠G">
+          <span>広告枠 G</span>
           <strong>ワイドバナー広告 掲載募集中</strong>
-          <small>推奨画像 1080 × 184px</small>
+          <small>推奨画像 1080 × 148px</small>
           <a href={googleFormDirectUrl} target="_blank" rel="noreferrer">掲載のお問い合わせ</a>
         </section>
 
@@ -417,18 +417,19 @@ export default async function Home() {
           <a className="home-articles-more" href="/articles">他の記事を見る</a>
         </section>
 
-        <section className="home-wide-pr-banner is-resort is-recruiting" aria-label="広告枠G">
-          <span>広告枠 G</span>
+        <section className="home-wide-pr-banner is-resort is-recruiting" aria-label="広告枠H">
+          <span>広告枠 H</span>
           <strong>ワイドバナー広告 掲載募集中</strong>
-          <small>推奨画像 1080 × 92px</small>
+          <small>推奨画像 1080 × 148px</small>
           <a href={googleFormDirectUrl} target="_blank" rel="noreferrer">掲載のお問い合わせ</a>
         </section>
 
           </div>
 
           <aside className="home-sidebar" aria-label="サイド情報">
-            <section className="sidebar-box sidebar-hero-ad">
+            <section className="sidebar-box sidebar-hero-ad" aria-label="広告枠A" data-ad-slot="A">
               <a href="https://haisaigolf.com/" target="_blank" rel="noreferrer">
+                <span className="sidebar-ad-slot-label">広告枠 A</span>
                 <img src="/assets/ads/haisai.png" alt="県内最大の女性ゴルフコミュニティ Haisai Golf Girls" />
               </a>
             </section>
@@ -453,14 +454,14 @@ export default async function Home() {
             </section>
 
             <section className="sidebar-box sidebar-pink-pr">
-              <span>広告枠 C</span>
+              <span>広告枠 D</span>
               <strong>スクエア広告<br />掲載パートナー募集中</strong>
               <small>推奨画像 300 × 300px</small>
               <a href={googleFormDirectUrl} target="_blank" rel="noreferrer">掲載のお問い合わせ</a>
             </section>
 
             <section className="sidebar-box sidebar-tall-ad is-recruiting">
-              <span>広告枠 D</span>
+              <span>広告枠 E</span>
               <h2>縦長バナー広告</h2>
               <strong>掲載パートナー募集中</strong>
               <p>ゴルフ関連の店舗・サービス・イベントを大きくPRできる広告枠です。</p>
@@ -469,7 +470,7 @@ export default async function Home() {
             </section>
 
             <section className="sidebar-box sidebar-sale-ad is-recruiting">
-              <span>広告枠 E</span>
+              <span>広告枠 F</span>
               <h2>ショップ・商品広告</h2>
               <strong>広告掲載募集中</strong>
               <p>ゴルフ用品やキャンペーン情報を効果的にPRできます。</p>

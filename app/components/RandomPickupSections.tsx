@@ -278,15 +278,22 @@ export function RandomPickupSections({ courses, practiceRanges }: RandomPickupSe
             すべてのゴルフ場を見る
           </a>
         </div>
-        <aside className="pickup-mobile-ad pickup-mobile-ad-e" aria-label="広告枠E">
+        <aside className="pickup-mobile-ad pickup-mobile-ad-f" aria-label="広告枠F">
           <a href={advertisingContactUrl} target="_blank" rel="noreferrer">
-            <span>広告枠 E</span>
+            <span>広告枠 F</span>
             <h2>ショップ・商品広告</h2>
             <strong>広告掲載募集中</strong>
             <p>ゴルフ用品やキャンペーン情報を効果的にPRできます。</p>
             <small>推奨画像 300 × 300px</small>
           </a>
         </aside>
+      </section>
+
+      <section className="home-wide-pr-banner pickup-between-ad is-recruiting" aria-label="広告枠I">
+        <span>広告枠 I</span>
+        <strong>ゴルフ場・練習場ワイド広告 掲載募集中</strong>
+        <small>推奨画像 1080 × 148px</small>
+        <a href={advertisingContactUrl} target="_blank" rel="noreferrer">掲載のお問い合わせ</a>
       </section>
 
       <section id="practice" className="portal-section pickup-section" aria-labelledby="practice-title">

@@ -59,8 +59,9 @@ export async function PortalSidebar({
 
   return (
     <aside className="home-sidebar portal-shared-sidebar" aria-label="サイド情報">
-      <section className="sidebar-box sidebar-hero-ad">
+      <section className="sidebar-box sidebar-hero-ad" aria-label="広告枠A" data-ad-slot="A">
         <a href="https://haisaigolf.com/" target="_blank" rel="noreferrer">
+          <span className="sidebar-ad-slot-label">広告枠 A</span>
           <img src="/assets/ads/haisai.png" alt="県内最大の女性ゴルフコミュニティ Haisai Golf Girls" />
         </a>
       </section>
@@ -88,14 +89,14 @@ export async function PortalSidebar({
       </section>
 
       <section className="sidebar-box sidebar-pink-pr">
-        <span>広告枠 C</span>
+        <span>広告枠 D</span>
         <strong>スクエア広告<br />掲載パートナー募集中</strong>
         <small>推奨画像 300 × 300px</small>
         <a href={googleFormDirectUrl} target="_blank" rel="noreferrer">掲載のお問い合わせ</a>
       </section>
 
       <section className="sidebar-box sidebar-tall-ad is-recruiting">
-        <span>広告枠 D</span>
+        <span>広告枠 E</span>
         <h2>縦長バナー広告</h2>
         <strong>掲載パートナー募集中</strong>
         <p>ゴルフ関連の店舗・サービス・イベントを大きくPRできる広告枠です。</p>
@@ -104,7 +105,7 @@ export async function PortalSidebar({
       </section>
 
       <section className="sidebar-box sidebar-sale-ad is-recruiting">
-        <span>広告枠 E</span>
+        <span>広告枠 F</span>
         <h2>ショップ・商品広告</h2>
         <strong>広告掲載募集中</strong>
         <p>ゴルフ用品やキャンペーン情報を効果的にPRできます。</p>
