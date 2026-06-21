@@ -91,17 +91,33 @@ function sortDateToDate(value: number) {
 function countdownLabel(tournament: Awaited<ReturnType<typeof getTournaments>>[number]) {
   const date = sortDateToDate(tournamentSortDate(tournament));
   if (!date) return "日程確認中";
-  const today = new Date(2026, 5, 16);
+  const today = getJstToday();
   const days = Math.ceil((date.getTime() - today.getTime()) / 86400000);
   if (days > 0) return `あと${days}日`;
   if (days === 0) return "本日開催";
   return "開催済み";
 }
 
-function tournamentStatusLabel(tournament: Awaited<ReturnType<typeof getTournaments>>[number]) {
-  if (tournament.status?.includes("成績")) return "結果公開中";
-  if (tournament.status?.includes("確認")) return "確認中";
-  return tournament.status || "受付状況確認";
+function topicScheduleDate(topic: Awaited<ReturnType<typeof getTopics>>[number]) {
+  const value = topic.eventDate || topic.startDate || topic.date;
+  if (!value) return null;
+  const date = new Date(value);
+  return Number.isNaN(date.getTime()) ? null : date;
+}
+
+function dateCountdownLabel(date: Date | null) {
+  if (!date) return "日程確認中";
+  const today = getJstToday();
+  const target = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+  const days = Math.ceil((target.getTime() - today.getTime()) / 86400000);
+  if (days > 0) return `あと${days}日`;
+  if (days === 0) return "本日開催";
+  return "開催済み";
+}
+
+function scheduleDateLabel(date: Date | null) {
+  if (!date) return "開催日確認中";
+  return `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`;
 }
 
 export default async function Home() {
@@ -127,6 +143,29 @@ export default async function Home() {
     ...topics.filter((topic) => ["イベント", "試打会"].some((label) => topicCategoryLabel(topic).includes(label))),
     ...topics
   ].filter((topic, index, items) => items.findIndex((item) => item.id === topic.id) === index).slice(0, 3);
+  const scheduledItems = [
+    ...monthlyTournaments.slice(0, 3).map((tournament) => {
+      const href = firstAvailableTournamentUrl(tournament);
+      return {
+        id: `tournament-${tournament.id}`,
+        type: "大会",
+        title: tournament.title,
+        venue: tournament.venue || "開催場所確認中",
+        date: sortDateToDate(tournamentSortDate(tournament)),
+        href
+      };
+    }),
+    ...eventTopics.map((topic) => ({
+      id: `event-${topic.id}`,
+      type: "イベント",
+      title: topic.title,
+      venue: topic.venue || topic.description || "開催場所確認中",
+      date: topicScheduleDate(topic),
+      href: topic.linkUrl || "/events"
+    }))
+  ]
+    .sort((a, b) => (a.date?.getTime() || Number.MAX_SAFE_INTEGER) - (b.date?.getTime() || Number.MAX_SAFE_INTEGER))
+    .slice(0, 6);
 
   const pickupCourses: PickupCourse[] = courses.map((course) => {
     const image = courseImages(course)[0]?.url || fallbackVisual;
@@ -233,36 +272,31 @@ export default async function Home() {
           </div>
         </section>
 
-        <section className="portal-section weekly-tournament-section" aria-labelledby="weekly-tournaments-title">
-          <div className="portal-section-heading with-link">
-            <div>
-              <h2 id="weekly-tournaments-title">近日開催の大会</h2>
-              <p>これから開催される大会を近い順にピックアップ！</p>
-            </div>
-            <a className="portal-more-link" href="/tournaments">一覧を見る</a>
+        <section className="portal-section upcoming-schedule-section" aria-labelledby="upcoming-schedule-title">
+          <div className="portal-section-heading">
+            <h2 id="upcoming-schedule-title">開催予定</h2>
+            <p>大会・イベントを開催日の近い順に掲載しています。</p>
           </div>
-          <div className="weekly-tournament-rail">
-            {monthlyTournaments.map((tournament, index) => {
-              const href = firstAvailableTournamentUrl(tournament);
-              return (
-                <article key={tournament.id} className={`weekly-tournament-card ${index === 0 ? "is-featured" : ""}`}>
-                  <div className="weekly-tournament-image">
-                    <img src={index === 0 ? fallbackVisual : pickupCourses[index % Math.max(pickupCourses.length, 1)]?.imageUrl || fallbackVisual} alt="" loading={index === 0 ? "eager" : "lazy"} />
-                    <span>{fieldText(tournament.category) || "大会"}</span>
-                  </div>
-                  <div className="weekly-tournament-body">
-                    <h3>{tournament.title}</h3>
-                    <p>{tournament.venue || "開催場所確認中"}</p>
-                    <div className="weekly-tournament-meta">
-                      <span><small>開催まで</small><strong>{countdownLabel(tournament)}</strong></span>
-                      <span><small>エントリー締切</small><strong>{tournamentStatusLabel(tournament)}</strong></span>
-                      <span><small>募集カテゴリ</small><strong>{index === 0 ? "ジュニア 37名" : "受付中"}</strong></span>
-                    </div>
-                  </div>
-                  <a href={href} {...externalLinkProps(href)} aria-label={`${tournament.title}の詳細を見る`}>詳細を見る</a>
-                </article>
-              );
-            })}
+          <div className="upcoming-schedule-list">
+            {scheduledItems.map((item) => (
+              <article key={item.id} className="upcoming-schedule-item">
+                <a href={item.href} {...externalLinkProps(item.href)}>
+                  <span className={`upcoming-schedule-type is-${item.type}`}>{item.type}</span>
+                  <span className="upcoming-schedule-copy">
+                    <strong>{item.title}</strong>
+                    <small>{item.venue}</small>
+                  </span>
+                  <span className="upcoming-schedule-date">
+                    <time>{scheduleDateLabel(item.date)}</time>
+                    <b>{dateCountdownLabel(item.date)}</b>
+                  </span>
+                </a>
+              </article>
+            ))}
+          </div>
+          <div className="upcoming-schedule-links">
+            <a href="/tournaments">大会一覧を見る</a>
+            <a href="/events">イベント一覧を見る</a>
           </div>
         </section>
 
@@ -317,40 +351,6 @@ export default async function Home() {
           <strong>ワイドバナー広告 掲載募集中</strong>
           <small>推奨画像 1080 × 148px</small>
           <a href={googleFormDirectUrl} target="_blank" rel="noreferrer">掲載のお問い合わせ</a>
-        </section>
-
-        <section className="home-focus-grid" aria-label="近日開催のイベント">
-          <section className="home-event-panel" aria-labelledby="home-events-title">
-            <div className="portal-section-heading with-link">
-              <div>
-                <p className="portal-eyebrow">Event</p>
-                <h2 id="home-events-title">近日開催のイベント</h2>
-              </div>
-              <a className="portal-more-link" href="/events">一覧を見る</a>
-            </div>
-            <div className="home-event-list">
-              {eventTopics.map((topic) => {
-                const href = topic.linkUrl || "/events";
-                return (
-                  <article key={topic.id} className="home-event-card">
-                    <a href={href} {...externalLinkProps(href)}>
-                      <img
-                        src={topic.image?.url || topic.eyecatch?.url || topic.thumbnail?.url || fallbackVisual}
-                        alt=""
-                        loading="lazy"
-                      />
-                      <div>
-                        <span>{topicCategoryLabel(topic)}</span>
-                        <h3>{topic.title}</h3>
-                        {topic.published ? <time dateTime={topic.published}>{compactDate(topic.published)}</time> : null}
-                      </div>
-                    </a>
-                  </article>
-                );
-              })}
-            </div>
-          </section>
-
         </section>
 
         <RandomPickupSections courses={pickupCourses} practiceRanges={pickupPracticeRanges} />

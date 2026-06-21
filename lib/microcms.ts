@@ -24,6 +24,10 @@ export type Topic = {
   category?: unknown;
   description?: string;
   published?: string;
+  eventDate?: string;
+  startDate?: string;
+  date?: string;
+  venue?: string;
   status?: string;
   linkUrl?: string;
   tags?: string;
