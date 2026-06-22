@@ -144,7 +144,7 @@ export default async function Home() {
   const latestArticles = articles.slice(0, 10);
   const mobileTopics = topics.slice(0, 5);
   const scheduledItems: UpcomingScheduleItem[] = [
-    ...tournaments.map((tournament) => {
+    ...tournaments.map<UpcomingScheduleItem | null>((tournament) => {
       const date = parseEventDate(tournament.eventDate) || sortDateToDate(tournamentSortDate(tournament));
       if (!date || dateToSortValue(date) < todaySortValue) return null;
       const eventDate = tournament.eventDate?.slice(0, 10) || [
@@ -156,6 +156,7 @@ export default async function Home() {
         id: `tournament-${tournament.id}`,
         type: "tournament" as const,
         title: tournament.title,
+        audience: tournament.category || "",
         venue: tournament.venue || tournament.area || "開催場所確認中",
         eventDate,
         dateLabel: scheduleDateLabel(date),
@@ -163,7 +164,7 @@ export default async function Home() {
         href: firstAvailableTournamentUrl(tournament)
       };
     }),
-    ...events.map((event) => {
+    ...events.map<UpcomingScheduleItem | null>((event) => {
       const date = parseEventDate(event.eventDate);
       if (!date || dateToSortValue(date) < todaySortValue) return null;
       return {

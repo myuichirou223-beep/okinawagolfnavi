@@ -2,6 +2,7 @@ export type UpcomingScheduleItem = {
   id: string;
   type: "tournament" | "event";
   title: string;
+  audience?: string;
   venue: string;
   eventDate: string;
   dateLabel: string;
@@ -51,7 +52,10 @@ export function UpcomingSchedule({ items }: { items: UpcomingScheduleItem[] }) {
                 <a href={item.href} {...externalProps}>
                   <span className="upcoming-schedule-badge">{typeLabel}</span>
                   <span className="upcoming-schedule-copy">
-                    <strong>{item.title}</strong>
+                    <span className="upcoming-schedule-title-row">
+                      <strong>{item.title}</strong>
+                      {item.audience ? <em>{item.audience}</em> : null}
+                    </span>
                     <small>{item.venue}</small>
                   </span>
                   <span className="upcoming-schedule-date">
