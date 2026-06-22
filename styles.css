@@ -7290,6 +7290,10 @@ body {
   background: #ffffff;
 }
 
+.upcoming-schedule-card:nth-child(even) {
+  background: #fbfdfc;
+}
+
 .upcoming-schedule-card > a {
   min-height: 90px;
   display: grid;
@@ -7303,21 +7307,24 @@ body {
 
 .upcoming-schedule-card > a:hover,
 .upcoming-schedule-card > a:focus-visible {
-  background: #f5faf7;
+  background: #f1f8f4;
 }
 
 .upcoming-schedule-badge {
   min-height: 34px;
   display: grid;
   place-items: center;
-  background: #ee7b18;
-  color: #ffffff;
+  border: 1px solid #f1c18e;
+  background: #fff4e7;
+  color: #b85b09;
   font-size: 13px;
   font-weight: 950;
 }
 
 .upcoming-schedule-card.is-event .upcoming-schedule-badge {
-  background: #087f67;
+  border-color: #9fcfc3;
+  background: #eaf7f3;
+  color: #08715c;
 }
 
 .upcoming-schedule-copy {
@@ -7355,13 +7362,13 @@ body {
 }
 
 .upcoming-schedule-date b {
-  color: #e25516;
+  color: #008f5a;
   font-size: 14px;
   font-weight: 950;
 }
 
 .upcoming-schedule-card.is-event .upcoming-schedule-date b {
-  color: #087f67;
+  color: #08715c;
 }
 
 .upcoming-schedule-empty {
