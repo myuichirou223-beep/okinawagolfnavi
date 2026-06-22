@@ -12939,6 +12939,170 @@ body {
   color: #65716a;
 }
 
+/* Article mobile readability and layout */
+@media (max-width: 760px) {
+  #articles.articles-section {
+    width: 100%;
+    padding: 38px 16px 52px;
+  }
+
+  #articles.articles-section .section-heading {
+    padding: 0;
+  }
+
+  #articles.articles-section .section-heading h1 {
+    font-size: 32px;
+    line-height: 1.3;
+  }
+
+  #articles.articles-section .section-heading p:not(.eyebrow) {
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+  .articles-toolbar {
+    gap: 12px;
+  }
+
+  .articles-toolbar p {
+    font-size: 14px;
+  }
+
+  .articles-toolbar select {
+    min-width: 140px;
+    height: 48px;
+    font-size: 15px;
+  }
+
+  .articles-news-item > a {
+    min-height: 0;
+    grid-template-columns: 108px minmax(0, 1fr);
+    gap: 13px;
+    padding: 18px 0;
+  }
+
+  .articles-news-image {
+    width: 108px;
+    min-height: 108px;
+    aspect-ratio: 1 / 1;
+  }
+
+  .articles-news-meta {
+    gap: 5px;
+    margin-bottom: 7px;
+  }
+
+  .articles-news-meta span,
+  .articles-news-meta time {
+    font-size: 12px;
+    line-height: 1.4;
+  }
+
+  .articles-news-body h2 {
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-line-clamp: 4;
+  }
+
+  .article-detail-page {
+    padding: 14px 0 52px;
+  }
+
+  .article-detail-page .article-breadcrumb {
+    margin: 0 16px 14px;
+    font-size: 13px;
+  }
+
+  .article-detail-page .article-detail-layout {
+    display: block;
+  }
+
+  .article-detail-page .article-body {
+    width: 100%;
+    padding: 0 0 34px;
+  }
+
+  .article-detail-page .article-header {
+    margin: 0 16px;
+    padding: 10px 0 22px;
+  }
+
+  .article-detail-page .article-header .eyebrow {
+    font-size: 13px;
+  }
+
+  .article-detail-page .article-body h1 {
+    font-size: clamp(25px, 7.2vw, 30px);
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+  }
+
+  .article-detail-page .article-lead {
+    margin-top: 15px;
+    color: #3f4c45;
+    font-size: 16px;
+    line-height: 1.9;
+  }
+
+  .article-detail-page .article-meta {
+    gap: 8px 16px;
+    margin-top: 15px;
+    color: #616d67;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .article-detail-page .article-eyecatch-frame {
+    margin: 20px 16px 0;
+  }
+
+  .article-detail-page .article-html {
+    margin: 0 16px;
+    padding: 28px 0 6px;
+  }
+
+  .article-detail-page .article-html > p:first-child,
+  .article-detail-page .article-html p,
+  .article-detail-page .article-html li {
+    color: #29352f;
+    font-size: 17px;
+    line-height: 1.95;
+  }
+
+  .article-detail-page .article-html h2 {
+    margin: 38px 0 16px;
+    padding-top: 22px;
+    font-size: 23px;
+    line-height: 1.55;
+    overflow-wrap: anywhere;
+  }
+
+  .article-detail-page .article-html ul,
+  .article-detail-page .article-html ol {
+    padding-left: 1.4em;
+  }
+
+  .article-detail-page .article-html img {
+    max-width: 100%;
+  }
+
+  .article-detail-page .article-inline-ad,
+  .article-detail-page .article-related-section,
+  .article-detail-page .article-link-section,
+  .article-detail-page .article-recommend-section {
+    margin-right: 16px;
+    margin-left: 16px;
+  }
+
+  .article-detail-page .article-related-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .article-detail-page .portal-shared-sidebar {
+    display: none !important;
+  }
+}
+
 @media (max-width: 760px) {
   .recommended-course-grid {
     grid-template-columns: 1fr;
