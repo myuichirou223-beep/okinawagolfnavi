@@ -7934,7 +7934,7 @@ body {
 .sidebar-tournament-list a {
   display: grid;
   grid-template-columns: 68px minmax(0, 1fr);
-  align-items: center;
+  align-items: start;
   gap: 10px;
   color: #12251c;
   text-decoration: none;
@@ -7948,14 +7948,12 @@ body {
 }
 
 .sidebar-tournament-list strong {
-  display: -webkit-box;
-  overflow: hidden;
+  display: block;
   color: #12251c;
   font-size: 12px;
   font-weight: 950;
-  line-height: 1.35;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
 }
 
 .sidebar-tournament-list small {

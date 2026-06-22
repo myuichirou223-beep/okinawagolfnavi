@@ -58,7 +58,6 @@ export async function PortalSidebar({
               <img src={articleImage(article)} alt="" loading="lazy" />
               <span>
                 <strong>{article.title}</strong>
-                <small>{article.category || "ゴルフ記事"}</small>
               </span>
             </a>
           ))}

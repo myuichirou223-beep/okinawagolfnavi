@@ -406,7 +406,6 @@ export default async function Home() {
                     <img src={article.eyecatch?.url || fallbackVisual} alt="" loading="lazy" />
                     <span>
                       <strong>{article.title}</strong>
-                      <small>{article.category || "ゴルフ記事"}</small>
                     </span>
                   </a>
                 ))}
