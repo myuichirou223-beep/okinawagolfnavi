@@ -1,10 +1,10 @@
 import {
+  articlePath,
+  formatDate,
+  getArticles,
   getPartners,
-  getTournaments,
-  tournamentActionLinks,
-  tournamentSortDate,
-  type Partner,
-  type Tournament
+  type Article,
+  type Partner
 } from "../../lib/microcms";
 import { PartnerLogoCarousel } from "./PartnerLogoCarousel";
 
@@ -12,50 +12,23 @@ const googleFormDirectUrl = "https://forms.gle/SKkamSAieuaUjuTW6";
 const fallbackVisual = "/assets/hero-golfer.jpg";
 
 type PortalSidebarProps = {
-  tournaments?: Tournament[];
+  articles?: Article[];
   partners?: Partner[];
 };
 
-function externalLinkProps(url: string) {
-  return url.startsWith("http") ? { target: "_blank", rel: "noreferrer" } : {};
-}
-
-function firstAvailableTournamentUrl(tournament: Tournament) {
-  return tournamentActionLinks(tournament).find((link) => link.url)?.url || "/tournaments";
-}
-
-function sortDateToDate(value: number) {
-  const text = String(value);
-  if (text.length !== 8) return null;
-  const year = Number(text.slice(0, 4));
-  const month = Number(text.slice(4, 6));
-  const day = Number(text.slice(6, 8));
-  if (!year || !month || !day || day > 31) return null;
-  return new Date(year, month - 1, day);
-}
-
-function countdownLabel(tournament: Tournament) {
-  const date = sortDateToDate(tournamentSortDate(tournament));
-  if (!date) return "日程確認中";
-  const jstNow = new Date(Date.now() + 9 * 60 * 60 * 1000);
-  const today = new Date(jstNow.getUTCFullYear(), jstNow.getUTCMonth(), jstNow.getUTCDate());
-  const days = Math.ceil((date.getTime() - today.getTime()) / 86400000);
-  if (days > 0) return `あと${days}日`;
-  if (days === 0) return "本日開催";
-  return "開催済み";
+function articleImage(article: Article) {
+  return article.eyecatch?.url || fallbackVisual;
 }
 
 export async function PortalSidebar({
-  tournaments: providedTournaments,
+  articles: providedArticles,
   partners: providedPartners
 }: PortalSidebarProps = {}) {
-  const [allTournaments, allPartners] = await Promise.all([
-    providedTournaments ? Promise.resolve(providedTournaments) : getTournaments(),
+  const [allArticles, allPartners] = await Promise.all([
+    providedArticles ? Promise.resolve(providedArticles) : getArticles(),
     providedPartners ? Promise.resolve(providedPartners) : getPartners()
   ]);
-  const sidebarTournaments = [...allTournaments]
-    .sort((a, b) => tournamentSortDate(a) - tournamentSortDate(b))
-    .slice(0, 3);
+  const sidebarArticles = allArticles.slice(0, 3);
 
   return (
     <aside className="home-sidebar portal-shared-sidebar" aria-label="サイド情報">
@@ -66,25 +39,22 @@ export async function PortalSidebar({
         </a>
       </section>
 
-      <section className="sidebar-box sidebar-tournament-card" aria-labelledby="shared-sidebar-tournament-title">
+      <section className="sidebar-box sidebar-tournament-card" aria-labelledby="shared-sidebar-articles-title">
         <div className="sidebar-heading">
-          <h2 id="shared-sidebar-tournament-title">注目大会</h2>
-          <span>PR枠あり</span>
+          <h2 id="shared-sidebar-articles-title">おすすめ記事</h2>
+          <a href="/articles">記事一覧</a>
         </div>
         <div className="sidebar-tournament-list">
-          {sidebarTournaments.map((tournament) => {
-            const href = firstAvailableTournamentUrl(tournament);
-            return (
-              <a key={tournament.id} href={href} {...externalLinkProps(href)}>
-                <img src={fallbackVisual} alt="" loading="lazy" />
-                <span>
-                  <strong>{tournament.title}</strong>
-                  <small>{tournament.venue || "開催コース確認中"}</small>
-                </span>
-                <em>{countdownLabel(tournament)}</em>
-              </a>
-            );
-          })}
+          {sidebarArticles.map((article) => (
+            <a key={article.id} href={articlePath(article)}>
+              <img src={articleImage(article)} alt="" loading="lazy" />
+              <span>
+                <strong>{article.title}</strong>
+                <small>{article.category || "ゴルフ記事"}</small>
+              </span>
+              <em>{formatDate(article.published)}</em>
+            </a>
+          ))}
         </div>
       </section>
 

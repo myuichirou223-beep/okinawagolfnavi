@@ -90,16 +90,6 @@ function sortDateToDate(value: number) {
   return new Date(year, month - 1, day);
 }
 
-function countdownLabel(tournament: Awaited<ReturnType<typeof getTournaments>>[number]) {
-  const date = sortDateToDate(tournamentSortDate(tournament));
-  if (!date) return "日程確認中";
-  const today = getJstToday();
-  const days = Math.ceil((date.getTime() - today.getTime()) / 86400000);
-  if (days > 0) return `あと${days}日`;
-  if (days === 0) return "本日開催";
-  return "開催済み";
-}
-
 function dateCountdownLabel(date: Date) {
   const today = getJstToday();
   const target = new Date(date.getFullYear(), date.getMonth(), date.getDate());
@@ -257,7 +247,7 @@ export default async function Home() {
       actions: [{ label: "詳しく見る", href: "/practice" }]
     }
   ];
-  const sidebarTournaments = monthlyTournaments.slice(0, 3);
+  const sidebarArticles = latestArticles.slice(0, 3);
 
   return (
     <>
@@ -396,20 +386,20 @@ export default async function Home() {
               </a>
             </section>
 
-            <section className="sidebar-box sidebar-tournament-card" aria-labelledby="sidebar-tournament-title">
+            <section className="sidebar-box sidebar-tournament-card" aria-labelledby="sidebar-articles-title">
               <div className="sidebar-heading">
-                <h2 id="sidebar-tournament-title">注目大会</h2>
-                <span>PR枠あり</span>
+                <h2 id="sidebar-articles-title">おすすめ記事</h2>
+                <a href="/articles">記事一覧</a>
               </div>
               <div className="sidebar-tournament-list">
-                {sidebarTournaments.map((tournament) => (
-                  <a key={tournament.id} href={firstAvailableTournamentUrl(tournament)} {...externalLinkProps(firstAvailableTournamentUrl(tournament))}>
-                    <img src={fallbackVisual} alt="" loading="lazy" />
+                {sidebarArticles.map((article) => (
+                  <a key={article.id} href={articlePath(article)}>
+                    <img src={article.eyecatch?.url || fallbackVisual} alt="" loading="lazy" />
                     <span>
-                      <strong>{tournament.title}</strong>
-                      <small>{tournament.venue || "開催コース確認中"}</small>
+                      <strong>{article.title}</strong>
+                      <small>{article.category || "ゴルフ記事"}</small>
                     </span>
-                    <em>{countdownLabel(tournament)}</em>
+                    <em>{formatDate(article.published)}</em>
                   </a>
                 ))}
               </div>

@@ -7974,6 +7974,13 @@ body {
   white-space: nowrap;
 }
 
+.sidebar-heading a {
+  color: #008f5a;
+  font-size: 11px;
+  font-weight: 900;
+  text-decoration: none;
+}
+
 .sidebar-pink-pr {
   min-height: 170px;
   display: grid;
