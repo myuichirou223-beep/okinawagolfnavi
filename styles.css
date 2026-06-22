@@ -10510,11 +10510,15 @@ body {
   }
 
   .upcoming-schedule-section .portal-section-heading h2 {
-    font-size: 22px;
+    font-size: 25px;
+    line-height: 1.35;
   }
 
   .upcoming-schedule-section .portal-section-heading p {
-    font-size: 12px;
+    margin-top: 7px;
+    color: #435a4f;
+    font-size: 14px;
+    line-height: 1.65;
   }
 
   .upcoming-schedule-filters {
@@ -10523,10 +10527,10 @@ body {
 
   .upcoming-schedule-filters button {
     min-width: 0;
-    min-height: 36px;
+    min-height: 48px;
     flex: 1;
     padding-inline: 10px;
-    font-size: 12px;
+    font-size: 14px;
   }
 
   .upcoming-schedule-grid {
@@ -10536,8 +10540,8 @@ body {
   .upcoming-schedule-card > a {
     min-height: 0;
     grid-template-columns: 1fr;
-    gap: 10px;
-    padding: 16px 12px;
+    gap: 12px;
+    padding: 18px 16px;
   }
 
   .upcoming-schedule-labels {
@@ -10547,28 +10551,32 @@ body {
   }
 
   .upcoming-schedule-badge {
-    min-width: 48px;
-    min-height: 25px;
-    font-size: 11px;
+    min-width: 52px;
+    min-height: 28px;
+    font-size: 12px;
   }
 
   .upcoming-schedule-copy strong {
     display: -webkit-box;
     overflow: hidden;
-    font-size: 15px;
-    line-height: 1.45;
+    color: #10281d;
+    font-size: 17px;
+    line-height: 1.55;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 3;
   }
 
   .upcoming-schedule-labels em {
-    font-size: 9px;
+    padding: 4px 9px;
+    color: #334c40;
+    font-size: 11px;
   }
 
   .upcoming-schedule-copy small {
     overflow: visible;
-    font-size: 11px;
-    line-height: 1.5;
+    color: #435a4f;
+    font-size: 13px;
+    line-height: 1.65;
     white-space: normal;
   }
 
@@ -10577,23 +10585,32 @@ body {
     align-items: center;
     justify-content: space-between;
     gap: 8px;
-    padding-top: 9px;
+    padding-top: 11px;
     border-top: 1px solid #edf1ef;
     text-align: left;
   }
 
   .upcoming-schedule-date time {
-    font-size: 11px;
+    color: #334c40;
+    font-size: 13px;
   }
 
   .upcoming-schedule-date b {
-    font-size: 13px;
+    font-size: 15px;
+    line-height: 1.4;
   }
 
   .upcoming-schedule-links {
     justify-content: center;
     gap: 28px;
-    padding-top: 14px;
+    padding-top: 18px;
+  }
+
+  .upcoming-schedule-links a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    font-size: 14px;
   }
 
   #tournaments.section {
