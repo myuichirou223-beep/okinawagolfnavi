@@ -7933,7 +7933,7 @@ body {
 
 .sidebar-tournament-list a {
   display: grid;
-  grid-template-columns: 68px minmax(0, 1fr) auto;
+  grid-template-columns: 68px minmax(0, 1fr);
   align-items: center;
   gap: 10px;
   color: #12251c;

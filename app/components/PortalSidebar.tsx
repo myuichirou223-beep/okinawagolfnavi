@@ -1,6 +1,5 @@
 import {
   articlePath,
-  formatDate,
   getArticles,
   getPartners,
   type Article,
@@ -20,6 +19,15 @@ function articleImage(article: Article) {
   return article.eyecatch?.url || fallbackVisual;
 }
 
+function pickRandomArticles(articles: Article[], count = 3) {
+  const items = [...articles];
+  for (let index = items.length - 1; index > 0; index -= 1) {
+    const randomIndex = Math.floor(Math.random() * (index + 1));
+    [items[index], items[randomIndex]] = [items[randomIndex], items[index]];
+  }
+  return items.slice(0, count);
+}
+
 export async function PortalSidebar({
   articles: providedArticles,
   partners: providedPartners
@@ -28,7 +36,7 @@ export async function PortalSidebar({
     providedArticles ? Promise.resolve(providedArticles) : getArticles(),
     providedPartners ? Promise.resolve(providedPartners) : getPartners()
   ]);
-  const sidebarArticles = allArticles.slice(0, 3);
+  const sidebarArticles = pickRandomArticles(allArticles);
 
   return (
     <aside className="home-sidebar portal-shared-sidebar" aria-label="サイド情報">
@@ -52,7 +60,6 @@ export async function PortalSidebar({
                 <strong>{article.title}</strong>
                 <small>{article.category || "ゴルフ記事"}</small>
               </span>
-              <em>{formatDate(article.published)}</em>
             </a>
           ))}
         </div>

@@ -113,6 +113,15 @@ function parseEventDate(value?: string) {
   return Number.isNaN(date.getTime()) ? null : date;
 }
 
+function pickRandomArticles<T>(articles: T[], count = 3) {
+  const items = [...articles];
+  for (let index = items.length - 1; index > 0; index -= 1) {
+    const randomIndex = Math.floor(Math.random() * (index + 1));
+    [items[index], items[randomIndex]] = [items[randomIndex], items[index]];
+  }
+  return items.slice(0, count);
+}
+
 export default async function Home() {
   const [articles, courses, practiceRanges, partners, tournaments, events, topics] = await Promise.all([
     getArticles(),
@@ -247,7 +256,7 @@ export default async function Home() {
       actions: [{ label: "詳しく見る", href: "/practice" }]
     }
   ];
-  const sidebarArticles = latestArticles.slice(0, 3);
+  const sidebarArticles = pickRandomArticles(articles);
 
   return (
     <>
@@ -399,7 +408,6 @@ export default async function Home() {
                       <strong>{article.title}</strong>
                       <small>{article.category || "ゴルフ記事"}</small>
                     </span>
-                    <em>{formatDate(article.published)}</em>
                   </a>
                 ))}
               </div>
