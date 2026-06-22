@@ -7320,6 +7320,12 @@ body {
   font-weight: 950;
 }
 
+.upcoming-schedule-labels {
+  display: grid;
+  justify-items: start;
+  gap: 6px;
+}
+
 .upcoming-schedule-card.is-event .upcoming-schedule-badge {
   background: #008f5a;
   color: #ffffff;
@@ -7331,13 +7337,6 @@ body {
   gap: 5px;
 }
 
-.upcoming-schedule-title-row {
-  min-width: 0;
-  display: flex;
-  align-items: center;
-  gap: 9px;
-}
-
 .upcoming-schedule-copy strong {
   min-width: 0;
   color: #14231b;
@@ -7345,8 +7344,7 @@ body {
   line-height: 1.4;
 }
 
-.upcoming-schedule-title-row em {
-  flex: 0 0 auto;
+.upcoming-schedule-labels em {
   padding: 3px 8px;
   border: 1px solid #cddbd4;
   border-radius: 999px;
@@ -10536,53 +10534,60 @@ body {
   }
 
   .upcoming-schedule-card > a {
-    min-height: 104px;
-    grid-template-columns: 66px minmax(0, 1fr);
+    min-height: 0;
+    grid-template-columns: 1fr;
     gap: 10px;
-    padding: 13px 8px;
+    padding: 16px 12px;
+  }
+
+  .upcoming-schedule-labels {
+    display: flex;
+    align-items: center;
+    gap: 7px;
   }
 
   .upcoming-schedule-badge {
-    min-height: 30px;
+    min-width: 48px;
+    min-height: 25px;
     font-size: 11px;
   }
 
   .upcoming-schedule-copy strong {
     display: -webkit-box;
     overflow: hidden;
-    font-size: 14px;
+    font-size: 15px;
+    line-height: 1.45;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
   }
 
-  .upcoming-schedule-title-row {
-    align-items: flex-start;
-    flex-wrap: wrap;
-    gap: 5px 7px;
-  }
-
-  .upcoming-schedule-title-row em {
+  .upcoming-schedule-labels em {
     font-size: 9px;
   }
 
   .upcoming-schedule-copy small {
-    font-size: 10px;
+    overflow: visible;
+    font-size: 11px;
+    line-height: 1.5;
+    white-space: normal;
   }
 
   .upcoming-schedule-date {
-    grid-column: 2;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 8px;
+    padding-top: 9px;
+    border-top: 1px solid #edf1ef;
     text-align: left;
   }
 
   .upcoming-schedule-date time {
-    font-size: 10px;
+    font-size: 11px;
   }
 
   .upcoming-schedule-date b {
-    font-size: 12px;
+    font-size: 13px;
   }
 
   .upcoming-schedule-links {

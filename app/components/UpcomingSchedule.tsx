@@ -50,12 +50,12 @@ export function UpcomingSchedule({ items }: { items: UpcomingScheduleItem[] }) {
                 data-schedule-type={item.type}
               >
                 <a href={item.href} {...externalProps}>
-                  <span className="upcoming-schedule-badge">{typeLabel}</span>
+                  <span className="upcoming-schedule-labels">
+                    <span className="upcoming-schedule-badge">{typeLabel}</span>
+                    {item.audience ? <em>{item.audience}</em> : null}
+                  </span>
                   <span className="upcoming-schedule-copy">
-                    <span className="upcoming-schedule-title-row">
-                      <strong>{item.title}</strong>
-                      {item.audience ? <em>{item.audience}</em> : null}
-                    </span>
+                    <strong>{item.title}</strong>
                     <small>{item.venue}</small>
                   </span>
                   <span className="upcoming-schedule-date">
