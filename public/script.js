@@ -106,6 +106,30 @@ document.addEventListener("click", (event) => {
   const target = event.target;
   if (!(target instanceof Element)) return;
 
+  const scheduleFilterButton = target.closest("[data-schedule-filter]");
+  if (scheduleFilterButton) {
+    const section = scheduleFilterButton.closest(".upcoming-schedule-section");
+    const filter = scheduleFilterButton.dataset.scheduleFilter || "all";
+    const cards = section?.querySelectorAll("[data-schedule-type]") || [];
+    let visibleCount = 0;
+
+    section?.querySelectorAll("[data-schedule-filter]").forEach((button) => {
+      const isActive = button === scheduleFilterButton;
+      button.classList.toggle("is-active", isActive);
+      button.setAttribute("aria-selected", String(isActive));
+    });
+
+    cards.forEach((card) => {
+      const isVisible = filter === "all" || card.dataset.scheduleType === filter;
+      card.hidden = !isVisible;
+      if (isVisible) visibleCount += 1;
+    });
+
+    const emptyMessage = section?.querySelector("[data-schedule-empty]");
+    if (emptyMessage) emptyMessage.hidden = visibleCount > 0;
+    return;
+  }
+
   const menuButton = target.closest(".menu-toggle");
   if (menuButton) {
     setMobileMenu(!document.body.classList.contains("mobile-menu-open"));

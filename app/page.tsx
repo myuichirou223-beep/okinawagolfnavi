@@ -3,6 +3,7 @@ import { Header } from "./components/Header";
 import { HomeFeatureCarousel } from "./components/HomeFeatureCarousel";
 import { PartnerLogoCarousel } from "./components/PartnerLogoCarousel";
 import { RandomPickupSections, type PickupCourse, type PickupPracticeRange } from "./components/RandomPickupSections";
+import { UpcomingSchedule, type UpcomingScheduleItem } from "./components/UpcomingSchedule";
 import {
   articlePath,
   courseImages,
@@ -10,6 +11,7 @@ import {
   formatDate,
   getArticles,
   getCourses,
+  getEvents,
   getPartners,
   getPracticeRanges,
   getTournaments,
@@ -98,15 +100,7 @@ function countdownLabel(tournament: Awaited<ReturnType<typeof getTournaments>>[n
   return "開催済み";
 }
 
-function topicScheduleDate(topic: Awaited<ReturnType<typeof getTopics>>[number]) {
-  const value = topic.eventDate || topic.startDate || topic.date;
-  if (!value) return null;
-  const date = new Date(value);
-  return Number.isNaN(date.getTime()) ? null : date;
-}
-
-function dateCountdownLabel(date: Date | null) {
-  if (!date) return "日程確認中";
+function dateCountdownLabel(date: Date) {
   const today = getJstToday();
   const target = new Date(date.getFullYear(), date.getMonth(), date.getDate());
   const days = Math.ceil((target.getTime() - today.getTime()) / 86400000);
@@ -120,13 +114,23 @@ function scheduleDateLabel(date: Date | null) {
   return `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`;
 }
 
+function parseEventDate(value?: string) {
+  const dateText = value?.slice(0, 10) || "";
+  const match = dateText.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if (!match) return null;
+
+  const date = new Date(Number(match[1]), Number(match[2]) - 1, Number(match[3]));
+  return Number.isNaN(date.getTime()) ? null : date;
+}
+
 export default async function Home() {
-  const [articles, courses, practiceRanges, partners, tournaments, topics] = await Promise.all([
+  const [articles, courses, practiceRanges, partners, tournaments, events, topics] = await Promise.all([
     getArticles(),
     getCourses(),
     getPracticeRanges(),
     getPartners(),
     getTournaments(),
+    getEvents(),
     getTopics()
   ]);
 
@@ -139,32 +143,38 @@ export default async function Home() {
   const monthlyTournaments = (upcomingTournaments.length ? upcomingTournaments : tournaments).slice(0, 4);
   const latestArticles = articles.slice(0, 10);
   const mobileTopics = topics.slice(0, 5);
-  const eventTopics = [
-    ...topics.filter((topic) => ["イベント", "試打会"].some((label) => topicCategoryLabel(topic).includes(label))),
-    ...topics
-  ].filter((topic, index, items) => items.findIndex((item) => item.id === topic.id) === index).slice(0, 3);
-  const scheduledItems = [
-    ...monthlyTournaments.slice(0, 3).map((tournament) => {
-      const href = firstAvailableTournamentUrl(tournament);
+  const scheduledItems: UpcomingScheduleItem[] = [
+    ...tournaments.map((tournament) => {
+      const date = parseEventDate(tournament.eventDate);
+      if (!date || dateToSortValue(date) < todaySortValue) return null;
       return {
         id: `tournament-${tournament.id}`,
-        type: "大会",
+        type: "tournament" as const,
         title: tournament.title,
-        venue: tournament.venue || "開催場所確認中",
-        date: sortDateToDate(tournamentSortDate(tournament)),
-        href
+        venue: tournament.venue || tournament.area || "開催場所確認中",
+        eventDate: tournament.eventDate!.slice(0, 10),
+        dateLabel: scheduleDateLabel(date),
+        countdownLabel: dateCountdownLabel(date),
+        href: firstAvailableTournamentUrl(tournament)
       };
     }),
-    ...eventTopics.map((topic) => ({
-      id: `event-${topic.id}`,
-      type: "イベント",
-      title: topic.title,
-      venue: topic.venue || topic.description || "開催場所確認中",
-      date: topicScheduleDate(topic),
-      href: topic.linkUrl || "/events"
-    }))
+    ...events.map((event) => {
+      const date = parseEventDate(event.eventDate);
+      if (!date || dateToSortValue(date) < todaySortValue) return null;
+      return {
+        id: `event-${event.id}`,
+        type: "event" as const,
+        title: event.title,
+        venue: event.venue || event.location || "開催場所確認中",
+        eventDate: event.eventDate!.slice(0, 10),
+        dateLabel: scheduleDateLabel(date),
+        countdownLabel: dateCountdownLabel(date),
+        href: event.linkUrl || event.officialUrl || "/events"
+      };
+    })
   ]
-    .sort((a, b) => (a.date?.getTime() || Number.MAX_SAFE_INTEGER) - (b.date?.getTime() || Number.MAX_SAFE_INTEGER))
+    .filter((item): item is UpcomingScheduleItem => item !== null)
+    .sort((a, b) => a.eventDate.localeCompare(b.eventDate))
     .slice(0, 6);
 
   const pickupCourses: PickupCourse[] = courses.map((course) => {
@@ -277,23 +287,7 @@ export default async function Home() {
             <h2 id="upcoming-schedule-title">開催予定</h2>
             <p>大会・イベントを開催日の近い順に掲載しています。</p>
           </div>
-          <div className="upcoming-schedule-list">
-            {scheduledItems.map((item) => (
-              <article key={item.id} className="upcoming-schedule-item">
-                <a href={item.href} {...externalLinkProps(item.href)}>
-                  <span className={`upcoming-schedule-type is-${item.type}`}>{item.type}</span>
-                  <span className="upcoming-schedule-copy">
-                    <strong>{item.title}</strong>
-                    <small>{item.venue}</small>
-                  </span>
-                  <span className="upcoming-schedule-date">
-                    <time>{scheduleDateLabel(item.date)}</time>
-                    <b>{dateCountdownLabel(item.date)}</b>
-                  </span>
-                </a>
-              </article>
-            ))}
-          </div>
+          <UpcomingSchedule items={scheduledItems} />
           <div className="upcoming-schedule-links">
             <a href="/tournaments">大会一覧を見る</a>
             <a href="/events">イベント一覧を見る</a>

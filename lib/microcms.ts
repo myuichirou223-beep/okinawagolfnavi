@@ -39,6 +39,7 @@ export type Topic = {
 export type Tournament = {
   id: string;
   title: string;
+  eventDate?: string;
   month?: string;
   dateLabel?: string;
   venue?: string;
@@ -51,6 +52,19 @@ export type Tournament = {
   resultUrl?: string;
   officialUrl?: string;
   displayOrder?: number;
+  tags?: string;
+};
+
+export type Event = {
+  id: string;
+  title: string;
+  eventDate?: string;
+  venue?: string;
+  location?: string;
+  description?: string;
+  status?: string;
+  linkUrl?: string;
+  officialUrl?: string;
   tags?: string;
 };
 
@@ -587,6 +601,21 @@ export async function getTournaments() {
   return tournaments
     .filter(isPublishedTournament)
     .sort((a, b) => tournamentSortDate(a) - tournamentSortDate(b));
+}
+
+function isPublishedEvent(event: Event) {
+  if (!event.status) return true;
+  return !["draft", "下書き", "archived", "非公開"].includes(event.status);
+}
+
+export async function getEvents() {
+  const data = await requestMicroCMS<MicroCMSListResponse<Event>>(
+    "/events?limit=100&orders=eventDate"
+  );
+
+  return (data?.contents || [])
+    .filter(isPublishedEvent)
+    .sort((a, b) => (a.eventDate || "").localeCompare(b.eventDate || ""));
 }
 
 function fieldText(value: unknown): string {
