@@ -145,14 +145,19 @@ export default async function Home() {
   const mobileTopics = topics.slice(0, 5);
   const scheduledItems: UpcomingScheduleItem[] = [
     ...tournaments.map((tournament) => {
-      const date = parseEventDate(tournament.eventDate);
+      const date = parseEventDate(tournament.eventDate) || sortDateToDate(tournamentSortDate(tournament));
       if (!date || dateToSortValue(date) < todaySortValue) return null;
+      const eventDate = tournament.eventDate?.slice(0, 10) || [
+        date.getFullYear(),
+        String(date.getMonth() + 1).padStart(2, "0"),
+        String(date.getDate()).padStart(2, "0")
+      ].join("-");
       return {
         id: `tournament-${tournament.id}`,
         type: "tournament" as const,
         title: tournament.title,
         venue: tournament.venue || tournament.area || "開催場所確認中",
-        eventDate: tournament.eventDate!.slice(0, 10),
+        eventDate,
         dateLabel: scheduleDateLabel(date),
         countdownLabel: dateCountdownLabel(date),
         href: firstAvailableTournamentUrl(tournament)

@@ -58,7 +58,11 @@ export type Tournament = {
 export type Event = {
   id: string;
   title: string;
+  category?: unknown;
   eventDate?: string;
+  startDate?: string;
+  date?: string;
+  published?: string;
   venue?: string;
   location?: string;
   description?: string;
@@ -609,12 +613,15 @@ function isPublishedEvent(event: Event) {
 }
 
 export async function getEvents() {
-  const data = await requestMicroCMS<MicroCMSListResponse<Event>>(
-    "/events?limit=100&orders=eventDate"
-  );
+  const topics = await getTopics();
 
-  return (data?.contents || [])
+  return topics
+    .filter((topic) => ["イベント", "試打会"].some((label) => topicCategoryLabel(topic).includes(label)))
     .filter(isPublishedEvent)
+    .map((topic): Event => ({
+      ...topic,
+      eventDate: topic.eventDate || topic.startDate || topic.date || topic.published
+    }))
     .sort((a, b) => (a.eventDate || "").localeCompare(b.eventDate || ""));
 }
 
