@@ -7314,14 +7314,14 @@ body {
   justify-self: start;
   padding: 4px 10px;
   border-radius: 999px;
-  background: #df7417;
+  background: #e91f73;
   color: #ffffff;
   font-size: 12px;
   font-weight: 950;
 }
 
 .upcoming-schedule-card.is-event .upcoming-schedule-badge {
-  background: #087f67;
+  background: #008f5a;
   color: #ffffff;
 }
 
@@ -7360,13 +7360,13 @@ body {
 }
 
 .upcoming-schedule-date b {
-  color: #244238;
+  color: #e91f73;
   font-size: 14px;
   font-weight: 950;
 }
 
 .upcoming-schedule-card.is-event .upcoming-schedule-date b {
-  color: #244238;
+  color: #008f5a;
 }
 
 .upcoming-schedule-empty {

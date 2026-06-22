@@ -104,7 +104,7 @@ function dateCountdownLabel(date: Date) {
   const today = getJstToday();
   const target = new Date(date.getFullYear(), date.getMonth(), date.getDate());
   const days = Math.ceil((target.getTime() - today.getTime()) / 86400000);
-  if (days > 0) return `あと${days}日`;
+  if (days > 0) return `開催まであと${days}日`;
   if (days === 0) return "本日開催";
   return "開催済み";
 }
