@@ -7282,58 +7282,37 @@ body {
 }
 
 .upcoming-schedule-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
+  border-top: 1px solid #dfe7e2;
 }
 
 .upcoming-schedule-card {
-  min-width: 0;
-  overflow: hidden;
-  border: 1px solid #dfe7e2;
-  border-radius: 14px;
+  border-bottom: 1px solid #dfe7e2;
   background: #ffffff;
-  box-shadow: 0 8px 22px rgba(21, 52, 37, 0.08);
 }
 
 .upcoming-schedule-card > a {
-  min-height: 190px;
-  display: flex;
-  flex-direction: column;
-  padding: 18px;
+  min-height: 90px;
+  display: grid;
+  grid-template-columns: 82px minmax(0, 1fr) 170px;
+  align-items: center;
+  gap: 18px;
+  padding: 16px 18px;
   color: inherit;
   text-decoration: none;
-  transition: transform 160ms ease, box-shadow 160ms ease;
 }
 
 .upcoming-schedule-card > a:hover,
 .upcoming-schedule-card > a:focus-visible {
-  transform: translateY(-2px);
-  box-shadow: inset 0 0 0 2px rgba(0, 143, 90, 0.22);
-}
-
-.upcoming-schedule-card-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-}
-
-.upcoming-schedule-card-top time {
-  color: #52655b;
-  font-size: 12px;
-  font-weight: 850;
+  background: #f5faf7;
 }
 
 .upcoming-schedule-badge {
-  display: inline-flex;
-  align-items: center;
-  min-height: 28px;
-  padding: 5px 12px;
-  border-radius: 999px;
+  min-height: 34px;
+  display: grid;
+  place-items: center;
   background: #ee7b18;
   color: #ffffff;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 950;
 }
 
@@ -7341,39 +7320,47 @@ body {
   background: #087f67;
 }
 
-.upcoming-schedule-card h3 {
-  margin: 16px 0 10px;
-  color: #14231b;
-  font-size: 17px;
-  line-height: 1.45;
+.upcoming-schedule-copy {
+  min-width: 0;
+  display: grid;
+  gap: 5px;
 }
 
-.upcoming-schedule-venue {
-  display: flex;
-  align-items: flex-start;
-  gap: 7px;
-  margin: 0;
+.upcoming-schedule-copy strong {
+  color: #14231b;
+  font-size: 17px;
+  line-height: 1.4;
+}
+
+.upcoming-schedule-copy small {
+  display: block;
+  overflow: hidden;
   color: #60746a;
   font-size: 12px;
   font-weight: 750;
-  line-height: 1.6;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
-.upcoming-schedule-venue span {
-  color: #008f5a;
-  font-size: 8px;
-  line-height: 2.4;
+.upcoming-schedule-date {
+  display: grid;
+  gap: 5px;
+  text-align: right;
 }
 
-.upcoming-schedule-countdown {
-  margin: auto 0 0;
-  padding-top: 16px;
+.upcoming-schedule-date time {
+  color: #52655b;
+  font-size: 12px;
+  font-weight: 850;
+}
+
+.upcoming-schedule-date b {
   color: #e25516;
   font-size: 14px;
   font-weight: 950;
 }
 
-.upcoming-schedule-card.is-event .upcoming-schedule-countdown {
+.upcoming-schedule-card.is-event .upcoming-schedule-date b {
   color: #087f67;
 }
 
@@ -10519,21 +10506,46 @@ body {
   }
 
   .upcoming-schedule-grid {
-    grid-template-columns: 1fr;
-    gap: 12px;
+    display: block;
   }
 
   .upcoming-schedule-card > a {
-    min-height: 170px;
-    padding: 16px;
+    min-height: 104px;
+    grid-template-columns: 66px minmax(0, 1fr);
+    gap: 10px;
+    padding: 13px 8px;
   }
 
-  .upcoming-schedule-card h3 {
-    margin-top: 13px;
-    font-size: 15px;
+  .upcoming-schedule-badge {
+    min-height: 30px;
+    font-size: 11px;
   }
 
-  .upcoming-schedule-countdown {
+  .upcoming-schedule-copy strong {
+    display: -webkit-box;
+    overflow: hidden;
+    font-size: 14px;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .upcoming-schedule-copy small {
+    font-size: 10px;
+  }
+
+  .upcoming-schedule-date {
+    grid-column: 2;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-align: left;
+  }
+
+  .upcoming-schedule-date time {
+    font-size: 10px;
+  }
+
+  .upcoming-schedule-date b {
     font-size: 12px;
   }
 
