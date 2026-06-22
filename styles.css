@@ -7414,6 +7414,94 @@ body {
   text-decoration: none;
 }
 
+.recommended-course-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.recommended-course-card {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid #dfe7e2;
+  border-radius: 12px;
+  background: #ffffff;
+  color: inherit;
+  text-decoration: none;
+}
+
+.recommended-course-card:hover,
+.recommended-course-card:focus-visible {
+  border-color: #9fc9b4;
+  box-shadow: 0 6px 18px rgba(16, 55, 37, 0.1);
+}
+
+.recommended-course-image {
+  aspect-ratio: 16 / 10;
+  display: block;
+  overflow: hidden;
+  background: #edf3ef;
+}
+
+.recommended-course-image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.recommended-course-copy {
+  display: grid;
+  gap: 7px;
+  padding: 15px;
+}
+
+.recommended-course-copy small {
+  color: #60746a;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.recommended-course-copy strong {
+  color: #14231b;
+  font-size: 16px;
+  line-height: 1.45;
+}
+
+.recommended-course-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.recommended-course-tags em {
+  padding: 3px 7px;
+  border-radius: 999px;
+  background: #eef7f2;
+  color: #267052;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 850;
+}
+
+.recommended-course-more {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 14px;
+  color: #008f5a;
+  font-size: 13px;
+  font-weight: 950;
+  text-decoration: none;
+}
+
+@media (max-width: 980px) {
+  .recommended-course-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 .home-focus-grid {
   width: min(1320px, calc(100% - 64px));
   margin-top: 24px;
@@ -12842,4 +12930,58 @@ body {
 
 #articles.articles-section .section-heading p:not(.eyebrow) {
   color: #65716a;
+}
+
+@media (max-width: 760px) {
+  .recommended-course-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+    border-top: 1px solid #dfe7e2;
+  }
+
+  .recommended-course-card {
+    min-height: 112px;
+    display: grid;
+    grid-template-columns: 112px minmax(0, 1fr);
+    border: 0;
+    border-bottom: 1px solid #dfe7e2;
+    border-radius: 0;
+  }
+
+  .recommended-course-card:hover,
+  .recommended-course-card:focus-visible {
+    background: #f7faf8;
+    box-shadow: none;
+  }
+
+  .recommended-course-image {
+    width: 112px;
+    height: 100%;
+    aspect-ratio: auto;
+  }
+
+  .recommended-course-copy {
+    align-content: center;
+    gap: 6px;
+    padding: 14px;
+  }
+
+  .recommended-course-copy small {
+    font-size: 12px;
+  }
+
+  .recommended-course-copy strong {
+    font-size: 17px;
+    line-height: 1.5;
+  }
+
+  .recommended-course-tags em {
+    font-size: 11px;
+  }
+
+  .recommended-course-more {
+    justify-content: center;
+    margin-top: 12px;
+    font-size: 14px;
+  }
 }

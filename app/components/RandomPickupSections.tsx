@@ -237,15 +237,12 @@ function PickupCarousel({
 }
 
 export function RandomPickupSections({ courses, practiceRanges }: RandomPickupSectionsProps) {
-  const [randomCourses, setRandomCourses] = useState<PickupCourse[]>([]);
-  const [mobileLongCourses, setMobileLongCourses] = useState<PickupCourse[]>([]);
   const [randomPracticeRanges, setRandomPracticeRanges] = useState<PickupPracticeRange[]>([]);
+  const recommendedCourses = courses.filter((course) => course.isVisible !== false).slice(0, 4);
 
   useEffect(() => {
-    setRandomCourses(pickRandomItems(courses));
-    setMobileLongCourses(pickRandomItems(courses.filter((course) => course.courseType?.includes("ロング")), 5));
     setRandomPracticeRanges(pickRandomItems(practiceRanges, 5));
-  }, [courses, practiceRanges]);
+  }, [practiceRanges]);
 
   return (
     <>
@@ -254,30 +251,26 @@ export function RandomPickupSections({ courses, practiceRanges }: RandomPickupSe
           <div>
             <p className="portal-eyebrow">Golf Course</p>
             <h2 id="courses-title">今週のおすすめゴルフ場</h2>
-            <p>沖縄県内のゴルフ場をランダムにピックアップ</p>
+            <p>沖縄県内のおすすめコースを見やすくご紹介</p>
           </div>
         </div>
-        <div className="pickup-course-desktop">
-          <PickupCarousel items={randomCourses} label="おすすめゴルフ場" layout="showcase" listHref="/courses" />
-        </div>
-        <div className="pickup-course-mobile-list">
-          {mobileLongCourses.map((course) => (
-            <a key={course.id} href={course.href}>
-              <span className="pickup-course-mobile-image">
+        <div className="recommended-course-grid">
+          {recommendedCourses.map((course) => (
+            <a key={course.id} className="recommended-course-card" href={course.href}>
+              <span className="recommended-course-image">
                 <img src={course.imageUrl} alt="" loading="lazy" />
               </span>
-              <span className="pickup-course-mobile-copy">
+              <span className="recommended-course-copy">
                 <small>{[course.area, course.city].filter(Boolean).join(" / ")}</small>
                 <strong>{course.title}</strong>
-                <em>ロングコース</em>
+                <span className="recommended-course-tags">
+                  {course.tags.slice(0, 2).map((tag) => <em key={tag}>{tag}</em>)}
+                </span>
               </span>
-              <i aria-hidden="true">›</i>
             </a>
           ))}
-          <a className="pickup-course-mobile-more" href="/courses">
-            すべてのゴルフ場を見る
-          </a>
         </div>
+        <a className="recommended-course-more" href="/courses">すべてのゴルフ場を見る</a>
         <aside className="pickup-mobile-ad pickup-mobile-ad-f" aria-label="広告枠F">
           <a href={advertisingContactUrl} target="_blank" rel="noreferrer">
             <span>広告枠 F</span>
