@@ -9668,6 +9668,72 @@ body {
   line-height: 1.6;
 }
 
+.article-series-nav {
+  max-width: 720px;
+  margin: 46px auto 0;
+  padding: 24px;
+  border: 1px solid #d8e3de;
+  background: #f5faf7;
+}
+
+.article-series-heading small {
+  color: #008f5a;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+}
+
+.article-detail-page .article-series-heading h2 {
+  margin: 3px 0 18px;
+  color: #183c30;
+  font-size: 22px;
+  line-height: 1.4;
+}
+
+.article-series-links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.article-series-links a {
+  display: grid;
+  align-content: start;
+  gap: 7px;
+  min-height: 116px;
+  padding: 17px 18px;
+  border: 1px solid #ccd9d3;
+  background: #ffffff;
+  color: #1f3029;
+  text-decoration: none;
+}
+
+.article-series-links a:only-child {
+  grid-column: 1 / -1;
+}
+
+.article-series-links a.is-next {
+  border-color: #008f5a;
+  background: #eaf8f1;
+}
+
+.article-series-links small {
+  color: #008f5a;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.article-series-links strong {
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.article-series-links a:hover,
+.article-series-links a:focus-visible {
+  border-color: #006f47;
+  box-shadow: 0 8px 20px rgba(0, 111, 71, 0.12);
+}
+
 .article-related-section {
   max-width: 720px;
   margin: 50px auto 0;
@@ -10118,6 +10184,31 @@ body {
 
   .article-inline-ad p {
     font-size: 12px;
+  }
+
+  .article-series-nav {
+    margin: 36px 18px 0;
+    padding: 20px 16px;
+  }
+
+  .article-detail-page .article-series-heading h2 {
+    margin-bottom: 14px;
+    padding: 0;
+    border: 0;
+    font-size: 20px;
+  }
+
+  .article-series-links {
+    grid-template-columns: 1fr;
+  }
+
+  .article-series-links a {
+    min-height: 0;
+    padding: 16px;
+  }
+
+  .article-series-links a:only-child {
+    grid-column: auto;
   }
 
   .article-related-section {
@@ -13203,6 +13294,7 @@ body {
   }
 
   .article-detail-page .article-inline-ad,
+  .article-detail-page .article-series-nav,
   .article-detail-page .article-related-section,
   .article-detail-page .article-link-section,
   .article-detail-page .article-recommend-section {

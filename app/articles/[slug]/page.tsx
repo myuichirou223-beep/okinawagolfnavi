@@ -56,6 +56,47 @@ function articleRelatedLinks(category?: string) {
   return [commonLinks[1], commonLinks[0], commonLinks[3], commonLinks[2]];
 }
 
+function japaneseNumber(value: string) {
+  if (/^\d+$/.test(value)) return Number(value);
+  const numbers: Record<string, number> = {
+    一: 1,
+    二: 2,
+    三: 3,
+    四: 4,
+    五: 5,
+    六: 6,
+    七: 7,
+    八: 8,
+    九: 9,
+    十: 10
+  };
+  return numbers[value] || 0;
+}
+
+function articleSeriesInfo(article: { title: string; slug?: string; id: string }) {
+  const slug = articleRouteSlug(article);
+  const slugPart = slug.match(/^(.*?)-part(\d+)(?:-|$)/);
+  if (slugPart) {
+    return {
+      key: `slug:${slugPart[1]}`,
+      order: Number(slugPart[2])
+    };
+  }
+
+  const titlePart = article.title.match(/第\s*([0-9一二三四五六七八九十]+)\s*部|([前中後])編/);
+  if (!titlePart || titlePart.index === undefined) return null;
+
+  const order = titlePart[1]
+    ? japaneseNumber(titlePart[1])
+    : { 前: 1, 中: 2, 後: 3 }[titlePart[2] as "前" | "中" | "後"];
+  const seriesName = article.title
+    .slice(0, titlePart.index)
+    .replace(/[【「『：:\s]+$/g, "")
+    .trim();
+
+  return seriesName && order ? { key: `title:${seriesName}`, order } : null;
+}
+
 export const revalidate = 300;
 
 export async function generateStaticParams() {
@@ -107,6 +148,19 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     .sort((a, b) => Number(b.category === article.category) - Number(a.category === article.category))
     .slice(0, 4);
   const relatedLinks = articleRelatedLinks(article.category);
+  const currentSeries = articleSeriesInfo(article);
+  const seriesArticles = currentSeries
+    ? articles
+        .map((item) => ({ article: item, info: articleSeriesInfo(item) }))
+        .filter((item) => item.info?.key === currentSeries.key)
+        .sort((a, b) => (a.info?.order || 0) - (b.info?.order || 0))
+    : [];
+  const currentSeriesIndex = seriesArticles.findIndex((item) => item.article.id === article.id);
+  const previousSeriesArticle = currentSeriesIndex > 0 ? seriesArticles[currentSeriesIndex - 1]?.article : null;
+  const nextSeriesArticle =
+    currentSeriesIndex >= 0 && currentSeriesIndex < seriesArticles.length - 1
+      ? seriesArticles[currentSeriesIndex + 1]?.article
+      : null;
 
   return (
     <>
@@ -144,6 +198,29 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
               className="article-html"
               dangerouslySetInnerHTML={{ __html: formatArticleBody(article.body) }}
             />
+
+            {previousSeriesArticle || nextSeriesArticle ? (
+              <nav className="article-series-nav" aria-label="連載記事の前後">
+                <div className="article-series-heading">
+                  <small>SERIES</small>
+                  <h2>連載を続けて読む</h2>
+                </div>
+                <div className="article-series-links">
+                  {previousSeriesArticle ? (
+                    <a className="is-previous" href={articlePath(previousSeriesArticle)}>
+                      <small>‹ 前の記事</small>
+                      <strong>{previousSeriesArticle.title}</strong>
+                    </a>
+                  ) : null}
+                  {nextSeriesArticle ? (
+                    <a className="is-next" href={articlePath(nextSeriesArticle)}>
+                      <small>次の記事 ›</small>
+                      <strong>{nextSeriesArticle.title}</strong>
+                    </a>
+                  ) : null}
+                </div>
+              </nav>
+            ) : null}
 
             <aside className="ad-slot article-inline-ad" aria-label="広告">
               <span>広告枠</span>
