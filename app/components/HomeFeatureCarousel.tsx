@@ -15,6 +15,8 @@ export type HomeFeatureSlide = {
   imageUrl: string;
   tone: "green" | "orange" | "blue" | "dark";
   actions: FeatureAction[];
+  artwork?: boolean;
+  imageAlt?: string;
 };
 
 type HomeFeatureCarouselProps = {
@@ -83,23 +85,25 @@ export function HomeFeatureCarousel({ slides }: HomeFeatureCarouselProps) {
       onTouchEnd={handleTouchEnd}
     >
       <div className="feature-slide-grid" aria-live="polite">
-        <article className={`feature-slide-card is-main tone-${activeSlide.tone}`}>
-          <img src={activeSlide.imageUrl} alt="" loading="eager" />
+        <article className={`feature-slide-card is-main tone-${activeSlide.tone}${activeSlide.artwork ? " is-artwork" : ""}`}>
+          <img src={activeSlide.imageUrl} alt={activeSlide.imageAlt || ""} loading="eager" />
           <div className="feature-slide-overlay" />
-          <div className="feature-slide-body">
-            <h2>{activeSlide.title}</h2>
-            <p>{activeSlide.description}</p>
-          </div>
+          {activeSlide.title || activeSlide.description ? (
+            <div className="feature-slide-body">
+              {activeSlide.title ? <h2>{activeSlide.title}</h2> : null}
+              {activeSlide.description ? <p>{activeSlide.description}</p> : null}
+            </div>
+          ) : null}
         </article>
         <div className="feature-side-stack" aria-label="注目カード">
           {sideSlides.map((slide, index) => (
-            <article key={`${slide.title}-${index}`} className={`feature-slide-card is-sub tone-${slide.tone}`}>
-              <img src={slide.imageUrl} alt="" loading="lazy" />
+            <article key={`${slide.title}-${index}`} className={`feature-slide-card is-sub tone-${slide.tone}${slide.artwork ? " is-artwork" : ""}`}>
+              <img src={slide.imageUrl} alt={slide.imageAlt || ""} loading="lazy" />
               <div className="feature-slide-overlay" />
               <div className="feature-slide-body">
                 <span className="feature-label">{slide.label}</span>
-                <h2>{slide.title}</h2>
-                <p>{slide.description}</p>
+                {slide.title ? <h2>{slide.title}</h2> : null}
+                {slide.description ? <p>{slide.description}</p> : null}
                 <div className="feature-slide-actions">
                   {slide.actions.map((action) => (
                     <a key={action.label} href={action.href}>
@@ -115,7 +119,7 @@ export function HomeFeatureCarousel({ slides }: HomeFeatureCarouselProps) {
       <div className="feature-dots" aria-label="スライドを選択">
         {slides.map((slide, index) => (
           <button
-            key={slide.title}
+            key={`${slide.label}-${slide.title}`}
             type="button"
             className={index === activeIndex ? "is-active" : ""}
             onClick={() => setActiveIndex(index)}
@@ -127,14 +131,14 @@ export function HomeFeatureCarousel({ slides }: HomeFeatureCarouselProps) {
       <div ref={thumbnailStripRef} className="feature-thumbnail-strip" aria-label="注目コンテンツ一覧">
         {slides.map((slide, index) => (
           <button
-            key={`${slide.title}-thumb`}
+            key={`${slide.label}-${slide.title}-thumb`}
             ref={(element) => {
               thumbnailRefs.current[index] = element;
             }}
             type="button"
             className={index === activeIndex ? "is-active" : ""}
             onClick={() => setActiveIndex(index)}
-            aria-label={`${slide.title.replace(/\n/g, "")}を表示`}
+            aria-label={`${(slide.title || slide.label).replace(/\n/g, "")}を表示`}
             aria-current={index === activeIndex ? "true" : undefined}
           >
             <img src={slide.imageUrl} alt="" loading="lazy" />

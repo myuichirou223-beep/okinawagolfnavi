@@ -101,7 +101,8 @@ function dateCountdownLabel(date: Date) {
 
 function scheduleDateLabel(date: Date | null) {
   if (!date) return "開催日確認中";
-  return `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`;
+  const weekdays = ["日", "月", "火", "水", "木", "金", "土"];
+  return `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日（${weekdays[date.getDay()]}）`;
 }
 
 function parseEventDate(value?: string) {
@@ -222,14 +223,13 @@ export default async function Home() {
   const featureSlides = [
     {
       label: "メイン",
-      title: "沖縄のゴルフ情報を\nひとつに。",
-      description: "大会・ゴルフ場・練習場・イベント情報を\nまとめて探せるポータルサイト",
-      imageUrl: pickupCourses[0]?.imageUrl || fallbackVisual,
-      tone: "green" as const,
-      actions: [
-        { label: "大会を探す", href: "/tournaments" },
-        { label: "ゴルフ場を探す", href: "/courses" }
-      ]
+      title: "",
+      description: "",
+      imageUrl: "/assets/hero/okinawa-golf-navi-main.jpg",
+      tone: "blue" as const,
+      actions: [],
+      artwork: true,
+      imageAlt: "おきなわGOLFなび 沖縄のゴルフ情報をひとつに"
     },
     {
       label: "今週の注目大会",

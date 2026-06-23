@@ -6776,6 +6776,27 @@ body {
   filter: saturate(1.12) contrast(1.06);
 }
 
+.home-feature-carousel .feature-slide-card.is-artwork {
+  background: #118fd5;
+}
+
+.home-feature-carousel .feature-slide-card.is-artwork img {
+  object-fit: contain;
+  object-position: center;
+  filter: none;
+}
+
+.home-feature-carousel .feature-slide-card.is-artwork .feature-slide-overlay {
+  display: none;
+}
+
+.feature-side-stack .feature-slide-card.is-artwork .feature-slide-body {
+  min-height: 0;
+  justify-content: end;
+  padding: 14px;
+  background: linear-gradient(180deg, transparent 45%, rgba(0, 40, 92, 0.74));
+}
+
 .home-feature-carousel .feature-slide-overlay {
   background:
     linear-gradient(90deg, rgba(0, 39, 72, 0.84), rgba(0, 88, 92, 0.28) 52%, rgba(0, 0, 0, 0.1)),
@@ -9064,6 +9085,20 @@ body {
   .partners-section,
   .portal-section:not(.quick-search-section):not(.weekly-tournament-section):not(#partners) {
     margin-top: 34px;
+  }
+}
+
+@media (min-width: 761px) {
+  .home-feature-carousel .feature-slide-grid:has(.feature-slide-card.is-main.is-artwork) {
+    height: auto !important;
+    min-height: 0 !important;
+    aspect-ratio: 1.99 / 1;
+  }
+
+  .home-feature-carousel .feature-slide-grid:has(.feature-slide-card.is-main.is-artwork) > .feature-slide-card,
+  .home-feature-carousel .feature-slide-grid:has(.feature-slide-card.is-main.is-artwork) > .feature-side-stack {
+    height: 100% !important;
+    min-height: 0 !important;
   }
 }
 
@@ -12939,6 +12974,23 @@ body {
 
 /* Article mobile readability and layout */
 @media (max-width: 760px) {
+  .home-feature-carousel .feature-slide-grid:has(.feature-slide-card.is-main.is-artwork),
+  .home-feature-carousel .feature-slide-card.is-main.is-artwork {
+    height: 75vw;
+    min-height: 0;
+    max-height: 430px;
+  }
+
+  .home-feature-carousel .feature-slide-card.is-main.is-artwork img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .home-feature-carousel:has(.feature-slide-card.is-main.is-artwork) .feature-dots {
+    bottom: 10px;
+  }
+
   #articles.articles-section {
     width: 100%;
     padding: 38px 16px 52px;
