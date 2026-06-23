@@ -86,6 +86,34 @@ function applyFilters() {
   });
 
   updateEmptyStates();
+  positionTournamentTodayMarker();
+}
+
+function positionTournamentTodayMarker() {
+  const scheduleList = document.querySelector("#tournaments .schedule-list");
+  const marker = scheduleList?.querySelector(".schedule-today-marker");
+  if (!scheduleList || !marker) return;
+
+  const today = Number(marker.dataset.todaySortDate || "0");
+  const visibleItems = [...scheduleList.querySelectorAll(".schedule-item")]
+    .filter((item) => !item.classList.contains("is-hidden"));
+
+  if (!visibleItems.length) {
+    marker.classList.add("is-hidden");
+    return;
+  }
+
+  marker.classList.remove("is-hidden");
+  const nextItem = visibleItems.find((item) => {
+    const itemDate = Number(item.dataset.sortDate || "99999999");
+    return activeTournamentSort === "asc" ? itemDate >= today : itemDate < today;
+  });
+
+  if (nextItem) {
+    scheduleList.insertBefore(marker, nextItem);
+  } else {
+    scheduleList.append(marker);
+  }
 }
 
 function sortTournamentItems() {
@@ -100,6 +128,8 @@ function sortTournamentItems() {
       return activeTournamentSort === "asc" ? dateA - dateB : dateB - dateA;
     })
     .forEach((item) => scheduleList.append(item));
+
+  positionTournamentTodayMarker();
 }
 
 document.addEventListener("click", (event) => {

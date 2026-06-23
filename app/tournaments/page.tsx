@@ -44,8 +44,25 @@ function tournamentDateLabel(eventDate?: string, fallbackLabel?: string) {
   return `${dateText}（${weekday}）`;
 }
 
+function currentJstDate() {
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    timeZone: "Asia/Tokyo"
+  }).formatToParts(new Date());
+  const values = Object.fromEntries(parts.map((part) => [part.type, part.value]));
+  const isoDate = `${values.year}-${values.month}-${values.day}`;
+
+  return {
+    label: tournamentDateLabel(`${isoDate}T00:00:00+09:00`),
+    sortDate: Number(`${values.year}${values.month}${values.day}`)
+  };
+}
+
 export default async function TournamentsPage() {
   const tournaments = await getTournaments();
+  const today = currentJstDate();
 
   return (
     <>
@@ -74,6 +91,15 @@ export default async function TournamentsPage() {
           </div>
           <div className="annual-schedule" aria-label="大会年間スケジュール">
             <div className="schedule-list">
+              <div
+                className="schedule-today-marker"
+                data-today-sort-date={today.sortDate}
+                role="separator"
+                aria-label={`本日 ${today.label}`}
+              >
+                <span>現在</span>
+                <strong>{today.label}</strong>
+              </div>
               {tournaments.map((tournament) => (
                 <article
                   key={tournament.id}

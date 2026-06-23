@@ -12487,6 +12487,37 @@ body {
   line-height: 1.5;
 }
 
+#tournaments .schedule-today-marker {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 8px 0;
+  color: #9b3d00;
+}
+
+#tournaments .schedule-today-marker::before,
+#tournaments .schedule-today-marker::after {
+  height: 3px;
+  flex: 1;
+  background: #f07818;
+  content: "";
+}
+
+#tournaments .schedule-today-marker span {
+  padding: 5px 10px;
+  background: #e85f00;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+
+#tournaments .schedule-today-marker strong {
+  color: #713510;
+  font-size: 15px;
+  white-space: nowrap;
+}
+
 #tournaments .schedule-action-button {
   border-color: #d95f00;
   background:
@@ -12610,6 +12641,20 @@ body {
     font-size: 13px;
     font-weight: 700;
     line-height: 1.55;
+  }
+
+  #tournaments .schedule-today-marker {
+    gap: 7px;
+    margin: 6px 0;
+  }
+
+  #tournaments .schedule-today-marker span {
+    padding: 5px 8px;
+    font-size: 12px;
+  }
+
+  #tournaments .schedule-today-marker strong {
+    font-size: 13px;
   }
 }
 
