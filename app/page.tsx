@@ -243,12 +243,15 @@ export default async function Home() {
       href: "https://okinawagolfnavi.com/articles/tiger-woods-legacy-part1.html"
     },
     {
-      label: "PR",
-      title: "PGMゴルフリゾート沖縄",
-      description: "宿泊付きゴルフプランが充実！",
-      imageUrl: pickupCourses[1]?.imageUrl || pickupCourses[0]?.imageUrl || fallbackVisual,
-      tone: "blue" as const,
-      actions: [{ label: "詳しく見る", href: "/courses" }]
+      label: "特集記事",
+      title: "",
+      description: "",
+      imageUrl: "/assets/hero/masashi-ozaki-feature.jpg",
+      tone: "dark" as const,
+      actions: [],
+      artwork: true,
+      imageAlt: "尾崎将司特集 日本ゴルフ界を牽引したレジェンドの軌跡",
+      href: "https://okinawagolfnavi.com/articles/jumbo-ozaki-emperor-reign-part1.html"
     },
     {
       label: "PR",

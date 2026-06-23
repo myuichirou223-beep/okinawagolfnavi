@@ -6809,6 +6809,15 @@ body {
   background: linear-gradient(180deg, transparent 45%, rgba(0, 40, 92, 0.74));
 }
 
+.feature-side-stack .feature-slide-card.is-artwork {
+  background: #101815;
+}
+
+.feature-side-stack .feature-slide-card.is-artwork img {
+  object-fit: cover;
+  object-position: center;
+}
+
 .home-feature-carousel .feature-slide-overlay {
   background:
     linear-gradient(90deg, rgba(0, 39, 72, 0.84), rgba(0, 88, 92, 0.28) 52%, rgba(0, 0, 0, 0.1)),
