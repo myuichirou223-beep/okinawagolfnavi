@@ -16,6 +16,26 @@ export const metadata = {
   description: "沖縄県内で開催されるゴルフ大会の年間スケジュール、募集要項、概要、成績表へのリンクを掲載しています。"
 };
 
+function tournamentDateLabel(eventDate?: string, fallbackLabel?: string) {
+  if (!eventDate) return fallbackLabel || "";
+
+  const date = new Date(eventDate);
+  if (Number.isNaN(date.getTime())) return fallbackLabel || "";
+
+  const dateText = new Intl.DateTimeFormat("ja-JP", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    timeZone: "Asia/Tokyo"
+  }).format(date);
+  const weekday = new Intl.DateTimeFormat("ja-JP", {
+    weekday: "short",
+    timeZone: "Asia/Tokyo"
+  }).format(date);
+
+  return `${dateText}（${weekday}）`;
+}
+
 export default async function TournamentsPage() {
   const tournaments = await getTournaments();
 
@@ -57,7 +77,12 @@ export default async function TournamentsPage() {
                   <time>{tournament.month || "未定"}</time>
                   <div className="schedule-copy">
                     <h4>{tournament.title}</h4>
-                    <p>{[tournament.dateLabel, tournament.venue].filter(Boolean).join(" / ") || "詳細確認中"}</p>
+                    <p>
+                      {[
+                        tournamentDateLabel(tournament.eventDate, tournament.dateLabel),
+                        tournament.venue
+                      ].filter(Boolean).join(" / ") || "詳細確認中"}
+                    </p>
                   </div>
                   <div className="schedule-actions" aria-label={`${tournament.title}の関連リンク`}>
                     {tournamentActionLinks(tournament).map((link) => (
