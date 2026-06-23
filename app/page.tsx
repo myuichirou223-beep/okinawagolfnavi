@@ -232,12 +232,15 @@ export default async function Home() {
       imageAlt: "おきなわGOLFなび 沖縄のゴルフ情報をひとつに"
     },
     {
-      label: "今週の注目大会",
-      title: "県民ゴルフジュニア選手権",
-      description: "エントリー受付中！あと6日",
-      imageUrl: fallbackVisual,
-      tone: "orange" as const,
-      actions: [{ label: "詳しく見る", href: "/tournaments" }]
+      label: "特集記事",
+      title: "",
+      description: "",
+      imageUrl: "/assets/hero/tiger-woods-feature.jpg",
+      tone: "dark" as const,
+      actions: [],
+      artwork: true,
+      imageAlt: "タイガー・ウッズ特集 伝説を築いたスイング、思考、そして軌跡",
+      href: "https://okinawagolfnavi.com/articles/tiger-woods-legacy-part1.html"
     },
     {
       label: "PR",

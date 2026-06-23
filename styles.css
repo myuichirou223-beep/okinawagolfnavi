@@ -6790,6 +6790,18 @@ body {
   display: none;
 }
 
+.home-feature-carousel .feature-slide-link {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  cursor: pointer;
+}
+
+.home-feature-carousel .feature-slide-link:focus-visible {
+  outline: 4px solid #ffffff;
+  outline-offset: -6px;
+}
+
 .feature-side-stack .feature-slide-card.is-artwork .feature-slide-body {
   min-height: 0;
   justify-content: end;

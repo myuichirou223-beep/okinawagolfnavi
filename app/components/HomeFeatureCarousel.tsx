@@ -17,6 +17,7 @@ export type HomeFeatureSlide = {
   actions: FeatureAction[];
   artwork?: boolean;
   imageAlt?: string;
+  href?: string;
 };
 
 type HomeFeatureCarouselProps = {
@@ -102,6 +103,13 @@ export function HomeFeatureCarousel({ slides }: HomeFeatureCarouselProps) {
               {activeSlide.description ? <p>{activeSlide.description}</p> : null}
             </div>
           ) : null}
+          {activeSlide.href ? (
+            <a
+              className="feature-slide-link"
+              href={activeSlide.href}
+              aria-label={`${activeSlide.imageAlt || activeSlide.title || activeSlide.label}の記事を読む`}
+            />
+          ) : null}
           <div
             key={`${activeIndex}-${progressCycle}`}
             className="feature-dots"
@@ -137,6 +145,13 @@ export function HomeFeatureCarousel({ slides }: HomeFeatureCarouselProps) {
                   ))}
                 </div>
               </div>
+              {slide.href ? (
+                <a
+                  className="feature-slide-link"
+                  href={slide.href}
+                  aria-label={`${slide.imageAlt || slide.title || slide.label}の記事を読む`}
+                />
+              ) : null}
             </article>
           ))}
         </div>
