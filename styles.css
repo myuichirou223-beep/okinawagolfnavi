@@ -13198,6 +13198,101 @@ body {
   }
 }
 
+/* Keep carousel navigation circular and clear of artwork text on every screen size. */
+.home-feature-carousel .feature-slide-card.is-main .feature-dots {
+  right: 18px;
+  bottom: 18px;
+  left: auto;
+  z-index: 6;
+  width: auto;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.home-feature-carousel .feature-slide-card.is-main .feature-dots button {
+  position: relative;
+  width: 28px;
+  min-width: 28px;
+  height: 28px;
+  min-height: 28px;
+  border: 0;
+  border-radius: 50% !important;
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: 0 1px 7px rgba(0, 0, 0, 0.28);
+}
+
+.home-feature-carousel .feature-slide-card.is-main .feature-dots button::after {
+  position: absolute;
+  inset: 6px;
+  border-radius: 50% !important;
+  background: rgba(0, 71, 49, 0.34);
+  content: "";
+}
+
+.home-feature-carousel .feature-slide-card.is-main .feature-dots button svg {
+  position: absolute;
+  inset: 0;
+  width: 28px;
+  height: 28px;
+  overflow: visible;
+  pointer-events: none;
+  transform: rotate(-90deg);
+}
+
+.home-feature-carousel .feature-slide-card.is-main .feature-dots button > span {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  width: 100%;
+  height: 100%;
+  place-items: center;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 900;
+  line-height: 1;
+  text-shadow: 0 1px 2px rgba(0, 48, 32, 0.5);
+}
+
+.home-feature-carousel .feature-slide-card.is-main .feature-dots button circle {
+  fill: none;
+  stroke: transparent;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-dasharray: 50.27;
+  stroke-dashoffset: 50.27;
+}
+
+.home-feature-carousel .feature-slide-card.is-main .feature-dots button.is-active {
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.home-feature-carousel .feature-slide-card.is-main .feature-dots button.is-active::after {
+  background: #008f5a;
+}
+
+.home-feature-carousel .feature-slide-card.is-main .feature-dots button.is-active circle {
+  stroke: #00a96b;
+  animation: featureDotCircleProgress 5s linear forwards;
+}
+
+@keyframes featureDotCircleProgress {
+  from {
+    stroke-dashoffset: 50.27;
+  }
+
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@media (max-width: 760px) {
+  .home-feature-carousel .feature-slide-card.is-main .feature-dots,
+  .home-feature-carousel:has(.feature-slide-card.is-main.is-artwork) .feature-slide-card.is-main .feature-dots {
+    right: 12px;
+    bottom: 12px;
+  }
+}
+
 @media (max-width: 760px) {
   .recommended-course-grid {
     grid-template-columns: 1fr;

@@ -25,6 +25,7 @@ type HomeFeatureCarouselProps = {
 
 export function HomeFeatureCarousel({ slides }: HomeFeatureCarouselProps) {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [progressCycle, setProgressCycle] = useState(0);
   const touchStartX = useRef<number | null>(null);
   const thumbnailStripRef = useRef<HTMLDivElement | null>(null);
   const thumbnailRefs = useRef<Array<HTMLButtonElement | null>>([]);
@@ -38,11 +39,18 @@ export function HomeFeatureCarousel({ slides }: HomeFeatureCarouselProps) {
   });
 
   function showPrevious() {
+    setProgressCycle((current) => current + 1);
     setActiveIndex((current) => (current - 1 + slides.length) % slides.length);
   }
 
   function showNext() {
+    setProgressCycle((current) => current + 1);
     setActiveIndex((current) => (current + 1) % slides.length);
+  }
+
+  function selectSlide(index: number) {
+    setProgressCycle((current) => current + 1);
+    setActiveIndex(index);
   }
 
   function handleTouchEnd(event: React.TouchEvent<HTMLElement>) {
@@ -56,12 +64,12 @@ export function HomeFeatureCarousel({ slides }: HomeFeatureCarouselProps) {
 
   useEffect(() => {
     if (slides.length < 2) return undefined;
-    const timer = window.setInterval(() => {
+    const timer = window.setTimeout(() => {
       setActiveIndex((current) => (current + 1) % slides.length);
     }, 5000);
 
-    return () => window.clearInterval(timer);
-  }, [slides.length]);
+    return () => window.clearTimeout(timer);
+  }, [activeIndex, progressCycle, slides.length]);
 
   useEffect(() => {
     const strip = thumbnailStripRef.current;
@@ -94,6 +102,23 @@ export function HomeFeatureCarousel({ slides }: HomeFeatureCarouselProps) {
               {activeSlide.description ? <p>{activeSlide.description}</p> : null}
             </div>
           ) : null}
+          <div
+            key={`${activeIndex}-${progressCycle}`}
+            className="feature-dots"
+            aria-label="次のスライドへ"
+          >
+            <button
+              type="button"
+              className="is-active"
+              onClick={showNext}
+              aria-label="次の画像を表示"
+            >
+              <svg viewBox="0 0 20 20" aria-hidden="true">
+                <circle cx="10" cy="10" r="8" />
+              </svg>
+              <span aria-hidden="true">{activeIndex + 1}</span>
+            </button>
+          </div>
         </article>
         <div className="feature-side-stack" aria-label="注目カード">
           {sideSlides.map((slide, index) => (
@@ -116,18 +141,6 @@ export function HomeFeatureCarousel({ slides }: HomeFeatureCarouselProps) {
           ))}
         </div>
       </div>
-      <div className="feature-dots" aria-label="スライドを選択">
-        {slides.map((slide, index) => (
-          <button
-            key={`${slide.label}-${slide.title}`}
-            type="button"
-            className={index === activeIndex ? "is-active" : ""}
-            onClick={() => setActiveIndex(index)}
-            aria-label={`${index + 1}枚目を表示`}
-            aria-current={index === activeIndex ? "true" : undefined}
-          />
-        ))}
-      </div>
       <div ref={thumbnailStripRef} className="feature-thumbnail-strip" aria-label="注目コンテンツ一覧">
         {slides.map((slide, index) => (
           <button
@@ -137,7 +150,7 @@ export function HomeFeatureCarousel({ slides }: HomeFeatureCarouselProps) {
             }}
             type="button"
             className={index === activeIndex ? "is-active" : ""}
-            onClick={() => setActiveIndex(index)}
+            onClick={() => selectSlide(index)}
             aria-label={`${(slide.title || slide.label).replace(/\n/g, "")}を表示`}
             aria-current={index === activeIndex ? "true" : undefined}
           >
