@@ -17,10 +17,18 @@ export const metadata = {
 };
 
 function tournamentDateLabel(eventDate?: string, fallbackLabel?: string) {
-  if (!eventDate) return fallbackLabel || "";
+  let date = eventDate ? new Date(eventDate) : null;
 
-  const date = new Date(eventDate);
-  if (Number.isNaN(date.getTime())) return fallbackLabel || "";
+  if (!date || Number.isNaN(date.getTime())) {
+    const label = fallbackLabel || "";
+    const year = Number(label.match(/(\d{4})年/)?.[1] || new Date().getFullYear());
+    const dateParts =
+      label.match(/(\d{1,2})月\s*(\d{1,2})日/) ||
+      label.match(/(\d{1,2})\/(\d{1,2})/);
+
+    if (!dateParts) return label;
+    date = new Date(`${year}-${dateParts[1].padStart(2, "0")}-${dateParts[2].padStart(2, "0")}T00:00:00+09:00`);
+  }
 
   const dateText = new Intl.DateTimeFormat("ja-JP", {
     year: "numeric",
