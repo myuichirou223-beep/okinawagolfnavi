@@ -255,11 +255,14 @@ export default async function Home() {
     },
     {
       label: "PR",
-      title: "エックスゴルフラボ 那覇小禄店",
-      description: "最新シミュレーターでスコアアップ！",
-      imageUrl: pickupPracticeRanges[0]?.imageUrl || fallbackVisual,
-      tone: "dark" as const,
-      actions: [{ label: "詳しく見る", href: "/practice" }]
+      title: "",
+      description: "",
+      imageUrl: "/assets/ads/advertising-pr-banner.png",
+      tone: "blue" as const,
+      actions: [{ label: "掲載について問い合わせる", href: googleFormDirectUrl }],
+      artwork: true,
+      imageAlt: "大会・イベント・キャンペーン・サービスをおきなわGOLFなびに掲載して沖縄のゴルフ好きに向けてPRしませんか",
+      href: googleFormDirectUrl
     }
   ];
   const sidebarArticles = pickRandomArticles(articles);

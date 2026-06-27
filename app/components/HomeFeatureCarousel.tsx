@@ -18,11 +18,16 @@ export type HomeFeatureSlide = {
   artwork?: boolean;
   imageAlt?: string;
   href?: string;
+  linkAriaLabel?: string;
 };
 
 type HomeFeatureCarouselProps = {
   slides: HomeFeatureSlide[];
 };
+
+function externalLinkProps(url: string) {
+  return url.startsWith("http") ? { target: "_blank", rel: "noreferrer" } : {};
+}
 
 export function HomeFeatureCarousel({ slides }: HomeFeatureCarouselProps) {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -107,7 +112,8 @@ export function HomeFeatureCarousel({ slides }: HomeFeatureCarouselProps) {
             <a
               className="feature-slide-link"
               href={activeSlide.href}
-              aria-label={`${activeSlide.imageAlt || activeSlide.title || activeSlide.label}の記事を読む`}
+              aria-label={activeSlide.linkAriaLabel || `${activeSlide.imageAlt || activeSlide.title || activeSlide.label}を開く`}
+              {...externalLinkProps(activeSlide.href)}
             />
           ) : null}
           <div
@@ -139,7 +145,7 @@ export function HomeFeatureCarousel({ slides }: HomeFeatureCarouselProps) {
                 {slide.description ? <p>{slide.description}</p> : null}
                 <div className="feature-slide-actions">
                   {slide.actions.map((action) => (
-                    <a key={action.label} href={action.href}>
+                    <a key={action.label} href={action.href} {...externalLinkProps(action.href)}>
                       {action.label}
                     </a>
                   ))}
@@ -149,7 +155,8 @@ export function HomeFeatureCarousel({ slides }: HomeFeatureCarouselProps) {
                 <a
                   className="feature-slide-link"
                   href={slide.href}
-                  aria-label={`${slide.imageAlt || slide.title || slide.label}の記事を読む`}
+                  aria-label={slide.linkAriaLabel || `${slide.imageAlt || slide.title || slide.label}を開く`}
+                  {...externalLinkProps(slide.href)}
                 />
               ) : null}
             </article>
