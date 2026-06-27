@@ -16,6 +16,7 @@ export type HomeFeatureSlide = {
   tone: "green" | "orange" | "blue" | "dark";
   actions: FeatureAction[];
   artwork?: boolean;
+  fillFrame?: boolean;
   imageAlt?: string;
   href?: string;
   linkAriaLabel?: string;
@@ -99,7 +100,7 @@ export function HomeFeatureCarousel({ slides }: HomeFeatureCarouselProps) {
       onTouchEnd={handleTouchEnd}
     >
       <div className="feature-slide-grid" aria-live="polite">
-        <article className={`feature-slide-card is-main tone-${activeSlide.tone}${activeSlide.artwork ? " is-artwork" : ""}`}>
+        <article className={`feature-slide-card is-main tone-${activeSlide.tone}${activeSlide.artwork ? " is-artwork" : ""}${activeSlide.fillFrame ? " is-fill-frame" : ""}`}>
           <img src={activeSlide.imageUrl} alt={activeSlide.imageAlt || ""} loading="eager" />
           <div className="feature-slide-overlay" />
           {activeSlide.title || activeSlide.description ? (
@@ -136,7 +137,7 @@ export function HomeFeatureCarousel({ slides }: HomeFeatureCarouselProps) {
         </article>
         <div className="feature-side-stack" aria-label="注目カード">
           {sideSlides.map((slide, index) => (
-            <article key={`${slide.title}-${index}`} className={`feature-slide-card is-sub tone-${slide.tone}${slide.artwork ? " is-artwork" : ""}`}>
+            <article key={`${slide.title}-${index}`} className={`feature-slide-card is-sub tone-${slide.tone}${slide.artwork ? " is-artwork" : ""}${slide.fillFrame ? " is-fill-frame" : ""}`}>
               <img src={slide.imageUrl} alt={slide.imageAlt || ""} loading="lazy" />
               <div className="feature-slide-overlay" />
               <div className="feature-slide-body">

@@ -261,6 +261,7 @@ export default async function Home() {
       tone: "blue" as const,
       actions: [{ label: "掲載について問い合わせる", href: googleFormDirectUrl }],
       artwork: true,
+      fillFrame: true,
       imageAlt: "大会・イベント・キャンペーン・サービスをおきなわGOLFなびに掲載して沖縄のゴルフ好きに向けてPRしませんか",
       href: googleFormDirectUrl
     }
