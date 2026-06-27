@@ -137,7 +137,7 @@ export function HomeFeatureCarousel({ slides }: HomeFeatureCarouselProps) {
         </article>
         <div className="feature-side-stack" aria-label="注目カード">
           {sideSlides.map((slide, index) => (
-            <article key={`${slide.title}-${index}`} className={`feature-slide-card is-sub tone-${slide.tone}${slide.artwork ? " is-artwork" : ""}${slide.fillFrame ? " is-fill-frame" : ""}`}>
+            <article key={`${slide.imageUrl}-${index}`} className={`feature-slide-card is-sub tone-${slide.tone}${slide.artwork ? " is-artwork" : ""}${slide.fillFrame ? " is-fill-frame" : ""}`}>
               <img src={slide.imageUrl} alt={slide.imageAlt || ""} loading="lazy" />
               <div className="feature-slide-overlay" />
               <div className="feature-slide-body">
@@ -167,7 +167,7 @@ export function HomeFeatureCarousel({ slides }: HomeFeatureCarouselProps) {
       <div ref={thumbnailStripRef} className="feature-thumbnail-strip" aria-label="注目コンテンツ一覧">
         {slides.map((slide, index) => (
           <button
-            key={`${slide.label}-${slide.title}-thumb`}
+            key={`${slide.imageUrl}-${index}-thumb`}
             ref={(element) => {
               thumbnailRefs.current[index] = element;
             }}

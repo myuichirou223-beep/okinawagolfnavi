@@ -10,6 +10,7 @@ export function Footer({ articleLink = false }: FooterProps) {
     { label: "大会情報", href: "/tournaments" },
     { label: "ゴルフ場", href: "/courses" },
     { label: "練習場", href: "/practice" },
+    { label: "お得情報", href: "/deals" },
     { label: "イベント", href: "/events" },
     { label: "レッスン", href: "/lessons" },
     { label: "記事", href: articleHref },
