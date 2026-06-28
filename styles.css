@@ -9244,6 +9244,35 @@ body {
   }
 }
 
+/* Mobile menu readability: large text-only category buttons. */
+@media (max-width: 760px) {
+  .site-header .site-nav a {
+    min-height: 76px !important;
+    height: 76px !important;
+    padding: 10px 8px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0 !important;
+    text-align: center !important;
+  }
+
+  .site-header .site-nav .nav-icon {
+    display: none !important;
+  }
+
+  .site-header .site-nav .nav-label {
+    display: block !important;
+    color: #ffffff !important;
+    font-size: 24px !important;
+    font-weight: 900 !important;
+    line-height: 1.18 !important;
+    letter-spacing: 0 !important;
+    text-shadow: 0 2px 4px rgba(0, 42, 35, 0.34) !important;
+    white-space: normal !important;
+  }
+}
+
 /* Desktop final carousel layout: main image left, thumbnails stacked right. */
 @media (min-width: 761px) {
   .home-feature-carousel .feature-slide-grid,
