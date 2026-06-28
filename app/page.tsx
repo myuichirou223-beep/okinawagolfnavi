@@ -276,6 +276,18 @@ export default async function Home() {
           <div className="home-content-column">
         <HomeFeatureCarousel slides={featureSlides} />
 
+        <section className="portal-section upcoming-schedule-section" aria-labelledby="upcoming-schedule-title">
+          <div className="portal-section-heading">
+            <h2 id="upcoming-schedule-title">開催予定</h2>
+            <p>大会・イベントを開催日の近い順に掲載しています。</p>
+          </div>
+          <UpcomingSchedule items={scheduledItems} />
+          <div className="upcoming-schedule-links">
+            <a href="/tournaments">大会一覧を見る</a>
+            <a href="/events">イベント一覧を見る</a>
+          </div>
+        </section>
+
         <section className="home-banner-ad-section" aria-label="広告">
           <div className="home-banner-ad-slot is-recruiting">
             <a href={googleFormDirectUrl} target="_blank" rel="noreferrer">
@@ -296,27 +308,6 @@ export default async function Home() {
             </a>
           </div>
         </section>
-
-        <section className="portal-section upcoming-schedule-section" aria-labelledby="upcoming-schedule-title">
-          <div className="portal-section-heading">
-            <h2 id="upcoming-schedule-title">開催予定</h2>
-            <p>大会・イベントを開催日の近い順に掲載しています。</p>
-          </div>
-          <UpcomingSchedule items={scheduledItems} />
-          <div className="upcoming-schedule-links">
-            <a href="/tournaments">大会一覧を見る</a>
-            <a href="/events">イベント一覧を見る</a>
-          </div>
-        </section>
-
-        <aside className="mobile-inline-ad" aria-label="広告">
-          <a href={googleFormDirectUrl} target="_blank" rel="noreferrer">
-            <span>広告枠 D</span>
-            <strong>スクエア広告 掲載パートナー募集中</strong>
-            <small>PC・スマホ共通の広告掲載枠です</small>
-            <em>推奨画像 300 × 300px</em>
-          </a>
-        </aside>
 
         <section className="mobile-topic-list" aria-labelledby="mobile-topics-title">
           <div className="mobile-section-heading with-link">
@@ -346,14 +337,16 @@ export default async function Home() {
           <a className="mobile-more-link" href="/events">すべての情報を見る</a>
         </section>
 
-        <aside className="mobile-inline-ad mobile-inline-ad-e" aria-label="広告枠E">
+        <aside className="mobile-inline-ad" aria-label="広告">
           <a href={googleFormDirectUrl} target="_blank" rel="noreferrer">
-            <span>広告枠 E</span>
-            <strong>縦長バナー広告 掲載パートナー募集中</strong>
-            <small>ゴルフ関連の店舗・サービス・イベントを大きくPRできる広告枠です</small>
+            <span>広告枠 D</span>
+            <strong>スクエア広告 掲載パートナー募集中</strong>
+            <small>PC・スマホ共通の広告掲載枠です</small>
             <em>推奨画像 300 × 300px</em>
           </a>
         </aside>
+
+        <RandomPickupSections courses={pickupCourses} practiceRanges={pickupPracticeRanges} />
 
         <section className="home-wide-pr-banner is-recruiting" aria-label="広告枠G">
           <span>広告枠 G</span>
@@ -361,8 +354,6 @@ export default async function Home() {
           <small>推奨画像 1080 × 148px</small>
           <a href={googleFormDirectUrl} target="_blank" rel="noreferrer">掲載のお問い合わせ</a>
         </section>
-
-        <RandomPickupSections courses={pickupCourses} practiceRanges={pickupPracticeRanges} />
 
         <section id="articles" className="portal-section" aria-labelledby="articles-title">
           <div className="portal-section-heading with-link">
@@ -387,6 +378,15 @@ export default async function Home() {
           </div>
           <a className="home-articles-more" href="/articles">他の記事を見る</a>
         </section>
+
+        <aside className="mobile-inline-ad mobile-inline-ad-e" aria-label="広告枠E">
+          <a href={googleFormDirectUrl} target="_blank" rel="noreferrer">
+            <span>広告枠 E</span>
+            <strong>縦長バナー広告 掲載パートナー募集中</strong>
+            <small>ゴルフ関連の店舗・サービス・イベントを大きくPRできる広告枠です</small>
+            <em>推奨画像 300 × 300px</em>
+          </a>
+        </aside>
 
         <section className="home-wide-pr-banner is-resort is-recruiting" aria-label="広告枠H">
           <span>広告枠 H</span>
