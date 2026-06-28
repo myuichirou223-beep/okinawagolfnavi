@@ -1,13 +1,19 @@
 # おきなわGOLFなび
 
-沖縄県内のゴルフ大会、募集要項、成績、ゴルフ場、練習場、イベント情報をまとめる地域情報サイトの初期プロトタイプです。
+沖縄県内のゴルフ大会、募集要項、成績、ゴルフ場、練習場、イベント情報をまとめる地域情報サイトです。Next.js と microCMS 連携を前提にした構成です。
 
 ## ファイル構成
 
-- `index.html` サイト本文、SEOメタ情報、初期掲載データ
-- `articles/` ブログ・読み物記事ページ
-- `styles.css` レイアウト、配色、レスポンシブ対応
-- `script.js` キーワード検索と大会カテゴリ絞り込み
+- `app/` ページ、レイアウト、コンポーネント
+- `lib/` microCMS取得処理、表示用ヘルパー
+- `public/` 画像、ロゴ、ファビコン、公開用JavaScript
+- `styles.css` サイト全体のスタイル
+- `docs/` microCMS運用メモ
+- `microcms/schemas/` microCMS APIフィールド定義
+- `microcms/imports/` microCMSインポート用CSVテンプレート
+- `_data/imports/` CSV変換元データ、管理用スプレッドシート
+- `tools/` CSV変換などの補助スクリプト
+- `_archive/` 過去の静的サイト、生成ZIP、退避ファイル
 
 ## 想定する運用
 

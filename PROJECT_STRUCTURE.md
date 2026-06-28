@@ -12,7 +12,8 @@
 
 ## 管理用
 
-- `microcms/`: microCMSのフィールド定義メモ、インポート用テンプレート
+- `microcms/schemas/`: microCMS APIフィールド定義
+- `microcms/imports/`: microCMSインポート用CSVテンプレート、生成CSV
 - `docs/`: microCMS運用メモ
 - `tools/`: CSV変換などの補助スクリプト
 - `_data/imports/`: microCMSへ取り込むCSVや管理用スプレッドシート
@@ -22,5 +23,6 @@
 - `_archive/generated-zips/`: 過去の公開用ZIP
 - `_archive/generated-folders/`: ZIP展開後の過去作業フォルダ
 - `_archive/legacy-static/`: Next.js化前の静的HTMLサイト
+- `_archive/legacy-static/js/`: Next.js化前の直下JavaScript退避先
 
 `_archive/` はサイト本体では使いません。過去データを確認したいときだけ見れば大丈夫です。

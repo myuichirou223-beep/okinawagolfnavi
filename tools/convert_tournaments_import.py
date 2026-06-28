@@ -4,8 +4,9 @@ from pathlib import Path
 import pandas as pd
 
 
+ROOT = Path(__file__).resolve().parents[1]
 SOURCE = Path("/Users/miyaguniyuichiro/Downloads/2026_okinawa_golf_integrated_schedule.xlsx")
-OUTPUT = Path("/Users/miyaguniyuichiro/Documents/おきなわGOLFなびWEBサイト/tournaments-import-microcms.csv")
+OUTPUT = ROOT / "_data/imports/tournaments-import-microcms.csv"
 
 
 def clean(value):

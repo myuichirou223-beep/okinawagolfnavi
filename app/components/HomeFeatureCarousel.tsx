@@ -103,7 +103,7 @@ export function HomeFeatureCarousel({ slides }: HomeFeatureCarouselProps) {
     if (slides.length < 2) return undefined;
     const timer = window.setTimeout(() => {
       moveToSlide((activeIndex + 1) % slides.length, "next");
-    }, 5000);
+    }, 15000);
 
     return () => window.clearTimeout(timer);
   }, [activeIndex, progressCycle, slides.length]);

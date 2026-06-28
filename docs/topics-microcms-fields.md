@@ -29,7 +29,7 @@
 
 ## 初期データの一括登録
 
-`microcms/topics-import-template.csv` を用意しています。
+`microcms/imports/topics-import-template.csv` を用意しています。
 microCMSのトピックAPI画面でCSVインポートを開き、このファイルをアップロードしてください。
 
 画像フィールドは空欄にしています。現在のトップページでは画像を使わないため、必要になったタイミングで登録してください。

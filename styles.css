@@ -8707,7 +8707,7 @@ body {
   }
 
   .feature-thumbnail-strip button.is-active .feature-thumbnail-progress-value {
-    animation: featureThumbCircleProgress 5s linear forwards;
+    animation: featureThumbCircleProgress 15s linear forwards;
   }
 
   @keyframes featureThumbCircleProgress {
@@ -13646,7 +13646,7 @@ body {
 
 .home-feature-carousel .feature-slide-card.is-main .feature-dots button.is-active circle {
   stroke: #00a96b;
-  animation: featureDotCircleProgress 5s linear forwards;
+  animation: featureDotCircleProgress 15s linear forwards;
 }
 
 @keyframes featureDotCircleProgress {
@@ -14089,7 +14089,7 @@ body {
 }
 
 .home-feature-carousel .feature-dots button.is-active::after {
-  animation: featureDotFillProgress 5s linear forwards;
+  animation: featureDotFillProgress 15s linear forwards;
 }
 
 @keyframes featureDotFillProgress {

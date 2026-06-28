@@ -1,0 +1,80 @@
+id,name,slug,type,status,area,address,phone,website,summary,airportAccess,gallery,city,facilityType,holes,par,reservationUrl,features
+ryukyu-golf-club,琉球ゴルフ倶楽部,ryukyu-golf-club,golf_course,published,南部,〒901-0608 沖縄県南城市玉城親慶原1,098-948-2460,https://www.ryukyugolf.com/,27H Par108 ダイキンオーキッドレディス開催,車で約35分,,南城市,ロングコース,27,108,,27H Par108 ダイキンオーキッドレディス開催
+shurei-country-club,守礼カントリークラブ,shurei-country-club,golf_course,published,南部,〒901-1305 沖縄県南城市知念字知名1029,098-947-3411,https://www.shurei-cc.com/,18H Par72,車で約35分,,南城市,ロングコース,18,72,,18H Par72
+bashofu-course,芭蕉布コース,bashofu-course,golf_course,published,南部,〒901-0604 沖縄県南城市玉城字中山1313,098-943-5890,,18H Par63,車で約35分,,南城市,ミドルコース,18,63,,18H Par63
+naha-golf-club,那覇ゴルフ倶楽部,naha-golf-club,golf_course,published,南部,〒901-0402 沖縄県島尻郡八重瀬町字富盛2270,098-998-3311,,18H Par72 2012年日本オープン開催,車で約30分,,八重瀬町,ロングコース,18,72,,18H Par72 2012年日本オープン開催
+southern-links-golf-club,ザ・サザンリンクスゴルフクラブ,southern-links-golf-club,golf_course,published,南部,〒901-0513 沖縄県島尻郡八重瀬町字玻名城697,098-998-7001,https://www.accordiagolf.com/grand/southernlinks/,18H Par72,車で約40〜50分,,八重瀬町,ロングコース,18,72,,18H Par72
+palm-hills-golf-resort-club,パームヒルズゴルフリゾートクラブ,palm-hills-golf-resort-club,golf_course,published,南部,〒901-0323 沖縄県糸満市字新垣762,098-994-0002,https://reserve.accordiagolf.com/golfCourse/okinawa/palmhills/,18H Par72,車で約30〜35分,,糸満市,ロングコース,18,72,,18H Par72
+nanzan-country-club,南山カントリークラブ,nanzan-country-club,golf_course,published,南部,〒901-0331 沖縄県糸満市字真栄平1170,098-997-2021,http://www.okinawa-nanzan.com/,9H Par34（2周で18H）,車で約35分,,糸満市,ミドルコース,9,34,,9H Par34（2周で18H）
+marine-town-golf,マリンタウンゴルフ,marine-town-golf,golf_course,published,南部,〒901-1303 沖縄県島尻郡与那原町字与那原3309,098-945-1040,https://www.mtg-okinawa.jp/,10H Par30 ショートコース,車で約25分,,与那原町,ショートコース,10,30,,10H Par30 ショートコース
+okinawa-country-club,沖縄カントリークラブ,okinawa-country-club,golf_course,published,中部,〒903-0114 沖縄県中頭郡西原町字桃原109,098-945-3371,https://reserve.accordiagolf.com/golfCourse/okinawa/okinawa/,18H Par72,車で約25分,,西原町,ロングコース,18,72,,18H Par72
+ocean-castle-country-club,オーシャンキャッスルカントリークラブ,ocean-castle-country-club,golf_course,published,中部,〒901-2421 沖縄県中頭郡中城村字登又60,098-935-5500,https://reserve.accordiagolf.com/golfCourse/okinawa/oceancastle/,18H Par72 世界遺産・中城城跡に隣接,車で約40分,,中城村,ロングコース,18,72,,18H Par72 世界遺産・中城城跡に隣接
+onishi-terrace-golf-club,大西テェラスゴルフクラブ,onishi-terrace-golf-club,golf_course,published,中部,〒901-2306 沖縄県中頭郡北中城村字大城190,098-935-4300,https://www.otgc.co.jp/,18H Par63,車で約40分,,北中城村,ミドルコース,18,63,,18H Par63
+em-wellness-resort-golf-course,EMウェルネス リゾートゴルフコース,em-wellness-resort-golf-course,golf_course,published,中部,〒901-2305 沖縄県中頭郡北中城村字喜舎場1478,098-935-1500,https://www.emwellness-resort.com/,9H ホテル併設,車で約40分,,北中城村,ミドルコース,9,,,9H ホテル併設
+okinawa-royal-golf-club,沖縄ロイヤルゴルフクラブ,okinawa-royal-golf-club,golf_course,published,中部,〒904-1113 沖縄県うるま市石川山城1436,098-964-2811,https://okinawaroyal.jp/,36H（18H×2コース）,車で約50分,,うるま市,ロングコース,36,,,36H（18H×2コース）
+gushikawa-golf-club,具志川ゴルフクラブ,gushikawa-golf-club,golf_course,published,中部,〒904-2205 沖縄県うるま市字栄野比50-1,098-974-3223,,18H Par63,車で約50分,,うるま市,ミドルコース,18,63,,18H Par63
+public-golf-urasoe,パブリックゴルフうらそえ,public-golf-urasoe,golf_course,published,中部,〒901-2101 沖縄県浦添市西原5丁目51-1,098-877-3513,,9H ショートコース,車で約25分,,浦添市,ショートコース,9,,,9H ショートコース
+nishihara-green-center,西原グリーンセンター,nishihara-green-center,golf_course,published,中部,〒903-0104 沖縄県中頭郡西原町字内間546,098-945-5456,,9H Par27 全Par3 レンジ24時間営業,車で約25〜30分,,西原町,ショートコース,9,27,,9H Par27 全Par3 レンジ24時間営業
+queens-trap-golf-course,クイーンズトラップゴルフコース,queens-trap-golf-course,golf_course,published,中部,〒904-0300 沖縄県中頭郡読谷村字牧原254,098-921-5577,,9H Par36（2周で18H）Par4あり,車で約50分,,読谷村,ミドルコース,9,36,,9H Par36（2周で18H）Par4あり
+zanpa-golf-club,残波ゴルフクラブ,zanpa-golf-club,golf_course,published,中部,〒904-0301 沖縄県中頭郡読谷村字宇座1133,098-958-1938,,18H Par63,車で約50分,,読谷村,ミドルコース,18,63,,18H Par63
+taiyo-golf-club,TAIYO GOLF CLUB（タイヨーゴルフクラブ）,taiyo-golf-club,golf_course,published,中部,沖縄県沖縄市池原（キャンプ・フォスター内）,098-954-2004,https://www.mccsokinawa.com/,18H Par72 米軍基地内・民間人利用可,車で約40分,,沖縄市,ロングコース,18,72,,18H Par72 米軍基地内・民間人利用可
+chibana-golf-course,知花ゴルフコース（チバナ）,chibana-golf-course,golf_course,published,中部,〒904-2144 沖縄県沖縄市知花4-1-3,098-938-6063,https://www.mccsokinawa.com/,9H Par3のみ 米軍基地内・民間人利用可,車で約40分,,沖縄市,ショートコース,9,3,,9H Par3のみ 米軍基地内・民間人利用可
+kadena-banyan-tree-golf-course,カデナ バンヤンツリーゴルフコース,kadena-banyan-tree-golf-course,golf_course,published,中部,沖縄県中頭郡嘉手納町（嘉手納空軍基地内）,,https://www.mccsokinawa.com/,18H Par72 米軍基地内・エスコート要 1960年開場（沖縄最古）,車で約40分,,嘉手納町,ロングコース,18,72,,18H Par72 米軍基地内・エスコート要 1960年開場（沖縄最古）
+pgm-golf-resort-okinawa,PGMゴルフリゾート沖縄【GRAND PGM】,pgm-golf-resort-okinawa,golf_course,published,北部,〒904-0413 沖縄県国頭郡恩納村字冨着1043,098-965-1100,https://www.pacificgolf.co.jp/okinawa/,27H Par108 HEIWA・PGM CHAMPIONSHIP開催,車で約60分,,恩納村,ロングコース,27,108,,27H Par108 HEIWA・PGM CHAMPIONSHIP開催
+atta-terrace-golf-resort,ジ・アッタテラス ゴルフリゾート,atta-terrace-golf-resort,golf_course,published,北部,〒904-0402 沖縄県国頭郡恩納村安富祖1079,098-967-8554,https://www.terrace.co.jp/atta/,18H Par72,車で約60分,,恩納村,ロングコース,18,72,,18H Par72
+chura-orchard-golf-club,美らオーチャードゴルフ倶楽部,chura-orchard-golf-club,golf_course,published,北部,〒904-0402 沖縄県国頭郡恩納村字安富祖1577,098-967-8711,https://www.jgmgroup.co.jp/churaorchard/,18H Par72 大京オープン17回開催,車で約65〜70分,,恩納村,ロングコース,18,72,,18H Par72 大京オープン17回開催
+ginoza-country-club,宜野座カントリークラブ,ginoza-country-club,golf_course,published,北部,〒904-1301 沖縄県国頭郡宜野座村字松田2824-264,098-983-2200,https://www.ginozacc.com/,18H Par72,車で約55分,,宜野座村,ロングコース,18,72,,18H Par72
+kise-country-club,かねひで喜瀬カントリークラブ,kise-country-club,golf_course,published,北部,〒905-0026 沖縄県名護市字喜瀬1107-1,0980-53-6100,https://www.kise-cc.jp/,18H Par72,車で約80〜90分,,名護市,ロングコース,18,72,,18H Par72
+kanucha-golf-course,カヌチャリゾート カヌチャゴルフコース,kanucha-golf-course,golf_course,published,北部,〒905-0225 沖縄県名護市安部156-2,0980-55-8888,https://www.kanucha.jp/,18H Par72,車で約90分,,名護市,ロングコース,18,72,,18H Par72
+belle-beach-golf-club,ベルビーチゴルフクラブ,belle-beach-golf-club,golf_course,published,北部,〒905-0225 沖縄県国頭郡本部町字崎本部5151,0980-47-3111,http://www.belle-co.com/belbeach/,18H Par72 宮里3兄弟が練習したコース,車で約90分,,本部町,ロングコース,18,72,,18H Par72 宮里3兄弟が練習したコース
+motobu-green-park-golf-course,本部グリーンパークゴルフ場,motobu-green-park-golf-course,golf_course,published,北部,〒905-0213 沖縄県国頭郡本部町字古島404,0980-48-3211,,18H Par57,車で約90分,,本部町,ミドルコース,18,57,,18H Par57
+kin-seaside-golf-club,金武シーサイドゴルフクラブ,kin-seaside-golf-club,golf_course,published,北部,〒904-1202 沖縄県国頭郡金武町字伊芸1996-3,098-968-8455,,9H ショートコース,車で約55分,,金武町,ショートコース,9,,,9H ショートコース
+enagic-sedake-country-club,エナジック瀬嵩カントリークラブ,enagic-sedake-country-club,golf_course,published,北部,〒905-2262 沖縄県名護市瀬嵩463-3,0980-55-8368,https://www.enagicsedakecc.com/,18H Par73 2025年8月より一般開放,車で約90〜100分,,名護市,ロングコース,18,73,,18H Par73 2025年8月より一般開放
+iejima-country-club,伊江島カントリークラブ,iejima-country-club,golf_course,published,離島,〒905-0502 沖縄県国頭郡伊江村字東江前3682-1,0980-49-2028,,18H Par58（第1日曜・隔週土曜はPar72のロング形式）,本部港フェリー約30分＋車 計約120分以上,,伊江村,ミドルコース,18,58,,18H Par58（第1日曜・隔週土曜はPar72のロング形式）
+emerald-coast-golf-links,エメラルドコーストゴルフリンクス,emerald-coast-golf-links,golf_course,published,離島,〒906-0305 沖縄県宮古島市下地字与那覇1591-1,0980-76-3232,https://www.emeraldcoast.jp/,18H Par72,飛行機約45分＋車約15分,,宮古島市,ロングコース,18,72,,18H Par72
+shigira-bay-country-club,シギラベイカントリークラブ,shigira-bay-country-club,golf_course,published,離島,〒906-0202 沖縄県宮古島市上野字新里1264,0980-76-3940,https://sigira.com/sports/golf/,18H Par72,飛行機約45分＋車約15分,,宮古島市,ロングコース,18,72,,18H Par72
+chiyoda-country-club,千代田カントリークラブ,chiyoda-country-club,golf_course,published,離島,〒906-0202 沖縄県宮古島市上野野原137-1,0980-76-2588,,18H Par63,飛行機約45分＋車約15分,,宮古島市,ミドルコース,18,63,,18H Par63
+ocean-links-miyakojima,オーシャンリンクス宮古島,ocean-links-miyakojima,golf_course,published,離島,〒906-0507 沖縄県宮古島市城辺保良940-1,0980-77-8072,,18H Par72,飛行機約45分＋車約20分,,宮古島市,ロングコース,18,72,,18H Par72
+matsugahara-golf-club,松が原ゴルフクラブ,matsugahara-golf-club,golf_course,published,離島,〒906-0000 沖縄県宮古島市平良松原1180-1,0980-73-6011,,9H Par36 ミドルコース,飛行機約45分＋車約10分,,宮古島市,ミドルコース,9,36,,9H Par36 ミドルコース
+sashiba-links-irabu,サシバリンクス伊良部,sashiba-links-irabu,golf_course,published,離島,〒906-0501 沖縄県宮古島市伊良部字国仲659,0980-74-5555,,9H Par36,飛行機約45分＋車約25分,,宮古島市,ミドルコース,9,36,,9H Par36
+kohamajima-country-club,小浜島カントリークラブ,kohamajima-country-club,golf_course,published,離島,〒907-1221 沖縄県八重山郡竹富町小浜東表2954,0980-84-6314,https://risonare-kohamajima.hoshino-resorts.com/,18H Par72 星野リゾート内 日本最南端・最西端,飛行機＋船 約2時間以上（石垣経由）,,竹富町,ロングコース,18,72,,18H Par72 星野リゾート内 日本最南端・最西端
+maesato-golf-course,マエサトゴルフコース,maesato-golf-course,golf_course,published,離島,〒907-0002 沖縄県石垣市真栄里354-1,0980-88-7111,https://www.anaintercontinental-ishigaki.jp/recreation/golf/,9〜10H Par27 全Par3 ANAインターコンチネンタル石垣リゾート内 ビジター利用可・ドレスコードなし,飛行機約55分＋車約10分,,石垣市,ショートコース,,27,,9〜10H Par27 全Par3 ANAインターコンチネンタル石垣リゾート内 ビジター利用可・ドレスコードなし
+facility-0eab77395d,波之上ゴルフ練習場,facility-0eab77395d,outdoor_practice_range,published,南部,沖縄県那覇市辻3-2-13,098-866-4218,https://www.naminouegolf.jp/,,那覇空港から車で約10分,,,屋外,,,,
+facility-c7778dd95c,豊見城ゴルフ練習場,facility-c7778dd95c,outdoor_practice_range,published,南部,沖縄県豊見城市字高安415,098-850-5757,,,那覇空港から車で約15分,,,屋外,,,,
+abc,ABCゴルフガーデン,abc,outdoor_practice_range,published,南部,沖縄県糸満市字阿波根1565-1,098-995-0555,,,那覇空港から車で約20分,,,屋外,,,,
+ka-mi-fu-golf-range,KA.MI.FU Golf Range（旧大里ゴルフセンター）,ka-mi-fu-golf-range,outdoor_practice_range,published,南部,沖縄県南城市大里字大里地内,098-944-1321,,,那覇空港から車で約30分,,,屋外,,,,
+facility-097cff53ca,与那原ゴルフセンター,facility-097cff53ca,outdoor_practice_range,published,南部,沖縄県島尻郡与那原町字板良敷1030,098-946-4100,,,那覇空港から車で約30分,,,屋外,,,,
+facility-681d05a79c,マリンタウンゴルフ,facility-681d05a79c,outdoor_practice_range,published,南部,沖縄県島尻郡与那原町字与那原3309,098-945-1040,https://www.mtg-okinawa.jp/,,那覇空港から車で約25分,,,屋外,,,,
+facility-d3667d9870,西原グリーンセンター,facility-d3667d9870,outdoor_practice_range,published,中部,沖縄県中頭郡西原町字内間546,098-945-5456,,,那覇空港から車で約20分,,,屋外,,,,
+facility-404e714bae,森川ゴルフガーデン,facility-404e714bae,outdoor_practice_range,published,中部,沖縄県中頭郡西原町字森川162,098-945-5130,,,那覇空港から車で約25分,,,屋外,,,,
+facility-aa81522d94,北谷ゴルフ練習場（北谷スポーツセンター）,facility-aa81522d94,outdoor_practice_range,published,中部,沖縄県中頭郡北谷町字桑江432,098-936-1294,,,那覇空港から車で約30分,,,屋外,,,,
+facility-1931e3beb0,コザゴルフ練習場,facility-1931e3beb0,outdoor_practice_range,published,中部,沖縄県沖縄市胡屋6-8-9,098-933-7183,,,那覇空港から車で約40分,,,屋外,,,,
+facility-12814a3371,もろみゴルフレンジ,facility-12814a3371,outdoor_practice_range,published,中部,沖縄県沖縄市諸見里2-21-1,098-933-6388,,,那覇空港から車で約40分,,,屋外,,,,
+facility-24ce1d54f4,松本ゴルフセンター,facility-24ce1d54f4,outdoor_practice_range,published,中部,沖縄県沖縄市松本5-8-1,098-934-2859,https://www.matsumoto-golf.com/,,那覇空港から車で約40分,,,屋外,,,,
+facility-656fd12a3a,津嘉山ゴルフレンジ,facility-656fd12a3a,outdoor_practice_range,published,中部,沖縄県沖縄市古謝1219-1,098-934-3434,,,那覇空港から車で約40分,,,屋外,,,,
+facility-9b21dce5c4,和合ヒルズゴルフガーデン,facility-9b21dce5c4,outdoor_practice_range,published,中部,沖縄県うるま市石川東恩納1180,098-972-4004,,,那覇空港から車で約45分,,,屋外,,,,
+facility-f3c63fa9ef,東海ゴルフ練習場,facility-f3c63fa9ef,outdoor_practice_range,published,北部,沖縄県国頭郡金武町字伊芸1292-2,098-968-2888,https://www.instagram.com/toukai_golf/,,那覇空港から車で約60分,,,屋外,,,,
+facility-ba78ab0097,大北ゴルフ練習場,facility-ba78ab0097,outdoor_practice_range,published,北部,沖縄県名護市大北4丁目8-29,0980-54-3000,,,那覇空港から車で約75分,,,屋外,,,,
+facility-40a12ea553,みやこゴルフレンジ,facility-40a12ea553,outdoor_practice_range,published,離島,沖縄県宮古島市平良西仲宗根649-1,0980-73-3715,,,宮古空港から車で約10分,,,屋外,,,,
+facility-8266122f14,八重山ゴルフレンジ,facility-8266122f14,outdoor_practice_range,published,離島,沖縄県石垣市字真栄里123,0980-82-7766,,,石垣空港から車で約10分,,,屋外,,,,
+facility-c140e9506f,マイゴルフレーン 那覇店,facility-c140e9506f,indoor_practice_range,published,南部,沖縄県那覇市宇栄原1009-2,,https://www.mygol.jp/shop/naha/,,那覇空港から車で約10分,,,屋内,,,,
+facility-1ca73f3038,マイゴルフレーン 赤嶺店,facility-1ca73f3038,indoor_practice_range,published,南部,沖縄県那覇市赤嶺（赤嶺駅徒歩約5分）,,https://mygol.jp/lane/shop/akamine.php,,那覇空港から車で約6分,,,屋内,,,,
+facility-a7f2bb4a95,マイゴルフレーン 糸満店,facility-a7f2bb4a95,indoor_practice_range,published,南部,沖縄県糸満市照屋1271-3 金福ビル1F,,https://www.mygol.jp/,,那覇空港から車で約20分,,,屋内,,,,
+facility-c541d9c649,チキンゴルフ 沖縄那覇店,facility-c541d9c649,indoor_practice_range,published,南部,沖縄県那覇市銘苅1-19-1 アクロスプラザ古島駅前2F,098-988-8476,https://chicken-golf.com/schools/okinawa-naha/,,那覇空港から車で約15分,,,屋内,,,,
+indoor-golf-365,Indoor Golf 365,indoor-golf-365,indoor_practice_range,published,南部,沖縄県那覇市上之屋1丁目20-9 富士家オーシャンビル2F,0120-426-847,https://golf365.jp/,,那覇空港から車で約10分,,,屋内,,,,
+golfzon,Golfzon ちゅらかん,golfzon,indoor_practice_range,published,南部,沖縄県那覇市松山2-9-6 朝日ビル2F,098-943-2920,https://churakan.com/,,那覇空港から車で約15分,,,屋内,,,,
+facility-31d404bea7,ハイサイインドアゴルフ（那覇泊店）,facility-31d404bea7,indoor_practice_range,published,南部,沖縄県那覇市泊3-5-5 ハイサイ泊ビル2階,070-8482-2275,https://haisai-golf.jp/,,那覇空港から車で約15分,,,屋内,,,,
+golfix,GOLFIX（ゴルフィックス）おもろまち店,golfix,indoor_practice_range,published,南部,沖縄県那覇市おもろまち4丁目6-20,090-5090-0302,https://golfix-fc.jp/,,那覇空港から車で約20分,,,屋内,,,,
+facility-7656a72d65,うるくラボ,facility-7656a72d65,indoor_practice_range,published,南部,沖縄県那覇市小禄（小禄駅徒歩11分）,,,,那覇空港から車で約10分,,,屋内,,,,
+facility-d20c6c96ac,イノセントゴルフスタジオ 那覇本店,facility-d20c6c96ac,indoor_practice_range,published,南部,沖縄県那覇市（ノボテル沖縄那覇内）,080-6290-9312,https://studio.rsvsys.jp/,,那覇空港から車で約15分,,,屋内,,,,
+x-golf-range,X GOLF RANGE 糸満西崎店,x-golf-range,indoor_practice_range,published,南部,沖縄県糸満市西崎,,https://x-golfrange.com/itoman/,,那覇空港から車で約20分,,,屋内,,,,
+ex,eXゴルフラボ（エックスゴルフラボ）,ex,indoor_practice_range,published,南部,沖縄県那覇市（おもろまち駅徒歩12分）,,,,那覇空港から車で約20分,,,屋内,,,,
+facility-2a9135bd72,マイゴルフレーン うるま店,facility-2a9135bd72,indoor_practice_range,published,中部,沖縄県うるま市江洲507 うるまシティプラザ2F,,https://www.mygol.jp/,,那覇空港から車で約40分,,,屋内,,,,
+facility-f9ab34ec8d,みんなのゴルフ練習場,facility-f9ab34ec8d,indoor_practice_range,published,中部,沖縄県浦添市宮城5-1-1 タウンプラザかねひで内間市場2F,098-894-8874,,,那覇空港から車で約20分,,,屋内,,,,
+facility-825ee8b0a0,ゴルフラウンジサンシャイン 牧港店,facility-825ee8b0a0,indoor_practice_range,published,中部,沖縄県浦添市牧港（牧港エリア）,,https://golfloungesunshine.com/,,那覇空港から車で約20分,,,屋内,,,,
+facility-a62c719e2b,ゴルフラウンジサンシャイン 具志川店,facility-a62c719e2b,indoor_practice_range,published,中部,沖縄県うるま市（具志川エリア）,,https://golfloungesunshine.com/,,那覇空港から車で約45分,,,屋内,,,,
+golfix-2,GOLFIX（ゴルフィックス）本店,golfix-2,indoor_practice_range,published,中部,沖縄県浦添市（浦添市内）,,https://www.golfix.jp/,,那覇空港から車で約20分,,,屋内,,,,
+facility-0a977db43d,北谷インドアゴルフスタジオ,facility-0a977db43d,indoor_practice_range,published,中部,沖縄県中頭郡北谷町（北谷スポーツセンター内）,,https://csi.okinawa/,,那覇空港から車で約30分,,,屋内,,,,
+facility-da5a0fbf80,ハイサイエンジョイゴルフ（沖縄市店）,facility-da5a0fbf80,indoor_practice_range,published,中部,沖縄県沖縄市知花6丁目40-12 知花プラザA棟202,,https://haisai-golf.jp/,,那覇空港から車で約40分,,,屋内,,,,
+fogo-gym-golf,FOGO GYM & GOLF,fogo-gym-golf,indoor_practice_range,published,中部,沖縄県中頭郡北谷町美浜8-10,,https://fogo-gym.com/,,那覇空港から車で約30分,,,屋内,,,,
+facility-7058309b4f,パームゴルフ ホテルカリフォルニア店,facility-7058309b4f,indoor_practice_range,published,離島,沖縄県宮古島市平良（ホテルカリフォルニア宮古島リゾート内）,,https://www.palm-golf.com/,,宮古空港から車で約8分,,,屋内,,,,
