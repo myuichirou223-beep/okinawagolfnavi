@@ -14224,6 +14224,150 @@ body {
   }
 }
 
+/* Keep tablet and desktop on the same structural layout; only mobile gets a separate layout. */
+@media (min-width: 761px) {
+  .site-header .header-actions {
+    display: none !important;
+  }
+
+  .site-header .site-nav {
+    position: static !important;
+    width: auto !important;
+    height: auto !important;
+    display: flex !important;
+    flex: 1 1 auto !important;
+    grid-template-columns: none !important;
+    align-items: stretch !important;
+    justify-content: flex-end !important;
+    gap: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+  }
+
+  .home-portal-layout {
+    width: min(1440px, 100%) !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) clamp(220px, 21vw, 300px) !important;
+    align-items: start !important;
+    gap: clamp(12px, 1.2vw, 16px) !important;
+  }
+
+  .home-content-column {
+    min-width: 0 !important;
+  }
+
+  .home-sidebar {
+    position: static !important;
+    width: auto !important;
+    min-width: 0 !important;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: clamp(12px, 1.25vw, 18px) !important;
+    margin: 0 !important;
+    padding: 0 clamp(10px, 1.25vw, 18px) 28px 0 !important;
+  }
+
+  .home-banner-ad-section {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .weekly-tournament-rail {
+    grid-auto-flow: row !important;
+    grid-auto-columns: unset !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    overflow: visible !important;
+  }
+
+  .weekly-tournament-card.is-featured {
+    grid-column: auto !important;
+  }
+
+  .home-wide-pr-banner,
+  .home-content-column > .home-wide-pr-banner {
+    display: grid !important;
+  }
+}
+
+@media (min-width: 761px) and (max-width: 980px) {
+  .site-header .header-inner {
+    width: 100% !important;
+    min-height: 62px !important;
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: stretch !important;
+    gap: 0 !important;
+  }
+
+  .site-header .brand {
+    flex: 0 0 clamp(150px, 22vw, 190px) !important;
+    min-width: 0 !important;
+    padding: 0 8px 0 12px !important;
+  }
+
+  .site-header .brand-logo {
+    width: clamp(138px, 20vw, 176px) !important;
+    max-width: 100% !important;
+  }
+
+  .site-header .site-nav {
+    min-width: 0 !important;
+  }
+
+  .site-header .site-nav a {
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
+    min-height: 62px !important;
+    height: 62px !important;
+    padding: 6px 3px !important;
+  }
+
+  .site-header .site-nav .nav-label {
+    font-size: 11px !important;
+    line-height: 1.1 !important;
+    white-space: normal !important;
+  }
+
+  .site-header .site-nav .nav-icon svg {
+    width: 21px !important;
+    height: 21px !important;
+  }
+
+  .home-feature-carousel .feature-slide-grid,
+  .home-feature-carousel .feature-slide-grid:has(.feature-slide-card.is-main.is-artwork) {
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-rows: auto auto !important;
+    gap: 10px !important;
+    padding: 12px 0 18px !important;
+  }
+
+  .home-feature-carousel .feature-main-stage {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    width: 100% !important;
+    aspect-ratio: 4 / 3 !important;
+  }
+
+  .home-feature-carousel .feature-mobile-thumbnails {
+    grid-column: 1 !important;
+    grid-row: 2 !important;
+    width: 100% !important;
+    height: auto !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    grid-template-rows: none !important;
+    gap: 8px !important;
+  }
+
+  .home-feature-carousel .feature-mobile-thumbnails button {
+    aspect-ratio: 4 / 3 !important;
+  }
+}
+
 /* Mobile homepage hardening: keep the fixed header and carousel from overlapping. */
 @media (max-width: 760px) {
   html,
@@ -14306,6 +14450,9 @@ body {
 
   .home-feature-carousel {
     width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
     margin: 0 !important;
     padding: 0 0 26px !important;
     overflow: visible !important;
@@ -14318,10 +14465,12 @@ body {
     max-width: 100% !important;
     height: auto !important;
     min-height: 0 !important;
-    display: flex !important;
-    flex-direction: column !important;
+    max-height: none !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-rows: auto auto !important;
     align-items: stretch !important;
-    gap: 0 !important;
+    gap: 10px !important;
     margin: 0 !important;
     padding: 0 !important;
     overflow: visible !important;
@@ -14330,10 +14479,12 @@ body {
 
   .home-feature-carousel .feature-main-stage {
     position: relative !important;
+    grid-column: 1 !important;
+    grid-row: 1 !important;
     width: 100% !important;
     height: auto !important;
     min-height: 0 !important;
-    flex: 0 0 auto !important;
+    max-height: none !important;
     aspect-ratio: 4 / 3 !important;
     overflow: hidden !important;
     margin: 0 !important;
@@ -14373,11 +14524,13 @@ body {
   }
 
   .home-feature-carousel .feature-mobile-thumbnails {
+    grid-column: 1 !important;
+    grid-row: 2 !important;
     display: grid !important;
     width: calc(100% - 24px) !important;
     grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
     gap: 6px !important;
-    margin: 10px auto 0 !important;
+    margin: 0 auto !important;
     order: 2;
   }
 

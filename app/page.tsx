@@ -210,6 +210,28 @@ export default async function Home() {
       label: "メイン",
       title: "",
       description: "",
+      imageUrl: "/assets/hero/okinawa-golf-info-poster.png",
+      tone: "orange" as const,
+      actions: [],
+      artwork: true,
+      imageAlt: "沖縄のゴルフ情報 ココに集約。QRを読み取って今すぐチェック",
+      href: "https://okinawagolfnavi.com/"
+    },
+    {
+      label: "メイン",
+      title: "",
+      description: "",
+      imageUrl: "/assets/hero/responsive-devices-poster.png",
+      tone: "orange" as const,
+      actions: [],
+      artwork: true,
+      imageAlt: "PC・タブレット・スマホ どのサイズでも見やすい。",
+      href: "https://okinawagolfnavi.com/"
+    },
+    {
+      label: "メイン",
+      title: "",
+      description: "",
       imageUrl: "/assets/hero/okinawa-golf-navi-main.jpg",
       tone: "blue" as const,
       actions: [],
