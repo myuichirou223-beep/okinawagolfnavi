@@ -45,6 +45,15 @@ export function HomeFeatureCarousel({ slides }: HomeFeatureCarouselProps) {
   const previousSlide = slides[previousIndex];
   const nextSlide = slides[nextIndex];
   const exitingSlide = exitingIndex !== null ? slides[exitingIndex] : null;
+  const thumbnailSlides = slides
+    .map((slide, index) => ({ slide, index }))
+    .filter((item) => item.index !== activeIndex)
+    .sort((a, b) => {
+      const distanceA = (a.index - activeIndex + slides.length) % slides.length;
+      const distanceB = (b.index - activeIndex + slides.length) % slides.length;
+      return distanceA - distanceB;
+    })
+    .slice(0, 4);
 
   function moveToSlide(index: number, direction: "next" | "previous" | "direct") {
     if (index === activeIndex) return;
@@ -143,14 +152,12 @@ export function HomeFeatureCarousel({ slides }: HomeFeatureCarouselProps) {
           {renderSlideCard(activeSlide, "is-main is-entering", `enter-${activeIndex}-${progressCycle}`)}
         </div>
         <div className="feature-mobile-thumbnails" aria-label="スライド一覧">
-          {slides.map((slide, index) => (
+          {thumbnailSlides.map(({ slide, index }) => (
             <button
               key={`${slide.imageUrl}-${index}-mobile-thumb`}
               type="button"
-              className={index === activeIndex ? "is-active" : ""}
               onClick={() => selectSlide(index)}
               aria-label={`${(slide.title || slide.label || `スライド${index + 1}`).replace(/\n/g, "")}を表示`}
-              aria-current={index === activeIndex ? "true" : undefined}
             >
               <img src={slide.imageUrl} alt="" loading="lazy" />
             </button>
