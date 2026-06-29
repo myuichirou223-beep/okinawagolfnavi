@@ -14428,6 +14428,12 @@ body {
     align-self: stretch !important;
   }
 
+  .site-header .menu-toggle i::before,
+  .site-header .menu-toggle i::after {
+    content: none !important;
+    display: none !important;
+  }
+
   .site-header .site-nav {
     top: 60px !important;
   }
