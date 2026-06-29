@@ -428,12 +428,6 @@ export default async function Home() {
               <a href={googleFormDirectUrl} target="_blank" rel="noreferrer">掲載のお問い合わせ</a>
             </section>
 
-            <section className="sidebar-box sidebar-line-card">
-              <h2>公式LINEで最新情報をお届け！</h2>
-              <p>大会情報やイベント情報をいち早くお届けします。</p>
-              <a href={googleFormDirectUrl} target="_blank" rel="noreferrer">友だち追加</a>
-            </section>
-
             <section id="partners" className="partners-section sidebar-partners" aria-labelledby="partners-title">
               <div className="portal-section-heading">
                 <p className="portal-eyebrow">Partners</p>

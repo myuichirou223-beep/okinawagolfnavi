@@ -7967,8 +7967,8 @@ body {
 }
 
 .sidebar-hero-ad.is-recruiting {
-  min-height: 170px;
-  aspect-ratio: auto;
+  min-height: 0;
+  aspect-ratio: 1 / 1;
   background:
     radial-gradient(circle at 18% 18%, rgba(255, 255, 255, 0.24), transparent 26%),
     linear-gradient(145deg, #009f78, #0077b6);
@@ -8176,8 +8176,7 @@ body {
 
 .sidebar-pink-pr a,
 .sidebar-tall-ad a,
-.sidebar-sale-ad a,
-.sidebar-line-card a {
+.sidebar-sale-ad a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -8209,8 +8208,7 @@ body {
 }
 
 .sidebar-tall-ad h2,
-.sidebar-sale-ad h2,
-.sidebar-line-card h2 {
+.sidebar-sale-ad h2 {
   margin: 8px 0 0;
   color: #0d6eba;
   font-size: 20px;
@@ -8226,8 +8224,7 @@ body {
 }
 
 .sidebar-tall-ad p,
-.sidebar-sale-ad p,
-.sidebar-line-card p {
+.sidebar-sale-ad p {
   margin: 0;
   color: #20362b;
   font-size: 13px;
@@ -8304,7 +8301,17 @@ body {
   color: #d84a65;
 }
 
+.sidebar-hero-ad.is-recruiting,
+.sidebar-pink-pr,
+.sidebar-tall-ad.is-recruiting,
+.sidebar-sale-ad.is-recruiting {
+  width: 100%;
+  min-height: 0;
+  aspect-ratio: 1 / 1;
+}
+
 @media (min-width: 761px) {
+  .sidebar-hero-ad.is-recruiting,
   .sidebar-pink-pr,
   .sidebar-tall-ad,
   .sidebar-sale-ad {
@@ -8329,18 +8336,6 @@ body {
     font-size: 12px;
     line-height: 1.55;
   }
-}
-
-.sidebar-line-card {
-  display: grid;
-  gap: 10px;
-  padding: 18px;
-  background: linear-gradient(135deg, #eefaf4, #ffffff);
-}
-
-.sidebar-line-card h2 {
-  color: #12251c;
-  font-size: 15px;
 }
 
 .sidebar-favorite-card {
