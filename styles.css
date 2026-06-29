@@ -7966,6 +7966,15 @@ body {
   background: #ffffff;
 }
 
+.sidebar-hero-ad.is-recruiting {
+  min-height: 170px;
+  aspect-ratio: auto;
+  background:
+    radial-gradient(circle at 18% 18%, rgba(255, 255, 255, 0.24), transparent 26%),
+    linear-gradient(145deg, #009f78, #0077b6);
+  color: #ffffff;
+}
+
 .sidebar-hero-ad img {
   width: 100%;
   height: auto;
@@ -7978,6 +7987,28 @@ body {
   text-decoration: none;
 }
 
+.sidebar-hero-ad.is-recruiting > a {
+  min-height: 100%;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 10px;
+  padding: 20px 18px;
+  text-align: center;
+}
+
+.sidebar-hero-ad.is-recruiting .sidebar-ad-slot-label {
+  display: inline-flex;
+  width: fit-content;
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: #ffffff;
+  color: #008166;
+  font-size: 11px;
+  font-weight: 950;
+  line-height: 1.2;
+}
+
 .sidebar-hero-ad p,
 .sidebar-hero-ad strong {
   margin: 0;
@@ -7986,6 +8017,27 @@ body {
 
 .sidebar-hero-ad strong {
   font-size: 18px;
+}
+
+.sidebar-hero-ad small {
+  font-size: 13px;
+  font-weight: 850;
+  line-height: 1.55;
+}
+
+.sidebar-hero-ad em {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  padding: 8px 14px;
+  border-radius: 4px;
+  background: #ffffff;
+  color: #008166;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 950;
+  line-height: 1;
 }
 
 .sidebar-heading {

@@ -40,10 +40,12 @@ export async function PortalSidebar({
 
   return (
     <aside className="home-sidebar portal-shared-sidebar" aria-label="サイド情報">
-      <section className="sidebar-box sidebar-hero-ad" aria-label="広告枠A" data-ad-slot="A">
-        <a href="https://haisaigolf.com/" target="_blank" rel="noreferrer">
+      <section className="sidebar-box sidebar-hero-ad is-recruiting" aria-label="広告枠A" data-ad-slot="A">
+        <a href={googleFormDirectUrl} target="_blank" rel="noreferrer">
           <span className="sidebar-ad-slot-label">広告枠 A</span>
-          <img src="/assets/ads/haisai.png" alt="県内最大の女性ゴルフコミュニティ Haisai Golf Girls" />
+          <strong>広告掲載パートナー募集中</strong>
+          <small>サイド上部の注目枠でPRできます</small>
+          <em>掲載のお問い合わせ</em>
         </a>
       </section>
 
