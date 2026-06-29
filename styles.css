@@ -9273,6 +9273,14 @@ body {
   }
 }
 
+/* Mobile ad cadence: keep ads separated by real content after removing topics. */
+@media (max-width: 760px) {
+  .home-content-column > .home-wide-pr-banner.is-recruiting:not(.pickup-between-ad),
+  .home-content-column > .mobile-inline-ad-e {
+    display: none !important;
+  }
+}
+
 /* Desktop final carousel layout: main image left, thumbnails stacked right. */
 @media (min-width: 761px) {
   .home-feature-carousel .feature-slide-grid,

@@ -15,8 +15,6 @@ import {
   getPartners,
   getPracticeRanges,
   getTournaments,
-  getTopics,
-  topicCategoryLabel,
   tournamentActionLinks,
   tournamentSortDate
 } from "../lib/microcms";
@@ -56,20 +54,9 @@ function fieldText(value: unknown): string {
   return "";
 }
 
-function externalLinkProps(url: string) {
-  return url.startsWith("http") ? { target: "_blank", rel: "noreferrer" } : {};
-}
-
 function compactDate(value?: string) {
   if (!value) return "";
   return formatDate(value).replace("年", ".").replace("月", ".").replace("日", "");
-}
-
-function compactMonthDay(value?: string) {
-  if (!value) return "";
-  const date = new Date(value);
-  if (Number.isNaN(date.getTime())) return "";
-  return `${date.getMonth() + 1}/${date.getDate()}`;
 }
 
 function firstAvailableTournamentUrl(tournament: Awaited<ReturnType<typeof getTournaments>>[number]) {
@@ -124,14 +111,13 @@ function pickRandomArticles<T>(articles: T[], count = 3) {
 }
 
 export default async function Home() {
-  const [articles, courses, practiceRanges, partners, tournaments, events, topics] = await Promise.all([
+  const [articles, courses, practiceRanges, partners, tournaments, events] = await Promise.all([
     getArticles(),
     getCourses(),
     getPracticeRanges(),
     getPartners(),
     getTournaments(),
-    getEvents(),
-    getTopics()
+    getEvents()
   ]);
 
   const today = getJstToday();
@@ -142,7 +128,6 @@ export default async function Home() {
     .sort((a, b) => tournamentSortDate(a) - tournamentSortDate(b));
   const monthlyTournaments = (upcomingTournaments.length ? upcomingTournaments : tournaments).slice(0, 4);
   const latestArticles = articles.slice(0, 10);
-  const mobileTopics = topics.slice(0, 5);
   const scheduledItems: UpcomingScheduleItem[] = [
     ...tournaments.map<UpcomingScheduleItem | null>((tournament) => {
       const date = parseEventDate(tournament.eventDate) || sortDateToDate(tournamentSortDate(tournament));
@@ -309,43 +294,6 @@ export default async function Home() {
           </div>
         </section>
 
-        <section className="mobile-topic-list" aria-labelledby="mobile-topics-title">
-          <div className="mobile-section-heading with-link">
-            <h2 id="mobile-topics-title">注目情報</h2>
-          </div>
-          <div className="mobile-topic-rows">
-            {mobileTopics.map((topic) => (
-              <a key={topic.id} href={topic.linkUrl || "/events"} {...externalLinkProps(topic.linkUrl || "/events")}>
-                <span className="mobile-topic-image">
-                  <img
-                    src={topic.image?.url || topic.eyecatch?.url || topic.thumbnail?.url || fallbackVisual}
-                    alt=""
-                    loading="lazy"
-                  />
-                </span>
-                <span className="mobile-topic-copy">
-                  <span className="mobile-topic-meta">
-                    <span className={`mobile-topic-badge is-${topicCategoryLabel(topic)}`}>{topicCategoryLabel(topic)}</span>
-                    <time>{compactMonthDay(topic.published) || "更新"}</time>
-                  </span>
-                  <strong>{topic.title}</strong>
-                </span>
-                <i aria-hidden="true">›</i>
-              </a>
-            ))}
-          </div>
-          <a className="mobile-more-link" href="/events">すべての情報を見る</a>
-        </section>
-
-        <aside className="mobile-inline-ad" aria-label="広告">
-          <a href={googleFormDirectUrl} target="_blank" rel="noreferrer">
-            <span>広告枠 D</span>
-            <strong>スクエア広告 掲載パートナー募集中</strong>
-            <small>PC・スマホ共通の広告掲載枠です</small>
-            <em>推奨画像 300 × 300px</em>
-          </a>
-        </aside>
-
         <RandomPickupSections courses={pickupCourses} practiceRanges={pickupPracticeRanges} />
 
         <section className="home-wide-pr-banner is-recruiting" aria-label="広告枠G">
@@ -378,6 +326,15 @@ export default async function Home() {
           </div>
           <a className="home-articles-more" href="/articles">他の記事を見る</a>
         </section>
+
+        <aside className="mobile-inline-ad" aria-label="広告">
+          <a href={googleFormDirectUrl} target="_blank" rel="noreferrer">
+            <span>広告枠 D</span>
+            <strong>スクエア広告 掲載パートナー募集中</strong>
+            <small>PC・スマホ共通の広告掲載枠です</small>
+            <em>推奨画像 300 × 300px</em>
+          </a>
+        </aside>
 
         <aside className="mobile-inline-ad mobile-inline-ad-e" aria-label="広告枠E">
           <a href={googleFormDirectUrl} target="_blank" rel="noreferrer">

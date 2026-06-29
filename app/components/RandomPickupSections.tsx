@@ -74,13 +74,6 @@ export function RandomPickupSections({ courses, practiceRanges }: RandomPickupSe
         </aside>
       </section>
 
-      <section className="home-wide-pr-banner pickup-between-ad is-recruiting" aria-label="広告枠I">
-        <span>広告枠 I</span>
-        <strong>ゴルフ場・練習場ワイド広告 掲載募集中</strong>
-        <small>推奨画像 1080 × 148px</small>
-        <a href={advertisingContactUrl} target="_blank" rel="noreferrer">掲載のお問い合わせ</a>
-      </section>
-
       <section id="practice" className="portal-section pickup-section" aria-labelledby="practice-title">
         <div className="portal-section-heading with-link">
           <div>
@@ -111,6 +104,13 @@ export function RandomPickupSections({ courses, practiceRanges }: RandomPickupSe
           ))}
         </div>
         <a className="recommended-course-more" href="/practice">すべての練習場を見る</a>
+      </section>
+
+      <section className="home-wide-pr-banner pickup-between-ad is-recruiting" aria-label="広告枠I">
+        <span>広告枠 I</span>
+        <strong>ゴルフ場・練習場ワイド広告 掲載募集中</strong>
+        <small>推奨画像 1080 × 148px</small>
+        <a href={advertisingContactUrl} target="_blank" rel="noreferrer">掲載のお問い合わせ</a>
       </section>
     </>
   );
