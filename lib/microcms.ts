@@ -44,6 +44,7 @@ export type Tournament = {
   dateLabel?: string;
   venue?: string;
   area?: string;
+  organizer?: string;
   category?: string;
   status?: string;
   description?: string;
@@ -246,6 +247,7 @@ const fallbackTournaments: Tournament[] = [
     dateLabel: "2026年1月26日-27日",
     venue: "琉球ゴルフ倶楽部",
     area: "南城市",
+    organizer: "ダイキンオーキッドレディス大会事務局",
     category: "ジュニア",
     status: "成績あり",
     description: "募集要項、組み合わせ、成績、公式情報への導線をわかりやすく整理して掲載します。",
@@ -261,6 +263,7 @@ const fallbackTournaments: Tournament[] = [
     dateLabel: "2026大会",
     venue: "沖縄県内",
     area: "沖縄県内",
+    organizer: "エナジックジュニアオープン実行委員会",
     category: "ジュニア",
     status: "成績あり",
     description: "U-22、ジュニア世代向け大会の募集要項、組み合わせ、成績を確認できます。",
@@ -276,6 +279,7 @@ const fallbackTournaments: Tournament[] = [
     dateLabel: "2026年3月5日-8日",
     venue: "琉球ゴルフ倶楽部",
     area: "南城市",
+    organizer: "ダイキンオーキッドレディス大会事務局",
     category: "プロ",
     status: "成績あり",
     description: "沖縄を代表する女子プロゴルフトーナメント。大会結果と公式情報を整理して掲載します。",
@@ -291,6 +295,7 @@ const fallbackTournaments: Tournament[] = [
     dateLabel: "春季",
     venue: "各ゴルフ場",
     area: "沖縄県内",
+    organizer: "主催確認中",
     category: "コンペ",
     status: "確認中",
     description: "県内で開催されるオープンコンペや親睦大会を確認後に掲載します。",
@@ -304,6 +309,7 @@ const fallbackTournaments: Tournament[] = [
     dateLabel: "夏季",
     venue: "県内会場",
     area: "沖縄県内",
+    organizer: "主催確認中",
     category: "ジュニア",
     status: "確認中",
     description: "夏休み期間のジュニア・学生向け競技情報を整理して掲載します。",
@@ -317,6 +323,7 @@ const fallbackTournaments: Tournament[] = [
     dateLabel: "秋季",
     venue: "各ゴルフ場",
     area: "沖縄県内",
+    organizer: "主催確認中",
     category: "一般",
     status: "確認中",
     description: "各ゴルフ場や地域団体の競技会情報を確認後に掲載します。",
@@ -330,6 +337,7 @@ const fallbackTournaments: Tournament[] = [
     dateLabel: "冬季",
     venue: "各ゴルフ場",
     area: "沖縄県内",
+    organizer: "主催確認中",
     category: "コンペ",
     status: "確認中",
     description: "年末コンペやチャリティ大会など、参加しやすいイベント型大会を掲載します。",
@@ -952,6 +960,7 @@ export function tournamentKeywords(tournament: Tournament) {
     tournament.title,
     tournament.venue,
     tournament.area,
+    tournament.organizer,
     tournament.category,
     tournament.status,
     tournament.description,

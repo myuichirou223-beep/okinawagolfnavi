@@ -31,6 +31,12 @@
       "required": false
     },
     {
+      "fieldId": "organizer",
+      "name": "主催",
+      "kind": "text",
+      "required": false
+    },
+    {
       "fieldId": "category",
       "name": "種別",
       "kind": "select",

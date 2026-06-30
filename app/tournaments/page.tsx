@@ -111,6 +111,12 @@ export default async function TournamentsPage() {
                   <time>{tournament.month || "未定"}</time>
                   <div className="schedule-copy">
                     <h4>{tournament.title}</h4>
+                    <dl className="schedule-meta" aria-label={`${tournament.title}の基本情報`}>
+                      <div className="schedule-meta-item is-organizer">
+                        <dt>主催</dt>
+                        <dd>{tournament.organizer || "主催確認中"}</dd>
+                      </div>
+                    </dl>
                     <p>
                       {[
                         tournamentDateLabel(tournament.eventDate, tournament.dateLabel),

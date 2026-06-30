@@ -2479,6 +2479,39 @@ button:focus-visible,
   letter-spacing: 0;
 }
 
+.schedule-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 7px 0 0;
+}
+
+.schedule-meta-item {
+  display: inline-flex;
+  min-width: 0;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 9px;
+  border: 1px solid #f0c8a7;
+  background: #fff8ef;
+  color: #5b321b;
+  font-size: 12px;
+  font-weight: 850;
+  line-height: 1.35;
+}
+
+.schedule-meta-item dt {
+  color: #a94300;
+  font-size: 11px;
+  font-weight: 950;
+  white-space: nowrap;
+}
+
+.schedule-meta-item dd {
+  min-width: 0;
+  margin: 0;
+}
+
 .schedule-item p {
   margin: 3px 0 0;
   color: var(--muted);
@@ -11339,12 +11372,14 @@ body {
   }
 
   #tournaments .schedule-copy {
-    display: contents;
+    grid-column: 2;
+    grid-row: 1;
+    min-width: 0;
+    display: grid;
+    gap: 7px;
   }
 
   #tournaments .schedule-copy h4 {
-    grid-column: 2;
-    grid-row: 1;
     align-self: center;
     min-width: 0;
   }
@@ -11363,6 +11398,23 @@ body {
     color: #555555;
     font-size: 12px;
     line-height: 1.5;
+  }
+
+  #tournaments .schedule-meta {
+    margin: 0;
+  }
+
+  #tournaments .schedule-meta-item {
+    max-width: 100%;
+    padding: 4px 7px;
+    font-size: 11px;
+    line-height: 1.35;
+  }
+
+  #tournaments .schedule-meta-item dd {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
   #tournaments .schedule-actions {
@@ -14485,9 +14537,18 @@ body {
     top: 60px !important;
   }
 
-  .portal-main {
+  main#main {
+    padding-top: 60px !important;
+  }
+
+  .portal-main,
+  .portal-page-shell {
     padding-top: 60px !important;
     overflow: visible !important;
+  }
+
+  .portal-page-layout {
+    padding-top: 0 !important;
   }
 
   .home-portal-layout,
