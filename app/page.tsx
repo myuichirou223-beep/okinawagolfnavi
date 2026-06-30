@@ -16,7 +16,8 @@ import {
   getPracticeRanges,
   getTournaments,
   tournamentActionLinks,
-  tournamentSortDate
+  tournamentSortDate,
+  tournamentTargetLabel
 } from "../lib/microcms";
 
 export const revalidate = 300;
@@ -141,7 +142,7 @@ export default async function Home() {
         id: `tournament-${tournament.id}`,
         type: "tournament" as const,
         title: tournament.title,
-        audience: tournament.category || "",
+        audience: tournamentTargetLabel(tournament),
         venue: tournament.venue || tournament.area || "開催場所確認中",
         eventDate,
         dateLabel: scheduleDateLabel(date),

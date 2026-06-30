@@ -6,7 +6,8 @@ import {
   tournamentActionLinks,
   tournamentFilterCategory,
   tournamentKeywords,
-  tournamentSortDate
+  tournamentSortDate,
+  tournamentTargetLabel
 } from "../../lib/microcms";
 
 export const revalidate = 300;
@@ -116,6 +117,10 @@ export default async function TournamentsPage() {
                       <div className="schedule-meta-item is-organizer">
                         <dt>主催者</dt>
                         <dd>{tournament.organizer || "主催者確認中"}</dd>
+                      </div>
+                      <div className="schedule-meta-item is-target">
+                        <dt>対象</dt>
+                        <dd>{tournamentTargetLabel(tournament)}</dd>
                       </div>
                     </dl>
                     <p>

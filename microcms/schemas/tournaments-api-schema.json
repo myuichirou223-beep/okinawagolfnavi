@@ -38,10 +38,10 @@
     },
     {
       "fieldId": "category",
-      "name": "種別",
+      "name": "対象",
       "kind": "select",
       "required": false,
-      "multipleSelect": false,
+      "multipleSelect": true,
       "selectInitialValue": [],
       "selectItems": [
         {

@@ -45,7 +45,7 @@ export type Tournament = {
   venue?: string;
   area?: string;
   organizer?: string;
-  category?: string;
+  category?: unknown;
   status?: string;
   description?: string;
   entryUrl?: string;
@@ -939,7 +939,7 @@ export function topicImage(topic: Topic) {
 export function tournamentFilterCategory(tournament: Tournament) {
   const values = [];
   const status = tournament.status || "";
-  const category = tournament.category || "";
+  const category = tournamentTargetLabel(tournament);
 
   if (["募集中", "開催予定", "確認中", "予定", "published", "掲載OK", "公開"].includes(status)) values.push("upcoming");
   if (["成績あり", "開催済み", "終了"].includes(status)) values.push("past");
@@ -961,13 +961,17 @@ export function tournamentKeywords(tournament: Tournament) {
     tournament.venue,
     tournament.area,
     tournament.organizer,
-    tournament.category,
+    tournamentTargetLabel(tournament),
     tournament.status,
     tournament.description,
     tournament.tags
   ]
     .filter(Boolean)
     .join(" ");
+}
+
+export function tournamentTargetLabel(tournament: Tournament) {
+  return fieldText(tournament.category) || "対象確認中";
 }
 
 export function tournamentSortDate(tournament: Tournament) {
