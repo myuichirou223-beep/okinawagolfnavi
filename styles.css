@@ -11437,6 +11437,9 @@ body {
   }
 
   #tournaments .schedule-meta {
+    display: grid;
+    justify-items: start;
+    gap: 6px;
     margin: 0;
   }
 
