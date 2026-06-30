@@ -1813,6 +1813,17 @@ button:focus-visible,
   color: var(--muted);
 }
 
+.schedule-note {
+  max-width: 680px;
+  padding: 10px 13px;
+  border: 1px solid #f0c8a7;
+  background: #fff8ef;
+  color: #6b3b20 !important;
+  font-size: 13px;
+  font-weight: 750;
+  line-height: 1.7;
+}
+
 .filter-bar {
   display: flex;
   flex-wrap: wrap;

@@ -74,6 +74,9 @@ export default async function TournamentsPage() {
             <p className="eyebrow">Tournament</p>
             <h1 id="tournament-title">大会情報</h1>
             <p>沖縄県内で開催される大会を年間スケジュールで確認できます。</p>
+            <p className="schedule-note">
+              掲載している日程は変更される場合があります。参加・観戦前に、公式ページや主催者発表で最新情報を再確認してください。
+            </p>
           </div>
           <div className="filter-bar" aria-label="大会の絞り込み">
             <button className="filter-button is-active" type="button" data-filter="all">すべて</button>
