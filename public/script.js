@@ -69,6 +69,28 @@ function updateEmptyStates() {
   });
 }
 
+function syncTournamentMonthGroups() {
+  const scheduleList = document.querySelector("#tournaments .schedule-list");
+  if (!scheduleList) return;
+
+  scheduleList.querySelectorAll(".schedule-month-heading").forEach((heading) => heading.remove());
+
+  let currentMonth = "";
+  [...scheduleList.querySelectorAll(".schedule-item")]
+    .filter((item) => !item.classList.contains("is-hidden"))
+    .forEach((item) => {
+      const month = item.dataset.month || item.querySelector("time")?.textContent?.trim() || "未定";
+      if (month === currentMonth) return;
+
+      currentMonth = month;
+      const heading = document.createElement("div");
+      heading.className = "schedule-month-heading";
+      heading.setAttribute("aria-hidden", "true");
+      heading.textContent = month;
+      scheduleList.insertBefore(heading, item);
+    });
+}
+
 function applyFilters() {
   document.querySelectorAll("#tournaments .searchable").forEach((item) => {
     const shouldShow = itemMatchesTournamentFilter(item);
@@ -87,6 +109,7 @@ function applyFilters() {
 
   updateEmptyStates();
   positionTournamentTodayMarker();
+  syncTournamentMonthGroups();
 }
 
 function positionTournamentTodayMarker() {
@@ -130,6 +153,7 @@ function sortTournamentItems() {
     .forEach((item) => scheduleList.append(item));
 
   positionTournamentTodayMarker();
+  syncTournamentMonthGroups();
 }
 
 document.addEventListener("click", (event) => {

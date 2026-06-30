@@ -106,6 +106,7 @@ export default async function TournamentsPage() {
                   className="schedule-item searchable"
                   data-category={tournamentFilterCategory(tournament)}
                   data-keywords={tournamentKeywords(tournament)}
+                  data-month={tournament.month || "未定"}
                   data-sort-date={tournamentSortDate(tournament)}
                 >
                   <time>{tournament.month || "未定"}</time>

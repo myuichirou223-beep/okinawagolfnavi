@@ -1006,7 +1006,7 @@ export function tournamentLink(tournament: Tournament) {
 
 export function tournamentActionLinks(tournament: Tournament) {
   return [
-    { label: "大会公式ページ", url: tournament.officialUrl },
+    { label: "公式ページ", url: tournament.officialUrl },
     { label: "大会概要", url: tournament.overviewUrl || tournament.entryUrl },
     { label: "成績表", url: tournament.resultUrl }
   ];
