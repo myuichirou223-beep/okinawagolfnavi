@@ -32,7 +32,7 @@
     },
     {
       "fieldId": "organizer",
-      "name": "主催",
+      "name": "主催者",
       "kind": "text",
       "required": false
     },
