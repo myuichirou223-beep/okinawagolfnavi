@@ -56,9 +56,9 @@ const roadmapSteps = [
     imageAlt: "ゴルフクラブとシューズとキャディバッグのイメージ",
     tone: "mint",
     spots: [
-      { title: "マンガ倉庫 那覇店", label: "ギア探し", note: "クラブや小物をまずは手頃に探したい人の候補。", href: "/deals" },
-      { title: "練習場でシューズを慣らす", label: "実践準備", note: "買ったシューズはラウンド前に履き心地を確認。", href: "/practice" },
-      { title: "お得情報ページ", label: "ショップ", note: "ゴルフ用品やサービス情報をまとめて確認。", href: "/deals" }
+      { title: "PGAストア豊崎", label: "大型店舗", note: "新品クラブやウェア、小物までまとめて見たい人の候補。", href: "/shops" },
+      { title: "つるやゴルフ", label: "専門店", note: "クラブ選びやシューズ選びを相談しながら進めたい人へ。", href: "/shops" },
+      { title: "マンガ倉庫浦添", label: "中古あり", note: "最初のギアを手頃に探したい人の候補。", href: "/shops" }
     ]
   },
   {

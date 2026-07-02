@@ -11,6 +11,14 @@ export const metadata = {
 };
 
 const areaOrder = ["南部", "中部", "北部", "離島", "その他"];
+const shopFilterCategories = ["大型ショップ", "ショップ", "新品販売", "中古販売", "工房", "アパレル"] as const;
+type ShopFilterCategory = (typeof shopFilterCategories)[number];
+
+type ShopsPageProps = {
+  searchParams?: Promise<{
+    category?: string;
+  }>;
+};
 
 function areaGroup(area?: string) {
   if (!area) return "その他";
@@ -23,6 +31,67 @@ function shopCategories(shop: GolfShop) {
   return shop.categories.length ? shop.categories : ["取扱内容確認中"];
 }
 
+function categoryText(shop: GolfShop) {
+  return [
+    shop.name,
+    shop.storeSize,
+    shop.productCondition,
+    shop.summary,
+    ...shop.categories
+  ].join(" ").toLowerCase();
+}
+
+function matchesShopCategory(shop: GolfShop, category: ShopFilterCategory) {
+  const text = categoryText(shop);
+
+  switch (category) {
+    case "大型ショップ":
+      return text.includes("大型");
+    case "ショップ":
+      return (
+        !text.includes("大型") &&
+        (text.includes("ショップ") ||
+          text.includes("店舗") ||
+          text.includes("専門店") ||
+          text.includes("用品") ||
+          text.includes("プロショップ") ||
+          text.includes("普通店舗"))
+      );
+    case "新品販売":
+      return text.includes("新品") || text.includes("new");
+    case "中古販売":
+      return text.includes("中古") || text.includes("used");
+    case "工房":
+      return (
+        text.includes("工房") ||
+        text.includes("修理") ||
+        text.includes("リペア") ||
+        text.includes("フィッティング") ||
+        text.includes("調整")
+      );
+    case "アパレル":
+      return (
+        text.includes("アパレル") ||
+        text.includes("ウェア") ||
+        text.includes("ウエア") ||
+        text.includes("服")
+      );
+    default:
+      return false;
+  }
+}
+
+function shopCategoryCounts(shops: GolfShop[]) {
+  return shopFilterCategories.map((category) => ({
+    category,
+    count: shops.filter((shop) => matchesShopCategory(shop, category)).length
+  }));
+}
+
+function selectedShopCategory(category?: string): ShopFilterCategory {
+  return shopFilterCategories.find((item) => item === category) ?? "大型ショップ";
+}
+
 function groupedShops(shops: GolfShop[]) {
   return areaOrder
     .map((area) => ({
@@ -32,9 +101,13 @@ function groupedShops(shops: GolfShop[]) {
     .filter((group) => group.shops.length);
 }
 
-export default async function ShopsPage() {
+export default async function ShopsPage({ searchParams }: ShopsPageProps) {
+  const params = await searchParams;
   const shops = await getGolfShops();
-  const groups = groupedShops(shops);
+  const activeCategory = selectedShopCategory(params?.category);
+  const categoryCounts = shopCategoryCounts(shops);
+  const filteredShops = shops.filter((shop) => matchesShopCategory(shop, activeCategory));
+  const groups = groupedShops(filteredShops);
 
   return (
     <>
@@ -44,14 +117,26 @@ export default async function ShopsPage() {
           <div className="section-heading">
             <p className="eyebrow">Shop</p>
             <h1 id="shops-title">ショップ情報</h1>
-            <p>CMSに登録された施設データから、地域別に店舗規模や新品・中古の取扱傾向を確認できます。</p>
+            <p>カテゴリを選ぶと、CMSに登録されたショップ施設の中から該当する店舗だけを地域別に確認できます。</p>
           </div>
 
-          <div className="shop-legend" aria-label="ショップ情報の見方">
-            <span>地域別</span>
-            <span>大型店舗 / 普通店舗</span>
-            <span>新品 / 中古</span>
-            <span>クラブ・ウェア・小物</span>
+          <div className="shop-category-filter" aria-label="ショップカテゴリ">
+            {categoryCounts.map(({ category, count }) => (
+              <a
+                key={category}
+                href={`/shops?category=${encodeURIComponent(category)}`}
+                className={category === activeCategory ? "is-active" : undefined}
+                aria-current={category === activeCategory ? "page" : undefined}
+              >
+                <span>{category}</span>
+                <em>{count}件</em>
+              </a>
+            ))}
+          </div>
+
+          <div className="shop-selected-summary">
+            <span>{activeCategory}</span>
+            <p>{filteredShops.length}件のショップを表示しています。</p>
           </div>
 
           {groups.length ? (
@@ -70,10 +155,9 @@ export default async function ShopsPage() {
                   </p>
 
                   <div className="shop-card-grid">
-                    {group.shops.map((shop) => {
-                      return (
-                        <article key={shop.id} className="shop-card">
-                          <div className="shop-card-inner">
+                    {group.shops.map((shop) => (
+                      <article key={shop.id} className="shop-card">
+                        <div className="shop-card-inner">
                           <div className="shop-card-image">
                             <img src={shop.imageUrl || "/assets/logo.png"} alt="" loading="lazy" />
                           </div>
@@ -99,19 +183,18 @@ export default async function ShopsPage() {
                               ) : null}
                             </div>
                           </div>
-                          </div>
-                        </article>
-                      );
-                    })}
+                        </div>
+                      </article>
+                    ))}
                   </div>
                 </section>
               ))}
             </div>
           ) : (
             <div className="coming-soon-panel">
-              <p className="coming-soon-label">CMSデータ確認中</p>
-              <h2>ショップ施設データを準備しています</h2>
-              <p>CMSの施設にショップ種別のデータを登録すると、このページに地域別で表示されます。</p>
+              <p className="coming-soon-label">該当ショップなし</p>
+              <h2>{activeCategory}のショップはまだ準備中です</h2>
+              <p>CMSの施設データにカテゴリや取扱内容を追加すると、このカテゴリに表示されます。</p>
             </div>
           )}
         </section>

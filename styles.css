@@ -4177,24 +4177,92 @@ body {
   max-width: 820px;
 }
 
-.shop-legend {
+.shop-category-filter {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  margin: 0 0 24px;
+  gap: 12px;
+  margin: 0 0 18px;
 }
 
-.shop-legend span {
+.shop-category-filter a {
   display: inline-flex;
-  min-height: 34px;
+  min-height: 46px;
   align-items: center;
-  padding: 6px 12px;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 15px;
   border: 1px solid rgba(0, 166, 166, 0.22);
+  border-radius: 999px;
+  background: #ffffff;
+  color: #087575;
+  font-size: 14px;
+  font-weight: 900;
+  text-decoration: none;
+  box-shadow: 0 10px 22px rgba(31, 42, 36, 0.06);
+  transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease, color 160ms ease, border-color 160ms ease;
+}
+
+.shop-category-filter a:hover,
+.shop-category-filter a:focus-visible {
+  border-color: rgba(0, 166, 166, 0.42);
+  background: #e8fbf9;
+  transform: translateY(-1px);
+}
+
+.shop-category-filter a.is-active {
+  border-color: transparent;
+  background: linear-gradient(135deg, #00a6a6, #17b890);
+  color: #ffffff;
+  box-shadow: 0 16px 30px rgba(0, 166, 166, 0.22);
+}
+
+.shop-category-filter em {
+  display: inline-flex;
+  min-width: 38px;
+  min-height: 24px;
+  align-items: center;
+  justify-content: center;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: rgba(0, 166, 166, 0.1);
+  color: inherit;
+  font-size: 12px;
+  font-style: normal;
+}
+
+.shop-category-filter a.is-active em {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.shop-selected-summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 24px;
+  padding: 14px 16px;
+  border: 1px solid rgba(0, 166, 166, 0.14);
+  border-radius: 16px;
+  background: rgba(232, 251, 249, 0.72);
+}
+
+.shop-selected-summary span {
+  display: inline-flex;
+  min-height: 30px;
+  align-items: center;
+  padding: 5px 11px;
   border-radius: 999px;
   background: #ffffff;
   color: #087575;
   font-size: 13px;
   font-weight: 900;
+}
+
+.shop-selected-summary p {
+  margin: 0;
+  color: #4f626a;
+  font-size: 14px;
+  font-weight: 800;
 }
 
 .shop-area-list {
