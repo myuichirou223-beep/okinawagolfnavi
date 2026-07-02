@@ -116,12 +116,14 @@ export type Facility = {
   id: string;
   name: string;
   slug: string;
+  [key: string]: unknown;
   type?: unknown;
   status?: unknown;
   area?: unknown;
   address?: string;
   phone?: string;
   website?: string;
+  mapUrl?: string;
   summary?: string;
   airportAccess?: string;
   gallery?: MicroCMSImage[] | MicroCMSImage;
@@ -144,6 +146,23 @@ export type PracticeRange = {
   url?: string;
   accessFromNaha?: string;
   status?: string;
+};
+
+export type GolfShop = {
+  id: string;
+  name: string;
+  slug: string;
+  area?: string;
+  city?: string;
+  address?: string;
+  phone?: string;
+  website?: string;
+  mapUrl?: string;
+  summary?: string;
+  imageUrl?: string;
+  storeSize?: string;
+  productCondition?: string;
+  categories: string[];
 };
 
 export type Partner = {
@@ -497,20 +516,12 @@ const fallbackPartners: Partner[] = [
     displayOrder: 2
   },
   {
-    id: "golf-lounge-sunshine",
-    name: "GOLF LOUNGE SUNSHINE",
-    logo: { url: "/assets/partners/golf-lounge-sunshine-logo.png" },
-    websiteUrl: "https://golfloungesunshine.com/",
-    status: "published",
-    displayOrder: 3
-  },
-  {
     id: "okinawa-pet-care",
     name: "OKINAWA PET CARE",
     logo: { url: "/assets/partners/okinawa-pet-care-logo.png" },
     websiteUrl: "https://pet-care.co.jp/",
     status: "published",
-    displayOrder: 4
+    displayOrder: 3
   }
 ];
 
@@ -676,6 +687,26 @@ function isPracticeRangeFacility(facility: Facility) {
   return ["outdoor_practice_range", "indoor_practice_range"].includes(facilityTypeValue(facility));
 }
 
+function isGolfShopFacility(facility: Facility) {
+  const values = [
+    fieldText(facility.type),
+    fieldText(facility.facilityType),
+    fieldText(facility.category),
+    fieldText(facility.shopType)
+  ].filter(Boolean);
+
+  return values.some((value) => {
+    const normalized = value.toLowerCase();
+    return (
+      ["golf_shop", "shop", "pro_shop", "golf_goods_shop", "golf_store"].includes(normalized) ||
+      value.includes("ショップ") ||
+      value.includes("店舗") ||
+      value.includes("用品") ||
+      value.includes("工房")
+    );
+  });
+}
+
 function facilityGallery(facility: Facility) {
   if (!facility.gallery) return [];
   return Array.isArray(facility.gallery) ? facility.gallery : [facility.gallery];
@@ -727,6 +758,69 @@ function facilityToPracticeRange(facility: Facility): PracticeRange {
     url: facility.website,
     accessFromNaha: facility.airportAccess,
     status: fieldText(facility.status)
+  };
+}
+
+function splitTags(value: unknown) {
+  const text = fieldText(value);
+  if (!text) return [];
+  return text
+    .split(/[、,／/｜|・\s]+/)
+    .map((item) => item.trim())
+    .filter(Boolean);
+}
+
+function firstFieldText(facility: Facility, fields: string[]) {
+  for (const field of fields) {
+    const text = fieldText(facility[field]);
+    if (text) return text;
+  }
+  return "";
+}
+
+function normalizeStoreSize(value: string) {
+  if (!value) return "店舗規模未確認";
+  if (value.includes("大型") || value.toLowerCase().includes("large")) return "大型店舗";
+  if (value.includes("普通") || value.includes("通常") || value.toLowerCase().includes("standard")) return "普通店舗";
+  return value;
+}
+
+function normalizeProductCondition(value: string) {
+  if (!value) return "新品・中古未確認";
+  if (value.includes("新品") && value.includes("中古")) return "新品・中古";
+  if (value.includes("中古") || value.toLowerCase().includes("used")) return "中古";
+  if (value.includes("新品") || value.toLowerCase().includes("new")) return "新品";
+  return value;
+}
+
+function facilityToGolfShop(facility: Facility): GolfShop {
+  const image = facilityGallery(facility)[0];
+  const categories = [
+    ...splitTags(facility.categories),
+    ...splitTags(facility.shopCategories),
+    ...splitTags(facility.products),
+    ...splitTags(facility.features)
+  ];
+
+  return {
+    id: facility.id,
+    name: facility.name,
+    slug: facility.slug,
+    area: fieldText(facility.area),
+    city: fieldText(facility.city),
+    address: facility.address,
+    phone: facility.phone,
+    website: facility.website,
+    mapUrl: firstFieldText(facility, ["mapUrl", "googleMapUrl", "googleMapsUrl", "googlemapurl", "map", "mapsUrl"]),
+    summary: facility.summary,
+    imageUrl: image?.url,
+    storeSize: normalizeStoreSize(
+      firstFieldText(facility, ["storeSize", "shopSize", "size", "scale", "storeType"])
+    ),
+    productCondition: normalizeProductCondition(
+      firstFieldText(facility, ["productCondition", "condition", "salesType", "itemCondition", "handlingType"])
+    ),
+    categories: Array.from(new Set(categories)).slice(0, 6)
   };
 }
 
@@ -785,6 +879,11 @@ export async function getPracticeRanges() {
   }
 
   return fallbackPracticeRanges.filter(isPublishedPracticeRange);
+}
+
+export async function getGolfShops() {
+  const facilities = await getFacilities();
+  return facilities.filter(isGolfShopFacility).map(facilityToGolfShop);
 }
 
 export async function getSiteStats() {

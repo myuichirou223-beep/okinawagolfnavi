@@ -7,6 +7,8 @@ const navItems = [
   { label: "大会情報", subtitle: "Tournament", href: "/tournaments", icon: "trophy", className: "nav-tournament" },
   { label: "ゴルフ場", subtitle: "Golf Course", href: "/courses", icon: "flag", className: "nav-course" },
   { label: "練習場", subtitle: "Practice Range", href: "/practice", icon: "golf", className: "nav-practice" },
+  { label: "ショップ", subtitle: "Shop", href: "/shops", icon: "shop", className: "nav-shop" },
+  { label: "初心者", subtitle: "Beginner", href: "/beginner", icon: "beginner", className: "nav-beginner" },
   { label: "お得情報", subtitle: "Deals", href: "/deals", icon: "star", className: "nav-deals" },
   { label: "イベント", subtitle: "Event", href: "/events", icon: "calendar", className: "nav-event" },
   { label: "レッスン", subtitle: "Lesson", href: "/lessons", icon: "lesson", className: "nav-lesson" },
@@ -76,6 +78,29 @@ function NavIcon({ name }: { name: string }) {
     return (
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9L12 3Z" />
+      </svg>
+    );
+  }
+
+  if (name === "beginner") {
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M6 20V5" />
+        <path d="M6 6h10l-1.2 3L16 12H6" />
+        <circle cx="16" cy="18" r="3" />
+        <path d="m14.8 18 1 1 1.8-2" />
+      </svg>
+    );
+  }
+
+  if (name === "shop") {
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M4 10h16" />
+        <path d="M5 10 7 4h10l2 6" />
+        <path d="M6 10v10h12V10" />
+        <path d="M9 20v-5h6v5" />
+        <path d="M8 4h8" />
       </svg>
     );
   }
