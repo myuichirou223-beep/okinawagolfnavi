@@ -173,7 +173,8 @@ export function Header() {
     <header className={`site-header mobile-scroll-${mobileScrollState}${mobileMenuOpen ? " mobile-menu-open" : ""}`}>
       <div className="header-inner">
         <a className="brand" href="/" aria-label="おきなわGOLFなび トップ">
-          <img className="brand-logo" src="/assets/logo-footer-blue.png" alt="おきなわGOLFなび" />
+          <img className="brand-logo" src="/assets/logo-mobile-text.png" alt="おきなわGOLFなび" />
+          <img className="brand-logo-mobile" src="/assets/logo-mobile-text.png" alt="" aria-hidden="true" />
         </a>
         <div className="header-actions">
           <button
