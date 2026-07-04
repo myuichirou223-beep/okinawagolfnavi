@@ -447,6 +447,53 @@ const fallbackCourses: Course[] = [
     summary: "海沿いのロケーションを活かした観光ゴルフ向けコース。"
   },
   {
+    id: "bashofu-course",
+    title: "芭蕉布コース",
+    slug: "bashofu-course",
+    status: "published",
+    area: "南部",
+    city: "南城市",
+    courseType: "ミドルコース",
+    holes: 18,
+    par: 63,
+    address: "〒901-0604 沖縄県南城市玉城字中山1313",
+    phone: "098-943-5890",
+    airportAccess: "車で約35分",
+    summary: "18H Par63。コースデビュー前後の練習ラウンドにも検討しやすいミドルコース。"
+  },
+  {
+    id: "nanzan-country-club",
+    title: "南山カントリークラブ",
+    slug: "nanzan-country-club",
+    status: "published",
+    area: "南部",
+    city: "糸満市",
+    courseType: "ミドルコース",
+    holes: 9,
+    par: 34,
+    address: "〒901-0331 沖縄県糸満市字真栄平1170",
+    phone: "098-997-2021",
+    websiteUrl: "http://www.okinawa-nanzan.com/",
+    airportAccess: "車で約35分",
+    summary: "9H Par34。2周で18Hとして楽しめる、初心者にも挑戦しやすいコース。"
+  },
+  {
+    id: "onishi-terrace-golf-club",
+    title: "大西テェラスゴルフクラブ",
+    slug: "onishi-terrace-golf-club",
+    status: "published",
+    area: "中部",
+    city: "北中城村",
+    courseType: "ミドルコース",
+    holes: 18,
+    par: 63,
+    address: "〒901-2306 沖縄県中頭郡北中城村字大城190",
+    phone: "098-935-4300",
+    websiteUrl: "https://www.otgc.co.jp/",
+    airportAccess: "車で約40分",
+    summary: "18H Par63。中部エリアで実戦感覚をつかみたい初心者にもおすすめ。"
+  },
+  {
     id: "okinawa-country-club",
     title: "沖縄カントリークラブ",
     slug: "okinawa-country-club",
@@ -494,6 +541,45 @@ const fallbackPracticeRanges: PracticeRange[] = [
     address: "沖縄県糸満市字阿波根1565-1",
     phone: "098-995-0555",
     accessFromNaha: "那覇空港から車で約20分",
+    status: "営業確認済み"
+  },
+  {
+    id: "exgolf-lab",
+    name: "eXGOLF LAB",
+    category: "屋内 / レッスン",
+    area: "中部",
+    url: "/lessons",
+    accessFromNaha: "スイング分析やフォーム確認におすすめ",
+    status: "営業確認済み"
+  },
+  {
+    id: "golf-lounge-sunshine-makiminato",
+    name: "ゴルフラウンジサンシャイン 牧港店",
+    category: "屋内",
+    area: "中部",
+    address: "沖縄県浦添市牧港（牧港エリア）",
+    url: "https://golfloungesunshine.com/",
+    accessFromNaha: "那覇空港から車で約20分",
+    status: "営業確認済み"
+  },
+  {
+    id: "golf-lounge-sunshine-gushikawa",
+    name: "ゴルフラウンジサンシャイン 具志川店",
+    category: "屋内",
+    area: "中部",
+    address: "沖縄県うるま市（具志川エリア）",
+    url: "https://golfloungesunshine.com/",
+    accessFromNaha: "那覇空港から車で約45分",
+    status: "営業確認済み"
+  },
+  {
+    id: "chatan-indoor-golf-studio",
+    name: "北谷インドアゴルフスタジオ",
+    category: "屋内",
+    area: "中部",
+    address: "沖縄県中頭郡北谷町（北谷スポーツセンター内）",
+    url: "https://csi.okinawa/",
+    accessFromNaha: "那覇空港から車で約30分",
     status: "営業確認済み"
   }
 ];

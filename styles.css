@@ -18,6 +18,1793 @@
   color-scheme: light;
 }
 
+/* Beginner guide fidelity pass: closer to the supplied comp. */
+.beginner-guide-page-shell .portal-page-content {
+  overflow: visible;
+}
+
+.beginner-guide {
+  position: relative;
+  width: min(980px, calc(100% - 18px));
+  padding: 0 0 34px;
+  border: 2px solid #009b86;
+  border-radius: 12px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 1.5% 84%, rgba(255, 111, 91, 0.22) 0 18px, transparent 19px),
+    radial-gradient(circle at 97% 88%, rgba(255, 111, 91, 0.18) 0 20px, transparent 21px),
+    linear-gradient(90deg, rgba(226, 250, 245, 0.92) 0 52px, transparent 120px),
+    linear-gradient(270deg, rgba(226, 250, 245, 0.88) 0 52px, transparent 120px),
+    #ffffff;
+  box-shadow: 0 18px 38px rgba(0, 155, 134, 0.12);
+}
+
+.beginner-guide::before,
+.beginner-guide::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  width: 150px;
+  height: 170px;
+  pointer-events: none;
+  opacity: 0.32;
+  background:
+    radial-gradient(ellipse at 50% 100%, rgba(0, 155, 134, 0.42) 0 38%, transparent 39%),
+    radial-gradient(ellipse at 18% 70%, rgba(18, 184, 159, 0.34) 0 32%, transparent 33%),
+    radial-gradient(ellipse at 82% 74%, rgba(18, 184, 159, 0.3) 0 30%, transparent 31%);
+}
+
+.beginner-guide::before {
+  left: -54px;
+  top: 206px;
+  transform: rotate(18deg);
+}
+
+.beginner-guide::after {
+  right: -54px;
+  top: 210px;
+  transform: scaleX(-1) rotate(18deg);
+}
+
+.beginner-guide__hero {
+  min-height: 252px;
+  grid-template-columns: minmax(0, 1fr) 270px;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background:
+    radial-gradient(circle at 4px 4px, rgba(0, 155, 134, 0.48) 0 1.5px, transparent 2px) 0 0 / 10px 10px,
+    radial-gradient(circle at 62% 20%, rgba(255, 255, 255, 0.94) 0 20px, transparent 21px),
+    radial-gradient(circle at 67% 17%, rgba(255, 255, 255, 0.9) 0 16px, transparent 17px),
+    radial-gradient(circle at 91% 19%, rgba(255, 255, 255, 0.9) 0 18px, transparent 19px),
+    radial-gradient(circle at 95% 16%, rgba(255, 255, 255, 0.84) 0 13px, transparent 14px),
+    linear-gradient(180deg, #d4f6ff 0%, #effcff 39%, #d8f2dd 40%, #77c44f 100%);
+}
+
+.beginner-guide__hero::before {
+  left: -60px;
+  right: -60px;
+  bottom: -10px;
+  height: 116px;
+  background:
+    radial-gradient(ellipse at 25% 74%, rgba(45, 154, 59, 0.9) 0 11%, transparent 12%),
+    radial-gradient(ellipse at 55% 78%, rgba(59, 169, 65, 0.82) 0 14%, transparent 15%),
+    radial-gradient(ellipse at 78% 74%, rgba(69, 176, 72, 0.86) 0 12%, transparent 13%),
+    repeating-linear-gradient(168deg, rgba(255, 255, 255, 0.28) 0 24px, rgba(255, 255, 255, 0) 24px 48px),
+    linear-gradient(180deg, #94d56b 0%, #4fae39 100%);
+  border-radius: 58% 58% 0 0;
+}
+
+.beginner-guide__hero::after {
+  display: block;
+  left: 30px;
+  top: 54px;
+  width: 96px;
+  height: 128px;
+  background:
+    linear-gradient(90deg, transparent 47%, #9b6434 48% 52%, transparent 53%) 42px 38px / 30px 92px no-repeat,
+    radial-gradient(ellipse at 50% 100%, #2a9d62 0 40%, transparent 41%),
+    radial-gradient(ellipse at 18% 66%, #3dbb70 0 34%, transparent 35%),
+    radial-gradient(ellipse at 82% 64%, #35aa63 0 34%, transparent 35%),
+    radial-gradient(ellipse at 50% 26%, #42bc73 0 30%, transparent 31%);
+  opacity: 0.88;
+}
+
+.beginner-guide__hero-copy {
+  padding: 38px 12px 28px 148px;
+}
+
+.beginner-guide__hero-copy p {
+  margin-bottom: 2px;
+  color: #009b86;
+  font-size: clamp(23px, 2.9vw, 30px);
+  text-align: left;
+}
+
+.beginner-guide__hero-copy h1 {
+  max-width: 565px;
+  color: #202124;
+  font-size: clamp(40px, 4.4vw, 54px);
+  line-height: 1.03;
+  text-shadow: 0 2px 0 rgba(255, 255, 255, 0.78);
+}
+
+.beginner-guide__hero-copy h1::first-letter {
+  color: #202124;
+}
+
+.beginner-guide__hero-copy h1 {
+  background: linear-gradient(90deg, #202124 0 31%, #12a893 31% 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.beginner-guide__speech {
+  width: min(420px, 100%);
+  margin-top: 13px;
+  margin-left: 84px;
+  padding: 15px 28px;
+  border-color: rgba(18, 184, 159, 0.52);
+  border-radius: 20px;
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+.beginner-guide__character.is-hero {
+  align-self: stretch;
+  min-height: 252px;
+  padding: 0 18px 0 0;
+  place-items: end center;
+}
+
+.beginner-guide__character.is-hero img {
+  width: 248px;
+  height: 248px;
+  object-fit: contain;
+  object-position: center bottom;
+}
+
+.beginner-guide__panel,
+.beginner-guide__articles,
+.beginner-guide__cta {
+  width: calc(100% - 84px);
+  margin-left: auto;
+  margin-right: auto;
+  border-color: rgba(215, 236, 232, 0.95);
+  background: rgba(255, 255, 255, 0.97);
+  box-shadow: 0 8px 22px rgba(31, 41, 51, 0.09);
+}
+
+.beginner-guide__panel {
+  margin-top: 0;
+  padding: 16px 22px 20px;
+  border-radius: 15px;
+}
+
+.beginner-guide__section-title {
+  gap: 8px;
+  margin-bottom: 12px;
+  font-size: 18px;
+  letter-spacing: 0;
+}
+
+.beginner-guide__icon {
+  width: 32px;
+  height: 32px;
+}
+
+.beginner-guide__route-grid {
+  gap: 20px;
+  margin: 0 4px;
+}
+
+.beginner-guide__route-card {
+  min-height: 70px;
+  padding: 11px 28px;
+  border-radius: 11px;
+  border-width: 1px;
+  box-shadow: 0 4px 12px rgba(31, 41, 51, 0.08);
+}
+
+.beginner-guide__route-card.is-active {
+  border-width: 2px;
+  border-color: #12b89f;
+}
+
+.beginner-guide__route-card b,
+.beginner-guide__mini-route b {
+  font-size: 14px;
+  letter-spacing: 0;
+}
+
+.beginner-guide__route-card strong {
+  font-size: 15px;
+}
+
+.beginner-guide__detail-card {
+  grid-template-columns: minmax(0, 1fr) 250px;
+  gap: 10px;
+  min-height: 250px;
+  margin-top: 14px;
+  padding: 32px 20px 10px;
+  border-radius: 13px;
+  background:
+    linear-gradient(90deg, #ffffff 0%, #ffffff 62%, rgba(233, 250, 245, 0.83) 100%);
+}
+
+.beginner-guide__detail-card::after {
+  width: 35%;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.88)),
+    linear-gradient(180deg, #d4f6ff 0%, #eaffff 50%, #7ac85b 51%, #48a93d 100%);
+  opacity: 1;
+}
+
+.beginner-guide__ribbon {
+  left: 24px;
+  min-width: 132px;
+  padding: 8px 17px;
+  font-size: 14px;
+}
+
+.beginner-guide__detail-copy h3 {
+  margin-left: 18px;
+  margin-bottom: 11px;
+  font-size: clamp(25px, 3.1vw, 31px);
+}
+
+.beginner-guide__detail-table {
+  max-width: 560px;
+  margin-left: 10px;
+  border-radius: 9px;
+}
+
+.beginner-guide__detail-row {
+  grid-template-columns: 56px 116px minmax(0, 1fr);
+  min-height: 58px;
+}
+
+.beginner-guide__detail-row p {
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.beginner-guide__character.is-pointing {
+  align-self: stretch;
+  min-height: 230px;
+  place-items: end center;
+}
+
+.beginner-guide__character.is-pointing img {
+  width: 218px;
+  height: 240px;
+  object-fit: contain;
+  object-position: center bottom;
+}
+
+.beginner-guide__mini-routes {
+  margin-top: 10px;
+  border-radius: 11px;
+}
+
+.beginner-guide__mini-route {
+  grid-template-columns: 38px minmax(0, 1fr);
+  padding: 9px 14px;
+}
+
+.beginner-guide__mini-route p {
+  font-size: 10px;
+}
+
+.beginner-guide__steps {
+  margin-top: 22px;
+}
+
+.beginner-guide__timeline {
+  padding-left: 42px;
+}
+
+.beginner-guide__timeline::before {
+  left: 17px;
+  width: 2px;
+}
+
+.beginner-guide__step {
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 16px;
+  min-height: 82px;
+  padding: 10px 0;
+}
+
+.beginner-guide__step-dot {
+  left: -38px;
+  top: 25px;
+  width: 30px;
+  height: 30px;
+}
+
+.beginner-guide__step-copy {
+  grid-template-columns: 78px minmax(0, 1fr);
+  gap: 4px 10px;
+}
+
+.beginner-guide__step-copy span {
+  min-height: 24px;
+  justify-content: center;
+  padding: 2px 8px;
+  border-radius: 7px;
+  font-size: 13px;
+}
+
+.beginner-guide__step-copy h3 {
+  font-size: 16px;
+}
+
+.beginner-guide__step-copy p {
+  font-size: 12px;
+}
+
+.beginner-guide__step-message {
+  grid-template-columns: minmax(0, 1fr) 84px;
+}
+
+.beginner-guide__step-message p {
+  min-height: 62px;
+  display: flex;
+  align-items: center;
+  padding: 11px 16px;
+  font-size: 12px;
+}
+
+.beginner-guide__step-message .beginner-guide__character {
+  width: 86px;
+  height: 76px;
+  overflow: hidden;
+  border: 1px solid rgba(18, 184, 159, 0.22);
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.beginner-guide__step-message .beginner-guide__character img {
+  width: 88px;
+  height: 114px;
+  object-fit: cover;
+  object-position: 50% 3%;
+}
+
+.beginner-guide__panel.is-compact {
+  margin-top: 0;
+  padding-top: 13px;
+}
+
+.beginner-guide__course-grid {
+  gap: 22px;
+}
+
+.beginner-guide__course-card {
+  border-radius: 8px;
+  box-shadow: 0 5px 13px rgba(31, 41, 51, 0.09);
+}
+
+.beginner-guide__course-card img {
+  height: 96px;
+}
+
+.beginner-guide__course-card div {
+  min-height: 96px;
+  padding: 9px 12px 12px;
+}
+
+.beginner-guide__course-card h3 {
+  font-size: 15px;
+}
+
+.beginner-guide__course-card strong,
+.beginner-guide__course-card p {
+  font-size: 12px;
+}
+
+.beginner-guide__articles {
+  margin-top: 0;
+  padding: 10px 22px 14px;
+  border-top: 0;
+  border-radius: 0 0 15px 15px;
+  box-shadow: 0 10px 20px rgba(31, 41, 51, 0.08);
+}
+
+.beginner-guide__article-grid {
+  gap: 16px;
+}
+
+.beginner-guide__article-link {
+  min-height: 58px;
+  border-radius: 9px;
+}
+
+.beginner-guide__cta {
+  width: calc(100% - 40px);
+  min-height: 166px;
+  grid-template-columns: 135px 148px minmax(0, 1fr);
+  margin-top: 14px;
+  padding: 16px 42px 18px;
+  border: 0;
+  border-radius: 0 0 10px 10px;
+  background:
+    radial-gradient(circle at 2% 84%, #ff7b68 0 18px, transparent 19px),
+    radial-gradient(circle at 98% 91%, #ff8f7d 0 16px, transparent 17px),
+    radial-gradient(ellipse at 5% 100%, rgba(18, 184, 159, 0.24) 0 36%, transparent 37%),
+    radial-gradient(ellipse at 96% 100%, rgba(18, 184, 159, 0.22) 0 34%, transparent 35%),
+    linear-gradient(90deg, #dff8f4 0%, #f8fffc 52%, #d8f6f1 100%);
+  box-shadow: none;
+}
+
+.beginner-guide__cta .beginner-guide__character {
+  width: 132px;
+  height: 132px;
+  overflow: hidden;
+  align-self: end;
+}
+
+.beginner-guide__cta .beginner-guide__character img {
+  width: 132px;
+  height: 176px;
+  object-fit: cover;
+  object-position: 50% 0;
+}
+
+.beginner-guide__cta-balloon {
+  padding: 14px 17px;
+  border-radius: 50%;
+  color: #1f2933;
+  font-size: 12px;
+  text-align: center;
+}
+
+.beginner-guide__cta-copy h2 {
+  margin-bottom: 14px;
+  font-size: 26px;
+}
+
+.beginner-guide__cta-actions {
+  gap: 30px;
+}
+
+.beginner-guide__button {
+  min-height: 62px;
+  border-radius: 11px;
+  font-size: 18px;
+}
+
+@media (max-width: 1100px) {
+  .beginner-guide {
+    width: min(100%, calc(100% - 8px));
+  }
+
+  .beginner-guide__hero {
+    grid-template-columns: minmax(0, 1fr) 228px;
+  }
+
+  .beginner-guide__hero-copy {
+    padding-left: 98px;
+  }
+
+  .beginner-guide__speech {
+    margin-left: 44px;
+  }
+
+  .beginner-guide__panel,
+  .beginner-guide__articles {
+    width: calc(100% - 36px);
+  }
+
+  .beginner-guide__step {
+    grid-template-columns: minmax(0, 1fr) 320px;
+  }
+}
+
+@media (max-width: 900px) {
+  .beginner-guide {
+    border-radius: 10px;
+  }
+
+  .beginner-guide__hero {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .beginner-guide__hero-copy {
+    padding: 28px 20px 0;
+  }
+
+  .beginner-guide__hero-copy h1 {
+    font-size: 39px;
+  }
+
+  .beginner-guide__speech {
+    margin-left: 0;
+  }
+
+  .beginner-guide__character.is-hero {
+    min-height: 180px;
+    justify-self: end;
+  }
+
+  .beginner-guide__character.is-hero img {
+    width: 190px;
+    height: 188px;
+  }
+
+  .beginner-guide__detail-card {
+    grid-template-columns: 1fr;
+  }
+
+  .beginner-guide__character.is-pointing {
+    min-height: 168px;
+    justify-self: end;
+  }
+
+  .beginner-guide__character.is-pointing img {
+    width: 162px;
+    height: 170px;
+  }
+
+  .beginner-guide__step {
+    grid-template-columns: 1fr;
+  }
+
+  .beginner-guide__cta {
+    width: calc(100% - 24px);
+    grid-template-columns: 110px minmax(0, 1fr);
+    padding: 16px 18px 20px;
+  }
+
+  .beginner-guide__cta-copy {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 640px) {
+  .beginner-guide {
+    width: min(100%, calc(100% - 8px));
+  }
+
+  .beginner-guide__hero-copy h1 {
+    font-size: 33px;
+  }
+
+  .beginner-guide__panel,
+  .beginner-guide__articles {
+    width: calc(100% - 18px);
+  }
+
+  .beginner-guide__route-card {
+    padding: 11px 18px;
+  }
+
+  .beginner-guide__detail-copy h3,
+  .beginner-guide__detail-table {
+    margin-left: 0;
+  }
+
+  .beginner-guide__step-copy {
+    grid-template-columns: 1fr;
+  }
+
+  .beginner-guide__step-copy p {
+    grid-column: auto;
+  }
+
+  .beginner-guide__step-message {
+    grid-template-columns: 1fr 84px;
+  }
+
+  .beginner-guide__cta {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .beginner-guide__cta .beginner-guide__character {
+    justify-self: center;
+  }
+
+  .beginner-guide__cta-actions {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+
+/* Beginner guide test page */
+.beginner-guide-page-shell {
+  background:
+    radial-gradient(circle at 0 12%, rgba(18, 184, 159, 0.12), transparent 280px),
+    radial-gradient(circle at 100% 18%, rgba(255, 214, 102, 0.18), transparent 320px),
+    linear-gradient(180deg, #f0fffb 0%, #ffffff 48%, #e9faf5 100%);
+}
+
+.beginner-guide {
+  --guide-mint: #12b89f;
+  --guide-green: #009b86;
+  --guide-pale: #e9faf5;
+  --guide-ink: #1f2933;
+  --guide-orange: #ff6b57;
+  --guide-line: #d7ece8;
+  --guide-shadow: 0 14px 30px rgba(31, 41, 51, 0.1);
+  width: min(960px, calc(100% - 18px));
+  margin: 0 auto;
+  padding: 18px 0 44px;
+  color: var(--guide-ink);
+  font-family: "M PLUS Rounded 1c", "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
+}
+
+.beginner-guide * {
+  box-sizing: border-box;
+}
+
+.beginner-guide__hero {
+  position: relative;
+  min-height: 270px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 240px;
+  align-items: center;
+  overflow: hidden;
+  border: 2px solid rgba(0, 155, 134, 0.55);
+  border-radius: 18px 18px 10px 10px;
+  background:
+    radial-gradient(circle at 4% 20%, rgba(255, 255, 255, 0.34) 0 3px, transparent 4px) 0 0 / 18px 18px,
+    linear-gradient(180deg, rgba(207, 246, 255, 0.9) 0%, rgba(255, 255, 255, 0.66) 45%, rgba(181, 230, 117, 0.6) 100%),
+    var(--hero-bg) center / cover no-repeat;
+  box-shadow: var(--guide-shadow);
+}
+
+.beginner-guide__hero::before {
+  content: "";
+  position: absolute;
+  left: -22px;
+  right: -22px;
+  bottom: -28px;
+  height: 98px;
+  background:
+    radial-gradient(ellipse at 20% 78%, rgba(86, 179, 67, 0.8), transparent 42%),
+    radial-gradient(ellipse at 58% 70%, rgba(135, 211, 78, 0.8), transparent 44%),
+    linear-gradient(180deg, rgba(95, 194, 69, 0.22), rgba(81, 176, 56, 0.55));
+  border-radius: 50% 50% 0 0;
+}
+
+.beginner-guide__hero::after {
+  content: "";
+  position: absolute;
+  left: 22px;
+  top: 24px;
+  width: 102px;
+  height: 150px;
+  background:
+    linear-gradient(95deg, transparent 47%, rgba(93, 68, 34, 0.65) 48% 52%, transparent 53%) 46px 46px / 36px 104px no-repeat,
+    radial-gradient(ellipse at 50% 100%, rgba(27, 137, 82, 0.85) 0 44%, transparent 45%),
+    radial-gradient(ellipse at 20% 70%, rgba(69, 177, 98, 0.88) 0 38%, transparent 39%),
+    radial-gradient(ellipse at 72% 62%, rgba(36, 150, 82, 0.88) 0 40%, transparent 41%);
+  opacity: 0.72;
+}
+
+.beginner-guide__hero-copy {
+  position: relative;
+  z-index: 2;
+  padding: 34px 20px 30px 128px;
+}
+
+.beginner-guide__hero-copy p {
+  margin: 0 0 4px;
+  color: var(--guide-green);
+  font-size: clamp(21px, 3vw, 30px);
+  font-weight: 900;
+  letter-spacing: 0;
+}
+
+.beginner-guide__hero-copy h1 {
+  margin: 0;
+  color: #20252b;
+  font-size: clamp(32px, 4vw, 43px);
+  font-weight: 950;
+  line-height: 1.05;
+  letter-spacing: 0;
+}
+
+.beginner-guide__hero-copy h1::first-letter {
+  color: #20252b;
+}
+
+.beginner-guide__speech {
+  position: relative;
+  width: min(410px, 100%);
+  margin-top: 18px;
+  padding: 18px 26px;
+  border: 1px solid rgba(18, 184, 159, 0.55);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.96);
+  color: #111827;
+  font-size: clamp(14px, 1.6vw, 17px);
+  font-weight: 850;
+  line-height: 1.7;
+  box-shadow: 0 8px 16px rgba(0, 155, 134, 0.08);
+}
+
+.beginner-guide__speech::after {
+  content: "";
+  position: absolute;
+  right: -23px;
+  top: 36px;
+  width: 24px;
+  height: 28px;
+  background: inherit;
+  border-top: 1px solid rgba(18, 184, 159, 0.55);
+  border-right: 1px solid rgba(18, 184, 159, 0.55);
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+
+.beginner-guide__character {
+  position: relative;
+  z-index: 2;
+  margin: 0;
+  display: grid;
+  place-items: center;
+}
+
+.beginner-guide__character img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 10px 14px rgba(31, 41, 51, 0.18));
+}
+
+.beginner-guide__character > span {
+  position: relative;
+  display: block;
+  width: 150px;
+  height: 218px;
+}
+
+.beginner-guide__character > span::before,
+.beginner-guide__character > span::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.beginner-guide__character > span::before {
+  top: 0;
+  width: 110px;
+  height: 110px;
+  border: 5px solid #7be4d7;
+  border-radius: 54% 46% 50% 50%;
+  background:
+    radial-gradient(circle at 36% 45%, #1f2933 0 5px, transparent 6px),
+    radial-gradient(circle at 65% 45%, #1f2933 0 5px, transparent 6px),
+    radial-gradient(ellipse at 50% 70%, #ff8f7a 0 8px, transparent 9px),
+    linear-gradient(140deg, #5c2f12 0 17%, transparent 18%),
+    #ffe0c6;
+  box-shadow:
+    0 -20px 0 -4px #6d3516,
+    0 -31px 0 -13px #d8fff8,
+    0 5px 0 #ffffff inset;
+}
+
+.beginner-guide__character > span::after {
+  top: 100px;
+  width: 132px;
+  height: 116px;
+  border: 4px solid #079b86;
+  border-radius: 36px 36px 24px 24px;
+  background:
+    radial-gradient(circle at 23px 25px, rgba(255, 255, 255, 0.8) 0 4px, transparent 5px),
+    radial-gradient(circle at 42px 42px, rgba(255, 255, 255, 0.75) 0 3px, transparent 4px),
+    linear-gradient(90deg, transparent 45%, rgba(255, 255, 255, 0.9) 46% 54%, transparent 55%),
+    #8de6dc;
+}
+
+.beginner-guide__character.is-hero {
+  min-height: 248px;
+  align-self: end;
+  padding-right: 8px;
+}
+
+.beginner-guide__character.is-hero > span {
+  width: 188px;
+  height: 248px;
+}
+
+.beginner-guide__character.is-hero img {
+  width: min(238px, 100%);
+  height: 268px;
+  object-position: center bottom;
+}
+
+.beginner-guide__character.is-hero > span::before {
+  width: 126px;
+  height: 126px;
+}
+
+.beginner-guide__character.is-hero > span::after {
+  top: 114px;
+  width: 154px;
+  height: 132px;
+}
+
+.beginner-guide__character.is-hero::after,
+.beginner-guide__character.is-pointing::after,
+.beginner-guide__character.is-cheer::after {
+  content: "";
+  position: absolute;
+  right: 26px;
+  top: 64px;
+  width: 46px;
+  height: 78px;
+  border: 9px solid #ffe0c6;
+  border-left: 0;
+  border-bottom: 0;
+  border-radius: 0 28px 0 0;
+  transform: rotate(-18deg);
+}
+
+.beginner-guide__character:has(img)::after {
+  display: none;
+}
+
+.beginner-guide__panel,
+.beginner-guide__articles,
+.beginner-guide__cta {
+  position: relative;
+  z-index: 3;
+  margin-top: 0;
+  padding: 18px 22px 22px;
+  border: 1px solid var(--guide-line);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: var(--guide-shadow);
+}
+
+.beginner-guide__panel.is-compact,
+.beginner-guide__articles,
+.beginner-guide__cta {
+  margin-top: 14px;
+}
+
+.beginner-guide__section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 12px;
+  color: #111827;
+  font-size: clamp(17px, 2vw, 21px);
+  font-weight: 950;
+  line-height: 1.25;
+  letter-spacing: 0;
+}
+
+.beginner-guide__icon {
+  position: relative;
+  flex: 0 0 auto;
+  width: 38px;
+  height: 38px;
+  display: inline-block;
+}
+
+.beginner-guide__icon.is-flag::before {
+  content: "";
+  position: absolute;
+  left: 11px;
+  top: 8px;
+  width: 3px;
+  height: 25px;
+  border-radius: 999px;
+  background: var(--guide-green);
+}
+
+.beginner-guide__icon.is-flag::after {
+  content: "";
+  position: absolute;
+  left: 14px;
+  top: 8px;
+  width: 18px;
+  height: 13px;
+  background: var(--guide-orange);
+  clip-path: polygon(0 0, 100% 42%, 0 100%);
+}
+
+.beginner-guide__icon.is-room::before {
+  content: "";
+  position: absolute;
+  inset: 5px 8px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #8ee7d8 0 44%, #009b86 45% 100%);
+  clip-path: polygon(18% 12%, 70% 0, 70% 100%, 18% 88%);
+}
+
+.beginner-guide__icon.is-room::after {
+  content: "";
+  position: absolute;
+  right: 7px;
+  bottom: 6px;
+  width: 8px;
+  height: 26px;
+  border-radius: 1px;
+  background: #dff8f4;
+}
+
+.beginner-guide__icon.is-coach::before,
+.beginner-guide__icon.is-coach::after,
+.beginner-guide__icon.is-group::before,
+.beginner-guide__icon.is-group::after {
+  content: "";
+  position: absolute;
+  background: #ff6b57;
+}
+
+.beginner-guide__icon.is-coach::before {
+  left: 13px;
+  top: 5px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+}
+
+.beginner-guide__icon.is-coach::after {
+  left: 8px;
+  bottom: 6px;
+  width: 24px;
+  height: 18px;
+  border-radius: 16px 16px 4px 4px;
+}
+
+.beginner-guide__icon.is-group::before {
+  left: 13px;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--guide-green);
+  box-shadow: -13px 6px 0 -1px var(--guide-mint), 13px 6px 0 -1px var(--guide-mint);
+}
+
+.beginner-guide__icon.is-group::after {
+  left: 7px;
+  bottom: 7px;
+  width: 24px;
+  height: 17px;
+  border-radius: 14px 14px 4px 4px;
+  background: var(--guide-green);
+  box-shadow: -14px 3px 0 -3px var(--guide-mint), 14px 3px 0 -3px var(--guide-mint);
+}
+
+.beginner-guide__icon.is-clipboard::before {
+  content: "";
+  position: absolute;
+  left: 8px;
+  top: 6px;
+  width: 23px;
+  height: 28px;
+  border: 3px solid var(--guide-mint);
+  border-radius: 4px;
+}
+
+.beginner-guide__icon.is-clipboard::after {
+  content: "";
+  position: absolute;
+  left: 14px;
+  top: 4px;
+  width: 12px;
+  height: 7px;
+  border-radius: 4px;
+  background: var(--guide-mint);
+  box-shadow: 0 12px 0 -5px var(--guide-mint), 0 21px 0 -5px var(--guide-mint);
+}
+
+.beginner-guide__icon.is-hand::before {
+  content: "";
+  position: absolute;
+  left: 9px;
+  top: 5px;
+  width: 20px;
+  height: 29px;
+  border-radius: 11px 11px 13px 13px;
+  background: var(--guide-mint);
+  box-shadow: -5px 5px 0 -2px var(--guide-green), 6px 5px 0 -2px var(--guide-green);
+}
+
+.beginner-guide__icon.is-chat::before {
+  content: "";
+  position: absolute;
+  inset: 8px 5px 8px 4px;
+  border-radius: 18px;
+  background: var(--guide-mint);
+}
+
+.beginner-guide__icon.is-chat::after {
+  content: "";
+  position: absolute;
+  left: 17px;
+  top: 18px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: -9px 0 0 #ffffff, 9px 0 0 #ffffff;
+}
+
+.beginner-guide__icon.is-book::before {
+  content: "";
+  position: absolute;
+  inset: 8px 5px 8px 5px;
+  border: 3px solid var(--guide-green);
+  border-radius: 4px 10px 10px 4px;
+}
+
+.beginner-guide__icon.is-book::after {
+  content: "";
+  position: absolute;
+  left: 18px;
+  top: 10px;
+  width: 3px;
+  height: 19px;
+  background: var(--guide-green);
+}
+
+.beginner-guide__route-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.beginner-guide__route-card {
+  position: relative;
+  min-height: 74px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  border: 2px solid #dbe8e7;
+  border-radius: 12px;
+  background: #ffffff;
+  color: var(--guide-ink);
+  text-align: left;
+  box-shadow: 0 5px 13px rgba(31, 41, 51, 0.08);
+  cursor: default;
+}
+
+.beginner-guide__route-card.is-active {
+  border-color: var(--guide-mint);
+  box-shadow: 0 8px 18px rgba(0, 155, 134, 0.16);
+}
+
+.beginner-guide__route-card.is-active::after {
+  content: "";
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  border-top: 24px solid var(--guide-mint);
+  border-left: 24px solid transparent;
+}
+
+.beginner-guide__route-card b,
+.beginner-guide__mini-route b {
+  display: block;
+  color: var(--guide-green);
+  font-size: 14px;
+  font-weight: 950;
+  line-height: 1.2;
+}
+
+.beginner-guide__route-card.is-b b,
+.beginner-guide__mini-route.is-b b {
+  color: #ff4f3e;
+}
+
+.beginner-guide__route-card strong {
+  display: block;
+  margin-top: 3px;
+  font-size: 15px;
+  font-weight: 900;
+  line-height: 1.2;
+}
+
+.beginner-guide__detail-card {
+  position: relative;
+  min-height: 260px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 238px;
+  gap: 16px;
+  margin-top: 18px;
+  padding: 34px 20px 12px;
+  overflow: hidden;
+  border: 1px solid var(--guide-line);
+  border-radius: 14px;
+  background:
+    linear-gradient(90deg, #ffffff 0%, #ffffff 62%, rgba(233, 250, 245, 0.74) 100%);
+  box-shadow: 0 8px 18px rgba(31, 41, 51, 0.08);
+}
+
+.beginner-guide__detail-card::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 32%;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.92)),
+    var(--hero-bg, url("/assets/hero-golfer.jpg")) center / cover no-repeat;
+  opacity: 0.55;
+}
+
+.beginner-guide__ribbon {
+  position: absolute;
+  left: 22px;
+  top: 0;
+  z-index: 2;
+  min-width: 134px;
+  padding: 7px 18px;
+  background: var(--guide-green);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 950;
+  line-height: 1;
+  clip-path: polygon(8px 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
+}
+
+.beginner-guide__detail-copy {
+  position: relative;
+  z-index: 2;
+}
+
+.beginner-guide__detail-copy h3 {
+  margin: 0 0 12px;
+  color: #030712;
+  font-size: clamp(22px, 3vw, 31px);
+  font-weight: 950;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+.beginner-guide__detail-table {
+  overflow: hidden;
+  border: 1px solid var(--guide-line);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.94);
+}
+
+.beginner-guide__detail-row {
+  display: grid;
+  grid-template-columns: 46px 118px minmax(0, 1fr);
+  align-items: center;
+  min-height: 62px;
+}
+
+.beginner-guide__detail-row + .beginner-guide__detail-row {
+  border-top: 1px solid var(--guide-line);
+}
+
+.beginner-guide__detail-row .beginner-guide__icon {
+  justify-self: center;
+}
+
+.beginner-guide__detail-row strong {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  border-right: 1px solid var(--guide-line);
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.beginner-guide__detail-row p {
+  margin: 0;
+  padding: 10px 14px;
+  color: #26333d;
+  font-size: 13px;
+  font-weight: 650;
+  line-height: 1.6;
+}
+
+.beginner-guide__character.is-pointing {
+  z-index: 2;
+  align-self: end;
+  min-height: 220px;
+}
+
+.beginner-guide__character.is-pointing img {
+  width: min(220px, 100%);
+  height: 228px;
+  object-position: center bottom;
+}
+
+.beginner-guide__mini-routes {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  margin-top: 12px;
+  overflow: hidden;
+  border: 1px solid var(--guide-line);
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.beginner-guide__mini-route {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr);
+  gap: 10px;
+  align-items: center;
+  padding: 12px 14px;
+}
+
+.beginner-guide__mini-route + .beginner-guide__mini-route {
+  border-left: 1px solid var(--guide-line);
+}
+
+.beginner-guide__mini-route strong {
+  margin-left: 8px;
+  color: #111827;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.beginner-guide__mini-route p {
+  margin: 3px 0 0;
+  color: #4b5563;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.beginner-guide__steps {
+  margin-top: 28px;
+}
+
+.beginner-guide__timeline {
+  position: relative;
+  display: grid;
+  gap: 0;
+  padding-left: 40px;
+}
+
+.beginner-guide__timeline::before {
+  content: "";
+  position: absolute;
+  left: 16px;
+  top: 0;
+  bottom: 4px;
+  width: 2px;
+  background: repeating-linear-gradient(180deg, var(--guide-mint) 0 7px, transparent 7px 13px);
+}
+
+.beginner-guide__step {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 330px);
+  gap: 18px;
+  align-items: center;
+  padding: 13px 0;
+  border-top: 1px solid rgba(215, 236, 232, 0.9);
+}
+
+.beginner-guide__step:first-child {
+  border-top: 0;
+}
+
+.beginner-guide__step-dot {
+  position: absolute;
+  left: -36px;
+  top: 30px;
+  width: 28px;
+  height: 28px;
+  border: 4px solid #e9faf5;
+  border-radius: 50%;
+  background: var(--guide-green);
+  box-shadow: 0 0 0 1px rgba(0, 155, 134, 0.25);
+}
+
+.beginner-guide__step-copy {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 8px 12px;
+  align-items: baseline;
+}
+
+.beginner-guide__step-copy span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--guide-mint);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 950;
+  line-height: 1;
+}
+
+.beginner-guide__step-copy h3 {
+  margin: 0;
+  color: #111827;
+  font-size: 17px;
+  font-weight: 950;
+  line-height: 1.35;
+}
+
+.beginner-guide__step-copy p {
+  grid-column: 2;
+  margin: 0;
+  color: #1f2933;
+  font-size: 13px;
+  font-weight: 650;
+  line-height: 1.65;
+}
+
+.beginner-guide__step-message {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 82px;
+  gap: 10px;
+  align-items: center;
+}
+
+.beginner-guide__step-message p,
+.beginner-guide__cta-balloon {
+  position: relative;
+  margin: 0;
+  padding: 13px 16px;
+  border: 1px solid rgba(18, 184, 159, 0.55);
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.93);
+  color: var(--guide-green);
+  font-size: 13px;
+  font-weight: 900;
+  line-height: 1.55;
+}
+
+.beginner-guide__step-message p::after {
+  content: "";
+  position: absolute;
+  right: -11px;
+  top: 50%;
+  width: 12px;
+  height: 18px;
+  background: inherit;
+  border-top: 1px solid rgba(18, 184, 159, 0.55);
+  border-right: 1px solid rgba(18, 184, 159, 0.55);
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+  transform: translateY(-50%);
+}
+
+.beginner-guide__step-message .beginner-guide__character > span {
+  width: 70px;
+  height: 82px;
+}
+
+.beginner-guide__step-message .beginner-guide__character img {
+  width: 76px;
+  height: 86px;
+  object-position: top center;
+}
+
+.beginner-guide__step-message .beginner-guide__character > span::before {
+  width: 50px;
+  height: 50px;
+  border-width: 3px;
+  box-shadow:
+    0 -10px 0 -2px #6d3516,
+    0 -18px 0 -9px #d8fff8,
+    0 3px 0 #ffffff inset;
+}
+
+.beginner-guide__step-message .beginner-guide__character > span::after {
+  top: 48px;
+  width: 58px;
+  height: 34px;
+  border-width: 3px;
+  border-radius: 18px 18px 12px 12px;
+}
+
+.beginner-guide__course-grid,
+.beginner-guide__article-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.beginner-guide__course-card {
+  overflow: hidden;
+  border: 1px solid var(--guide-line);
+  border-radius: 9px;
+  background: #ffffff;
+  text-align: center;
+  box-shadow: 0 6px 14px rgba(31, 41, 51, 0.08);
+}
+
+.beginner-guide__course-card img {
+  width: 100%;
+  height: 92px;
+  object-fit: cover;
+  display: block;
+}
+
+.beginner-guide__course-card div {
+  padding: 10px 12px 14px;
+}
+
+.beginner-guide__course-card h3 {
+  margin: 0;
+  color: #111827;
+  font-size: 15px;
+  font-weight: 950;
+  line-height: 1.35;
+}
+
+.beginner-guide__course-card strong {
+  display: block;
+  margin-top: 3px;
+  color: var(--guide-mint);
+  font-size: 13px;
+  font-weight: 950;
+}
+
+.beginner-guide__course-card p {
+  margin: 2px 0 0;
+  color: #1f2933;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.beginner-guide__article-link {
+  min-height: 62px;
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) 20px;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 12px;
+  border: 1px solid var(--guide-line);
+  border-radius: 9px;
+  background: #ffffff;
+  color: #111827;
+  text-decoration: none;
+  box-shadow: 0 5px 12px rgba(31, 41, 51, 0.07);
+  transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.beginner-guide__article-link:hover,
+.beginner-guide__article-link:focus-visible,
+.beginner-guide__button:hover,
+.beginner-guide__button:focus-visible {
+  border-color: rgba(0, 155, 134, 0.45);
+  box-shadow: 0 10px 20px rgba(0, 155, 134, 0.13);
+  transform: translateY(-1px);
+}
+
+.beginner-guide__article-link strong {
+  font-size: 14px;
+  font-weight: 900;
+  line-height: 1.35;
+}
+
+.beginner-guide__article-link strong span {
+  display: block;
+}
+
+.beginner-guide__article-link i {
+  width: 11px;
+  height: 11px;
+  border-top: 3px solid var(--guide-green);
+  border-right: 3px solid var(--guide-green);
+  transform: rotate(45deg);
+}
+
+.beginner-guide__cta {
+  min-height: 170px;
+  display: grid;
+  grid-template-columns: 132px 146px minmax(0, 1fr);
+  gap: 18px;
+  align-items: center;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 6% 84%, rgba(255, 107, 87, 0.2), transparent 76px),
+    radial-gradient(circle at 96% 90%, rgba(255, 107, 87, 0.16), transparent 82px),
+    linear-gradient(90deg, #e4faf5 0%, #f7fffd 50%, #ddf8f2 100%);
+}
+
+.beginner-guide__cta .beginner-guide__character > span {
+  width: 118px;
+  height: 138px;
+}
+
+.beginner-guide__cta .beginner-guide__character img {
+  width: 124px;
+  height: 142px;
+  object-position: top center;
+}
+
+.beginner-guide__cta .beginner-guide__character > span::before {
+  width: 82px;
+  height: 82px;
+}
+
+.beginner-guide__cta .beginner-guide__character > span::after {
+  top: 78px;
+  width: 96px;
+  height: 58px;
+}
+
+.beginner-guide__cta-balloon::after {
+  content: "";
+  position: absolute;
+  left: -12px;
+  top: 36px;
+  width: 14px;
+  height: 20px;
+  background: inherit;
+  border-left: 1px solid rgba(18, 184, 159, 0.55);
+  border-bottom: 1px solid rgba(18, 184, 159, 0.55);
+  clip-path: polygon(100% 0, 0 50%, 100% 100%);
+}
+
+.beginner-guide__cta-copy {
+  text-align: center;
+}
+
+.beginner-guide__cta-copy h2 {
+  display: inline-block;
+  margin: 0 0 18px;
+  padding: 0 28px 7px;
+  border-bottom: 2px dashed var(--guide-mint);
+  color: var(--guide-green);
+  font-size: clamp(24px, 3vw, 31px);
+  font-weight: 950;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+.beginner-guide__cta-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.beginner-guide__button {
+  min-height: 58px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 14px 18px;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  font-size: 17px;
+  font-weight: 950;
+  line-height: 1.2;
+  text-decoration: none;
+  transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+}
+
+.beginner-guide__button::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-top: 3px solid currentColor;
+  border-right: 3px solid currentColor;
+  transform: rotate(45deg);
+}
+
+.beginner-guide__button.is-primary {
+  background: var(--guide-orange);
+  color: #ffffff;
+  box-shadow: 0 10px 18px rgba(255, 107, 87, 0.3);
+}
+
+.beginner-guide__button.is-primary::before {
+  content: "";
+  width: 18px;
+  height: 22px;
+  background: currentColor;
+  clip-path: polygon(0 0, 100% 28%, 0 56%);
+}
+
+.beginner-guide__button.is-secondary {
+  border-color: var(--guide-green);
+  background: rgba(255, 255, 255, 0.86);
+  color: var(--guide-green);
+}
+
+.beginner-guide__button.is-secondary::before {
+  content: "";
+  width: 22px;
+  height: 18px;
+  border: 3px solid currentColor;
+  border-radius: 3px 8px 8px 3px;
+}
+
+@media (max-width: 1100px) {
+  .beginner-guide {
+    width: min(100%, calc(100% - 8px));
+  }
+
+  .beginner-guide__hero {
+    grid-template-columns: minmax(0, 1fr) 190px;
+  }
+
+  .beginner-guide__hero-copy {
+    padding-left: 92px;
+  }
+
+  .beginner-guide__route-grid,
+  .beginner-guide__course-grid,
+  .beginner-guide__article-grid {
+    gap: 12px;
+  }
+}
+
+@media (max-width: 900px) {
+  .beginner-guide__hero {
+    grid-template-columns: minmax(0, 1fr);
+    min-height: 0;
+  }
+
+  .beginner-guide__hero-copy {
+    padding: 28px 24px 8px;
+  }
+
+  .beginner-guide__hero::after {
+    display: none;
+  }
+
+  .beginner-guide__character.is-hero {
+    justify-self: end;
+    margin-top: -24px;
+    padding-right: 20px;
+  }
+
+  .beginner-guide__route-grid,
+  .beginner-guide__mini-routes,
+  .beginner-guide__course-grid,
+  .beginner-guide__article-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .beginner-guide__mini-route + .beginner-guide__mini-route {
+    border-left: 0;
+    border-top: 1px solid var(--guide-line);
+  }
+
+  .beginner-guide__detail-card {
+    grid-template-columns: 1fr;
+  }
+
+  .beginner-guide__detail-card::after {
+    width: 100%;
+    opacity: 0.22;
+  }
+
+  .beginner-guide__character.is-pointing {
+    min-height: 160px;
+    justify-self: end;
+  }
+
+  .beginner-guide__step {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .beginner-guide__step-message {
+    grid-template-columns: minmax(0, 1fr) 72px;
+  }
+
+  .beginner-guide__cta {
+    grid-template-columns: 110px minmax(0, 1fr);
+  }
+
+  .beginner-guide__cta-copy {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 640px) {
+  .beginner-guide {
+    padding-top: 10px;
+  }
+
+  .beginner-guide__panel,
+  .beginner-guide__articles,
+  .beginner-guide__cta {
+    padding: 16px 14px 18px;
+    border-radius: 14px;
+  }
+
+  .beginner-guide__hero-copy h1 {
+    font-size: 34px;
+  }
+
+  .beginner-guide__speech {
+    padding: 14px 16px;
+  }
+
+  .beginner-guide__speech::after {
+    display: none;
+  }
+
+  .beginner-guide__detail-row {
+    grid-template-columns: 40px minmax(0, 1fr);
+    padding: 10px 0;
+  }
+
+  .beginner-guide__detail-row strong {
+    min-height: 34px;
+    border-right: 0;
+  }
+
+  .beginner-guide__detail-row p {
+    grid-column: 1 / -1;
+    padding: 0 12px 4px 52px;
+  }
+
+  .beginner-guide__timeline {
+    padding-left: 30px;
+  }
+
+  .beginner-guide__timeline::before {
+    left: 12px;
+  }
+
+  .beginner-guide__step-dot {
+    left: -30px;
+    width: 24px;
+    height: 24px;
+  }
+
+  .beginner-guide__step-copy {
+    grid-template-columns: 1fr;
+  }
+
+  .beginner-guide__step-copy p {
+    grid-column: auto;
+  }
+
+  .beginner-guide__step-message {
+    grid-template-columns: 1fr;
+  }
+
+  .beginner-guide__step-message p::after {
+    display: none;
+  }
+
+  .beginner-guide__step-message .beginner-guide__character {
+    justify-self: end;
+  }
+
+  .beginner-guide__course-card img {
+    height: 118px;
+  }
+
+  .beginner-guide__cta {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .beginner-guide__cta .beginner-guide__character {
+    justify-self: center;
+  }
+
+  .beginner-guide__cta-balloon::after {
+    display: none;
+  }
+
+  .beginner-guide__cta-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .beginner-guide__button {
+    width: 100%;
+    font-size: 16px;
+  }
+}
+
 /* Portal mockup refresh */
 :root {
   --portal-green: #008f5a;
@@ -9631,6 +11418,1216 @@ body {
   }
 }
 
+/* Beginner guide character variant final overrides. */
+.beginner-guide .beginner-guide__character.is-pointing img[src*="yui-pointing"] {
+  width: 258px !important;
+  height: 248px !important;
+  object-fit: cover !important;
+  object-position: 50% 10% !important;
+}
+
+.beginner-guide .beginner-guide__step-message .beginner-guide__character img[src*="yui-smile"],
+.beginner-guide .beginner-guide__step-message .beginner-guide__character img[src*="yui-pointing"],
+.beginner-guide .beginner-guide__step-message .beginner-guide__character img[src*="yui-cheer"] {
+  width: 86px !important;
+  height: 86px !important;
+  object-fit: cover !important;
+  object-position: 50% 18% !important;
+}
+
+.beginner-guide .beginner-guide__step-message .beginner-guide__character img[src*="yui-cheer"] {
+  object-position: 50% 21% !important;
+}
+
+.beginner-guide .beginner-guide__cta .beginner-guide__character img[src*="yui-smile"] {
+  width: 152px !important;
+  height: 152px !important;
+  object-fit: cover !important;
+  object-position: 50% 16% !important;
+}
+
+.beginner-guide .beginner-guide__step-message {
+  grid-template-columns: minmax(0, 1fr) 88px !important;
+}
+
+.beginner-guide .beginner-guide__step-message .beginner-guide__character {
+  width: 88px !important;
+  height: 88px !important;
+  aspect-ratio: 1 / 1 !important;
+}
+
+/* Browser comment fix: make step comments read as speech bubbles from the character. */
+.beginner-guide .beginner-guide__step-message {
+  column-gap: 10px !important;
+  align-items: center !important;
+}
+
+.beginner-guide .beginner-guide__step-message p {
+  position: relative !important;
+  border-radius: 10px !important;
+  overflow: visible !important;
+}
+
+.beginner-guide .beginner-guide__step-message p::before {
+  content: "" !important;
+  position: absolute !important;
+  top: 50% !important;
+  right: -10px !important;
+  width: 18px !important;
+  height: 18px !important;
+  border-top: 1px solid rgba(18, 184, 159, 0.5) !important;
+  border-right: 1px solid rgba(18, 184, 159, 0.5) !important;
+  background: #ffffff !important;
+  transform: translateY(-50%) rotate(45deg) !important;
+  z-index: 1 !important;
+}
+
+.beginner-guide .beginner-guide__step-message p::after {
+  content: "" !important;
+  position: absolute !important;
+  top: calc(50% - 16px) !important;
+  right: -1px !important;
+  width: 13px !important;
+  height: 32px !important;
+  background: #ffffff !important;
+  z-index: 2 !important;
+}
+
+/* Browser comment fix: expand the beginner guide to the available content column. */
+.beginner-guide-page-shell .portal-page-content {
+  width: 100% !important;
+  max-width: none !important;
+}
+
+.beginner-guide-page-shell .beginner-guide.beginner-guide {
+  width: 100% !important;
+  max-width: none !important;
+}
+
+/* Browser comment fix: remove the frame around step character images. */
+.beginner-guide .beginner-guide__step-message .beginner-guide__character {
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Beginner guide: keep stacked recommendation sections visually separated. */
+.beginner-guide .beginner-guide__panel.is-compact + .beginner-guide__panel.is-compact {
+  margin-top: 12px !important;
+  border-radius: 15px !important;
+}
+
+/* Browser comment fix: make step comments read as speech bubbles from the character. */
+.beginner-guide .beginner-guide__step-message {
+  column-gap: 10px !important;
+  align-items: center !important;
+}
+
+.beginner-guide .beginner-guide__step-message p {
+  position: relative !important;
+  border-radius: 10px !important;
+  overflow: visible !important;
+}
+
+.beginner-guide .beginner-guide__step-message p::before {
+  content: "" !important;
+  position: absolute !important;
+  top: 50% !important;
+  right: -10px !important;
+  width: 18px !important;
+  height: 18px !important;
+  border-top: 1px solid rgba(18, 184, 159, 0.5) !important;
+  border-right: 1px solid rgba(18, 184, 159, 0.5) !important;
+  background: #ffffff !important;
+  transform: translateY(-50%) rotate(45deg) !important;
+  z-index: 1 !important;
+}
+
+.beginner-guide .beginner-guide__step-message p::after {
+  content: "" !important;
+  position: absolute !important;
+  top: calc(50% - 16px) !important;
+  right: -1px !important;
+  width: 13px !important;
+  height: 32px !important;
+  background: #ffffff !important;
+  z-index: 2 !important;
+}
+
+/* Beginner guide precision pass: match the supplied comp more closely. */
+.beginner-guide-page-shell .portal-page-content {
+  overflow: visible !important;
+}
+
+.beginner-guide.beginner-guide {
+  --guide-mint: #12b89f;
+  --guide-green: #009b86;
+  --guide-pale: #e9faf5;
+  --guide-ink: #1f2933;
+  --guide-orange: #ff6b57;
+  --guide-line: #d7ece8;
+  width: min(980px, calc(100% - 16px)) !important;
+  padding: 0 0 24px !important;
+  overflow: hidden !important;
+  border: 2px solid #009b86 !important;
+  border-radius: 12px !important;
+  background:
+    linear-gradient(90deg, rgba(232, 250, 245, 0.95) 0 44px, rgba(232, 250, 245, 0) 120px),
+    linear-gradient(270deg, rgba(232, 250, 245, 0.9) 0 44px, rgba(232, 250, 245, 0) 120px),
+    #ffffff !important;
+  color: var(--guide-ink) !important;
+  font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Noto Sans JP", system-ui, sans-serif !important;
+  box-shadow: 0 16px 34px rgba(0, 155, 134, 0.13) !important;
+}
+
+.beginner-guide.beginner-guide::before,
+.beginner-guide.beginner-guide::after {
+  z-index: 1 !important;
+  opacity: 0.28 !important;
+}
+
+.beginner-guide .beginner-guide__hero {
+  min-height: 260px !important;
+  grid-template-columns: minmax(0, 1fr) 292px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0.34) 39%, rgba(255, 255, 255, 0.02) 74%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.08) 100%),
+    var(--hero-bg) center 48% / cover no-repeat !important;
+  box-shadow: none !important;
+}
+
+.beginner-guide .beginner-guide__hero::before {
+  height: 92px !important;
+  bottom: -20px !important;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(72, 170, 55, 0.12) 100%) !important;
+}
+
+.beginner-guide .beginner-guide__hero::after {
+  display: none !important;
+}
+
+.beginner-guide .beginner-guide__hero-copy {
+  position: relative !important;
+  z-index: 2 !important;
+  padding: 36px 0 28px 148px !important;
+}
+
+.beginner-guide .beginner-guide__hero-copy::before {
+  content: "" !important;
+  position: absolute !important;
+  left: -148px !important;
+  top: -36px !important;
+  width: 226px !important;
+  height: 126px !important;
+  background: radial-gradient(circle at 4px 4px, rgba(0, 155, 134, 0.62) 0 1.5px, transparent 2px) 0 0 / 10px 10px !important;
+  pointer-events: none !important;
+}
+
+.beginner-guide .beginner-guide__hero-copy p {
+  margin: 0 0 4px !important;
+  color: #009b86 !important;
+  font-size: 29px !important;
+  font-weight: 950 !important;
+  line-height: 1.18 !important;
+}
+
+.beginner-guide .beginner-guide__hero-copy h1 {
+  max-width: 585px !important;
+  margin: 0 !important;
+  font-size: 52px !important;
+  font-weight: 950 !important;
+  line-height: 1.04 !important;
+  letter-spacing: 0 !important;
+  background: linear-gradient(90deg, #202124 0 32%, #109d8a 32% 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+  text-shadow: none !important;
+}
+
+.beginner-guide .beginner-guide__speech {
+  width: 408px !important;
+  margin: 13px 0 0 86px !important;
+  padding: 14px 27px !important;
+  border: 1px solid rgba(18, 184, 159, 0.54) !important;
+  border-radius: 20px !important;
+  background: rgba(255, 255, 255, 0.96) !important;
+  color: #111827 !important;
+  font-size: 16px !important;
+  font-weight: 900 !important;
+  line-height: 1.55 !important;
+  box-shadow: 0 7px 14px rgba(0, 155, 134, 0.08) !important;
+}
+
+.beginner-guide .beginner-guide__speech::after {
+  right: -22px !important;
+  top: 38px !important;
+}
+
+.beginner-guide .beginner-guide__character img {
+  filter: drop-shadow(0 9px 12px rgba(31, 41, 51, 0.16)) !important;
+}
+
+.beginner-guide .beginner-guide__character.is-hero {
+  z-index: 2 !important;
+  min-height: 260px !important;
+  padding: 0 28px 0 0 !important;
+  align-self: stretch !important;
+  place-items: end center !important;
+}
+
+.beginner-guide .beginner-guide__character.is-hero img {
+  width: 276px !important;
+  height: 268px !important;
+  object-fit: contain !important;
+  object-position: center bottom !important;
+}
+
+.beginner-guide .beginner-guide__panel,
+.beginner-guide .beginner-guide__articles {
+  position: relative !important;
+  z-index: 3 !important;
+  width: calc(100% - 84px) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  border: 1px solid var(--guide-line) !important;
+  background: rgba(255, 255, 255, 0.98) !important;
+  box-shadow: 0 8px 21px rgba(31, 41, 51, 0.09) !important;
+}
+
+.beginner-guide .beginner-guide__panel {
+  margin-top: 0 !important;
+  padding: 16px 22px 20px !important;
+  border-radius: 16px !important;
+}
+
+.beginner-guide .beginner-guide__section-title {
+  margin: 0 0 12px !important;
+  gap: 8px !important;
+  color: #111827 !important;
+  font-size: 18px !important;
+  font-weight: 950 !important;
+  line-height: 1.25 !important;
+  letter-spacing: 0 !important;
+}
+
+.beginner-guide .beginner-guide__route-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 20px !important;
+  margin: 0 4px !important;
+}
+
+.beginner-guide .beginner-guide__route-card {
+  min-height: 70px !important;
+  padding: 11px 26px !important;
+  gap: 13px !important;
+  border: 1px solid #dbe8e7 !important;
+  border-radius: 11px !important;
+  background: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(31, 41, 51, 0.08) !important;
+}
+
+.beginner-guide .beginner-guide__route-card.is-active {
+  border: 2px solid var(--guide-mint) !important;
+  box-shadow: 0 6px 16px rgba(0, 155, 134, 0.13) !important;
+}
+
+.beginner-guide .beginner-guide__route-card b {
+  font-size: 14px !important;
+  font-weight: 950 !important;
+  line-height: 1.2 !important;
+}
+
+.beginner-guide .beginner-guide__route-card strong {
+  margin-top: 3px !important;
+  font-size: 15px !important;
+  font-weight: 950 !important;
+  line-height: 1.2 !important;
+}
+
+.beginner-guide .beginner-guide__detail-card {
+  grid-template-columns: minmax(0, 1fr) 260px !important;
+  gap: 8px !important;
+  min-height: 258px !important;
+  margin-top: 14px !important;
+  padding: 32px 18px 10px !important;
+  border: 1px solid var(--guide-line) !important;
+  border-radius: 13px !important;
+  background: linear-gradient(90deg, #ffffff 0%, #ffffff 63%, rgba(233, 250, 245, 0.82) 100%) !important;
+  box-shadow: 0 7px 17px rgba(31, 41, 51, 0.08) !important;
+}
+
+.beginner-guide .beginner-guide__detail-card::after {
+  width: 35% !important;
+  opacity: 1 !important;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.38), rgba(255, 255, 255, 0.86)),
+    var(--hero-bg) center / cover no-repeat !important;
+}
+
+.beginner-guide .beginner-guide__ribbon {
+  left: 24px !important;
+  min-width: 132px !important;
+  padding: 8px 17px !important;
+  font-size: 14px !important;
+  font-weight: 950 !important;
+  clip-path: polygon(8px 0, 100% 0, calc(100% - 10px) 100%, 0 100%) !important;
+}
+
+.beginner-guide .beginner-guide__detail-copy h3 {
+  margin: 0 0 11px 18px !important;
+  color: #030712 !important;
+  font-size: 30px !important;
+  font-weight: 950 !important;
+  line-height: 1.2 !important;
+}
+
+.beginner-guide .beginner-guide__detail-table {
+  max-width: 560px !important;
+  margin-left: 10px !important;
+  border-radius: 9px !important;
+}
+
+.beginner-guide .beginner-guide__detail-row {
+  grid-template-columns: 56px 116px minmax(0, 1fr) !important;
+  min-height: 58px !important;
+}
+
+.beginner-guide .beginner-guide__detail-row strong {
+  font-size: 14px !important;
+  font-weight: 950 !important;
+}
+
+.beginner-guide .beginner-guide__detail-row p {
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  line-height: 1.55 !important;
+}
+
+.beginner-guide .beginner-guide__character.is-pointing {
+  z-index: 2 !important;
+  min-height: 244px !important;
+  align-self: stretch !important;
+  place-items: end center !important;
+}
+
+.beginner-guide .beginner-guide__character.is-pointing img {
+  width: 258px !important;
+  height: 248px !important;
+  object-fit: cover !important;
+  object-position: 50% 10% !important;
+}
+
+.beginner-guide .beginner-guide__mini-routes {
+  margin-top: 10px !important;
+  border-radius: 11px !important;
+}
+
+.beginner-guide .beginner-guide__mini-route {
+  grid-template-columns: 38px minmax(0, 1fr) !important;
+  padding: 9px 14px !important;
+}
+
+.beginner-guide .beginner-guide__mini-route b {
+  font-size: 12px !important;
+  font-weight: 950 !important;
+}
+
+.beginner-guide .beginner-guide__mini-route strong,
+.beginner-guide .beginner-guide__mini-route p {
+  font-weight: 850 !important;
+}
+
+.beginner-guide .beginner-guide__steps {
+  margin-top: 22px !important;
+}
+
+.beginner-guide .beginner-guide__timeline {
+  padding-left: 42px !important;
+}
+
+.beginner-guide .beginner-guide__step {
+  grid-template-columns: minmax(0, 1fr) 360px !important;
+  gap: 16px !important;
+  min-height: 82px !important;
+  padding: 10px 0 !important;
+}
+
+.beginner-guide .beginner-guide__step-copy {
+  grid-template-columns: 78px minmax(0, 1fr) !important;
+  gap: 4px 10px !important;
+}
+
+.beginner-guide .beginner-guide__step-copy span {
+  justify-content: center !important;
+  border-radius: 7px !important;
+  font-size: 13px !important;
+  font-weight: 950 !important;
+}
+
+.beginner-guide .beginner-guide__step-copy h3 {
+  font-size: 16px !important;
+  font-weight: 950 !important;
+}
+
+.beginner-guide .beginner-guide__step-copy p {
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  line-height: 1.55 !important;
+}
+
+.beginner-guide .beginner-guide__step-message {
+  grid-template-columns: minmax(0, 1fr) 84px !important;
+}
+
+.beginner-guide .beginner-guide__step-message p {
+  min-height: 62px !important;
+  display: flex !important;
+  align-items: center !important;
+  padding: 11px 16px !important;
+  border-radius: 9px !important;
+  font-size: 12px !important;
+  font-weight: 900 !important;
+  line-height: 1.5 !important;
+}
+
+.beginner-guide .beginner-guide__step-message .beginner-guide__character {
+  width: 86px !important;
+  height: 76px !important;
+  overflow: hidden !important;
+  border: 1px solid rgba(18, 184, 159, 0.22) !important;
+  border-radius: 12px !important;
+  background: #ffffff !important;
+}
+
+.beginner-guide .beginner-guide__step-message .beginner-guide__character img {
+  width: 96px !important;
+  height: 100px !important;
+  object-fit: cover !important;
+  object-position: 50% 18% !important;
+}
+
+.beginner-guide .beginner-guide__panel.is-compact {
+  margin-top: 0 !important;
+  padding-top: 13px !important;
+}
+
+.beginner-guide .beginner-guide__course-grid {
+  gap: 22px !important;
+}
+
+.beginner-guide .beginner-guide__course-card {
+  border-radius: 8px !important;
+}
+
+.beginner-guide .beginner-guide__course-card img {
+  height: 96px !important;
+}
+
+.beginner-guide .beginner-guide__course-card div {
+  min-height: 96px !important;
+  padding: 9px 12px 12px !important;
+}
+
+.beginner-guide .beginner-guide__course-card h3 {
+  font-size: 15px !important;
+  font-weight: 950 !important;
+}
+
+.beginner-guide .beginner-guide__course-card strong,
+.beginner-guide .beginner-guide__course-card p {
+  font-size: 12px !important;
+}
+
+.beginner-guide .beginner-guide__articles {
+  margin-top: 0 !important;
+  padding: 10px 22px 14px !important;
+  border-top: 0 !important;
+  border-radius: 0 0 15px 15px !important;
+}
+
+.beginner-guide .beginner-guide__article-link {
+  min-height: 58px !important;
+  border-radius: 9px !important;
+}
+
+.beginner-guide .beginner-guide__cta {
+  position: relative !important;
+  z-index: 3 !important;
+  width: calc(100% - 40px) !important;
+  min-height: 166px !important;
+  grid-template-columns: 135px 148px minmax(0, 1fr) !important;
+  margin: 14px auto 0 !important;
+  padding: 16px 42px 18px !important;
+  border: 0 !important;
+  border-radius: 0 0 10px 10px !important;
+  background:
+    radial-gradient(circle at 2% 84%, #ff7b68 0 18px, transparent 19px),
+    radial-gradient(circle at 98% 91%, #ff8f7d 0 16px, transparent 17px),
+    radial-gradient(ellipse at 5% 100%, rgba(18, 184, 159, 0.24) 0 36%, transparent 37%),
+    radial-gradient(ellipse at 96% 100%, rgba(18, 184, 159, 0.22) 0 34%, transparent 35%),
+    linear-gradient(90deg, #dff8f4 0%, #f8fffc 52%, #d8f6f1 100%) !important;
+  box-shadow: none !important;
+}
+
+.beginner-guide .beginner-guide__cta .beginner-guide__character {
+  width: 132px !important;
+  height: 132px !important;
+  overflow: hidden !important;
+  align-self: end !important;
+}
+
+.beginner-guide .beginner-guide__cta .beginner-guide__character img {
+  width: 152px !important;
+  height: 152px !important;
+  object-fit: cover !important;
+  object-position: 50% 16% !important;
+}
+
+.beginner-guide .beginner-guide__cta-balloon {
+  padding: 14px 17px !important;
+  border-radius: 50% !important;
+  color: #1f2933 !important;
+  font-size: 12px !important;
+  font-weight: 850 !important;
+  text-align: center !important;
+}
+
+.beginner-guide .beginner-guide__cta-copy h2 {
+  margin-bottom: 14px !important;
+  color: #009b86 !important;
+  font-size: 26px !important;
+  font-weight: 950 !important;
+}
+
+.beginner-guide .beginner-guide__cta-actions {
+  gap: 30px !important;
+}
+
+.beginner-guide .beginner-guide__button {
+  min-height: 62px !important;
+  border-radius: 11px !important;
+  font-size: 18px !important;
+  font-weight: 950 !important;
+}
+
+@media (max-width: 1100px) {
+  .beginner-guide.beginner-guide {
+    width: min(100%, calc(100% - 8px)) !important;
+  }
+
+  .beginner-guide .beginner-guide__hero {
+    grid-template-columns: minmax(0, 1fr) 248px !important;
+  }
+
+  .beginner-guide .beginner-guide__hero-copy {
+    padding-left: 98px !important;
+  }
+
+  .beginner-guide .beginner-guide__speech {
+    margin-left: 44px !important;
+  }
+
+  .beginner-guide .beginner-guide__panel,
+  .beginner-guide .beginner-guide__articles {
+    width: calc(100% - 36px) !important;
+  }
+
+  .beginner-guide .beginner-guide__character.is-hero img {
+    width: 246px !important;
+  }
+
+  .beginner-guide .beginner-guide__step {
+    grid-template-columns: minmax(0, 1fr) 320px !important;
+  }
+}
+
+@media (max-width: 900px) {
+  .beginner-guide .beginner-guide__hero {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .beginner-guide .beginner-guide__hero-copy {
+    padding: 28px 20px 0 !important;
+  }
+
+  .beginner-guide .beginner-guide__hero-copy h1 {
+    font-size: 39px !important;
+  }
+
+  .beginner-guide .beginner-guide__speech {
+    width: min(408px, 100%) !important;
+    margin-left: 0 !important;
+  }
+
+  .beginner-guide .beginner-guide__character.is-hero {
+    min-height: 188px !important;
+    justify-self: end !important;
+  }
+
+  .beginner-guide .beginner-guide__character.is-hero img {
+    width: 190px !important;
+    height: 188px !important;
+  }
+
+  .beginner-guide .beginner-guide__detail-card,
+  .beginner-guide .beginner-guide__step {
+    grid-template-columns: 1fr !important;
+  }
+
+  .beginner-guide .beginner-guide__cta {
+    width: calc(100% - 24px) !important;
+    grid-template-columns: 110px minmax(0, 1fr) !important;
+    padding: 16px 18px 20px !important;
+  }
+
+  .beginner-guide .beginner-guide__cta-copy {
+    grid-column: 1 / -1 !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .beginner-guide .beginner-guide__hero-copy h1 {
+    font-size: 33px !important;
+  }
+
+  .beginner-guide .beginner-guide__panel,
+  .beginner-guide .beginner-guide__articles {
+    width: calc(100% - 18px) !important;
+  }
+
+  .beginner-guide .beginner-guide__detail-copy h3,
+  .beginner-guide .beginner-guide__detail-table {
+    margin-left: 0 !important;
+  }
+
+  .beginner-guide .beginner-guide__step-copy {
+    grid-template-columns: 1fr !important;
+  }
+
+  .beginner-guide .beginner-guide__step-copy p {
+    grid-column: auto !important;
+  }
+
+  .beginner-guide .beginner-guide__step-message {
+    grid-template-columns: 1fr 84px !important;
+  }
+
+  .beginner-guide .beginner-guide__cta {
+    grid-template-columns: 1fr !important;
+    text-align: center !important;
+  }
+
+  .beginner-guide .beginner-guide__cta .beginner-guide__character {
+    justify-self: center !important;
+  }
+
+  .beginner-guide .beginner-guide__cta-actions {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+}
+
+/* Beginner guide final fidelity overrides. Keep this block after global mobile rules. */
+.beginner-guide-page-shell .portal-page-content {
+  overflow: visible !important;
+}
+
+.beginner-guide.beginner-guide {
+  position: relative;
+  width: min(980px, calc(100% - 18px));
+  margin: 0 auto;
+  padding: 0 0 34px;
+  overflow: hidden;
+  border: 2px solid #009b86;
+  border-radius: 12px;
+  background:
+    radial-gradient(circle at 1.5% 84%, rgba(255, 111, 91, 0.22) 0 18px, transparent 19px),
+    radial-gradient(circle at 97% 88%, rgba(255, 111, 91, 0.18) 0 20px, transparent 21px),
+    linear-gradient(90deg, rgba(226, 250, 245, 0.92) 0 52px, transparent 120px),
+    linear-gradient(270deg, rgba(226, 250, 245, 0.88) 0 52px, transparent 120px),
+    #ffffff;
+  box-shadow: 0 18px 38px rgba(0, 155, 134, 0.12);
+}
+
+.beginner-guide.beginner-guide::before,
+.beginner-guide.beginner-guide::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  width: 150px;
+  height: 170px;
+  pointer-events: none;
+  opacity: 0.32;
+  background:
+    radial-gradient(ellipse at 50% 100%, rgba(0, 155, 134, 0.42) 0 38%, transparent 39%),
+    radial-gradient(ellipse at 18% 70%, rgba(18, 184, 159, 0.34) 0 32%, transparent 33%),
+    radial-gradient(ellipse at 82% 74%, rgba(18, 184, 159, 0.3) 0 30%, transparent 31%);
+}
+
+.beginner-guide.beginner-guide::before {
+  left: -54px;
+  top: 206px;
+  transform: rotate(18deg);
+}
+
+.beginner-guide.beginner-guide::after {
+  right: -54px;
+  top: 210px;
+  transform: scaleX(-1) rotate(18deg);
+}
+
+.beginner-guide .beginner-guide__hero {
+  min-height: 252px;
+  grid-template-columns: minmax(0, 1fr) 270px;
+  overflow: hidden;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.74) 0%, rgba(255, 255, 255, 0.5) 43%, rgba(255, 255, 255, 0.08) 76%),
+    linear-gradient(180deg, rgba(219, 248, 255, 0.18) 0%, rgba(255, 255, 255, 0) 44%, rgba(57, 158, 47, 0.08) 100%),
+    var(--hero-bg) center 49% / cover no-repeat;
+}
+
+.beginner-guide .beginner-guide__hero::before {
+  left: -60px;
+  right: -60px;
+  bottom: -10px;
+  height: 116px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(81, 176, 56, 0.12) 42%, rgba(66, 153, 47, 0.22) 100%);
+  border-radius: 58% 58% 0 0;
+}
+
+.beginner-guide .beginner-guide__hero::after {
+  display: block;
+  left: 30px;
+  top: 54px;
+  width: 96px;
+  height: 128px;
+  opacity: 0;
+  background:
+    linear-gradient(90deg, transparent 47%, #9b6434 48% 52%, transparent 53%) 42px 38px / 30px 92px no-repeat,
+    radial-gradient(ellipse at 50% 100%, #2a9d62 0 40%, transparent 41%),
+    radial-gradient(ellipse at 18% 66%, #3dbb70 0 34%, transparent 35%),
+    radial-gradient(ellipse at 82% 64%, #35aa63 0 34%, transparent 35%),
+    radial-gradient(ellipse at 50% 26%, #42bc73 0 30%, transparent 31%);
+}
+
+.beginner-guide .beginner-guide__hero-copy {
+  position: relative;
+  padding: 38px 12px 28px 148px;
+}
+
+.beginner-guide .beginner-guide__hero-copy::before {
+  content: "";
+  position: absolute;
+  left: -148px;
+  top: -38px;
+  width: 220px;
+  height: 118px;
+  opacity: 0.9;
+  background: radial-gradient(circle at 4px 4px, rgba(0, 155, 134, 0.62) 0 1.5px, transparent 2px) 0 0 / 10px 10px;
+  pointer-events: none;
+}
+
+.beginner-guide .beginner-guide__hero-copy p {
+  margin-bottom: 2px;
+  color: #009b86;
+  font-size: clamp(23px, 2.9vw, 30px);
+}
+
+.beginner-guide .beginner-guide__hero-copy h1 {
+  max-width: 565px;
+  font-size: clamp(40px, 4.4vw, 54px);
+  line-height: 1.03;
+  background: linear-gradient(90deg, #202124 0 31%, #12a893 31% 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: none;
+}
+
+.beginner-guide .beginner-guide__speech {
+  width: min(420px, 100%);
+  margin-top: 13px;
+  margin-left: 84px;
+  padding: 15px 28px;
+  border-color: rgba(18, 184, 159, 0.52);
+  border-radius: 20px;
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+.beginner-guide .beginner-guide__character.is-hero {
+  align-self: stretch;
+  min-height: 252px;
+  padding: 0 18px 0 0;
+  place-items: end center;
+}
+
+.beginner-guide .beginner-guide__character.is-hero img {
+  width: 258px;
+  height: 252px;
+  object-fit: cover;
+  object-position: 50% 0;
+}
+
+.beginner-guide .beginner-guide__panel,
+.beginner-guide .beginner-guide__articles,
+.beginner-guide .beginner-guide__cta {
+  position: relative;
+  z-index: 3;
+  width: calc(100% - 84px);
+  margin-left: auto;
+  margin-right: auto;
+  border-color: rgba(215, 236, 232, 0.95);
+  background: rgba(255, 255, 255, 0.97);
+  box-shadow: 0 8px 22px rgba(31, 41, 51, 0.09);
+}
+
+.beginner-guide .beginner-guide__panel {
+  margin-top: 0;
+  padding: 16px 22px 20px;
+  border-radius: 15px;
+}
+
+.beginner-guide .beginner-guide__section-title {
+  gap: 8px;
+  margin-bottom: 12px;
+  font-size: 18px;
+}
+
+.beginner-guide .beginner-guide__route-grid {
+  gap: 20px;
+  margin: 0 4px;
+}
+
+.beginner-guide .beginner-guide__route-card {
+  min-height: 70px;
+  padding: 11px 28px;
+  border-radius: 11px;
+  border-width: 1px;
+  box-shadow: 0 4px 12px rgba(31, 41, 51, 0.08);
+}
+
+.beginner-guide .beginner-guide__route-card.is-active {
+  border-width: 2px;
+  border-color: #12b89f;
+}
+
+.beginner-guide .beginner-guide__detail-card {
+  grid-template-columns: minmax(0, 1fr) 250px;
+  gap: 10px;
+  min-height: 250px;
+  margin-top: 14px;
+  padding: 32px 20px 10px;
+  border-radius: 13px;
+  background: linear-gradient(90deg, #ffffff 0%, #ffffff 62%, rgba(233, 250, 245, 0.83) 100%);
+}
+
+.beginner-guide .beginner-guide__detail-card::after {
+  width: 35%;
+  opacity: 1;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.88)),
+    var(--hero-bg) center / cover no-repeat;
+}
+
+.beginner-guide .beginner-guide__detail-copy h3 {
+  margin-left: 18px;
+  margin-bottom: 11px;
+  font-size: clamp(25px, 3.1vw, 31px);
+}
+
+.beginner-guide .beginner-guide__detail-table {
+  max-width: 560px;
+  margin-left: 10px;
+  border-radius: 9px;
+}
+
+.beginner-guide .beginner-guide__detail-row {
+  grid-template-columns: 56px 116px minmax(0, 1fr);
+  min-height: 58px;
+}
+
+.beginner-guide .beginner-guide__character.is-pointing img {
+  width: 224px;
+  height: 242px;
+  object-fit: cover;
+  object-position: 50% 0;
+}
+
+.beginner-guide .beginner-guide__mini-routes {
+  margin-top: 10px;
+  border-radius: 11px;
+}
+
+.beginner-guide .beginner-guide__mini-route {
+  grid-template-columns: 38px minmax(0, 1fr);
+  padding: 9px 14px;
+}
+
+.beginner-guide .beginner-guide__steps {
+  margin-top: 22px;
+}
+
+.beginner-guide .beginner-guide__timeline {
+  padding-left: 42px;
+}
+
+.beginner-guide .beginner-guide__step {
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 16px;
+  min-height: 82px;
+  padding: 10px 0;
+}
+
+.beginner-guide .beginner-guide__step-copy {
+  grid-template-columns: 78px minmax(0, 1fr);
+  gap: 4px 10px;
+}
+
+.beginner-guide .beginner-guide__step-copy span {
+  justify-content: center;
+  border-radius: 7px;
+  font-size: 13px;
+}
+
+.beginner-guide .beginner-guide__step-copy h3 {
+  font-size: 16px;
+}
+
+.beginner-guide .beginner-guide__step-copy p {
+  font-size: 12px;
+}
+
+.beginner-guide .beginner-guide__step-message {
+  grid-template-columns: minmax(0, 1fr) 84px;
+}
+
+.beginner-guide .beginner-guide__step-message p {
+  min-height: 62px;
+  display: flex;
+  align-items: center;
+  padding: 11px 16px;
+  font-size: 12px;
+}
+
+.beginner-guide .beginner-guide__step-message .beginner-guide__character {
+  width: 86px;
+  height: 76px;
+  overflow: hidden;
+  border: 1px solid rgba(18, 184, 159, 0.22);
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.beginner-guide .beginner-guide__step-message .beginner-guide__character img {
+  width: 88px;
+  height: 114px;
+  object-fit: cover;
+  object-position: 50% 3%;
+}
+
+.beginner-guide .beginner-guide__panel.is-compact {
+  margin-top: 0;
+  padding-top: 13px;
+}
+
+.beginner-guide .beginner-guide__course-grid {
+  gap: 22px;
+}
+
+.beginner-guide .beginner-guide__course-card img {
+  height: 96px;
+}
+
+.beginner-guide .beginner-guide__course-card div {
+  min-height: 96px;
+  padding: 9px 12px 12px;
+}
+
+.beginner-guide .beginner-guide__articles {
+  margin-top: 0;
+  padding: 10px 22px 14px;
+  border-top: 0;
+  border-radius: 0 0 15px 15px;
+}
+
+.beginner-guide .beginner-guide__cta {
+  width: calc(100% - 40px);
+  min-height: 166px;
+  grid-template-columns: 135px 148px minmax(0, 1fr);
+  margin-top: 14px;
+  padding: 16px 42px 18px;
+  border: 0;
+  border-radius: 0 0 10px 10px;
+  background:
+    radial-gradient(circle at 2% 84%, #ff7b68 0 18px, transparent 19px),
+    radial-gradient(circle at 98% 91%, #ff8f7d 0 16px, transparent 17px),
+    radial-gradient(ellipse at 5% 100%, rgba(18, 184, 159, 0.24) 0 36%, transparent 37%),
+    radial-gradient(ellipse at 96% 100%, rgba(18, 184, 159, 0.22) 0 34%, transparent 35%),
+    linear-gradient(90deg, #dff8f4 0%, #f8fffc 52%, #d8f6f1 100%);
+  box-shadow: none;
+}
+
+.beginner-guide .beginner-guide__cta .beginner-guide__character {
+  width: 132px;
+  height: 132px;
+  overflow: hidden;
+  align-self: end;
+}
+
+.beginner-guide .beginner-guide__cta .beginner-guide__character img {
+  width: 132px;
+  height: 176px;
+  object-fit: cover;
+  object-position: 50% 0;
+}
+
+.beginner-guide .beginner-guide__cta-balloon {
+  padding: 14px 17px;
+  border-radius: 50%;
+  color: #1f2933;
+  font-size: 12px;
+  text-align: center;
+}
+
+.beginner-guide .beginner-guide__cta-copy h2 {
+  margin-bottom: 14px;
+  font-size: 26px;
+}
+
+.beginner-guide .beginner-guide__cta-actions {
+  gap: 30px;
+}
+
+.beginner-guide .beginner-guide__button {
+  min-height: 62px;
+  border-radius: 11px;
+  font-size: 18px;
+}
+
+@media (max-width: 1100px) {
+  .beginner-guide.beginner-guide {
+    width: min(100%, calc(100% - 8px));
+  }
+
+  .beginner-guide .beginner-guide__hero {
+    grid-template-columns: minmax(0, 1fr) 228px;
+  }
+
+  .beginner-guide .beginner-guide__hero-copy {
+    padding-left: 98px;
+  }
+
+  .beginner-guide .beginner-guide__speech {
+    margin-left: 44px;
+  }
+
+  .beginner-guide .beginner-guide__panel,
+  .beginner-guide .beginner-guide__articles {
+    width: calc(100% - 36px);
+  }
+
+  .beginner-guide .beginner-guide__step {
+    grid-template-columns: minmax(0, 1fr) 320px;
+  }
+}
+
+@media (max-width: 900px) {
+  .beginner-guide .beginner-guide__hero {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .beginner-guide .beginner-guide__hero-copy {
+    padding: 28px 20px 0;
+  }
+
+  .beginner-guide .beginner-guide__hero-copy h1 {
+    font-size: 39px;
+  }
+
+  .beginner-guide .beginner-guide__speech {
+    margin-left: 0;
+  }
+
+  .beginner-guide .beginner-guide__character.is-hero {
+    min-height: 180px;
+    justify-self: end;
+  }
+
+  .beginner-guide .beginner-guide__character.is-hero img {
+    width: 190px;
+    height: 188px;
+  }
+
+  .beginner-guide .beginner-guide__detail-card {
+    grid-template-columns: 1fr;
+  }
+
+  .beginner-guide .beginner-guide__step {
+    grid-template-columns: 1fr;
+  }
+
+  .beginner-guide .beginner-guide__cta {
+    width: calc(100% - 24px);
+    grid-template-columns: 110px minmax(0, 1fr);
+    padding: 16px 18px 20px;
+  }
+
+  .beginner-guide .beginner-guide__cta-copy {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 640px) {
+  .beginner-guide .beginner-guide__hero-copy h1 {
+    font-size: 33px;
+  }
+
+  .beginner-guide .beginner-guide__panel,
+  .beginner-guide .beginner-guide__articles {
+    width: calc(100% - 18px);
+  }
+
+  .beginner-guide .beginner-guide__detail-copy h3,
+  .beginner-guide .beginner-guide__detail-table {
+    margin-left: 0;
+  }
+
+  .beginner-guide .beginner-guide__step-copy {
+    grid-template-columns: 1fr;
+  }
+
+  .beginner-guide .beginner-guide__step-copy p {
+    grid-column: auto;
+  }
+
+  .beginner-guide .beginner-guide__step-message {
+    grid-template-columns: 1fr 84px;
+  }
+
+  .beginner-guide .beginner-guide__cta {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .beginner-guide .beginner-guide__cta .beginner-guide__character {
+    justify-self: center;
+  }
+
+  .beginner-guide .beginner-guide__cta-actions {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+
 /* Mobile menu readability: large text-only category buttons. */
 @media (max-width: 760px) {
   .site-header .site-nav a {
@@ -16079,4 +19076,90 @@ body {
   .home-feature-carousel:has(.feature-slide-card.is-main.is-artwork) .feature-dots {
     display: none !important;
   }
+}
+
+/* Beginner guide character variant final overrides after all global rules. */
+.beginner-guide .beginner-guide__character.is-pointing img[src*="yui-pointing"] {
+  width: 258px !important;
+  height: 248px !important;
+  object-fit: cover !important;
+  object-position: 50% 10% !important;
+}
+
+.beginner-guide .beginner-guide__step-message .beginner-guide__character img[src*="yui-smile"],
+.beginner-guide .beginner-guide__step-message .beginner-guide__character img[src*="yui-pointing"],
+.beginner-guide .beginner-guide__step-message .beginner-guide__character img[src*="yui-cheer"] {
+  width: 86px !important;
+  height: 86px !important;
+  object-fit: cover !important;
+  object-position: 50% 18% !important;
+}
+
+.beginner-guide .beginner-guide__step-message .beginner-guide__character img[src*="yui-cheer"] {
+  object-position: 50% 21% !important;
+}
+
+.beginner-guide .beginner-guide__cta .beginner-guide__character img[src*="yui-smile"] {
+  width: 152px !important;
+  height: 152px !important;
+  object-fit: cover !important;
+  object-position: 50% 16% !important;
+}
+
+.beginner-guide .beginner-guide__step-message {
+  grid-template-columns: minmax(0, 1fr) 86px !important;
+}
+
+.beginner-guide .beginner-guide__step-message .beginner-guide__character {
+  width: 86px !important;
+  height: 86px !important;
+  aspect-ratio: 1 / 1 !important;
+}
+
+/* Browser comment fix: keep the selected step character image square. */
+.beginner-guide .beginner-guide__step-message {
+  grid-template-columns: minmax(0, 1fr) 88px !important;
+}
+
+.beginner-guide .beginner-guide__step-message .beginner-guide__character {
+  width: 88px !important;
+  height: 88px !important;
+  aspect-ratio: 1 / 1 !important;
+}
+
+/* Browser comment fix: make final step comments read as speech bubbles. */
+.beginner-guide .beginner-guide__step-message {
+  column-gap: 10px !important;
+  align-items: center !important;
+}
+
+.beginner-guide .beginner-guide__step-message p {
+  position: relative !important;
+  border-radius: 10px !important;
+  overflow: visible !important;
+}
+
+.beginner-guide .beginner-guide__step-message p::before {
+  content: "" !important;
+  position: absolute !important;
+  top: 50% !important;
+  right: -10px !important;
+  width: 18px !important;
+  height: 18px !important;
+  border-top: 1px solid rgba(18, 184, 159, 0.5) !important;
+  border-right: 1px solid rgba(18, 184, 159, 0.5) !important;
+  background: #ffffff !important;
+  transform: translateY(-50%) rotate(45deg) !important;
+  z-index: 1 !important;
+}
+
+.beginner-guide .beginner-guide__step-message p::after {
+  content: "" !important;
+  position: absolute !important;
+  top: calc(50% - 16px) !important;
+  right: -1px !important;
+  width: 13px !important;
+  height: 32px !important;
+  background: #ffffff !important;
+  z-index: 2 !important;
 }
