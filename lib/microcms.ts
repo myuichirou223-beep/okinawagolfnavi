@@ -125,6 +125,7 @@ export type Facility = {
   website?: string;
   mapUrl?: string;
   summary?: string;
+  description?: string;
   airportAccess?: string;
   gallery?: MicroCMSImage[] | MicroCMSImage;
   city?: unknown;
@@ -157,6 +158,7 @@ export type PracticeRange = {
   url?: string;
   accessFromNaha?: string;
   summary?: string;
+  description?: string;
   features?: string;
   status?: string;
   source?: "cms" | "fallback";
@@ -823,7 +825,30 @@ function isGolfCourseFacility(facility: Facility) {
 }
 
 function isPracticeRangeFacility(facility: Facility) {
-  return ["outdoor_practice_range", "indoor_practice_range"].includes(facilityTypeValue(facility));
+  const values = [
+    facilityTypeValue(facility),
+    fieldText(facility.facilityType),
+    fieldText(facility.category),
+    facility.name
+  ].filter(Boolean);
+
+  return values.some((value) => {
+    const normalized = value.toLowerCase();
+    return (
+      ["outdoor_practice_range", "indoor_practice_range", "practice_range", "golf_practice_range", "range"].includes(normalized) ||
+      normalized.includes("practice") ||
+      normalized.includes("range") ||
+      value.includes("練習場") ||
+      value.includes("打ちっぱなし") ||
+      value.includes("インドア") ||
+      value.includes("屋内") ||
+      value.includes("室内") ||
+      value.includes("屋外") ||
+      value.includes("ゴルフガーデン") ||
+      value.includes("グリーンセンター") ||
+      value.includes("ゴルフラウンジ")
+    );
+  });
 }
 
 function isGolfShopFacility(facility: Facility) {
@@ -916,7 +941,8 @@ function facilityToPracticeRange(facility: Facility): PracticeRange {
     phone: facility.phone,
     url: facility.website,
     accessFromNaha: facility.airportAccess,
-    summary: facility.summary,
+    summary: firstFieldText(facility, ["summary", "description", "intro", "introduction", "copy", "body", "features"]),
+    description: facility.description,
     features: facility.features,
     status: fieldText(facility.status),
     source: "cms"

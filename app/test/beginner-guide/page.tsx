@@ -151,7 +151,7 @@ function practiceRangeToRecommendation(range: PracticeRange, fallbackImage: stri
   return {
     title: range.name,
     lead: lead || "練習しやすい",
-    body: firstText(range.summary, range.features, range.accessFromNaha, range.address) || "CMSに登録された施設情報からおすすめ表示しています。",
+    body: firstText(range.summary, range.description, range.features, range.accessFromNaha, range.address) || "CMSに登録された施設情報からおすすめ表示しています。",
     image: range.imageUrl || "/assets/logo.png",
     href: "/practice"
   };
