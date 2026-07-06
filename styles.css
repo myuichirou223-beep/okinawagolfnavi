@@ -12001,6 +12001,7 @@ body {
 
 .beginner-guide .beginner-guide__course-card {
   border-radius: 8px !important;
+  text-align: left !important;
 }
 
 .beginner-guide .beginner-guide__course-card img {
@@ -12010,16 +12011,19 @@ body {
 .beginner-guide .beginner-guide__course-card div {
   min-height: 96px !important;
   padding: 9px 12px 12px !important;
+  text-align: left !important;
 }
 
 .beginner-guide .beginner-guide__course-card h3 {
   font-size: 15px !important;
   font-weight: 950 !important;
+  text-align: left !important;
 }
 
 .beginner-guide .beginner-guide__course-card strong,
 .beginner-guide .beginner-guide__course-card p {
   font-size: 12px !important;
+  text-align: left !important;
 }
 
 .beginner-guide .beginner-guide__articles {
