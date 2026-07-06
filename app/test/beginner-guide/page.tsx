@@ -62,6 +62,11 @@ const commonSteps = [
 
 const lessonFacilityTargets = ["eXGOLFLAB", "サンシャイン牧港", "北谷インドア"];
 const indoorRangeTargets = ["ゴルフラウンジサンシャイン牧港", "森川ゴルフガーデン", "西原グリーンセンター"];
+const golfShopTargets = [
+  { title: "PGAストア豊崎", aliases: ["PGAストア豊崎", "PGA", "豊崎"] },
+  { title: "GOLF5バークレー", aliases: ["GOLF5バークレー", "GOLF5", "ゴルフ5", "バークレー"] },
+  { title: "つるやゴルフ", aliases: ["つるやゴルフ", "つるや"] }
+];
 const courseTargets = ["芭蕉布コース", "南山カントリー", "大西"];
 
 type RecommendationCard = {
@@ -163,7 +168,7 @@ function golfShopToRecommendation(shop: GolfShop): RecommendationCard {
   return {
     title: shop.name,
     lead: lead || "ショップ",
-    body: firstText(shop.summary, shop.address) || "CMSに登録されたショップ情報からおすすめ表示しています。",
+    body: firstText(shop.summary, shop.description, shop.address) || "CMSに登録されたショップ情報からおすすめ表示しています。",
     image: shop.imageUrl || "/assets/logo.png",
     href: "/shops"
   };
@@ -267,15 +272,19 @@ function pickPickupCourses(courses: Course[], seed: string) {
 
 function pickRecommendedGolfShops(shops: GolfShop[]) {
   const cmsShops = shops.filter((shop) => shop.source !== "fallback");
-  if (cmsShops.length) return cmsShops.slice(0, 3).map(golfShopToRecommendation);
 
-  return ["ショップ情報 1", "ショップ情報 2", "ショップ情報 3"].map((title) => ({
-    title,
-    lead: "CMS情報を参照",
-    body: "CMSの施設写真と紹介文が登録されると、この枠に正式情報が表示されます。",
-    image: "/assets/logo.png",
-    href: "/shops"
-  }));
+  return golfShopTargets.map((target) => {
+    const shop = cmsShops.find((item) => target.aliases.some((alias) => recommendationMatches(item.name, alias)));
+    return shop
+      ? golfShopToRecommendation(shop)
+      : {
+          title: target.title,
+          lead: "CMS情報を参照",
+          body: "CMSの施設写真と紹介文が登録されると、この枠に正式情報が表示されます。",
+          image: "/assets/logo.png",
+          href: "/shops"
+        };
+  });
 }
 
 function recommendationGrid(cards: RecommendationCard[]) {

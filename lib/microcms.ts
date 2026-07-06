@@ -175,6 +175,7 @@ export type GolfShop = {
   website?: string;
   mapUrl?: string;
   summary?: string;
+  description?: string;
   imageUrl?: string;
   storeSize?: string;
   productCondition?: string;
@@ -856,17 +857,22 @@ function isGolfShopFacility(facility: Facility) {
     fieldText(facility.type),
     fieldText(facility.facilityType),
     fieldText(facility.category),
-    fieldText(facility.shopType)
+    fieldText(facility.shopType),
+    facility.name
   ].filter(Boolean);
 
   return values.some((value) => {
     const normalized = value.toLowerCase();
     return (
       ["golf_shop", "shop", "pro_shop", "golf_goods_shop", "golf_store"].includes(normalized) ||
+      normalized.includes("golf5") ||
       value.includes("ショップ") ||
       value.includes("店舗") ||
       value.includes("用品") ||
-      value.includes("工房")
+      value.includes("工房") ||
+      value.includes("PGAストア") ||
+      value.includes("ゴルフ5") ||
+      value.includes("つるやゴルフ")
     );
   });
 }
@@ -1000,7 +1006,8 @@ function facilityToGolfShop(facility: Facility): GolfShop {
     phone: facility.phone,
     website: facility.website,
     mapUrl: firstFieldText(facility, ["mapUrl", "googleMapUrl", "googleMapsUrl", "googlemapurl", "map", "mapsUrl"]),
-    summary: facility.summary,
+    summary: firstFieldText(facility, ["summary", "description", "intro", "introduction", "copy", "body", "features"]),
+    description: facility.description,
     imageUrl: image?.url,
     storeSize: normalizeStoreSize(
       firstFieldText(facility, ["storeSize", "shopSize", "size", "scale", "storeType"])

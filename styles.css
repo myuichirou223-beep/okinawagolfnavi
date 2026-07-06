@@ -12471,7 +12471,7 @@ body {
 
 .beginner-guide .beginner-guide__branch-recommendations .beginner-guide__course-card img {
   height: 150px !important;
-  object-fit: contain !important;
+  object-fit: cover !important;
   background: #f8fffc;
 }
 
@@ -12622,6 +12622,20 @@ body {
 
 .beginner-guide .beginner-guide__step-shops .beginner-guide__section-title {
   margin-bottom: 10px;
+}
+
+.beginner-guide .beginner-guide__step-shops .beginner-guide__course-card,
+.beginner-guide .beginner-guide__step-shops .beginner-guide__course-card div,
+.beginner-guide .beginner-guide__step-shops .beginner-guide__course-card h3,
+.beginner-guide .beginner-guide__step-shops .beginner-guide__course-card strong,
+.beginner-guide .beginner-guide__step-shops .beginner-guide__course-card p {
+  text-align: left !important;
+}
+
+.beginner-guide .beginner-guide__step-shops .beginner-guide__course-card img {
+  height: 150px !important;
+  object-fit: cover !important;
+  background: #f8fffc;
 }
 
 .beginner-guide .beginner-guide__step-image {
