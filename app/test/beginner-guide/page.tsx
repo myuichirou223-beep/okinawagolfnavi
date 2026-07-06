@@ -243,8 +243,9 @@ function pickPickupPracticeRanges(ranges: PracticeRange[], seed: string) {
     "/assets/hero/beginner-step-01-range.png",
     "/assets/partners/golf-lounge-sunshine-logo.png"
   ];
+  const cmsRanges = ranges.filter((range) => range.source === "cms");
 
-  return dailyRandomItems(ranges, 6, `${seed}:practice`, (range) => range.id || range.name).map((range, index) =>
+  return dailyRandomItems(cmsRanges, 6, `${seed}:practice`, (range) => range.id || range.name).map((range, index) =>
     practiceRangeToRecommendation(range, fallbackImages[index % fallbackImages.length])
   );
 }
@@ -255,8 +256,7 @@ function pickPickupLessonFacilities(ranges: PracticeRange[], seed: string) {
     "/assets/hero/beginner-step-02-simulator.png",
     "/assets/hero/beginner-step-01-range.png"
   ];
-  const lessonCandidates = ranges.filter(looksLikeLessonFacility);
-  const candidates = uniquePracticeRanges([...lessonCandidates, ...ranges]);
+  const candidates = uniquePracticeRanges(ranges.filter((range) => range.source === "cms" && looksLikeLessonFacility(range)));
 
   return dailyRandomItems(candidates, 6, `${seed}:lesson`, (range) => range.id || range.name).map((range, index) =>
     practiceRangeToRecommendation(range, fallbackImages[index % fallbackImages.length])
@@ -265,8 +265,9 @@ function pickPickupLessonFacilities(ranges: PracticeRange[], seed: string) {
 
 function pickPickupCourses(courses: Course[], seed: string) {
   const fallbackImages = [beginnerAssets.course1, beginnerAssets.course2, beginnerAssets.course3];
+  const cmsCourses = courses.filter((course) => course.source === "cms");
 
-  return dailyRandomItems(courses, 6, `${seed}:courses`, (course) => course.id || course.slug || course.title).map((course, index) =>
+  return dailyRandomItems(cmsCourses, 6, `${seed}:courses`, (course) => course.id || course.slug || course.title).map((course, index) =>
     courseToRecommendation(course, fallbackImages[index % fallbackImages.length])
   );
 }

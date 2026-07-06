@@ -110,6 +110,7 @@ export type Course = {
   galleryImages?: MicroCMSImage[];
   gallery?: MicroCMSImage[];
   images?: MicroCMSImage[];
+  source?: "cms" | "fallback";
 };
 
 export type Facility = {
@@ -925,7 +926,8 @@ function facilityToCourse(facility: Facility): Course {
     par: numberValue(facility.par),
     summary: facility.summary,
     features: facility.features,
-    gallery: facilityGallery(facility)
+    gallery: facilityGallery(facility),
+    source: "cms"
   };
 }
 
@@ -1055,7 +1057,7 @@ export async function getCourses() {
     if (courses.length) return courses;
   }
 
-  return fallbackCourses.map(normalizeCourse).filter(isPublishedCourse);
+  return fallbackCourses.map((course) => ({ ...course, source: "fallback" as const })).map(normalizeCourse).filter(isPublishedCourse);
 }
 
 function isPublishedPracticeRange(range: PracticeRange) {
