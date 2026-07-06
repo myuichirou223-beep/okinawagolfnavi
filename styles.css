@@ -10167,6 +10167,31 @@ body {
   line-height: 1;
 }
 
+.sidebar-beginner-guide-banner {
+  display: block;
+  overflow: hidden;
+  border: 1px solid #a7ded3;
+  border-radius: 14px;
+  background: #ffffff;
+  line-height: 0;
+  box-shadow: 0 10px 26px rgba(12, 36, 28, 0.08);
+  transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+}
+
+.sidebar-beginner-guide-banner img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.sidebar-beginner-guide-banner:hover,
+.sidebar-beginner-guide-banner:focus-visible {
+  border-color: #12b89f;
+  box-shadow: 0 14px 30px rgba(18, 184, 159, 0.18);
+  outline: none;
+  transform: translateY(-2px);
+}
+
 .sidebar-heading {
   display: flex;
   align-items: center;

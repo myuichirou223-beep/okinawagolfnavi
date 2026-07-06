@@ -133,6 +133,17 @@ export type Facility = {
   par?: number | string;
   reservationUrl?: string;
   features?: string;
+  mainImage?: MicroCMSImage;
+  image?: MicroCMSImage;
+  eyecatch?: MicroCMSImage;
+  thumbnail?: MicroCMSImage;
+  photo1?: MicroCMSImage;
+  photo2?: MicroCMSImage;
+  photo3?: MicroCMSImage;
+  photo4?: MicroCMSImage;
+  photo5?: MicroCMSImage;
+  galleryImages?: MicroCMSImage[];
+  images?: MicroCMSImage[];
 };
 
 export type PracticeRange = {
@@ -145,7 +156,10 @@ export type PracticeRange = {
   phone?: string;
   url?: string;
   accessFromNaha?: string;
+  summary?: string;
+  features?: string;
   status?: string;
+  source?: "cms" | "fallback";
 };
 
 export type GolfShop = {
@@ -831,9 +845,29 @@ function isGolfShopFacility(facility: Facility) {
   });
 }
 
+function microCMSImages(value: unknown) {
+  if (!value) return [];
+  const values = Array.isArray(value) ? value : [value];
+  return values.filter((item): item is MicroCMSImage => {
+    return Boolean(item && typeof item === "object" && "url" in item && typeof (item as MicroCMSImage).url === "string");
+  });
+}
+
 function facilityGallery(facility: Facility) {
-  if (!facility.gallery) return [];
-  return Array.isArray(facility.gallery) ? facility.gallery : [facility.gallery];
+  return [
+    ...microCMSImages(facility.mainImage),
+    ...microCMSImages(facility.image),
+    ...microCMSImages(facility.eyecatch),
+    ...microCMSImages(facility.thumbnail),
+    ...microCMSImages(facility.gallery),
+    ...microCMSImages(facility.galleryImages),
+    ...microCMSImages(facility.images),
+    ...microCMSImages(facility.photo1),
+    ...microCMSImages(facility.photo2),
+    ...microCMSImages(facility.photo3),
+    ...microCMSImages(facility.photo4),
+    ...microCMSImages(facility.photo5)
+  ];
 }
 
 function facilityToCourse(facility: Facility): Course {
@@ -881,7 +915,10 @@ function facilityToPracticeRange(facility: Facility): PracticeRange {
     phone: facility.phone,
     url: facility.website,
     accessFromNaha: facility.airportAccess,
-    status: fieldText(facility.status)
+    summary: facility.summary,
+    features: facility.features,
+    status: fieldText(facility.status),
+    source: "cms"
   };
 }
 
@@ -1002,7 +1039,9 @@ export async function getPracticeRanges() {
     if (ranges.length) return ranges;
   }
 
-  return fallbackPracticeRanges.filter(isPublishedPracticeRange);
+  return fallbackPracticeRanges
+    .map((range) => ({ ...range, source: "fallback" as const }))
+    .filter(isPublishedPracticeRange);
 }
 
 export async function getGolfShops() {

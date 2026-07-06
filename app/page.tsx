@@ -387,6 +387,10 @@ export default async function Home() {
               </a>
             </section>
 
+            <a className="sidebar-beginner-guide-banner" href="/beginner" aria-label="ゴルフデビューガイドを見る">
+              <img src="/assets/beginner/sidebar-debut-guide.png" alt="" loading="lazy" />
+            </a>
+
             <section className="sidebar-box sidebar-tournament-card" aria-labelledby="sidebar-articles-title">
               <div className="sidebar-heading">
                 <h2 id="sidebar-articles-title">おすすめ記事</h2>

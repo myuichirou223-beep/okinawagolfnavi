@@ -145,8 +145,8 @@ function practiceRangeToRecommendation(range: PracticeRange, fallbackImage: stri
   return {
     title: range.name,
     lead: lead || "練習しやすい",
-    body: firstText(range.accessFromNaha, range.address) || "CMSに登録された施設情報からおすすめ表示しています。",
-    image: range.imageUrl || fallbackImage,
+    body: firstText(range.summary, range.features, range.accessFromNaha, range.address) || "CMSに登録された施設情報からおすすめ表示しています。",
+    image: range.imageUrl || "/assets/logo.png",
     href: "/practice"
   };
 }
@@ -195,15 +195,17 @@ function pickRecommendedCourses(courses: Course[]) {
 }
 
 function pickRecommendedPracticeRanges(ranges: PracticeRange[], targets: string[], fallbackImages: string[]) {
+  const cmsRanges = ranges.filter((range) => range.source !== "fallback");
+
   return targets.map((target, index) => {
-    const range = ranges.find((item) => recommendationMatches(item.name, target));
+    const range = cmsRanges.find((item) => recommendationMatches(item.name, target));
     return range
       ? practiceRangeToRecommendation(range, fallbackImages[index])
       : {
           title: target,
-          lead: "CMS登録待ち",
-          body: "該当施設がCMSに見つかったら自動で正式情報に切り替わります。",
-          image: fallbackImages[index]
+          lead: "CMS情報を参照",
+          body: "CMSの施設写真と紹介文が登録されると、この枠に正式情報が表示されます。",
+          image: "/assets/logo.png"
         };
   });
 }
