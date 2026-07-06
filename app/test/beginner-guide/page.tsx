@@ -2,7 +2,18 @@ import { DesktopSidebarLayout } from "../../components/DesktopSidebarLayout";
 import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
 import { BeginnerRouteSwitcher } from "./BeginnerRouteSwitcher";
-import { courseImages, getCourses, getGolfShops, getPracticeRanges, type Course, type GolfShop, type PracticeRange } from "../../../lib/microcms";
+import {
+  articlePath,
+  courseImages,
+  getArticles,
+  getCourses,
+  getGolfShops,
+  getPracticeRanges,
+  type Article,
+  type Course,
+  type GolfShop,
+  type PracticeRange
+} from "../../../lib/microcms";
 import { Fragment, type CSSProperties } from "react";
 
 export const revalidate = 300;
@@ -58,6 +69,7 @@ type RecommendationCard = {
   lead: string;
   body: string;
   image: string;
+  href?: string;
 };
 
 const articleLinks = [
@@ -101,6 +113,20 @@ function firstText(...values: Array<string | undefined>) {
   return values.find((value) => value?.trim())?.trim() || "";
 }
 
+function courseDebutDayArticlePath(articles: Article[]) {
+  const keywords = ["ゴルフ場デビュー", "コースデビュー", "当日", "動き", "マナー", "スループレー"];
+  const rankedArticles = articles
+    .map((article) => {
+      const text = [article.title, article.description, article.category, article.tags].filter(Boolean).join(" ");
+      const score = keywords.reduce((total, keyword) => total + (text.includes(keyword) ? 1 : 0), 0);
+      return { article, score };
+    })
+    .filter((item) => item.score >= 2)
+    .sort((a, b) => b.score - a.score);
+
+  return rankedArticles[0] ? articlePath(rankedArticles[0].article) : "/articles";
+}
+
 function courseToRecommendation(course: Course, fallbackImage: string): RecommendationCard {
   const lead = [course.city || course.area, course.courseType].filter(Boolean).join(" / ");
 
@@ -108,7 +134,8 @@ function courseToRecommendation(course: Course, fallbackImage: string): Recommen
     title: course.title,
     lead: lead || "初心者にもおすすめ",
     body: firstText(course.summary, course.features, course.airportAccess) || "CMSに登録された施設情報からおすすめ表示しています。",
-    image: courseImages(course)[0]?.url || fallbackImage
+    image: courseImages(course)[0]?.url || fallbackImage,
+    href: `/courses/${course.slug}`
   };
 }
 
@@ -119,7 +146,8 @@ function practiceRangeToRecommendation(range: PracticeRange, fallbackImage: stri
     title: range.name,
     lead: lead || "練習しやすい",
     body: firstText(range.accessFromNaha, range.address) || "CMSに登録された施設情報からおすすめ表示しています。",
-    image: range.imageUrl || fallbackImage
+    image: range.imageUrl || fallbackImage,
+    href: "/practice"
   };
 }
 
@@ -130,8 +158,24 @@ function golfShopToRecommendation(shop: GolfShop): RecommendationCard {
     title: shop.name,
     lead: lead || "ショップ",
     body: firstText(shop.summary, shop.address) || "CMSに登録されたショップ情報からおすすめ表示しています。",
-    image: shop.imageUrl || "/assets/logo.png"
+    image: shop.imageUrl || "/assets/logo.png",
+    href: "/shops"
   };
+}
+
+function seededScore(seed: string, value: string) {
+  let hash = 0;
+  const text = `${seed}:${value}`;
+  for (let index = 0; index < text.length; index += 1) {
+    hash = (hash * 31 + text.charCodeAt(index)) >>> 0;
+  }
+  return hash;
+}
+
+function dailyRandomItems<T>(items: T[], count: number, seed: string, keyForItem: (item: T) => string) {
+  return [...items]
+    .sort((a, b) => seededScore(seed, keyForItem(a)) - seededScore(seed, keyForItem(b)))
+    .slice(0, count);
 }
 
 function pickRecommendedCourses(courses: Course[]) {
@@ -164,6 +208,55 @@ function pickRecommendedPracticeRanges(ranges: PracticeRange[], targets: string[
   });
 }
 
+function uniquePracticeRanges(ranges: PracticeRange[]) {
+  const seen = new Set<string>();
+  return ranges.filter((range) => {
+    const key = range.id || range.name;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
+function looksLikeLessonFacility(range: PracticeRange) {
+  const text = [range.name, range.category, range.address, range.accessFromNaha].filter(Boolean).join(" ");
+  return /レッスン|lesson|スクール|コーチ|フォーム|分析|ラボ|lab/i.test(text);
+}
+
+function pickPickupPracticeRanges(ranges: PracticeRange[], seed: string) {
+  const fallbackImages = [
+    "/assets/hero/beginner-step-02-simulator.png",
+    "/assets/hero/beginner-step-01-range.png",
+    "/assets/partners/golf-lounge-sunshine-logo.png"
+  ];
+
+  return dailyRandomItems(ranges, 6, `${seed}:practice`, (range) => range.id || range.name).map((range, index) =>
+    practiceRangeToRecommendation(range, fallbackImages[index % fallbackImages.length])
+  );
+}
+
+function pickPickupLessonFacilities(ranges: PracticeRange[], seed: string) {
+  const fallbackImages = [
+    "/assets/hero/beginner-step-03-gear.png",
+    "/assets/hero/beginner-step-02-simulator.png",
+    "/assets/hero/beginner-step-01-range.png"
+  ];
+  const lessonCandidates = ranges.filter(looksLikeLessonFacility);
+  const candidates = uniquePracticeRanges([...lessonCandidates, ...ranges]);
+
+  return dailyRandomItems(candidates, 6, `${seed}:lesson`, (range) => range.id || range.name).map((range, index) =>
+    practiceRangeToRecommendation(range, fallbackImages[index % fallbackImages.length])
+  );
+}
+
+function pickPickupCourses(courses: Course[], seed: string) {
+  const fallbackImages = [beginnerAssets.course1, beginnerAssets.course2, beginnerAssets.course3];
+
+  return dailyRandomItems(courses, 6, `${seed}:courses`, (course) => course.id || course.slug || course.title).map((course, index) =>
+    courseToRecommendation(course, fallbackImages[index % fallbackImages.length])
+  );
+}
+
 function pickRecommendedGolfShops(shops: GolfShop[]) {
   return shops.slice(0, 3).map(golfShopToRecommendation);
 }
@@ -176,13 +269,14 @@ function recommendationGrid(cards: RecommendationCard[]) {
         <h3>{card.title}</h3>
         <strong>{card.lead}</strong>
         <p>{card.body}</p>
+        {card.href ? <a href={card.href}>詳しく見る</a> : null}
       </div>
     </article>
   ));
 }
 
 export default async function BeginnerGuideTestPage() {
-  const [courses, practiceRanges, golfShops] = await Promise.all([getCourses(), getPracticeRanges(), getGolfShops()]);
+  const [courses, practiceRanges, golfShops, articles] = await Promise.all([getCourses(), getPracticeRanges(), getGolfShops(), getArticles()]);
   const recommendedLessonFacilities = pickRecommendedPracticeRanges(practiceRanges, lessonFacilityTargets, [
     "/assets/hero/beginner-step-03-gear.png",
     "/assets/hero/beginner-step-02-simulator.png",
@@ -195,6 +289,11 @@ export default async function BeginnerGuideTestPage() {
   ]);
   const recommendedCourses = pickRecommendedCourses(courses);
   const recommendedGolfShops = pickRecommendedGolfShops(golfShops);
+  const pickupSeed = new Date().toISOString().slice(0, 10);
+  const pickupPracticeRanges = pickPickupPracticeRanges(practiceRanges, pickupSeed);
+  const pickupLessonFacilities = pickPickupLessonFacilities(practiceRanges, pickupSeed);
+  const pickupCourses = pickPickupCourses(courses, pickupSeed);
+  const courseDebutArticleHref = courseDebutDayArticlePath(articles);
 
   return (
     <>
@@ -257,29 +356,54 @@ export default async function BeginnerGuideTestPage() {
                         </div>
                       </section>
                     ) : null}
+                    {item.step === "03" ? (
+                      <figure className="beginner-guide__step-image">
+                        <img src="/assets/beginner/step-03-manners.png" alt="ゴルフデビュー前に覚えたい最低限のマナー" loading="lazy" />
+                      </figure>
+                    ) : null}
+                    {item.step === "04" ? (
+                      <figure className="beginner-guide__step-image">
+                        <img src="/assets/beginner/step-04-course-arrival.png" alt="ゴルフ場デビュー前の到着から準備までの流れ" loading="lazy" />
+                      </figure>
+                    ) : null}
+                    {item.step === "04" ? (
+                      <a className="beginner-guide__article-banner" href={courseDebutArticleHref} aria-label="ゴルフ場デビュー当日の動きとマナー解説の記事を読む">
+                        <img src="/assets/beginner/course-debut-day-guide.png" alt="" loading="lazy" />
+                      </a>
+                    ) : null}
                   </Fragment>
                 ))}
               </div>
             </section>
           </section>
 
-          <section className="beginner-guide__panel is-compact" aria-labelledby="beginner-lesson-title">
-            <h2 id="beginner-lesson-title" className="beginner-guide__section-title">
+          <section className="beginner-guide__panel is-compact" aria-labelledby="beginner-pickup-practice-title">
+            <h2 id="beginner-pickup-practice-title" className="beginner-guide__section-title">
               <GuideIcon name="flag" />
-              おすすめのゴルフレッスン施設
+              ピックアップ練習場
             </h2>
             <div className="beginner-guide__course-grid">
-              {recommendationGrid(recommendedLessonFacilities)}
+              {recommendationGrid(pickupPracticeRanges)}
             </div>
           </section>
 
-          <section className="beginner-guide__panel is-compact" aria-labelledby="beginner-course-title">
-            <h2 id="beginner-course-title" className="beginner-guide__section-title">
+          <section className="beginner-guide__panel is-compact" aria-labelledby="beginner-pickup-lesson-title">
+            <h2 id="beginner-pickup-lesson-title" className="beginner-guide__section-title">
               <GuideIcon name="flag" />
-              おすすめの沖縄のゴルフ場
+              ピックアップレッスン施設
             </h2>
             <div className="beginner-guide__course-grid">
-              {recommendationGrid(recommendedCourses)}
+              {recommendationGrid(pickupLessonFacilities)}
+            </div>
+          </section>
+
+          <section className="beginner-guide__panel is-compact" aria-labelledby="beginner-pickup-course-title">
+            <h2 id="beginner-pickup-course-title" className="beginner-guide__section-title">
+              <GuideIcon name="flag" />
+              ピックアップゴルフ場
+            </h2>
+            <div className="beginner-guide__course-grid">
+              {recommendationGrid(pickupCourses)}
             </div>
           </section>
 

@@ -584,6 +584,44 @@ const fallbackPracticeRanges: PracticeRange[] = [
   }
 ];
 
+const fallbackGolfShops: GolfShop[] = [
+  {
+    id: "pga-store-toyosaki",
+    name: "PGAストア豊崎",
+    slug: "pga-store-toyosaki",
+    area: "南部",
+    city: "豊見城市",
+    summary: "新品クラブやウェア、小物までまとめて見たい初心者向けの大型店舗候補。",
+    imageUrl: "/assets/logo.png",
+    storeSize: "大型店舗",
+    productCondition: "新品",
+    categories: ["大型ショップ", "新品販売", "ウェア"]
+  },
+  {
+    id: "tsuruya-golf",
+    name: "つるやゴルフ",
+    slug: "tsuruya-golf",
+    area: "南部",
+    summary: "クラブ選びやシューズ選びを相談しながら進めたい初心者向けの専門店候補。",
+    imageUrl: "/assets/logo.png",
+    storeSize: "専門店",
+    productCondition: "新品",
+    categories: ["ショップ", "新品販売", "クラブ"]
+  },
+  {
+    id: "mangasouko-urasoe",
+    name: "マンガ倉庫浦添",
+    slug: "mangasouko-urasoe",
+    area: "中部",
+    city: "浦添市",
+    summary: "最初のギアを手頃に探したい人向けの中古用品候補。",
+    imageUrl: "/assets/partners/mangasouko-logo.png",
+    storeSize: "大型店舗",
+    productCondition: "中古",
+    categories: ["中古販売", "ショップ", "ゴルフ用品"]
+  }
+];
+
 const fallbackPartners: Partner[] = [
   {
     id: "mangasouko-naha",
@@ -969,7 +1007,8 @@ export async function getPracticeRanges() {
 
 export async function getGolfShops() {
   const facilities = await getFacilities();
-  return facilities.filter(isGolfShopFacility).map(facilityToGolfShop);
+  const shops = facilities.filter(isGolfShopFacility).map(facilityToGolfShop);
+  return shops.length ? shops : fallbackGolfShops;
 }
 
 export async function getSiteStats() {

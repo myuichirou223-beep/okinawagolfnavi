@@ -12585,6 +12585,62 @@ body {
   margin-bottom: 10px;
 }
 
+.beginner-guide .beginner-guide__step-image {
+  margin: 8px 0 18px;
+}
+
+.beginner-guide .beginner-guide__step-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+}
+
+.beginner-guide .beginner-guide__article-banner {
+  position: relative;
+  display: block;
+  margin: 10px 0 18px;
+  border: 3px solid #12b89f;
+  border-radius: 14px;
+  overflow: hidden;
+  line-height: 0;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 8px 18px rgba(18, 184, 159, 0.16);
+  transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+}
+
+.beginner-guide .beginner-guide__article-banner img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.beginner-guide .beginner-guide__article-banner::after {
+  position: absolute;
+  right: 18px;
+  bottom: 18px;
+  min-width: 126px;
+  padding: 12px 18px;
+  border-radius: 999px;
+  background: #12b89f;
+  color: #ffffff;
+  content: "記事を読む  >";
+  font-size: 16px;
+  font-weight: 950;
+  line-height: 1;
+  text-align: center;
+  box-shadow: 0 8px 18px rgba(0, 112, 96, 0.25);
+}
+
+.beginner-guide .beginner-guide__article-banner:hover,
+.beginner-guide .beginner-guide__article-banner:focus-visible {
+  border-color: #0b8f7c;
+  outline-offset: 3px;
+  box-shadow: 0 14px 28px rgba(18, 184, 159, 0.24);
+  transform: translateY(-2px);
+}
+
 .beginner-guide .beginner-guide__panel.is-compact {
   margin-top: 0;
   padding-top: 13px;
@@ -12601,6 +12657,27 @@ body {
 .beginner-guide .beginner-guide__course-card div {
   min-height: 96px;
   padding: 9px 12px 12px;
+}
+
+.beginner-guide .beginner-guide__course-card a {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  min-height: 28px;
+  margin-top: 8px;
+  padding: 5px 11px;
+  border-radius: 999px;
+  background: #12b89f;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.beginner-guide .beginner-guide__course-card a:hover,
+.beginner-guide .beginner-guide__course-card a:focus-visible {
+  background: #0b8f7c;
+  outline: none;
 }
 
 .beginner-guide .beginner-guide__articles {
@@ -19297,6 +19374,12 @@ body {
   width: 88px !important;
   height: 88px !important;
   aspect-ratio: 1 / 1 !important;
+  border-color: transparent !important;
+  background: transparent !important;
+}
+
+.beginner-guide .beginner-guide__step-message .beginner-guide__character img {
+  filter: none !important;
 }
 
 /* Browser comment fix: make final step comments read as speech bubbles. */
