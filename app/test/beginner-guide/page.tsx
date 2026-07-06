@@ -14,6 +14,7 @@ export const metadata = {
 
 const beginnerAssets = {
   heroBg: "/assets/beginner/okinawa-course-hero.png",
+  heroTop: "/assets/beginner/top-beginner-guide.png",
   mainCharacter: "/assets/beginner/yui-main.png",
   characterPointing: "/assets/beginner/yui-pointing.png",
   characterSmile: "/assets/beginner/yui-smile.png",
@@ -229,6 +230,7 @@ export default async function BeginnerGuideTestPage() {
       <DesktopSidebarLayout mainClassName="beginner-guide-page-shell">
         <article className="beginner-guide" aria-labelledby="beginner-guide-title" style={{ "--hero-bg": `url(${beginnerAssets.heroBg})` } as CSSProperties}>
           <section className="beginner-guide__hero">
+            <img className="beginner-guide__hero-image" src={beginnerAssets.heroTop} alt="" fetchPriority="high" />
             <div className="beginner-guide__hero-copy">
               <p>自分らしく始める！</p>
               <h1 id="beginner-guide-title">ゴルフデビューガイド</h1>

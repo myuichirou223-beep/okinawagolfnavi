@@ -11493,6 +11493,61 @@ body {
   z-index: 2 !important;
 }
 
+/* Beginner guide first-view replacement using the supplied finished artwork. */
+.beginner-guide .beginner-guide__hero {
+  position: relative !important;
+  width: 100% !important;
+  min-height: 0 !important;
+  aspect-ratio: 1900 / 800 !important;
+  display: block !important;
+  overflow: hidden !important;
+  border: 0 !important;
+  border-radius: 10px 10px 0 0 !important;
+  background: #8ed8f8 !important;
+  box-shadow: none !important;
+}
+
+.beginner-guide .beginner-guide__hero::before,
+.beginner-guide .beginner-guide__hero::after {
+  display: none !important;
+}
+
+.beginner-guide .beginner-guide__hero-image {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 1 !important;
+  width: 100% !important;
+  height: 100% !important;
+  display: block !important;
+  object-fit: cover !important;
+  object-position: center center !important;
+}
+
+.beginner-guide .beginner-guide__hero-copy {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  clip: rect(0 0 0 0) !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+}
+
+.beginner-guide .beginner-guide__hero-copy::before,
+.beginner-guide .beginner-guide__speech,
+.beginner-guide .beginner-guide__speech::after,
+.beginner-guide .beginner-guide__character.is-hero {
+  display: none !important;
+}
+
+@media (max-width: 640px) {
+  .beginner-guide .beginner-guide__hero {
+    aspect-ratio: 1900 / 800 !important;
+  }
+}
+
 /* Browser comment fix: expand the beginner guide to the available content column. */
 .beginner-guide-page-shell .portal-page-content {
   width: 100% !important;
