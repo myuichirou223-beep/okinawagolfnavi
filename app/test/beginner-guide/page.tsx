@@ -63,9 +63,9 @@ const commonSteps = [
 const lessonFacilityTargets = ["eXGOLFLAB", "サンシャイン牧港", "北谷インドア"];
 const indoorRangeTargets = ["ゴルフラウンジサンシャイン牧港", "森川ゴルフガーデン", "西原グリーンセンター"];
 const golfShopTargets = [
-  { title: "PGAストア豊崎", aliases: ["PGAストア豊崎", "PGA", "豊崎"] },
-  { title: "GOLF5バークレー", aliases: ["GOLF5バークレー", "GOLF5", "ゴルフ5", "バークレー"] },
-  { title: "つるやゴルフ", aliases: ["つるやゴルフ", "つるや"] }
+  { title: "PGAストア豊崎", aliases: ["PGAストア豊崎", "PGA STORE豊崎", "PGATOURSUPERSTORE沖縄豊崎"] },
+  { title: "GOLF5バークレー", aliases: ["GOLF5バークレー", "ゴルフ5バークレー"] },
+  { title: "つるやゴルフ", aliases: ["つるやゴルフ"] }
 ];
 const courseTargets = ["芭蕉布コース", "南山カントリー", "大西"];
 
@@ -103,6 +103,7 @@ function characterImageFor(type: string) {
 
 function normalizeRecommendationText(value: string) {
   return value
+    .normalize("NFKC")
     .toLowerCase()
     .replace(/\s+/g, "")
     .replace(/[・･\-_（）()]/g, "");
