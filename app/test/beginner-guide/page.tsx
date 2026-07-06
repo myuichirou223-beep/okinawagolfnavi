@@ -405,7 +405,7 @@ export default async function BeginnerGuideTestPage() {
             </section>
           </section>
 
-          <section className="beginner-guide__panel is-compact" aria-labelledby="beginner-pickup-practice-title">
+          <section className="beginner-guide__panel is-compact is-pickup" aria-labelledby="beginner-pickup-practice-title">
             <h2 id="beginner-pickup-practice-title" className="beginner-guide__section-title">
               <GuideIcon name="flag" />
               ピックアップ練習場
@@ -415,7 +415,7 @@ export default async function BeginnerGuideTestPage() {
             </div>
           </section>
 
-          <section className="beginner-guide__panel is-compact" aria-labelledby="beginner-pickup-lesson-title">
+          <section className="beginner-guide__panel is-compact is-pickup" aria-labelledby="beginner-pickup-lesson-title">
             <h2 id="beginner-pickup-lesson-title" className="beginner-guide__section-title">
               <GuideIcon name="flag" />
               ピックアップレッスン施設
@@ -425,7 +425,7 @@ export default async function BeginnerGuideTestPage() {
             </div>
           </section>
 
-          <section className="beginner-guide__panel is-compact" aria-labelledby="beginner-pickup-course-title">
+          <section className="beginner-guide__panel is-compact is-pickup" aria-labelledby="beginner-pickup-course-title">
             <h2 id="beginner-pickup-course-title" className="beginner-guide__section-title">
               <GuideIcon name="flag" />
               ピックアップゴルフ場

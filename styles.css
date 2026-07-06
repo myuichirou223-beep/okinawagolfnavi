@@ -12642,6 +12642,12 @@ body {
   background: #f8fffc;
 }
 
+.beginner-guide .beginner-guide__panel.is-pickup .beginner-guide__course-card img {
+  height: 150px !important;
+  object-fit: cover !important;
+  background: #f8fffc;
+}
+
 .beginner-guide .beginner-guide__step-image {
   margin: 8px 0 18px;
 }
