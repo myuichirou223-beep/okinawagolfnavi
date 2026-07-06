@@ -260,7 +260,16 @@ function pickPickupCourses(courses: Course[], seed: string) {
 }
 
 function pickRecommendedGolfShops(shops: GolfShop[]) {
-  return shops.slice(0, 3).map(golfShopToRecommendation);
+  const cmsShops = shops.filter((shop) => shop.source !== "fallback");
+  if (cmsShops.length) return cmsShops.slice(0, 3).map(golfShopToRecommendation);
+
+  return ["ショップ情報 1", "ショップ情報 2", "ショップ情報 3"].map((title) => ({
+    title,
+    lead: "CMS情報を参照",
+    body: "CMSの施設写真と紹介文が登録されると、この枠に正式情報が表示されます。",
+    image: "/assets/logo.png",
+    href: "/shops"
+  }));
 }
 
 function recommendationGrid(cards: RecommendationCard[]) {

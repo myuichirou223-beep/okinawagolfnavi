@@ -177,6 +177,7 @@ export type GolfShop = {
   storeSize?: string;
   productCondition?: string;
   categories: string[];
+  source?: "cms" | "fallback";
 };
 
 export type Partner = {
@@ -981,7 +982,8 @@ function facilityToGolfShop(facility: Facility): GolfShop {
     productCondition: normalizeProductCondition(
       firstFieldText(facility, ["productCondition", "condition", "salesType", "itemCondition", "handlingType"])
     ),
-    categories: Array.from(new Set(categories)).slice(0, 6)
+    categories: Array.from(new Set(categories)).slice(0, 6),
+    source: "cms"
   };
 }
 
@@ -1047,7 +1049,7 @@ export async function getPracticeRanges() {
 export async function getGolfShops() {
   const facilities = await getFacilities();
   const shops = facilities.filter(isGolfShopFacility).map(facilityToGolfShop);
-  return shops.length ? shops : fallbackGolfShops;
+  return shops.length ? shops : fallbackGolfShops.map((shop) => ({ ...shop, source: "fallback" as const }));
 }
 
 export async function getSiteStats() {
