@@ -61,7 +61,7 @@ const commonSteps = [
 ];
 
 const lessonFacilityTargets = ["eXGOLFLAB", "サンシャイン牧港", "北谷インドア"];
-const indoorRangeTargets = ["サンシャイン牧港", "北谷インドア", "サンシャイン具志川"];
+const indoorRangeTargets = ["ゴルフラウンジサンシャイン牧港", "森川ゴルフガーデン", "西原グリーンセンター"];
 const courseTargets = ["芭蕉布コース", "南山カントリー", "大西"];
 
 type RecommendationCard = {
@@ -113,6 +113,12 @@ function firstText(...values: Array<string | undefined>) {
   return values.find((value) => value?.trim())?.trim() || "";
 }
 
+function rangeDisplayCategory(category?: string) {
+  if (!category) return "";
+  if (category.includes("屋内")) return category.replace("屋内", "室内");
+  return category;
+}
+
 function courseDebutDayArticlePath(articles: Article[]) {
   const keywords = ["ゴルフ場デビュー", "コースデビュー", "当日", "動き", "マナー", "スループレー"];
   const rankedArticles = articles
@@ -140,7 +146,7 @@ function courseToRecommendation(course: Course, fallbackImage: string): Recommen
 }
 
 function practiceRangeToRecommendation(range: PracticeRange, fallbackImage: string): RecommendationCard {
-  const lead = [range.area, range.category].filter(Boolean).join(" / ");
+  const lead = [range.area, rangeDisplayCategory(range.category)].filter(Boolean).join(" / ");
 
   return {
     title: range.name,

@@ -12469,6 +12469,12 @@ body {
   margin-top: 20px;
 }
 
+.beginner-guide .beginner-guide__branch-recommendations .beginner-guide__course-card img {
+  height: 150px !important;
+  object-fit: contain !important;
+  background: #f8fffc;
+}
+
 .beginner-guide .beginner-guide__route-grid {
   gap: 20px;
   margin: 0 4px;

@@ -117,7 +117,6 @@ export default async function ShopsPage({ searchParams }: ShopsPageProps) {
           <div className="section-heading">
             <p className="eyebrow">Shop</p>
             <h1 id="shops-title">ショップ情報</h1>
-            <p>カテゴリを選ぶと、CMSに登録されたショップ施設の中から該当する店舗だけを地域別に確認できます。</p>
           </div>
 
           <div className="shop-category-filter" aria-label="ショップカテゴリ">
