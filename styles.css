@@ -12337,7 +12337,7 @@ body {
 .beginner-guide .beginner-guide__cta {
   position: relative;
   z-index: 3;
-  width: calc(100% - 84px);
+  width: calc(100% - 24px);
   margin-left: auto;
   margin-right: auto;
   border-color: rgba(215, 236, 232, 0.95);
@@ -12355,6 +12355,93 @@ body {
   gap: 8px;
   margin-bottom: 12px;
   font-size: 18px;
+}
+
+.beginner-guide .beginner-guide__branch-banners {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin: 6px 4px 16px;
+}
+
+.beginner-guide .beginner-guide__branch-banner {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  overflow: visible;
+  border: 0;
+  border-radius: 16px;
+  background: transparent;
+  box-shadow: none;
+  cursor: pointer;
+  transition: transform 180ms ease, filter 180ms ease;
+}
+
+.beginner-guide .beginner-guide__branch-banner img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: inherit;
+}
+
+.beginner-guide .beginner-guide__branch-banner:hover,
+.beginner-guide .beginner-guide__branch-banner:focus-visible {
+  transform: translateY(-2px);
+  filter: drop-shadow(0 10px 16px rgba(31, 41, 51, 0.14));
+  outline: none;
+}
+
+.beginner-guide .beginner-guide__branch-banner.is-active {
+  filter: drop-shadow(0 10px 18px rgba(18, 184, 159, 0.22));
+}
+
+.beginner-guide .beginner-guide__branch-banner.is-pink.is-active {
+  filter: drop-shadow(0 10px 18px rgba(243, 107, 136, 0.2));
+}
+
+.beginner-guide .beginner-guide__branch-banner.is-active img {
+  outline: 3px solid #12b89f;
+  outline-offset: 4px;
+}
+
+.beginner-guide .beginner-guide__branch-banner.is-pink.is-active img {
+  outline-color: #f36b88;
+}
+
+.beginner-guide .beginner-guide__branch-banner.is-active::after {
+  content: "選択中";
+  position: absolute;
+  right: 12px;
+  bottom: 10px;
+  z-index: 2;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: #12b89f;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0;
+}
+
+.beginner-guide .beginner-guide__branch-banner.is-pink.is-active::after {
+  background: #f36b88;
+}
+
+.beginner-guide .beginner-guide__branch-detail-image {
+  width: 100%;
+  margin-top: 12px;
+}
+
+.beginner-guide .beginner-guide__branch-detail-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+}
+
+.beginner-guide .beginner-guide__branch-recommendations {
+  margin-top: 20px;
 }
 
 .beginner-guide .beginner-guide__route-grid {
@@ -12487,6 +12574,15 @@ body {
   height: 114px;
   object-fit: cover;
   object-position: 50% 3%;
+}
+
+.beginner-guide .beginner-guide__step-shops {
+  margin: 8px 0 18px;
+  padding: 12px 0 16px;
+}
+
+.beginner-guide .beginner-guide__step-shops .beginner-guide__section-title {
+  margin-bottom: 10px;
 }
 
 .beginner-guide .beginner-guide__panel.is-compact {
@@ -12622,6 +12718,10 @@ body {
     height: 188px;
   }
 
+  .beginner-guide .beginner-guide__branch-banners {
+    gap: 12px;
+  }
+
   .beginner-guide .beginner-guide__detail-card {
     grid-template-columns: 1fr;
   }
@@ -12649,6 +12749,23 @@ body {
   .beginner-guide .beginner-guide__panel,
   .beginner-guide .beginner-guide__articles {
     width: calc(100% - 18px);
+  }
+
+  .beginner-guide .beginner-guide__branch-banners {
+    grid-template-columns: 1fr;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .beginner-guide .beginner-guide__branch-banner {
+    border-radius: 11px;
+  }
+
+  .beginner-guide .beginner-guide__branch-banner.is-active::after {
+    right: 8px;
+    bottom: 8px;
+    padding: 4px 10px;
+    font-size: 11px;
   }
 
   .beginner-guide .beginner-guide__detail-copy h3,

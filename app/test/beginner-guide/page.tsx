@@ -1,8 +1,9 @@
 import { DesktopSidebarLayout } from "../../components/DesktopSidebarLayout";
 import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
-import { courseImages, getCourses, getPracticeRanges, type Course, type PracticeRange } from "../../../lib/microcms";
-import type { CSSProperties } from "react";
+import { BeginnerRouteSwitcher } from "./BeginnerRouteSwitcher";
+import { courseImages, getCourses, getGolfShops, getPracticeRanges, type Course, type GolfShop, type PracticeRange } from "../../../lib/microcms";
+import { Fragment, type CSSProperties } from "react";
 
 export const revalidate = 300;
 
@@ -23,51 +24,6 @@ const beginnerAssets = {
   course2: "/assets/hero/okinawa-golf-navi-main.jpg",
   course3: "/assets/hero/beginner-step-05-debut.png"
 };
-
-const routeCards = [
-  {
-    id: "a",
-    route: "ルートA",
-    title: "こっそり個室で",
-    summary: "人目を気にせずマイペースに練習したい方に◎",
-    icon: "room",
-    active: true
-  },
-  {
-    id: "b",
-    route: "ルートB",
-    title: "プロに教えてもらう",
-    summary: "基礎から安心して学びたい方に◎",
-    icon: "coach",
-    active: false
-  },
-  {
-    id: "c",
-    route: "ルートC",
-    title: "友達とわいわい",
-    summary: "気の合う仲間と一緒に楽しく始めたい方に◎",
-    icon: "group",
-    active: false
-  }
-];
-
-const detailRows = [
-  {
-    label: "内容",
-    icon: "clipboard",
-    text: "他人の目が一切気にならない個室シミュレーションゴルフへ。遊び感覚でボールを打つ体験をします。"
-  },
-  {
-    label: "必要なもの",
-    icon: "hand",
-    text: "手ぶらでもOK。クラブやシューズをレンタルできる施設なら、動きやすい服とスニーカーで始められます。"
-  },
-  {
-    label: "ナビゲーターの一言",
-    icon: "chat",
-    text: "お友達とカラオケに行く感覚でOK！まずは個室でリラックスして打ってみよう♪"
-  }
-];
 
 const commonSteps = [
   {
@@ -167,6 +123,17 @@ function practiceRangeToRecommendation(range: PracticeRange, fallbackImage: stri
   };
 }
 
+function golfShopToRecommendation(shop: GolfShop): RecommendationCard {
+  const lead = [shop.city || shop.area, shop.storeSize, shop.productCondition].filter(Boolean).join(" / ");
+
+  return {
+    title: shop.name,
+    lead: lead || "ショップ",
+    body: firstText(shop.summary, shop.address) || "CMSに登録されたショップ情報からおすすめ表示しています。",
+    image: shop.imageUrl || "/assets/logo.png"
+  };
+}
+
 function pickRecommendedCourses(courses: Course[]) {
   const fallbackImages = [beginnerAssets.course1, beginnerAssets.course2, beginnerAssets.course3];
 
@@ -197,6 +164,10 @@ function pickRecommendedPracticeRanges(ranges: PracticeRange[], targets: string[
   });
 }
 
+function pickRecommendedGolfShops(shops: GolfShop[]) {
+  return shops.slice(0, 3).map(golfShopToRecommendation);
+}
+
 function recommendationGrid(cards: RecommendationCard[]) {
   return cards.map((card) => (
     <article key={card.title} className="beginner-guide__course-card">
@@ -211,7 +182,7 @@ function recommendationGrid(cards: RecommendationCard[]) {
 }
 
 export default async function BeginnerGuideTestPage() {
-  const [courses, practiceRanges] = await Promise.all([getCourses(), getPracticeRanges()]);
+  const [courses, practiceRanges, golfShops] = await Promise.all([getCourses(), getPracticeRanges(), getGolfShops()]);
   const recommendedLessonFacilities = pickRecommendedPracticeRanges(practiceRanges, lessonFacilityTargets, [
     "/assets/hero/beginner-step-03-gear.png",
     "/assets/hero/beginner-step-02-simulator.png",
@@ -223,6 +194,7 @@ export default async function BeginnerGuideTestPage() {
     "/assets/partners/golf-lounge-sunshine-logo.png"
   ]);
   const recommendedCourses = pickRecommendedCourses(courses);
+  const recommendedGolfShops = pickRecommendedGolfShops(golfShops);
 
   return (
     <>
@@ -249,52 +221,10 @@ export default async function BeginnerGuideTestPage() {
               まずはスタートルートを選ぼう
             </h2>
 
-            <div className="beginner-guide__route-grid">
-              {routeCards.map((route) => (
-                <button
-                  key={route.id}
-                  className={`beginner-guide__route-card${route.active ? " is-active" : ""} is-${route.id}`}
-                  type="button"
-                  aria-pressed={route.active}
-                >
-                  <GuideIcon name={route.icon} />
-                  <span>
-                    <b>{route.route}</b>
-                    <strong>{route.title}</strong>
-                  </span>
-                </button>
-              ))}
-            </div>
-
-            <div className="beginner-guide__detail-card">
-              <span className="beginner-guide__ribbon">ルートAの詳細</span>
-              <div className="beginner-guide__detail-copy">
-                <h3>インドアゴルフからスタート！</h3>
-                <div className="beginner-guide__detail-table">
-                  {detailRows.map((row) => (
-                    <div key={row.label} className="beginner-guide__detail-row">
-                      <GuideIcon name={row.icon} />
-                      <strong>{row.label}</strong>
-                      <p>{row.text}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <GuideCharacter type="pointing" image={beginnerAssets.characterPointing} label="ポイントを案内する女性キャラクター" />
-            </div>
-
-            <div className="beginner-guide__mini-routes">
-              {routeCards.map((route) => (
-                <article key={route.id} className={`beginner-guide__mini-route is-${route.id}`}>
-                  <GuideIcon name={route.icon} />
-                  <div>
-                    <b>{route.route}</b>
-                    <strong>{route.title}</strong>
-                    <p>{route.summary}</p>
-                  </div>
-                </article>
-              ))}
-            </div>
+            <BeginnerRouteSwitcher
+              selfPacedRecommendations={recommendedIndoorRanges}
+              lessonRecommendations={recommendedLessonFacilities}
+            />
 
             <section className="beginner-guide__steps" aria-labelledby="beginner-common-step-title">
               <h2 id="beginner-common-step-title" className="beginner-guide__section-title">
@@ -303,18 +233,31 @@ export default async function BeginnerGuideTestPage() {
               </h2>
               <div className="beginner-guide__timeline">
                 {commonSteps.map((item) => (
-                  <article key={item.step} className="beginner-guide__step">
-                    <span className="beginner-guide__step-dot" aria-hidden="true" />
-                    <div className="beginner-guide__step-copy">
-                      <span>STEP {item.step}</span>
-                      <h3>{item.title}</h3>
-                      <p>{item.body}</p>
-                    </div>
-                    <div className="beginner-guide__step-message">
-                      <p>{item.message}</p>
-                      <GuideCharacter type={item.character} image={characterImageFor(item.character)} label="応援する女性キャラクター" />
-                    </div>
-                  </article>
+                  <Fragment key={item.step}>
+                    <article className="beginner-guide__step">
+                      <span className="beginner-guide__step-dot" aria-hidden="true" />
+                      <div className="beginner-guide__step-copy">
+                        <span>STEP {item.step}</span>
+                        <h3>{item.title}</h3>
+                        <p>{item.body}</p>
+                      </div>
+                      <div className="beginner-guide__step-message">
+                        <p>{item.message}</p>
+                        <GuideCharacter type={item.character} image={characterImageFor(item.character)} label="応援する女性キャラクター" />
+                      </div>
+                    </article>
+                    {item.step === "02" && recommendedGolfShops.length ? (
+                      <section className="beginner-guide__step-shops" aria-labelledby="beginner-step-shop-title">
+                        <h3 id="beginner-step-shop-title" className="beginner-guide__section-title">
+                          <GuideIcon name="flag" />
+                          初心者におすすめのショップ
+                        </h3>
+                        <div className="beginner-guide__course-grid">
+                          {recommendationGrid(recommendedGolfShops)}
+                        </div>
+                      </section>
+                    ) : null}
+                  </Fragment>
                 ))}
               </div>
             </section>
@@ -327,16 +270,6 @@ export default async function BeginnerGuideTestPage() {
             </h2>
             <div className="beginner-guide__course-grid">
               {recommendationGrid(recommendedLessonFacilities)}
-            </div>
-          </section>
-
-          <section className="beginner-guide__panel is-compact" aria-labelledby="beginner-indoor-title">
-            <h2 id="beginner-indoor-title" className="beginner-guide__section-title">
-              <GuideIcon name="flag" />
-              おすすめのインドアゴルフ練習場
-            </h2>
-            <div className="beginner-guide__course-grid">
-              {recommendationGrid(recommendedIndoorRanges)}
             </div>
           </section>
 
