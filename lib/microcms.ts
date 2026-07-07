@@ -823,7 +823,30 @@ function facilityTypeValue(facility: Facility) {
 }
 
 function isGolfCourseFacility(facility: Facility) {
-  return facilityTypeValue(facility) === "golf_course";
+  const values = [
+    facilityTypeValue(facility),
+    fieldText(facility.facilityType),
+    fieldText(facility.category),
+    fieldText(facility.courseType),
+    fieldText(facility.coursetype),
+    facility.name
+  ].filter(Boolean);
+
+  return values.some((value) => {
+    const normalized = value.normalize("NFKC").toLowerCase();
+    return (
+      ["golf_course", "course", "long_course", "middle_course", "short_course"].includes(normalized) ||
+      normalized.includes("golfcourse") ||
+      value.includes("ゴルフ場") ||
+      value.includes("コース") ||
+      value.includes("ロング") ||
+      value.includes("ミドル") ||
+      value.includes("ショート") ||
+      value.includes("カントリークラブ") ||
+      value.includes("ゴルフクラブ") ||
+      value.includes("リゾート")
+    );
+  });
 }
 
 function isPracticeRangeFacility(facility: Facility) {
@@ -906,7 +929,7 @@ function facilityGallery(facility: Facility) {
 function facilityToCourse(facility: Facility): Course {
   const area = fieldText(facility.area);
   const city = fieldText(facility.city);
-  const facilityType = fieldText(facility.facilityType);
+  const facilityType = firstFieldText(facility, ["courseType", "coursetype", "course_type", "facilityType", "category"]);
   const status = fieldText(facility.status);
 
   return {
@@ -1023,16 +1046,14 @@ function facilityToGolfShop(facility: Facility): GolfShop {
 }
 
 export async function getFacilities() {
-  const data = await requestMicroCMS<MicroCMSListResponse<Facility>>(
-    "/facilities?limit=100&orders=area,city"
-  );
+  const data = await requestAllMicroCMS<Facility>("facilities", "?orders=area,city");
 
-  return data?.contents?.length ? data.contents.filter((facility) => isPublishedStatus(facility.status)) : [];
+  return data?.length ? data.filter((facility) => isPublishedStatus(facility.status)) : [];
 }
 
 function isPublishedCourse(course: Course) {
   if (!course.status) return true;
-  return ["published", "掲載OK", "公開"].includes(course.status);
+  return !["draft", "下書き", "archived", "非公開"].includes(course.status);
 }
 
 function normalizeCourse(course: Course): Course {
@@ -1048,16 +1069,20 @@ function normalizeCourse(course: Course): Course {
 export async function getCourses() {
   const facilities = await getFacilities();
   if (facilities.length) {
-    const courses = facilities
-      .filter(isGolfCourseFacility)
-      .map(facilityToCourse)
-      .map(normalizeCourse)
-      .filter(isPublishedCourse);
+    const courses = coursesFromFacilities(facilities);
 
     if (courses.length) return courses;
   }
 
   return fallbackCourses.map((course) => ({ ...course, source: "fallback" as const })).map(normalizeCourse).filter(isPublishedCourse);
+}
+
+function coursesFromFacilities(facilities: Facility[]) {
+  return facilities
+    .filter(isGolfCourseFacility)
+    .map(facilityToCourse)
+    .map(normalizeCourse)
+    .filter(isPublishedCourse);
 }
 
 function isPublishedPracticeRange(range: PracticeRange) {
@@ -1068,10 +1093,7 @@ function isPublishedPracticeRange(range: PracticeRange) {
 export async function getPracticeRanges() {
   const facilities = await getFacilities();
   if (facilities.length) {
-    const ranges = facilities
-      .filter(isPracticeRangeFacility)
-      .map(facilityToPracticeRange)
-      .filter(isPublishedPracticeRange);
+    const ranges = practiceRangesFromFacilities(facilities);
 
     if (ranges.length) return ranges;
   }
@@ -1081,10 +1103,40 @@ export async function getPracticeRanges() {
     .filter(isPublishedPracticeRange);
 }
 
+function practiceRangesFromFacilities(facilities: Facility[]) {
+  return facilities
+    .filter(isPracticeRangeFacility)
+    .map(facilityToPracticeRange)
+    .filter(isPublishedPracticeRange);
+}
+
 export async function getGolfShops() {
   const facilities = await getFacilities();
-  const shops = facilities.filter(isGolfShopFacility).map(facilityToGolfShop);
+  const shops = golfShopsFromFacilities(facilities);
   return shops.length ? shops : fallbackGolfShops.map((shop) => ({ ...shop, source: "fallback" as const }));
+}
+
+function golfShopsFromFacilities(facilities: Facility[]) {
+  return facilities.filter(isGolfShopFacility).map(facilityToGolfShop);
+}
+
+export async function getFacilityCollections() {
+  const facilities = await getFacilities();
+  const cmsCourses = facilities.length ? coursesFromFacilities(facilities) : [];
+  const cmsPracticeRanges = facilities.length ? practiceRangesFromFacilities(facilities) : [];
+  const cmsGolfShops = facilities.length ? golfShopsFromFacilities(facilities) : [];
+
+  return {
+    courses: cmsCourses.length
+      ? cmsCourses
+      : fallbackCourses.map((course) => ({ ...course, source: "fallback" as const })).map(normalizeCourse).filter(isPublishedCourse),
+    practiceRanges: cmsPracticeRanges.length
+      ? cmsPracticeRanges
+      : fallbackPracticeRanges
+          .map((range) => ({ ...range, source: "fallback" as const }))
+          .filter(isPublishedPracticeRange),
+    golfShops: cmsGolfShops.length ? cmsGolfShops : fallbackGolfShops.map((shop) => ({ ...shop, source: "fallback" as const }))
+  };
 }
 
 export async function getSiteStats() {

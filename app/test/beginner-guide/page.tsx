@@ -6,9 +6,7 @@ import {
   articlePath,
   courseImages,
   getArticles,
-  getCourses,
-  getGolfShops,
-  getPracticeRanges,
+  getFacilityCollections,
   type Article,
   type Course,
   type GolfShop,
@@ -304,7 +302,7 @@ function recommendationGrid(cards: RecommendationCard[]) {
 }
 
 export default async function BeginnerGuideTestPage() {
-  const [courses, practiceRanges, golfShops, articles] = await Promise.all([getCourses(), getPracticeRanges(), getGolfShops(), getArticles()]);
+  const [{ courses, practiceRanges, golfShops }, articles] = await Promise.all([getFacilityCollections(), getArticles()]);
   const recommendedLessonFacilities = pickRecommendedPracticeRanges(practiceRanges, lessonFacilityTargets, [
     "/assets/hero/beginner-step-03-gear.png",
     "/assets/hero/beginner-step-02-simulator.png",
