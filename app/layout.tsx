@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import "../styles.css";
+import "../header-refresh.css";
 
 const siteUrl = "https://okinawagolfnavi.com";
 

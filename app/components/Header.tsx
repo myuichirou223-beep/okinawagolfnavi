@@ -1,18 +1,16 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 
 const navItems = [
-  { label: "ホーム", subtitle: "Home", href: "/", icon: "home", className: "nav-home" },
-  { label: "大会情報", subtitle: "Tournament", href: "/tournaments", icon: "trophy", className: "nav-tournament" },
-  { label: "ゴルフ場", subtitle: "Golf Course", href: "/courses", icon: "flag", className: "nav-course" },
-  { label: "練習場", subtitle: "Practice Range", href: "/practice", icon: "golf", className: "nav-practice" },
-  { label: "ショップ", subtitle: "Shop", href: "/shops", icon: "shop", className: "nav-shop" },
-  { label: "初心者", subtitle: "Beginner", href: "/beginner", icon: "beginner", className: "nav-beginner" },
-  { label: "お得情報", subtitle: "Deals", href: "/deals", icon: "star", className: "nav-deals" },
-  { label: "イベント", subtitle: "Event", href: "/events", icon: "calendar", className: "nav-event" },
-  { label: "レッスン", subtitle: "Lesson", href: "/lessons", icon: "lesson", className: "nav-lesson" },
-  { label: "記事", subtitle: "Articles", href: "/articles", icon: "blog", className: "nav-blog" }
+  { label: "TOP", href: "/", className: "nav-home" },
+  { label: "大会", href: "/tournaments", className: "nav-tournament" },
+  { label: "イベント", href: "/events", className: "nav-event" },
+  { label: "ゴルフ場", href: "/courses", className: "nav-course" },
+  { label: "練習場", href: "/practice", className: "nav-practice" },
+  { label: "ショップ", href: "/shops", className: "nav-shop" },
+  { label: "記事", href: "/articles", className: "nav-blog" }
 ];
 
 function NavIcon({ name }: { name: string }) {
@@ -126,6 +124,7 @@ function NavIcon({ name }: { name: string }) {
 }
 
 export function Header() {
+  const pathname = usePathname();
   const [mobileScrollState, setMobileScrollState] = useState<"normal" | "visible" | "hidden">("normal");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const lastScrollY = useRef(0);
@@ -189,14 +188,21 @@ export function Header() {
           </button>
         </div>
         <nav id="site-nav" className="site-nav" aria-label="主要メニュー">
-          {navItems.map((item) => (
-            <a key={item.label} className={item.className} href={item.href} onClick={() => setMobileMenuOpen(false)}>
-              <span className="nav-icon" aria-hidden="true">
-                <NavIcon name={item.icon} />
-              </span>
-              <span className="nav-label">{item.label}</span>
-            </a>
-          ))}
+          {navItems.map((item) => {
+            const isCurrent = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
+
+            return (
+              <a
+                key={item.label}
+                className={`${item.className}${isCurrent ? " is-current" : ""}`}
+                href={item.href}
+                aria-current={isCurrent ? "page" : undefined}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <span className="nav-label">{item.label}</span>
+              </a>
+            );
+          })}
         </nav>
       </div>
     </header>
