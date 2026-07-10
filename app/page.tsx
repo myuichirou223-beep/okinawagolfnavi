@@ -358,6 +358,10 @@ export default async function Home() {
               <img src="/assets/beginner/sidebar-debut-guide.png" alt="" loading="lazy" />
             </a>
 
+            <a className="sidebar-beginner-guide-banner sidebar-junior-feature-banner" href="/junior" aria-label="ジュニア特設ページを見る">
+              <img src="/assets/junior/sidebar-junior-feature.png" alt="" loading="lazy" />
+            </a>
+
             <section className="sidebar-box sidebar-tournament-card" aria-labelledby="sidebar-articles-title">
               <div className="sidebar-heading">
                 <h2 id="sidebar-articles-title">おすすめ記事</h2>

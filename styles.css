@@ -21974,9 +21974,37 @@ main#main.portal-main > section.home-feature-carousel:first-child .home-feature-
   grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
 }
 
+main#main.portal-main > section.home-feature-carousel:first-child .home-feature-carousel__indicators button {
+  background-color: rgba(17, 17, 17, 0.25) !important;
+  background-image: none !important;
+}
+
+main#main.portal-main > section.home-feature-carousel:first-child .home-feature-carousel__indicators button::before {
+  position: absolute !important;
+  inset: 0 auto 0 0 !important;
+  display: block !important;
+  width: 0%;
+  background: #111111 !important;
+  content: "" !important;
+  animation: homeHeroIndicatorThreeOneWidth 25.5s linear infinite !important;
+  animation-delay: var(--home-carousel-delay, 0s) !important;
+}
+
+main#main.portal-main > section.home-feature-carousel:first-child .home-feature-carousel__indicators button:nth-child(2)::before {
+  animation-name: homeHeroIndicatorThreeTwoWidth !important;
+}
+
+main#main.portal-main > section.home-feature-carousel:first-child .home-feature-carousel__indicators button:nth-child(3)::before {
+  animation-name: homeHeroIndicatorThreeThreeWidth !important;
+}
+
 main#main.portal-main > section.home-feature-carousel:first-child .home-feature-carousel__indicators button::after {
   animation: homeHeroIndicatorThreeOne 25.5s linear infinite !important;
   animation-delay: var(--home-carousel-delay, 0s) !important;
+  clip-path: inset(0 100% 0 0);
+  transform: none !important;
+  transform-origin: left center !important;
+  scale: 1 !important;
 }
 
 main#main.portal-main > section.home-feature-carousel:first-child .home-feature-carousel__indicators button:nth-child(2)::after {
@@ -22007,43 +22035,87 @@ main#main.portal-main > section.home-feature-carousel:first-child .home-feature-
 
 @keyframes homeHeroIndicatorThreeOne {
   0% {
-    scale: 0 1;
+    clip-path: inset(0 100% 0 0);
   }
-  27.451% {
-    scale: 1 1;
+  27.451%,
+  33.332% {
+    clip-path: inset(0 0 0 0);
   }
-  27.452%,
+  33.333%,
   100% {
-    scale: 0 1;
+    clip-path: inset(0 100% 0 0);
+  }
+}
+
+@keyframes homeHeroIndicatorThreeOneWidth {
+  0% {
+    width: 0%;
+  }
+  27.451%,
+  33.332% {
+    width: 100%;
+  }
+  33.333%,
+  100% {
+    width: 0%;
+  }
+}
+
+@keyframes homeHeroIndicatorThreeTwoWidth {
+  0%,
+  33.333% {
+    width: 0%;
+  }
+  60.784%,
+  66.666% {
+    width: 100%;
+  }
+  66.667%,
+  100% {
+    width: 0%;
+  }
+}
+
+@keyframes homeHeroIndicatorThreeThreeWidth {
+  0%,
+  66.667% {
+    width: 0%;
+  }
+  94.118%,
+  100% {
+    width: 100%;
   }
 }
 
 @keyframes homeHeroIndicatorThreeTwo {
   0%,
-  33.332% {
-    scale: 0 1;
+  33.333% {
+    clip-path: inset(0 100% 0 0);
   }
-  60.784% {
-    scale: 1 1;
+  60.784%,
+  66.666% {
+    clip-path: inset(0 0 0 0);
   }
-  60.785%,
+  66.667%,
   100% {
-    scale: 0 1;
+    clip-path: inset(0 100% 0 0);
   }
 }
 
 @keyframes homeHeroIndicatorThreeThree {
   0%,
-  66.666% {
-    scale: 0 1;
+  66.667% {
+    clip-path: inset(0 100% 0 0);
   }
-  94.118% {
-    scale: 1 1;
-  }
-  94.119%,
+  94.118%,
   100% {
-    scale: 0 1;
+    clip-path: inset(0 0 0 0);
   }
+}
+
+body:has(main#main.portal-main > section.home-feature-carousel:first-child) main#main.portal-main > section.home-feature-carousel:first-child .home-feature-carousel__indicators button::after {
+  transform: none !important;
+  scale: 1 !important;
 }
 
 /* Browser comment fix: square off the TOP carousel and keep a small gap before the first content row. */
@@ -22063,4 +22135,342 @@ body:has(main#main.portal-main > section.home-feature-carousel:first-child) .hom
 
 body:has(main#main.portal-main > section.home-feature-carousel:first-child) .home-sidebar {
   padding-top: 0 !important;
+}
+
+/* Junior feature page */
+.junior-feature-page {
+  min-height: 100vh;
+  padding: 76px 0 0;
+  background: #d8d3cb;
+  color: #111111;
+}
+
+body:has(.junior-feature-page) {
+  background: #d8d3cb !important;
+}
+
+body:has(.junior-feature-page) .site-header,
+body:has(.junior-feature-page) .site-header.mobile-scroll-visible,
+body:has(.junior-feature-page) .site-header.mobile-scroll-hidden,
+body:has(.junior-feature-page) .site-header.mobile-scroll-normal {
+  background: #d8d3cb !important;
+}
+
+.junior-feature-hero {
+  width: 100%;
+  border-top: 2px dashed rgba(17, 17, 17, 0.72);
+  border-bottom: 2px dashed rgba(17, 17, 17, 0.72);
+}
+
+.junior-feature-hero__heading {
+  width: min(1280px, calc(100% - 48px));
+  margin: 0 auto;
+  padding: 42px 0 34px;
+}
+
+.junior-feature-hero__eyebrow,
+.junior-feature-section__heading p {
+  margin: 0 0 10px;
+  color: #007f62;
+  font-size: 13px;
+  font-weight: 950;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.junior-feature-hero h1 {
+  max-width: 980px;
+  margin: 0;
+  font-size: clamp(34px, 6vw, 82px);
+  font-weight: 950;
+  line-height: 1.04;
+  letter-spacing: 0;
+}
+
+.junior-feature-hero__heading > p:not(.junior-feature-hero__eyebrow) {
+  max-width: 840px;
+  margin: 20px 0 0;
+  color: rgba(17, 17, 17, 0.78);
+  font-size: clamp(15px, 1.6vw, 19px);
+  font-weight: 800;
+  line-height: 1.9;
+}
+
+.junior-profile-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 2px dashed rgba(17, 17, 17, 0.72);
+}
+
+.junior-profile-card {
+  min-width: 0;
+  padding: 22px;
+  border-right: 2px dashed rgba(17, 17, 17, 0.72);
+  border-bottom: 2px dashed rgba(17, 17, 17, 0.72);
+}
+
+.junior-profile-card:nth-child(3n) {
+  border-right: 0;
+}
+
+.junior-profile-card__image {
+  position: relative;
+  display: grid;
+  min-height: 370px;
+  overflow: hidden;
+  background: #062f16;
+}
+
+.junior-profile-card__image img {
+  width: 100%;
+  height: 370px;
+  object-fit: cover;
+  object-position: center center;
+  filter: none;
+}
+
+.junior-profile-card__image span {
+  position: absolute;
+  right: 0;
+  bottom: 30px;
+  left: 0;
+  display: block;
+  padding: 12px 18px;
+  background: #007f62;
+  color: #ffffff;
+  font-size: clamp(20px, 2.3vw, 31px);
+  font-weight: 950;
+  line-height: 1;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.junior-profile-card.tone-blue .junior-profile-card__image span {
+  background: #006daf;
+}
+
+.junior-profile-card.tone-orange .junior-profile-card__image span {
+  background: #e86a2c;
+}
+
+.junior-profile-card.tone-pink .junior-profile-card__image span {
+  background: #cb4382;
+}
+
+.junior-profile-card__body {
+  padding: 24px 0 8px;
+}
+
+.junior-profile-card__body h2 {
+  margin: 0;
+  font-size: clamp(21px, 2.1vw, 31px);
+  font-weight: 950;
+  line-height: 1.45;
+  letter-spacing: 0;
+}
+
+.junior-profile-card__name {
+  margin: 18px 0 0 !important;
+  color: #111111 !important;
+  font-size: 17px !important;
+  font-weight: 950 !important;
+}
+
+.junior-profile-card__body p {
+  margin: 8px 0 0;
+  color: rgba(17, 17, 17, 0.72);
+  font-size: 14px;
+  font-weight: 750;
+  line-height: 1.75;
+}
+
+.junior-profile-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.junior-profile-card__tags span {
+  padding: 6px 10px;
+  border: 1px solid rgba(17, 17, 17, 0.22);
+  background: rgba(255, 255, 255, 0.24);
+  color: rgba(17, 17, 17, 0.78);
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.junior-feature-section {
+  width: min(1280px, calc(100% - 48px));
+  margin: 54px auto 72px;
+}
+
+.junior-feature-schedule.upcoming-schedule-section {
+  width: min(1280px, calc(100% - 48px));
+  margin: 54px auto 0;
+  padding: 0;
+}
+
+.junior-feature-schedule .portal-section-heading {
+  margin-bottom: 18px;
+}
+
+.junior-feature-schedule .portal-section-heading h2 {
+  max-width: 900px;
+  font-size: clamp(28px, 3.8vw, 52px);
+  font-weight: 950;
+  line-height: 1.14;
+}
+
+.junior-feature-schedule .portal-section-heading p {
+  max-width: 720px;
+  color: rgba(17, 17, 17, 0.68);
+  font-size: 15px;
+  font-weight: 850;
+  line-height: 1.8;
+}
+
+.junior-feature-schedule .upcoming-schedule-card,
+.junior-feature-schedule .upcoming-schedule-empty {
+  background: rgba(255, 255, 255, 0.34);
+}
+
+.junior-feature-banner {
+  width: min(1280px, calc(100% - 48px));
+  margin: 54px auto 0;
+}
+
+.junior-feature-banner a,
+.junior-feature-banner img {
+  display: block;
+}
+
+.junior-feature-banner a {
+  overflow: hidden;
+  background: #82e4d8;
+  text-decoration: none;
+}
+
+.junior-feature-banner img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 24 / 5;
+  object-fit: cover;
+}
+
+.junior-feature-section__heading h2,
+.junior-feature-section h2 {
+  margin: 0;
+  font-size: clamp(28px, 3.8vw, 52px);
+  font-weight: 950;
+  line-height: 1.14;
+  letter-spacing: 0;
+}
+
+.junior-feature-step-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  margin-top: 24px;
+  border: 2px dashed rgba(17, 17, 17, 0.72);
+}
+
+.junior-feature-step {
+  padding: 28px;
+  border-right: 2px dashed rgba(17, 17, 17, 0.72);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.junior-feature-step:last-child {
+  border-right: 0;
+}
+
+.junior-feature-step span {
+  display: block;
+  color: #007f62;
+  font-size: 14px;
+  font-weight: 950;
+}
+
+.junior-feature-step h3 {
+  margin: 14px 0 0;
+  font-size: 22px;
+  font-weight: 950;
+  line-height: 1.35;
+}
+
+.junior-feature-step p {
+  margin: 12px 0 0;
+  color: rgba(17, 17, 17, 0.72);
+  font-size: 14px;
+  font-weight: 750;
+  line-height: 1.8;
+}
+
+@media (max-width: 980px) {
+  .junior-profile-grid,
+  .junior-feature-step-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .junior-profile-card,
+  .junior-profile-card:nth-child(3n),
+  .junior-feature-step {
+    border-right: 0;
+  }
+
+  .junior-feature-step:not(:last-child) {
+    border-bottom: 2px dashed rgba(17, 17, 17, 0.72);
+  }
+}
+
+@media (max-width: 760px) {
+  .junior-feature-page {
+    padding-top: 60px;
+  }
+
+  .junior-feature-hero__heading,
+  .junior-feature-section,
+  .junior-feature-banner {
+    width: min(100% - 24px, 1280px);
+  }
+
+  .junior-feature-hero__heading {
+    padding: 30px 0 26px;
+  }
+
+  .junior-profile-card {
+    padding: 14px;
+  }
+
+  .junior-profile-card__image {
+    min-height: 300px;
+  }
+
+  .junior-profile-card__image img {
+    height: 300px;
+  }
+
+  .junior-profile-card__image span {
+    bottom: 20px;
+    padding: 10px 14px;
+  }
+
+  .junior-feature-section {
+    margin-top: 36px;
+    margin-bottom: 42px;
+  }
+
+  .junior-feature-banner {
+    margin-top: 36px;
+  }
+
+  .junior-feature-schedule.upcoming-schedule-section {
+    width: min(100% - 24px, 1280px);
+    margin-top: 36px;
+  }
+
+  .junior-feature-step {
+    padding: 22px;
+  }
 }
