@@ -22158,17 +22158,9 @@ body:has(.junior-feature-page) .site-header.mobile-scroll-normal {
 
 .junior-feature-hero {
   width: 100%;
-  border-top: 2px dashed rgba(17, 17, 17, 0.72);
   border-bottom: 2px dashed rgba(17, 17, 17, 0.72);
 }
 
-.junior-feature-hero__heading {
-  width: min(1280px, calc(100% - 48px));
-  margin: 0 auto;
-  padding: 42px 0 34px;
-}
-
-.junior-feature-hero__eyebrow,
 .junior-feature-section__heading p {
   margin: 0 0 10px;
   color: #007f62;
@@ -22176,24 +22168,6 @@ body:has(.junior-feature-page) .site-header.mobile-scroll-normal {
   font-weight: 950;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-}
-
-.junior-feature-hero h1 {
-  max-width: 980px;
-  margin: 0;
-  font-size: clamp(34px, 6vw, 82px);
-  font-weight: 950;
-  line-height: 1.04;
-  letter-spacing: 0;
-}
-
-.junior-feature-hero__heading > p:not(.junior-feature-hero__eyebrow) {
-  max-width: 840px;
-  margin: 20px 0 0;
-  color: rgba(17, 17, 17, 0.78);
-  font-size: clamp(15px, 1.6vw, 19px);
-  font-weight: 800;
-  line-height: 1.9;
 }
 
 .junior-profile-grid {
@@ -22429,14 +22403,9 @@ body:has(.junior-feature-page) .site-header.mobile-scroll-normal {
     padding-top: 60px;
   }
 
-  .junior-feature-hero__heading,
   .junior-feature-section,
   .junior-feature-banner {
     width: min(100% - 24px, 1280px);
-  }
-
-  .junior-feature-hero__heading {
-    padding: 30px 0 26px;
   }
 
   .junior-profile-card {
@@ -22472,5 +22441,46 @@ body:has(.junior-feature-page) .site-header.mobile-scroll-normal {
 
   .junior-feature-step {
     padding: 22px;
+  }
+}
+
+/* Mobile-only final polish for the TOP header and hero spacing. */
+@media (max-width: 760px) {
+  body:has(main#main.portal-main > section.home-feature-carousel:first-child) .site-header,
+  body:has(main#main.portal-main > section.home-feature-carousel:first-child) .site-header.mobile-scroll-visible,
+  body:has(main#main.portal-main > section.home-feature-carousel:first-child) .site-header.mobile-scroll-hidden,
+  body:has(main#main.portal-main > section.home-feature-carousel:first-child) .site-header.mobile-scroll-normal {
+    padding-right: 0 !important;
+  }
+
+  body:has(main#main.portal-main > section.home-feature-carousel:first-child) .site-header .header-inner {
+    position: relative !important;
+    justify-content: space-between !important;
+    padding-right: 0 !important;
+  }
+
+  body:has(main#main.portal-main > section.home-feature-carousel:first-child) .site-header .brand {
+    flex: 1 1 calc(100% - 60px) !important;
+    width: calc(100% - 60px) !important;
+    padding-right: 60px !important;
+  }
+
+  body:has(main#main.portal-main > section.home-feature-carousel:first-child) .site-header .brand-logo-mobile {
+    object-position: left center !important;
+  }
+
+  body:has(main#main.portal-main > section.home-feature-carousel:first-child) .site-header .header-actions,
+  body:has(main#main.portal-main > section.home-feature-carousel:first-child) .site-header .menu-toggle {
+    position: absolute !important;
+    top: 0 !important;
+    right: 0 !important;
+    margin-left: auto !important;
+    margin-right: 0 !important;
+  }
+
+  main#main.portal-main > section.home-feature-carousel:first-child {
+    margin-top: 0 !important;
+    padding-top: 14px !important;
+    min-height: calc(56.25vw + 78px) !important;
   }
 }

@@ -255,12 +255,7 @@ export default async function JuniorFeaturePage() {
     <>
       <Header />
       <main id="main" className="junior-feature-page">
-        <section className="junior-feature-hero" aria-labelledby="junior-feature-title">
-          <div className="junior-feature-hero__heading">
-            <p className="junior-feature-hero__eyebrow">Junior Golf Feature</p>
-            <h1 id="junior-feature-title">JUNIOR PICK UP .</h1>
-          </div>
-
+        <section className="junior-feature-hero" aria-label="ジュニアゴルファー紹介">
           <div className="junior-profile-grid" aria-label="ジュニアゴルファー紹介">
             {juniorProfiles.map((profile) => (
               <article key={profile.label} className={`junior-profile-card tone-${profile.tone}`}>
