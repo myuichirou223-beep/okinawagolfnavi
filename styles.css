@@ -22621,6 +22621,7 @@ body:has(.junior-feature-page) .site-header.mobile-scroll-normal {
   .mobile-menu-banners {
     grid-column: 1 / -1 !important;
     display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
     gap: 10px !important;
     margin-top: 4px !important;
   }
@@ -22688,6 +22689,7 @@ body:has(.junior-feature-page) .site-header.mobile-scroll-normal {
   body:has(main#main.portal-main > section.home-feature-carousel:first-child) .site-header.mobile-menu-open .site-nav .mobile-menu-banners {
     grid-column: 1 / -1 !important;
     display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   }
 
   body:has(main#main.portal-main > section.home-feature-carousel:first-child) .site-header.mobile-menu-open .site-nav .mobile-menu-banners a {
