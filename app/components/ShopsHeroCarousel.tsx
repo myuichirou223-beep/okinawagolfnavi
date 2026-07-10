@@ -16,6 +16,19 @@ export function ShopsHeroCarousel() {
     setAnimationCycle((cycle) => cycle + 1);
   }
 
+  function renderShopImage(
+    desktopSrc: string,
+    mobileSrc: string,
+    className?: string
+  ) {
+    return (
+      <picture>
+        <source media="(max-width: 760px)" srcSet={mobileSrc} />
+        <img className={className} src={desktopSrc} alt="" />
+      </picture>
+    );
+  }
+
   return (
     <div className="shops-hero__media" style={animationStyle}>
       <div key={animationCycle} className="shops-hero__animation-layer">
@@ -28,7 +41,11 @@ export function ShopsHeroCarousel() {
               rel="noopener noreferrer"
               aria-label="OKINAWA GOLF CLUBのページを開く"
             >
-              <img className="is-contain" src="/assets/shops/okinawa-golf-club-2.png" alt="" />
+              {renderShopImage(
+                "/assets/shops/okinawa-golf-club-2.png",
+                "/assets/shops/okinawa-golf-club-mobile.png",
+                "is-contain"
+              )}
             </a>
             <a
               className="shops-hero__slide-link"
@@ -37,7 +54,11 @@ export function ShopsHeroCarousel() {
               rel="noopener noreferrer"
               aria-label="PGA TOUR SUPERSTORE 沖縄豊崎店のページを開く"
             >
-              <img className="is-pga-store" src="/assets/shops/PGASTORE.png" alt="" />
+              {renderShopImage(
+                "/assets/shops/PGASTORE.png",
+                "/assets/shops/PGASTORE-mobile.png",
+                "is-pga-store"
+              )}
             </a>
             <a
               className="shops-hero__slide-link"
@@ -46,7 +67,10 @@ export function ShopsHeroCarousel() {
               rel="noopener noreferrer"
               aria-label="マンガ倉庫 那覇店のページを開く"
             >
-              <img src="/assets/shops/manga-souko.png" alt="" />
+              {renderShopImage(
+                "/assets/shops/manga-souko.png",
+                "/assets/shops/manga-souko-mobile.png"
+              )}
             </a>
             <a
               className="shops-hero__slide-link"
@@ -55,7 +79,11 @@ export function ShopsHeroCarousel() {
               rel="noopener noreferrer"
               aria-label="OKINAWA GOLF CLUBのページを開く"
             >
-              <img className="is-contain" src="/assets/shops/okinawa-golf-club-2.png" alt="" />
+              {renderShopImage(
+                "/assets/shops/okinawa-golf-club-2.png",
+                "/assets/shops/okinawa-golf-club-mobile.png",
+                "is-contain"
+              )}
             </a>
             <a
               className="shops-hero__slide-link"
@@ -64,7 +92,11 @@ export function ShopsHeroCarousel() {
               rel="noopener noreferrer"
               aria-label="PGA TOUR SUPERSTORE 沖縄豊崎店のページを開く"
             >
-              <img className="is-pga-store" src="/assets/shops/PGASTORE.png" alt="" />
+              {renderShopImage(
+                "/assets/shops/PGASTORE.png",
+                "/assets/shops/PGASTORE-mobile.png",
+                "is-pga-store"
+              )}
             </a>
             <a
               className="shops-hero__slide-link"
@@ -73,7 +105,10 @@ export function ShopsHeroCarousel() {
               rel="noopener noreferrer"
               aria-label="マンガ倉庫 那覇店のページを開く"
             >
-              <img src="/assets/shops/manga-souko.png" alt="" />
+              {renderShopImage(
+                "/assets/shops/manga-souko.png",
+                "/assets/shops/manga-souko-mobile.png"
+              )}
             </a>
           </div>
         </div>

@@ -12,6 +12,7 @@ export type HomeFeatureSlide = {
   title: string;
   description: string;
   imageUrl: string;
+  mobileImageUrl?: string;
   tone: "green" | "orange" | "blue" | "dark";
   actions: FeatureAction[];
   artwork?: boolean;
@@ -46,6 +47,21 @@ export function HomeFeatureCarousel({ slides }: HomeFeatureCarouselProps) {
     setAnimationCycle((cycle) => cycle + 1);
   }
 
+  function renderSlideImage(slide: HomeFeatureSlide, index: number) {
+    const image = <img src={slide.imageUrl} alt={slide.imageAlt || ""} loading={index <= 2 ? "eager" : "lazy"} />;
+
+    if (!slide.mobileImageUrl) {
+      return image;
+    }
+
+    return (
+      <picture>
+        <source media="(max-width: 760px)" srcSet={slide.mobileImageUrl} />
+        {image}
+      </picture>
+    );
+  }
+
   return (
     <section
       className="home-feature-carousel"
@@ -65,14 +81,14 @@ export function HomeFeatureCarousel({ slides }: HomeFeatureCarouselProps) {
                   aria-label={slide.linkAriaLabel || `${slide.imageAlt || slide.title || slide.label}を開く`}
                   {...externalLinkProps(slide.href)}
                 >
-                  <img src={slide.imageUrl} alt={slide.imageAlt || ""} loading={index <= 2 ? "eager" : "lazy"} />
+                  {renderSlideImage(slide, index)}
                 </a>
               ) : (
                 <div
                   key={`${slide.imageUrl}-${index}`}
                   className={`home-feature-carousel__slide tone-${slide.tone}${slide.artwork ? " is-artwork" : ""}${slide.fillFrame ? " is-fill-frame" : ""}`}
                 >
-                  <img src={slide.imageUrl} alt={slide.imageAlt || ""} loading={index <= 2 ? "eager" : "lazy"} />
+                  {renderSlideImage(slide, index)}
                 </div>
               )
             ))}

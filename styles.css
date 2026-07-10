@@ -22492,7 +22492,7 @@ body:has(.junior-feature-page) .site-header.mobile-scroll-normal {
     margin-top: 0 !important;
     margin-bottom: 0 !important;
     padding: 0 0 46px !important;
-    min-height: calc(56.25vw + 46px) !important;
+    min-height: calc(133.333vw + 46px) !important;
     border-radius: 0 !important;
   }
 
@@ -22503,7 +22503,7 @@ body:has(.junior-feature-page) .site-header.mobile-scroll-normal {
 
   main#main.portal-main > section.home-feature-carousel:first-child .home-feature-carousel__animation-layer,
   main#main.portal-main > section.home-feature-carousel:first-child .home-feature-carousel__viewport {
-    height: 56.25vw !important;
+    height: 133.333vw !important;
     min-height: 0 !important;
   }
 
@@ -22521,6 +22521,12 @@ body:has(.junior-feature-page) .site-header.mobile-scroll-normal {
     overflow: hidden !important;
   }
 
+  main#main.portal-main > section.home-feature-carousel:first-child .home-feature-carousel__slide picture {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
   main#main.portal-main > section.home-feature-carousel:first-child .home-feature-carousel__slide img {
     width: 100% !important;
     height: 100% !important;
@@ -22533,7 +22539,7 @@ body:has(.junior-feature-page) .site-header.mobile-scroll-normal {
   }
 
   main#main.portal-main > section.home-feature-carousel:first-child .home-feature-carousel__indicators {
-    top: calc(56.25vw + 18px) !important;
+    top: calc(133.333vw + 18px) !important;
     bottom: auto !important;
   }
 }
@@ -22621,7 +22627,7 @@ body:has(.junior-feature-page) .site-header.mobile-scroll-normal {
   .mobile-menu-banners {
     grid-column: 1 / -1 !important;
     display: grid !important;
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    grid-template-columns: 1fr !important;
     gap: 10px !important;
     margin-top: 4px !important;
   }
@@ -22689,7 +22695,7 @@ body:has(.junior-feature-page) .site-header.mobile-scroll-normal {
   body:has(main#main.portal-main > section.home-feature-carousel:first-child) .site-header.mobile-menu-open .site-nav .mobile-menu-banners {
     grid-column: 1 / -1 !important;
     display: grid !important;
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    grid-template-columns: 1fr !important;
   }
 
   body:has(main#main.portal-main > section.home-feature-carousel:first-child) .site-header.mobile-menu-open .site-nav .mobile-menu-banners a {
@@ -22725,5 +22731,71 @@ body:has(.junior-feature-page) .site-header.mobile-scroll-normal {
   body:has(main#main.portal-main > section.home-feature-carousel:first-child) .site-header.mobile-menu-open .site-nav a.is-current .nav-label {
     color: #ffffff !important;
     text-shadow: none !important;
+  }
+}
+
+/* Mobile-only shops hero cleanup: show each banner uncropped and remove the label. */
+@media (max-width: 760px) {
+  body:has(.shops-page-shell) .shops-hero-section {
+    margin-bottom: 20px !important;
+    padding-top: 0 !important;
+  }
+
+  body:has(.shops-page-shell) .shops-hero {
+    min-height: calc(60px + 133.333vw + 74px) !important;
+    margin-bottom: 20px !important;
+    overflow: hidden !important;
+    border-radius: 0 !important;
+  }
+
+  body:has(.shops-page-shell) .shops-hero__media {
+    position: relative !important;
+    top: auto !important;
+    right: auto !important;
+    left: auto !important;
+    z-index: 0 !important;
+    width: 100% !important;
+    height: 133.333vw !important;
+    min-height: 0 !important;
+    margin: 60px 0 0 !important;
+    overflow: visible !important;
+  }
+
+  body:has(.shops-page-shell) .shops-hero__animation-layer {
+    overflow: visible !important;
+  }
+
+  body:has(.shops-page-shell) .shops-hero__carousel {
+    --shops-hero-slide-width: 100vw;
+    --shops-hero-slide-gap: 0px;
+    overflow: hidden !important;
+  }
+
+  body:has(.shops-page-shell) .shops-hero__slide-link {
+    overflow: hidden !important;
+  }
+
+  body:has(.shops-page-shell) .shops-hero__slide-link picture {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  body:has(.shops-page-shell) .shops-hero__carousel-track img,
+  body:has(.shops-page-shell) .shops-hero__carousel-track img.is-contain,
+  body:has(.shops-page-shell) .shops-hero__carousel-track img.is-pga-store {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    object-position: center center !important;
+  }
+
+  body:has(.shops-page-shell) .shops-hero__indicators {
+    top: calc(133.333vw + 18px) !important;
+    bottom: auto !important;
+  }
+
+  body:has(.shops-page-shell) .shops-hero__eyebrow {
+    display: none !important;
   }
 }
