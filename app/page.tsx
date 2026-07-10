@@ -229,6 +229,17 @@ export default async function Home() {
       fillFrame: true,
       imageAlt: "広告掲載募集 ゴルフが好きな人に情報をダイレクトに届けられる",
       href: googleFormDirectUrl
+    },
+    {
+      label: "サイト紹介",
+      title: "",
+      description: "",
+      imageUrl: "/assets/hero/top-hero-responsive-site.png",
+      tone: "orange" as const,
+      actions: [],
+      artwork: true,
+      imageAlt: "どんなサイズでも見やすい、WEBサイトを目指してます。",
+      href: "https://okinawagolfnavi.com/"
     }
   ];
   const sidebarArticles = pickRandomArticles(articles);

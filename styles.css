@@ -21963,3 +21963,104 @@ main#main.portal-main > section.home-feature-carousel:first-child {
   margin-top: 0 !important;
   padding-top: 72px !important;
 }
+
+/* TOP carousel: three-slide cycle after adding the responsive-site visual. */
+main#main.portal-main > section.home-feature-carousel:first-child .home-feature-carousel__track {
+  animation: homeHeroCarouselThreeMargin 25.5s cubic-bezier(0.18, 0.72, 0.18, 1) infinite !important;
+  animation-delay: var(--home-carousel-delay, 0s) !important;
+}
+
+main#main.portal-main > section.home-feature-carousel:first-child .home-feature-carousel__indicators {
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+}
+
+main#main.portal-main > section.home-feature-carousel:first-child .home-feature-carousel__indicators button::after {
+  animation: homeHeroIndicatorThreeOne 25.5s linear infinite !important;
+  animation-delay: var(--home-carousel-delay, 0s) !important;
+}
+
+main#main.portal-main > section.home-feature-carousel:first-child .home-feature-carousel__indicators button:nth-child(2)::after {
+  animation-name: homeHeroIndicatorThreeTwo !important;
+}
+
+main#main.portal-main > section.home-feature-carousel:first-child .home-feature-carousel__indicators button:nth-child(3)::after {
+  animation-name: homeHeroIndicatorThreeThree !important;
+}
+
+@keyframes homeHeroCarouselThreeMargin {
+  0%,
+  27.451% {
+    margin-left: 0;
+  }
+  33.333%,
+  60.784% {
+    margin-left: calc((var(--home-hero-slide-width) + var(--home-hero-slide-gap)) * -1);
+  }
+  66.667%,
+  94.118% {
+    margin-left: calc((var(--home-hero-slide-width) + var(--home-hero-slide-gap)) * -2);
+  }
+  100% {
+    margin-left: calc((var(--home-hero-slide-width) + var(--home-hero-slide-gap)) * -3);
+  }
+}
+
+@keyframes homeHeroIndicatorThreeOne {
+  0% {
+    scale: 0 1;
+  }
+  27.451% {
+    scale: 1 1;
+  }
+  27.452%,
+  100% {
+    scale: 0 1;
+  }
+}
+
+@keyframes homeHeroIndicatorThreeTwo {
+  0%,
+  33.332% {
+    scale: 0 1;
+  }
+  60.784% {
+    scale: 1 1;
+  }
+  60.785%,
+  100% {
+    scale: 0 1;
+  }
+}
+
+@keyframes homeHeroIndicatorThreeThree {
+  0%,
+  66.666% {
+    scale: 0 1;
+  }
+  94.118% {
+    scale: 1 1;
+  }
+  94.119%,
+  100% {
+    scale: 0 1;
+  }
+}
+
+/* Browser comment fix: square off the TOP carousel and keep a small gap before the first content row. */
+body:has(main#main.portal-main > section.home-feature-carousel:first-child) main#main.portal-main > section.home-feature-carousel:first-child {
+  margin-bottom: 18px !important;
+  border-radius: 0 !important;
+}
+
+body:has(main#main.portal-main > section.home-feature-carousel:first-child) .home-portal-layout {
+  margin-top: 0 !important;
+}
+
+body:has(main#main.portal-main > section.home-feature-carousel:first-child) .home-content-column > .upcoming-schedule-section:first-child {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+body:has(main#main.portal-main > section.home-feature-carousel:first-child) .home-sidebar {
+  padding-top: 0 !important;
+}
