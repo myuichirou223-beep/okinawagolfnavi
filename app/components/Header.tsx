@@ -203,6 +203,14 @@ export function Header() {
               </a>
             );
           })}
+          <div className="mobile-menu-banners" aria-label="おすすめページ">
+            <a href="/beginner" aria-label="ゴルフデビューガイドを見る" onClick={() => setMobileMenuOpen(false)}>
+              <img src="/assets/beginner/sidebar-debut-guide.png" alt="" loading="lazy" />
+            </a>
+            <a href="/junior" aria-label="ジュニア特設ページを見る" onClick={() => setMobileMenuOpen(false)}>
+              <img src="/assets/junior/sidebar-junior-feature.png" alt="" loading="lazy" />
+            </a>
+          </div>
         </nav>
       </div>
     </header>
