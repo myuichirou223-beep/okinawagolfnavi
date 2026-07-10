@@ -22450,13 +22450,21 @@ body:has(.junior-feature-page) .site-header.mobile-scroll-normal {
   body:has(main#main.portal-main > section.home-feature-carousel:first-child) .site-header.mobile-scroll-visible,
   body:has(main#main.portal-main > section.home-feature-carousel:first-child) .site-header.mobile-scroll-hidden,
   body:has(main#main.portal-main > section.home-feature-carousel:first-child) .site-header.mobile-scroll-normal {
-    padding-right: 0 !important;
+    height: 60px !important;
+    min-height: 60px !important;
+    padding: 0 !important;
+    border-bottom: 0 !important;
+    box-shadow: none !important;
   }
 
   body:has(main#main.portal-main > section.home-feature-carousel:first-child) .site-header .header-inner {
     position: relative !important;
+    height: 60px !important;
+    min-height: 60px !important;
     justify-content: space-between !important;
+    padding-top: 0 !important;
     padding-right: 0 !important;
+    padding-bottom: 0 !important;
   }
 
   body:has(main#main.portal-main > section.home-feature-carousel:first-child) .site-header .brand {
@@ -22479,8 +22487,193 @@ body:has(.junior-feature-page) .site-header.mobile-scroll-normal {
   }
 
   main#main.portal-main > section.home-feature-carousel:first-child {
+    --home-hero-slide-width: 100vw;
+    --home-hero-slide-gap: 0px;
     margin-top: 0 !important;
-    padding-top: 14px !important;
-    min-height: calc(56.25vw + 78px) !important;
+    margin-bottom: 0 !important;
+    padding: 0 0 46px !important;
+    min-height: calc(56.25vw + 46px) !important;
+    border-radius: 0 !important;
+  }
+
+  main#main.portal-main > section.home-feature-carousel:first-child::before,
+  main#main.portal-main > section.home-feature-carousel:first-child::after {
+    inset: 0 !important;
+  }
+
+  main#main.portal-main > section.home-feature-carousel:first-child .home-feature-carousel__animation-layer,
+  main#main.portal-main > section.home-feature-carousel:first-child .home-feature-carousel__viewport {
+    height: 56.25vw !important;
+    min-height: 0 !important;
+  }
+
+  main#main.portal-main > section.home-feature-carousel:first-child .home-feature-carousel__animation-layer {
+    overflow: visible !important;
+  }
+
+  main#main.portal-main > section.home-feature-carousel:first-child .home-feature-carousel__viewport {
+    overflow: hidden !important;
+  }
+
+  main#main.portal-main > section.home-feature-carousel:first-child .home-feature-carousel__slide {
+    flex-basis: 100vw !important;
+    width: 100vw !important;
+    overflow: hidden !important;
+  }
+
+  main#main.portal-main > section.home-feature-carousel:first-child .home-feature-carousel__slide img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    object-position: center center !important;
+  }
+
+  main#main.portal-main > section.home-feature-carousel:first-child .home-feature-carousel__eyebrow {
+    display: none !important;
+  }
+
+  main#main.portal-main > section.home-feature-carousel:first-child .home-feature-carousel__indicators {
+    top: calc(56.25vw + 18px) !important;
+    bottom: auto !important;
+  }
+}
+
+/* Mobile-only final menu layout. */
+@media (max-width: 760px) {
+  .site-header.mobile-menu-open::before {
+    content: "" !important;
+    position: fixed !important;
+    inset: 60px 0 0 !important;
+    z-index: 4998 !important;
+    display: block !important;
+    background: rgba(15, 26, 22, 0.28) !important;
+    backdrop-filter: blur(4px) !important;
+  }
+
+  .site-header.mobile-menu-open .site-nav {
+    position: fixed !important;
+    top: 72px !important;
+    right: 12px !important;
+    left: 12px !important;
+    z-index: 5001 !important;
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+    width: auto !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 14px !important;
+    border: 1px solid rgba(0, 143, 90, 0.14) !important;
+    border-radius: 16px !important;
+    background: rgba(255, 255, 255, 0.98) !important;
+    box-shadow: 0 18px 46px rgba(13, 28, 23, 0.22) !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    transform: none !important;
+  }
+
+  .site-header.mobile-menu-open .site-nav a {
+    min-width: 0 !important;
+    min-height: 64px !important;
+    height: auto !important;
+    padding: 14px 10px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border: 1px solid #d7ebe4 !important;
+    border-radius: 10px !important;
+    background: linear-gradient(180deg, #ffffff 0%, #f0faf6 100%) !important;
+    color: #14372e !important;
+    font-size: 18px !important;
+    font-weight: 950 !important;
+    line-height: 1.15 !important;
+    text-align: center !important;
+    box-shadow: none !important;
+  }
+
+  .site-header.mobile-menu-open .site-nav a.nav-home {
+    grid-column: 1 / -1 !important;
+    min-height: 58px !important;
+  }
+
+  .site-header.mobile-menu-open .site-nav a.is-current {
+    border-color: #008f5a !important;
+    background: #008f5a !important;
+    color: #ffffff !important;
+  }
+
+  .site-header.mobile-menu-open .site-nav .nav-label {
+    display: block !important;
+    color: inherit !important;
+    font-size: inherit !important;
+    font-weight: inherit !important;
+    line-height: inherit !important;
+    white-space: nowrap !important;
+  }
+
+  body:has(main#main.portal-main > section.home-feature-carousel:first-child) .site-header.mobile-menu-open .site-nav {
+    position: fixed !important;
+    top: 72px !important;
+    right: 12px !important;
+    left: 12px !important;
+    z-index: 5001 !important;
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+    width: auto !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 14px !important;
+    border: 1px solid rgba(0, 143, 90, 0.14) !important;
+    border-radius: 16px !important;
+    background: rgba(255, 255, 255, 0.98) !important;
+    box-shadow: 0 18px 46px rgba(13, 28, 23, 0.22) !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    transform: none !important;
+  }
+
+  body:has(main#main.portal-main > section.home-feature-carousel:first-child) .site-header.mobile-menu-open .site-nav a {
+    width: auto !important;
+    min-width: 0 !important;
+    min-height: 64px !important;
+    height: auto !important;
+    padding: 14px 10px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  body:has(main#main.portal-main > section.home-feature-carousel:first-child) .site-header.mobile-menu-open .site-nav a.nav-home {
+    grid-column: 1 / -1 !important;
+    min-height: 58px !important;
+  }
+
+  .site-header.mobile-menu-open .site-nav a,
+  body:has(main#main.portal-main > section.home-feature-carousel:first-child) .site-header.mobile-menu-open .site-nav a {
+    transition: none !important;
+    transform: none !important;
+    filter: none !important;
+    -webkit-tap-highlight-color: rgba(0, 143, 90, 0.18) !important;
+  }
+
+  .site-header.mobile-menu-open .site-nav a:active,
+  .site-header.mobile-menu-open .site-nav a.is-current,
+  body:has(main#main.portal-main > section.home-feature-carousel:first-child) .site-header.mobile-menu-open .site-nav a:active,
+  body:has(main#main.portal-main > section.home-feature-carousel:first-child) .site-header.mobile-menu-open .site-nav a.is-current {
+    border-color: #008f5a !important;
+    background: #008f5a !important;
+    color: #ffffff !important;
+    box-shadow: none !important;
+    filter: none !important;
+    transform: none !important;
+  }
+
+  .site-header.mobile-menu-open .site-nav a:active .nav-label,
+  .site-header.mobile-menu-open .site-nav a.is-current .nav-label,
+  body:has(main#main.portal-main > section.home-feature-carousel:first-child) .site-header.mobile-menu-open .site-nav a:active .nav-label,
+  body:has(main#main.portal-main > section.home-feature-carousel:first-child) .site-header.mobile-menu-open .site-nav a.is-current .nav-label {
+    color: #ffffff !important;
+    text-shadow: none !important;
   }
 }
