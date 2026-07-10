@@ -211,7 +211,7 @@ export default async function Home() {
       label: "メイン",
       title: "",
       description: "",
-      imageUrl: "/assets/hero/okinawa-golf-info-poster.png",
+      imageUrl: "/assets/hero/top-hero-golf-info.png",
       tone: "orange" as const,
       actions: [],
       artwork: true,
@@ -219,58 +219,15 @@ export default async function Home() {
       href: "https://okinawagolfnavi.com/"
     },
     {
-      label: "メイン",
-      title: "",
-      description: "",
-      imageUrl: "/assets/hero/responsive-devices-poster.png",
-      tone: "orange" as const,
-      actions: [],
-      artwork: true,
-      imageAlt: "PC・タブレット・スマホ どのサイズでも見やすい。",
-      href: "https://okinawagolfnavi.com/"
-    },
-    {
-      label: "メイン",
-      title: "",
-      description: "",
-      imageUrl: "/assets/hero/okinawa-golf-navi-main.jpg",
-      tone: "blue" as const,
-      actions: [],
-      artwork: true,
-      imageAlt: "おきなわGOLFなび 沖縄のゴルフ情報をひとつに"
-    },
-    {
-      label: "特集記事",
-      title: "",
-      description: "",
-      imageUrl: "/assets/hero/tiger-woods-feature.jpg",
-      tone: "dark" as const,
-      actions: [],
-      artwork: true,
-      imageAlt: "タイガー・ウッズ特集 伝説を築いたスイング、思考、そして軌跡",
-      href: "https://okinawagolfnavi.com/articles/tiger-woods-legacy-part1.html"
-    },
-    {
-      label: "特集記事",
-      title: "",
-      description: "",
-      imageUrl: "/assets/hero/masashi-ozaki-feature.jpg",
-      tone: "dark" as const,
-      actions: [],
-      artwork: true,
-      imageAlt: "尾崎将司特集 日本ゴルフ界を牽引したレジェンドの軌跡",
-      href: "https://okinawagolfnavi.com/articles/jumbo-ozaki-emperor-reign-part1.html"
-    },
-    {
       label: "PR",
       title: "",
       description: "",
-      imageUrl: "/assets/ads/advertising-pr-banner.png",
+      imageUrl: "/assets/hero/top-hero-ad-recruit.png",
       tone: "blue" as const,
       actions: [{ label: "掲載について問い合わせる", href: googleFormDirectUrl }],
       artwork: true,
       fillFrame: true,
-      imageAlt: "大会・イベント・キャンペーン・サービスをおきなわGOLFなびに掲載して沖縄のゴルフ好きに向けてPRしませんか",
+      imageAlt: "広告掲載募集 ゴルフが好きな人に情報をダイレクトに届けられる",
       href: googleFormDirectUrl
     }
   ];
@@ -280,10 +237,9 @@ export default async function Home() {
     <>
       <Header />
       <main id="main" className="portal-main">
+        <HomeFeatureCarousel slides={featureSlides} />
         <div className="home-portal-layout">
           <div className="home-content-column">
-        <HomeFeatureCarousel slides={featureSlides} />
-
         <section className="portal-section upcoming-schedule-section" aria-labelledby="upcoming-schedule-title">
           <div className="portal-section-heading">
             <h2 id="upcoming-schedule-title">開催予定</h2>

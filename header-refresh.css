@@ -167,3 +167,24 @@
     font-size: 10px !important;
   }
 }
+
+/* Apply the shops-page transparent header treatment site-wide. */
+.site-header,
+.site-header.mobile-scroll-visible,
+.site-header.mobile-scroll-hidden,
+.site-header.mobile-scroll-normal {
+  background: transparent !important;
+  border-bottom: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+.site-header .header-inner,
+.site-header .brand {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.site-header .site-nav {
+  background: #000000 !important;
+}
