@@ -20390,6 +20390,339 @@ body:has(.shops-page-shell) .shops-hero-section {
   }
 }
 
+/* Tournament page: cyan theme inspired by the supplied reference image. */
+#tournaments.section {
+  --tournament-sky: #78d4ee;
+  --tournament-sky-soft: #dff8ff;
+  --tournament-sky-pale: #f2fcff;
+  --tournament-blue: #1298bd;
+  --tournament-blue-deep: #075a72;
+  --tournament-ink: #07384b;
+  --tournament-muted: #3f7282;
+  --tournament-line: rgba(14, 145, 183, 0.22);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.46), rgba(255, 255, 255, 0.14) 34%, rgba(255, 255, 255, 0.36) 100%),
+    linear-gradient(180deg, #78d4ee 0%, #7ad5ef 58%, #8cdef2 100%);
+}
+
+#tournaments .section-heading {
+  border-bottom-color: rgba(7, 90, 114, 0.18);
+}
+
+#tournaments .section-heading .eyebrow {
+  color: var(--tournament-blue-deep);
+}
+
+#tournaments .section-heading h1 {
+  color: var(--tournament-ink);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.44);
+}
+
+#tournaments .section-heading p:not(.eyebrow),
+#tournaments .sort-bar span {
+  color: var(--tournament-muted);
+}
+
+#tournaments .filter-bar,
+#tournaments .sort-bar {
+  border-color: rgba(255, 255, 255, 0.62);
+  background: rgba(242, 252, 255, 0.82);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.84),
+    0 12px 28px rgba(7, 90, 114, 0.12);
+}
+
+#tournaments .filter-button,
+#tournaments .sort-button {
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--tournament-blue-deep);
+}
+
+#tournaments .filter-button:hover,
+#tournaments .filter-button:focus-visible,
+#tournaments .sort-button:hover,
+#tournaments .sort-button:focus-visible {
+  border-color: rgba(7, 90, 114, 0.24);
+  background: #ffffff;
+  color: #043f55;
+  box-shadow: inset 0 0 0 1px rgba(18, 152, 189, 0.08);
+}
+
+#tournaments .filter-button.is-active,
+#tournaments .filter-button.is-active:hover,
+#tournaments .filter-button.is-active:focus-visible,
+#tournaments .sort-button.is-active,
+#tournaments .sort-button.is-active:hover,
+#tournaments .sort-button.is-active:focus-visible {
+  border-color: #087895;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.35), transparent 44%),
+    linear-gradient(180deg, #27bfe5, #0a86aa);
+  color: #ffffff;
+  text-shadow: 0 1px 1px rgba(0, 53, 74, 0.46);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.58),
+    0 3px 0 #066b86,
+    0 7px 14px rgba(7, 90, 114, 0.18);
+}
+
+#tournaments .annual-schedule {
+  border-color: rgba(255, 255, 255, 0.72);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(242, 252, 255, 0.86));
+  box-shadow: 0 16px 34px rgba(7, 90, 114, 0.14);
+}
+
+#tournaments .schedule-month-heading {
+  border-color: rgba(7, 90, 114, 0.18);
+  background:
+    linear-gradient(90deg, rgba(120, 212, 238, 0.58), rgba(255, 255, 255, 0.92) 64%),
+    #e8fbff;
+  color: var(--tournament-blue-deep);
+}
+
+#tournaments .schedule-month-heading::before {
+  background: linear-gradient(180deg, #23c3ea, #0785a8);
+}
+
+#tournaments .schedule-item {
+  grid-template-columns: minmax(0, 1fr) minmax(258px, 320px);
+  align-items: center;
+  gap: 18px 28px;
+  padding: 20px 18px;
+  border-color: var(--tournament-line);
+  background: rgba(255, 255, 255, 0.84);
+}
+
+#tournaments .schedule-copy {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+}
+
+#tournaments .schedule-item h4 {
+  color: var(--tournament-ink);
+  font-size: clamp(18px, 1.55vw, 21px);
+  line-height: 1.35;
+}
+
+#tournaments .schedule-item p,
+#tournaments .schedule-meta-item dd {
+  color: #245b6d;
+}
+
+#tournaments .schedule-meta-item {
+  border-color: rgba(18, 152, 189, 0.18);
+  background: rgba(223, 248, 255, 0.72);
+}
+
+#tournaments .schedule-meta-item dt {
+  color: var(--tournament-blue);
+}
+
+#tournaments .schedule-actions {
+  max-width: 320px;
+  align-self: center;
+  justify-self: end;
+  grid-template-columns: repeat(3, minmax(78px, 1fr));
+  gap: 8px;
+}
+
+#tournaments .schedule-action-button {
+  min-height: 40px;
+  padding-inline: 8px;
+  font-size: 12px;
+}
+
+#tournaments .schedule-item time {
+  display: none;
+}
+
+#tournaments .schedule-event-detail {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 10px;
+  margin-top: 2px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(18, 152, 189, 0.18);
+}
+
+#tournaments .schedule-event-date {
+  color: var(--tournament-ink);
+  font-size: clamp(18px, 1.65vw, 22px);
+  font-weight: 950;
+  line-height: 1.25;
+  letter-spacing: 0;
+}
+
+#tournaments .schedule-event-venue {
+  color: #245b6d;
+  font-size: 15px;
+  font-weight: 850;
+  line-height: 1.35;
+}
+
+#tournaments .schedule-countdown {
+  display: inline-flex;
+  min-height: 28px;
+  align-items: center;
+  margin-left: 4px;
+  padding: 4px 10px;
+  border: 1px solid rgba(7, 90, 114, 0.18);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.62), rgba(223, 248, 255, 0.82)),
+    #dff8ff;
+  color: var(--tournament-blue-deep);
+  font-size: 13px;
+  font-weight: 950;
+  line-height: 1.2;
+  white-space: nowrap;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.78);
+}
+
+#tournaments .schedule-event-date + .schedule-event-venue::before {
+  margin-right: 10px;
+  color: rgba(7, 90, 114, 0.5);
+  content: "/";
+}
+
+#tournaments .schedule-today-marker {
+  border-block-color: #075a72;
+  background: #0a86aa;
+  box-shadow: 0 8px 18px rgba(7, 90, 114, 0.18);
+}
+
+#tournaments .schedule-today-marker span,
+#tournaments .schedule-today-marker strong {
+  color: var(--tournament-blue-deep);
+}
+
+#tournaments .schedule-action-button,
+#tournaments a.schedule-action-button {
+  border-color: #087895;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.35), transparent 42%),
+    linear-gradient(180deg, #28bfe5, #0a86aa);
+  color: #ffffff;
+  text-shadow: 0 1px 1px rgba(0, 53, 74, 0.54);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.58),
+    0 3px 0 #066b86,
+    0 5px 10px rgba(7, 90, 114, 0.2);
+}
+
+#tournaments a.schedule-action-button:hover,
+#tournaments a.schedule-action-button:focus-visible {
+  border-color: #066b86;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.42), transparent 42%),
+    linear-gradient(180deg, #4dd3f1, #0a86aa);
+}
+
+#tournaments a.schedule-action-button:active {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.36),
+    0 1px 0 #066b86;
+}
+
+#tournaments .schedule-action-button.is-disabled {
+  border-color: rgba(7, 90, 114, 0.16);
+  background: rgba(236, 248, 251, 0.78);
+  color: #789aa4;
+}
+
+@media (min-width: 761px) and (max-width: 1180px) {
+  #tournaments .schedule-item {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto;
+    gap: 14px;
+    padding: 20px 18px 18px;
+  }
+
+  #tournaments .schedule-copy,
+  #tournaments .schedule-actions {
+    grid-column: 1;
+  }
+
+  #tournaments .schedule-actions {
+    width: 100%;
+    max-width: none;
+    justify-self: stretch;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  #tournaments .schedule-action-button {
+    min-height: 42px;
+  }
+}
+
+@media (max-width: 760px) {
+  #tournaments.section {
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.18)),
+      #78d4ee;
+  }
+
+  #tournaments .section-heading,
+  #tournaments .filter-bar,
+  #tournaments .annual-schedule,
+  #tournaments .schedule-item {
+    border-color: rgba(7, 90, 114, 0.18);
+  }
+
+  #tournaments .filter-bar,
+  #tournaments .sort-bar {
+    background: rgba(242, 252, 255, 0.84);
+    box-shadow: 0 8px 22px rgba(7, 90, 114, 0.1);
+  }
+
+  #tournaments .annual-schedule {
+    background: rgba(255, 255, 255, 0.86);
+  }
+
+  #tournaments .schedule-item {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.88);
+  }
+
+  #tournaments .schedule-copy,
+  #tournaments .schedule-actions {
+    grid-column: 1;
+  }
+
+  #tournaments .schedule-actions {
+    max-width: none;
+    justify-self: stretch;
+  }
+
+  #tournaments .schedule-event-detail {
+    display: grid;
+    gap: 4px;
+  }
+
+  #tournaments .schedule-event-date {
+    font-size: clamp(17px, 4.8vw, 20px);
+  }
+
+  #tournaments .schedule-event-venue {
+    font-size: 13px;
+  }
+
+  #tournaments .schedule-countdown {
+    width: fit-content;
+    margin-left: 0;
+    font-size: 12px;
+  }
+
+  #tournaments .schedule-event-date + .schedule-event-venue::before {
+    margin-right: 0;
+    content: "";
+  }
+}
+
 /* Site-wide visual rule: use square corners throughout the interface. */
 *,
 *::before,

@@ -18,18 +18,9 @@ export const metadata = {
 };
 
 function tournamentDateLabel(eventDate?: string, fallbackLabel?: string) {
-  let date = eventDate ? new Date(eventDate) : null;
+  let date = tournamentDate(eventDate, fallbackLabel);
 
-  if (!date || Number.isNaN(date.getTime())) {
-    const label = fallbackLabel || "";
-    const year = Number(label.match(/(\d{4})年/)?.[1] || new Date().getFullYear());
-    const dateParts =
-      label.match(/(\d{1,2})月\s*(\d{1,2})日/) ||
-      label.match(/(\d{1,2})\/(\d{1,2})/);
-
-    if (!dateParts) return label;
-    date = new Date(`${year}-${dateParts[1].padStart(2, "0")}-${dateParts[2].padStart(2, "0")}T00:00:00+09:00`);
-  }
+  if (!date) return fallbackLabel || "";
 
   const dateText = new Intl.DateTimeFormat("ja-JP", {
     year: "numeric",
@@ -45,6 +36,32 @@ function tournamentDateLabel(eventDate?: string, fallbackLabel?: string) {
   return `${dateText}（${weekday}）`;
 }
 
+function tournamentDate(eventDate?: string, fallbackLabel?: string) {
+  let date = eventDate ? new Date(eventDate) : null;
+
+  if (!date || Number.isNaN(date.getTime())) {
+    const label = fallbackLabel || "";
+    const year = Number(label.match(/(\d{4})年/)?.[1] || new Date().getFullYear());
+    const dateParts =
+      label.match(/(\d{1,2})月\s*(\d{1,2})日/) ||
+      label.match(/(\d{1,2})\/(\d{1,2})/);
+
+    if (!dateParts) return null;
+    date = new Date(`${year}-${dateParts[1].padStart(2, "0")}-${dateParts[2].padStart(2, "0")}T00:00:00+09:00`);
+  }
+
+  return Number.isNaN(date.getTime()) ? null : date;
+}
+
+function daysUntilTournament(eventDate: Date | null, todayDate: Date) {
+  if (!eventDate) return null;
+
+  const millisecondsPerDay = 24 * 60 * 60 * 1000;
+  const days = Math.round((eventDate.getTime() - todayDate.getTime()) / millisecondsPerDay);
+
+  return days > 0 ? days : null;
+}
+
 function currentJstDate() {
   const parts = new Intl.DateTimeFormat("en-CA", {
     year: "numeric",
@@ -57,6 +74,7 @@ function currentJstDate() {
 
   return {
     label: tournamentDateLabel(`${isoDate}T00:00:00+09:00`),
+    date: new Date(`${isoDate}T00:00:00+09:00`),
     sortDate: Number(`${values.year}${values.month}${values.day}`)
   };
 }
@@ -104,56 +122,62 @@ export default async function TournamentsPage() {
                 <span>現在</span>
                 <strong>{today.label}</strong>
               </div>
-              {tournaments.map((tournament) => (
-                <article
-                  key={tournament.id}
-                  className="schedule-item searchable"
-                  data-category={tournamentFilterCategory(tournament)}
-                  data-keywords={tournamentKeywords(tournament)}
-                  data-month={tournament.month || "未定"}
-                  data-sort-date={tournamentSortDate(tournament)}
-                >
-                  <time>{tournament.month || "未定"}</time>
-                  <div className="schedule-copy">
-                    <h4>{tournament.title}</h4>
-                    <dl className="schedule-meta" aria-label={`${tournament.title}の基本情報`}>
-                      <div className="schedule-meta-item is-organizer">
-                        <dt>主催者</dt>
-                        <dd>{tournament.organizer || "主催者確認中"}</dd>
-                      </div>
-                      <div className="schedule-meta-item is-target">
-                        <dt>対象</dt>
-                        <dd>{tournamentTargetLabel(tournament)}</dd>
-                      </div>
-                    </dl>
-                    <p>
-                      {[
-                        tournamentDateLabel(tournament.eventDate, tournament.dateLabel),
-                        tournament.venue
-                      ].filter(Boolean).join(" / ") || "詳細確認中"}
-                    </p>
-                  </div>
-                  <div className="schedule-actions" aria-label={`${tournament.title}の関連リンク`}>
-                    {tournamentActionLinks(tournament).map((link) => (
-                      link.url ? (
-                        <a
-                          key={link.label}
-                          className="schedule-action-button"
-                          href={link.url}
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          {link.label}
-                        </a>
-                      ) : (
-                        <span key={link.label} className="schedule-action-button is-disabled" aria-disabled="true">
-                          {link.label}
-                        </span>
-                      )
-                    ))}
-                  </div>
-                </article>
-              ))}
+              {tournaments.map((tournament) => {
+                const eventDateText = tournamentDateLabel(tournament.eventDate, tournament.dateLabel);
+                const eventDate = tournamentDate(tournament.eventDate, tournament.dateLabel);
+                const daysUntil = daysUntilTournament(eventDate, today.date);
+
+                return (
+                  <article
+                    key={tournament.id}
+                    className="schedule-item searchable"
+                    data-category={tournamentFilterCategory(tournament)}
+                    data-keywords={tournamentKeywords(tournament)}
+                    data-month={tournament.month || "未定"}
+                    data-sort-date={tournamentSortDate(tournament)}
+                  >
+                    <time>{tournament.month || "未定"}</time>
+                    <div className="schedule-copy">
+                      <h4>{tournament.title}</h4>
+                      <dl className="schedule-meta" aria-label={`${tournament.title}の基本情報`}>
+                        <div className="schedule-meta-item is-organizer">
+                          <dt>主催者</dt>
+                          <dd>{tournament.organizer || "主催者確認中"}</dd>
+                        </div>
+                        <div className="schedule-meta-item is-target">
+                          <dt>対象</dt>
+                          <dd>{tournamentTargetLabel(tournament)}</dd>
+                        </div>
+                      </dl>
+                      <p className="schedule-event-detail">
+                        {eventDateText ? <span className="schedule-event-date">{eventDateText}</span> : null}
+                        {tournament.venue ? <span className="schedule-event-venue">{tournament.venue}</span> : null}
+                        {daysUntil ? <span className="schedule-countdown">開催まで{daysUntil}日</span> : null}
+                        {!eventDateText && !tournament.venue ? "詳細確認中" : null}
+                      </p>
+                    </div>
+                    <div className="schedule-actions" aria-label={`${tournament.title}の関連リンク`}>
+                      {tournamentActionLinks(tournament).map((link) => (
+                        link.url ? (
+                          <a
+                            key={link.label}
+                            className="schedule-action-button"
+                            href={link.url}
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            {link.label}
+                          </a>
+                        ) : (
+                          <span key={link.label} className="schedule-action-button is-disabled" aria-disabled="true">
+                            {link.label}
+                          </span>
+                        )
+                      ))}
+                    </div>
+                  </article>
+                );
+              })}
             </div>
           </div>
         </section>
