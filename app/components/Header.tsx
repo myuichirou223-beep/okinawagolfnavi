@@ -128,6 +128,7 @@ export function Header() {
   const [mobileScrollState, setMobileScrollState] = useState<"normal" | "visible" | "hidden">("normal");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const lastScrollY = useRef(0);
+  const handledPointerToggle = useRef(false);
 
   useEffect(() => {
     const updateHeader = () => {
@@ -180,7 +181,23 @@ export function Header() {
           className="mobile-menu-toggle"
           aria-controls="site-nav"
           aria-expanded={mobileMenuOpen}
-          onClick={() => setMobileMenuOpen((current) => !current)}
+          onPointerDown={(event) => {
+            if (window.innerWidth > 760) {
+              return;
+            }
+
+            handledPointerToggle.current = true;
+            event.preventDefault();
+            setMobileMenuOpen((current) => !current);
+          }}
+          onClick={() => {
+            if (handledPointerToggle.current) {
+              handledPointerToggle.current = false;
+              return;
+            }
+
+            setMobileMenuOpen((current) => !current);
+          }}
         >
           <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false">
             <path d="M7 10h18" />

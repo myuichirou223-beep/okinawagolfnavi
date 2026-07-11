@@ -13808,6 +13808,11 @@ body:has(.shops-page-shell) .shops-hero-section {
     height: 32px !important;
   }
 
+  .site-header .site-nav a.nav-blog::after {
+    content: none !important;
+    display: none !important;
+  }
+
   .site-header .site-nav .nav-label {
     font-family: Arial, "Noto Sans JP", sans-serif !important;
     font-size: clamp(14px, 1.35vw, 19px) !important;
@@ -13905,6 +13910,11 @@ body:has(.shops-page-shell) .shops-hero-section {
     height: 36px;
     background: #ffffff;
     content: "";
+  }
+
+  .site-header .site-nav a.nav-blog::after {
+    content: none !important;
+    display: none !important;
   }
 
   .site-header .site-nav a:hover,
