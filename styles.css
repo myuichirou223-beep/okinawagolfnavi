@@ -22489,6 +22489,8 @@ body:has(.junior-feature-page) .site-header.mobile-scroll-normal {
   main#main.portal-main > section.home-feature-carousel:first-child {
     --home-hero-slide-width: 100vw;
     --home-hero-slide-gap: 0px;
+    background: transparent !important;
+    animation: none !important;
     margin-top: 0 !important;
     margin-bottom: 0 !important;
     padding: 0 0 46px !important;
@@ -22496,9 +22498,14 @@ body:has(.junior-feature-page) .site-header.mobile-scroll-normal {
     border-radius: 0 !important;
   }
 
+  body:has(main#main.portal-main > section.home-feature-carousel:first-child) .site-header::before,
+  body:has(main#main.portal-main > section.home-feature-carousel:first-child) .site-header::after,
   main#main.portal-main > section.home-feature-carousel:first-child::before,
   main#main.portal-main > section.home-feature-carousel:first-child::after {
-    inset: 0 !important;
+    content: none !important;
+    display: none !important;
+    background: transparent !important;
+    animation: none !important;
   }
 
   main#main.portal-main > section.home-feature-carousel:first-child .home-feature-carousel__animation-layer,
@@ -22739,13 +22746,25 @@ body:has(.junior-feature-page) .site-header.mobile-scroll-normal {
   body:has(.shops-page-shell) .shops-hero-section {
     margin-bottom: 20px !important;
     padding-top: 0 !important;
+    background: transparent !important;
   }
 
   body:has(.shops-page-shell) .shops-hero {
     min-height: calc(60px + 133.333vw + 74px) !important;
+    background: transparent !important;
+    animation: none !important;
+    box-shadow: none !important;
     margin-bottom: 20px !important;
     overflow: hidden !important;
     border-radius: 0 !important;
+  }
+
+  body:has(.shops-page-shell) .shops-hero::before,
+  body:has(.shops-page-shell) .shops-hero::after {
+    content: none !important;
+    display: none !important;
+    background: transparent !important;
+    animation: none !important;
   }
 
   body:has(.shops-page-shell) .shops-hero__media {
@@ -22797,5 +22816,358 @@ body:has(.junior-feature-page) .site-header.mobile-scroll-normal {
 
   body:has(.shops-page-shell) .shops-hero__eyebrow {
     display: none !important;
+  }
+}
+
+.brand-copy {
+  display: none;
+}
+
+/* Mobile floating pill header inspired by the supplied reference. */
+@media (max-width: 760px) {
+  .site-header,
+  .site-header.mobile-scroll-visible,
+  .site-header.mobile-scroll-hidden,
+  .site-header.mobile-scroll-normal,
+  body:has(main#main.portal-main > section.home-feature-carousel:first-child) .site-header,
+  body:has(main#main.portal-main > section.home-feature-carousel:first-child) .site-header.mobile-scroll-visible,
+  body:has(main#main.portal-main > section.home-feature-carousel:first-child) .site-header.mobile-scroll-hidden,
+  body:has(main#main.portal-main > section.home-feature-carousel:first-child) .site-header.mobile-scroll-normal,
+  body:has(.shops-page-shell) .site-header,
+  body:has(.shops-page-shell) .site-header.mobile-scroll-visible,
+  body:has(.shops-page-shell) .site-header.mobile-scroll-hidden,
+  body:has(.shops-page-shell) .site-header.mobile-scroll-normal {
+    position: fixed !important;
+    top: 14px !important;
+    right: 12px !important;
+    left: 12px !important;
+    z-index: 5000 !important;
+    width: auto !important;
+    min-width: 0 !important;
+    height: 58px !important;
+    min-height: 58px !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    border: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    transform: translateY(0) !important;
+  }
+
+  .site-header.mobile-scroll-hidden {
+    transform: translateY(-86px) !important;
+  }
+
+  .site-header .header-inner,
+  body:has(main#main.portal-main > section.home-feature-carousel:first-child) .site-header .header-inner,
+  body:has(.shops-page-shell) .site-header .header-inner {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    height: 58px !important;
+    min-height: 58px !important;
+    margin: 0 !important;
+    padding: 0 12px 0 16px !important;
+    overflow: hidden !important;
+    border: 1px solid rgba(255, 255, 255, 0.72) !important;
+    border-radius: 999px !important;
+    background: rgba(255, 255, 255, 0.84) !important;
+    box-shadow: 0 16px 34px rgba(18, 34, 30, 0.16) !important;
+    backdrop-filter: blur(18px) saturate(1.12) !important;
+    -webkit-backdrop-filter: blur(18px) saturate(1.12) !important;
+  }
+
+  .site-header .brand,
+  body:has(main#main.portal-main > section.home-feature-carousel:first-child) .site-header .brand,
+  body:has(.shops-page-shell) .site-header .brand {
+    flex: 1 1 calc(100% - 54px) !important;
+    width: auto !important;
+    min-width: 0 !important;
+    height: 58px !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+  }
+
+  .site-header .brand-logo {
+    display: none !important;
+  }
+
+  .site-header .brand-logo-mobile,
+  body:has(main#main.portal-main > section.home-feature-carousel:first-child) .site-header .brand-logo-mobile {
+    display: block !important;
+    flex: 0 0 auto !important;
+    width: min(58vw, 230px) !important;
+    height: auto !important;
+    max-width: none !important;
+    object-fit: contain !important;
+    object-position: left center !important;
+  }
+
+  .brand-copy {
+    display: none !important;
+    min-width: 0 !important;
+    color: #1d3730 !important;
+    font-size: clamp(10px, 2.75vw, 13px) !important;
+    font-weight: 900 !important;
+    line-height: 1.25 !important;
+    white-space: normal !important;
+  }
+
+  .site-header .header-actions,
+  body:has(main#main.portal-main > section.home-feature-carousel:first-child) .site-header .header-actions,
+  body:has(.shops-page-shell) .site-header .header-actions {
+    position: static !important;
+    flex: 0 0 46px !important;
+    width: 46px !important;
+    height: auto !important;
+    margin: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  .site-header .menu-toggle,
+  body:has(main#main.portal-main > section.home-feature-carousel:first-child) .site-header .menu-toggle,
+  body:has(.shops-page-shell) .site-header .menu-toggle {
+    position: relative !important;
+    top: auto !important;
+    right: auto !important;
+    width: 46px !important;
+    min-width: 46px !important;
+    height: 46px !important;
+    min-height: 46px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: grid !important;
+    place-items: center !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    border: 0 !important;
+    border-radius: 999px !important;
+    background: transparent !important;
+    color: #20342f !important;
+    box-shadow: none !important;
+  }
+
+  .site-header.mobile-menu-open .menu-toggle {
+    background-image: none !important;
+  }
+
+  .site-header .menu-toggle-icon,
+  body:has(main#main.portal-main > section.home-feature-carousel:first-child) .site-header .menu-toggle-icon,
+  body:has(.shops-page-shell) .site-header .menu-toggle-icon {
+    position: relative !important;
+    z-index: 2 !important;
+    display: block !important;
+    width: 32px !important;
+    height: 32px !important;
+    flex: 0 0 32px !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    overflow: visible !important;
+    color: #20342f !important;
+    stroke: currentColor !important;
+    stroke-width: 2.4 !important;
+    stroke-linecap: round !important;
+    fill: none !important;
+    pointer-events: none !important;
+  }
+
+  .site-header .menu-toggle-icon path,
+  body:has(main#main.portal-main > section.home-feature-carousel:first-child) .site-header .menu-toggle-icon path,
+  body:has(.shops-page-shell) .site-header .menu-toggle-icon path {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    stroke: #20342f !important;
+    vector-effect: non-scaling-stroke !important;
+  }
+
+  .site-header .menu-toggle span {
+    display: none !important;
+  }
+
+  .site-header .menu-toggle i,
+  .site-header .menu-toggle i::before,
+  .site-header .menu-toggle i::after {
+    display: none !important;
+    width: 25px !important;
+    height: 2px !important;
+    border-radius: 999px !important;
+    background: #20342f !important;
+    box-shadow: none !important;
+  }
+
+  .site-header .menu-toggle i::before {
+    top: -8px !important;
+  }
+
+  .site-header .menu-toggle i::after {
+    top: 8px !important;
+  }
+
+  .site-header.mobile-menu-open .site-nav {
+    top: 84px !important;
+  }
+
+  .site-header.mobile-menu-open::before {
+    inset: 0 !important;
+  }
+}
+
+/* Hard mobile menu visibility fix: keep the menu button visible inside the pill header. */
+@media (max-width: 760px) {
+  .site-header.mobile-scroll-hidden,
+  body:has(.shops-page-shell) .site-header.mobile-scroll-hidden,
+  body:has(main#main.portal-main > section.home-feature-carousel:first-child) .site-header.mobile-scroll-hidden {
+    transform: translateY(0) !important;
+  }
+
+  .site-header .header-actions,
+  body:has(.shops-page-shell) .site-header .header-actions,
+  body:has(main#main.portal-main > section.home-feature-carousel:first-child) .site-header .header-actions {
+    position: static !important;
+    z-index: 7000 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex: 0 0 48px !important;
+    width: 48px !important;
+    height: 48px !important;
+    margin-left: auto !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+  }
+
+  .site-header .menu-toggle,
+  body:has(.shops-page-shell) .site-header .menu-toggle,
+  body:has(main#main.portal-main > section.home-feature-carousel:first-child) .site-header .menu-toggle {
+    position: static !important;
+    z-index: 7001 !important;
+    display: grid !important;
+    width: 46px !important;
+    min-width: 46px !important;
+    height: 46px !important;
+    min-height: 46px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    place-items: center !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    border: 0 !important;
+    border-radius: 999px !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  .site-header .menu-toggle-icon,
+  body:has(.shops-page-shell) .site-header .menu-toggle-icon,
+  body:has(main#main.portal-main > section.home-feature-carousel:first-child) .site-header .menu-toggle-icon {
+    display: block !important;
+    width: 34px !important;
+    height: 34px !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    stroke: #111111 !important;
+    color: #111111 !important;
+  }
+
+  .site-header .menu-toggle-icon path,
+  body:has(.shops-page-shell) .site-header .menu-toggle-icon path,
+  body:has(main#main.portal-main > section.home-feature-carousel:first-child) .site-header .menu-toggle-icon path {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    stroke: #111111 !important;
+    stroke-width: 2.8 !important;
+    stroke-linecap: round !important;
+  }
+}
+
+.mobile-pill-menu-toggle {
+  display: none;
+}
+
+/* Dedicated mobile menu button that avoids legacy .menu-toggle conflicts. */
+@media (max-width: 760px) {
+  .site-header .mobile-pill-menu-toggle,
+  body:has(.shops-page-shell) .site-header .mobile-pill-menu-toggle,
+  body:has(main#main.portal-main > section.home-feature-carousel:first-child) .site-header .mobile-pill-menu-toggle {
+    position: relative !important;
+    z-index: 7200 !important;
+    flex: 0 0 48px !important;
+    display: grid !important;
+    width: 48px !important;
+    min-width: 48px !important;
+    height: 48px !important;
+    min-height: 48px !important;
+    margin: 0 0 0 auto !important;
+    padding: 0 !important;
+    place-items: center !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    border: 0 !important;
+    border-radius: 999px !important;
+    background: transparent !important;
+    color: #111111 !important;
+    box-shadow: none !important;
+    appearance: none !important;
+  }
+
+  .site-header .mobile-pill-menu-toggle svg,
+  body:has(.shops-page-shell) .site-header .mobile-pill-menu-toggle svg,
+  body:has(main#main.portal-main > section.home-feature-carousel:first-child) .site-header .mobile-pill-menu-toggle svg {
+    display: block !important;
+    width: 34px !important;
+    height: 34px !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    overflow: visible !important;
+    fill: none !important;
+    stroke: currentColor !important;
+    stroke-width: 2.8 !important;
+    stroke-linecap: round !important;
+    pointer-events: none !important;
+  }
+
+  .site-header .mobile-pill-menu-toggle path,
+  body:has(.shops-page-shell) .site-header .mobile-pill-menu-toggle path,
+  body:has(main#main.portal-main > section.home-feature-carousel:first-child) .site-header .mobile-pill-menu-toggle path {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    stroke: #111111 !important;
+    vector-effect: non-scaling-stroke !important;
+  }
+
+  .site-header .mobile-pill-menu-toggle span {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+  }
+
+  .site-header.mobile-menu-open .mobile-pill-menu-toggle svg path:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+    transform-origin: center;
+  }
+
+  .site-header.mobile-menu-open .mobile-pill-menu-toggle svg path:nth-child(2) {
+    opacity: 0 !important;
+  }
+
+  .site-header.mobile-menu-open .mobile-pill-menu-toggle svg path:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+    transform-origin: center;
   }
 }

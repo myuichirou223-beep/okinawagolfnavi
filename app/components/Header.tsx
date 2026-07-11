@@ -175,18 +175,20 @@ export function Header() {
           <img className="brand-logo" src="/assets/logo-mobile-text.png" alt="おきなわGOLFなび" />
           <img className="brand-logo-mobile" src="/assets/logo-mobile-text.png" alt="" aria-hidden="true" />
         </a>
-        <div className="header-actions">
-          <button
-            type="button"
-            className="menu-toggle"
-            aria-controls="site-nav"
-            aria-expanded={mobileMenuOpen}
-            onClick={() => setMobileMenuOpen((current) => !current)}
-          >
-            <i aria-hidden="true" />
-            <span className="menu-label-ja">{mobileMenuOpen ? "CLOSE" : "MENU"}</span>
-          </button>
-        </div>
+        <button
+          type="button"
+          className="mobile-pill-menu-toggle"
+          aria-controls="site-nav"
+          aria-expanded={mobileMenuOpen}
+          onClick={() => setMobileMenuOpen((current) => !current)}
+        >
+          <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+            <path d="M7 10h18" />
+            <path d="M7 16h18" />
+            <path d="M7 22h18" />
+          </svg>
+          <span>{mobileMenuOpen ? "CLOSE" : "MENU"}</span>
+        </button>
         <nav id="site-nav" className="site-nav" aria-label="主要メニュー">
           {navItems.map((item) => {
             const isCurrent = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
