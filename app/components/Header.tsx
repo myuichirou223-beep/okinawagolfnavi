@@ -177,7 +177,7 @@ export function Header() {
         </a>
         <button
           type="button"
-          className="mobile-pill-menu-toggle"
+          className="mobile-menu-toggle"
           aria-controls="site-nav"
           aria-expanded={mobileMenuOpen}
           onClick={() => setMobileMenuOpen((current) => !current)}
@@ -190,6 +190,14 @@ export function Header() {
           <span>{mobileMenuOpen ? "CLOSE" : "MENU"}</span>
         </button>
         <nav id="site-nav" className="site-nav" aria-label="主要メニュー">
+          <button
+            type="button"
+            className="mobile-menu-close"
+            aria-label="メニューを閉じる"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            <span>閉じる</span>
+          </button>
           {navItems.map((item) => {
             const isCurrent = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
 
