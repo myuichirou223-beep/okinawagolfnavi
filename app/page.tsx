@@ -131,9 +131,9 @@ export default async function Home() {
   const latestArticles = articles.slice(0, 10);
   const scheduledItems: UpcomingScheduleItem[] = [
     ...tournaments.map<UpcomingScheduleItem | null>((tournament) => {
-      const date = parseEventDate(tournament.eventDate) || sortDateToDate(tournamentSortDate(tournament));
+      const date = sortDateToDate(tournamentSortDate(tournament)) || parseEventDate(tournament.eventDate);
       if (!date || dateToSortValue(date) < todaySortValue) return null;
-      const eventDate = tournament.eventDate?.slice(0, 10) || [
+      const eventDate = [
         date.getFullYear(),
         String(date.getMonth() + 1).padStart(2, "0"),
         String(date.getDate()).padStart(2, "0")

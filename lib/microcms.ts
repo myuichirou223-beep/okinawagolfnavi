@@ -1,3 +1,6 @@
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
+
 export type MicroCMSImage = {
   url: string;
   height?: number;
@@ -384,6 +387,81 @@ const fallbackTournaments: Tournament[] = [
   }
 ];
 
+let importedFallbackTournaments: Tournament[] | null = null;
+
+function parseCsvLine(line: string) {
+  const values: string[] = [];
+  let current = "";
+  let inQuotes = false;
+
+  for (let index = 0; index < line.length; index += 1) {
+    const char = line[index];
+    const nextChar = line[index + 1];
+
+    if (char === "\"" && nextChar === "\"") {
+      current += "\"";
+      index += 1;
+      continue;
+    }
+
+    if (char === "\"") {
+      inQuotes = !inQuotes;
+      continue;
+    }
+
+    if (char === "," && !inQuotes) {
+      values.push(current);
+      current = "";
+      continue;
+    }
+
+    current += char;
+  }
+
+  values.push(current);
+  return values;
+}
+
+function fallbackTournamentsFromImportCsv() {
+  if (importedFallbackTournaments) return importedFallbackTournaments;
+
+  try {
+    const csvPath = join(process.cwd(), "_data/imports/tournaments-import-microcms.csv");
+    const [headerLine = "", ...lines] = readFileSync(csvPath, "utf-8").replace(/^\uFEFF/, "").trim().split(/\r?\n/);
+    const headers = parseCsvLine(headerLine);
+
+    importedFallbackTournaments = lines
+      .map((line) => {
+        const values = parseCsvLine(line);
+        const row = Object.fromEntries(headers.map((header, index) => [header, values[index] || ""]));
+
+        return {
+          id: row.id,
+          title: row.title,
+          month: row.month,
+          dateLabel: row.dateLabel,
+          venue: row.venue,
+          area: row.area,
+          organizer: row.organizer,
+          category: row.category,
+          status: row.status,
+          description: row.description,
+          entryUrl: row.entryUrl,
+          overviewUrl: row.overviewUrl,
+          resultUrl: row.resultUrl,
+          officialUrl: row.officialUrl,
+          displayOrder: row.displayOrder ? Number(row.displayOrder) : undefined,
+          tags: row.tags
+        } satisfies Tournament;
+      })
+      .filter((tournament) => tournament.id && tournament.title);
+  } catch {
+    importedFallbackTournaments = [];
+  }
+
+  return importedFallbackTournaments;
+}
+
 const fallbackCourses: Course[] = [
   {
     id: "ryukyu-golf-club",
@@ -763,9 +841,15 @@ export async function getTournaments() {
     "/tournaments?limit=100&orders=displayOrder,-dateLabel"
   );
 
-  const tournaments = data?.contents?.length ? data.contents : fallbackTournaments;
+  const importedTournaments = fallbackTournamentsFromImportCsv();
+  const tournaments = data?.contents?.length
+    ? data.contents
+    : importedTournaments.length
+      ? importedTournaments
+      : fallbackTournaments;
   return tournaments
     .filter(isPublishedTournament)
+    .map(normalizeTournamentDateFields)
     .sort((a, b) => tournamentSortDate(a) - tournamentSortDate(b));
 }
 
@@ -1146,7 +1230,9 @@ export async function getSiteStats() {
     requestAllMicroCMS<Topic>("topics", "?orders=-published,-createdAt")
   ]);
 
-  const visibleTournaments = (tournaments || fallbackTournaments).filter(isPublishedTournament);
+  const importedTournaments = fallbackTournamentsFromImportCsv();
+  const tournamentSource = tournaments || (importedTournaments.length ? importedTournaments : fallbackTournaments);
+  const visibleTournaments = tournamentSource.filter(isPublishedTournament);
   const visibleFacilities = (facilities || []).filter((facility) => isPublishedStatus(facility.status));
   const visibleTopics = (topics || fallbackTopics).filter(isPublishedTopic);
   const courseCount = visibleFacilities.length
@@ -1348,6 +1434,19 @@ export function tournamentSortDate(tournament: Tournament) {
 
   const month = Number(text.match(/(\d{1,2})月/)?.[1] || seasonMonth[tournament.month || ""] || 12);
   return year * 10000 + month * 100 + 99;
+}
+
+function sortDateToTournamentEventDate(sortDate: number) {
+  const text = String(sortDate);
+  if (text.length !== 8 || text.endsWith("99")) return "";
+  return `${text.slice(0, 4)}-${text.slice(4, 6)}-${text.slice(6, 8)}T00:00:00+09:00`;
+}
+
+function normalizeTournamentDateFields(tournament: Tournament): Tournament {
+  if (!tournament.dateLabel) return tournament;
+
+  const eventDate = sortDateToTournamentEventDate(tournamentSortDate(tournament));
+  return eventDate ? { ...tournament, eventDate } : tournament;
 }
 
 export function tournamentLink(tournament: Tournament) {

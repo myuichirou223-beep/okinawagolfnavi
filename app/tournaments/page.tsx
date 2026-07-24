@@ -123,8 +123,12 @@ export default async function TournamentsPage() {
                 <strong>{today.label}</strong>
               </div>
               {tournaments.map((tournament) => {
-                const eventDateText = tournamentDateLabel(tournament.eventDate, tournament.dateLabel);
-                const eventDate = tournamentDate(tournament.eventDate, tournament.dateLabel);
+                const eventDateText = tournament.dateLabel
+                  ? tournamentDateLabel(undefined, tournament.dateLabel)
+                  : tournamentDateLabel(tournament.eventDate);
+                const eventDate = tournament.dateLabel
+                  ? tournamentDate(undefined, tournament.dateLabel)
+                  : tournamentDate(tournament.eventDate);
                 const daysUntil = daysUntilTournament(eventDate, today.date);
 
                 return (
