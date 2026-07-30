@@ -104,6 +104,94 @@ function splitTournamentsByTiming(
   return { upcoming, past };
 }
 
+function BoardIcon({ type }: { type: "calendar" | "clock" | "organizer" | "venue" | "category" | "external" | "document" | "trophy" }) {
+  const commonProps = {
+    "aria-hidden": true,
+    fill: "none",
+    stroke: "currentColor",
+    strokeLinecap: "round" as const,
+    strokeLinejoin: "round" as const,
+    strokeWidth: 2.6,
+    viewBox: "0 0 24 24"
+  };
+
+  if (type === "calendar") {
+    return (
+      <svg {...commonProps}>
+        <path d="M8 2.8v3.4M16 2.8v3.4M4.5 9.3h15" />
+        <rect x="4.5" y="5.2" width="15" height="15.8" rx="2.2" />
+      </svg>
+    );
+  }
+
+  if (type === "clock") {
+    return (
+      <svg {...commonProps}>
+        <circle cx="12" cy="12" r="8.5" />
+        <path d="M12 7.5V12l3.2 2" />
+      </svg>
+    );
+  }
+
+  if (type === "organizer") {
+    return (
+      <svg {...commonProps}>
+        <circle cx="12" cy="7.2" r="3.2" />
+        <path d="M5.8 20c.8-4 3-6 6.2-6s5.4 2 6.2 6" />
+      </svg>
+    );
+  }
+
+  if (type === "venue") {
+    return (
+      <svg {...commonProps}>
+        <path d="M12 21s6.5-5.8 6.5-11.2a6.5 6.5 0 0 0-13 0C5.5 15.2 12 21 12 21Z" />
+        <circle cx="12" cy="9.8" r="2.2" />
+      </svg>
+    );
+  }
+
+  if (type === "category") {
+    return (
+      <svg {...commonProps}>
+        <path d="M20.5 13.1 12.1 21 3 11.9V3h8.9l8.6 8.6v1.5Z" />
+        <circle cx="8.2" cy="8.2" r="1.2" />
+      </svg>
+    );
+  }
+
+  if (type === "document") {
+    return (
+      <svg {...commonProps}>
+        <rect x="6.5" y="3.5" width="11" height="17" rx="1.8" />
+        <path d="M9.5 8h5M9.5 12h5M9.5 16h3" />
+      </svg>
+    );
+  }
+
+  if (type === "trophy") {
+    return (
+      <svg {...commonProps}>
+        <path d="M8 4.5h8v5.2a4 4 0 0 1-8 0V4.5Z" />
+        <path d="M8 6.5H5.5v2.2A3.2 3.2 0 0 0 8.7 12M16 6.5h2.5v2.2a3.2 3.2 0 0 1-3.2 3.3M12 14v3.2M8.8 20h6.4" />
+      </svg>
+    );
+  }
+
+  return (
+    <svg {...commonProps}>
+      <path d="M8 8h8v8M16 8 7 17" />
+      <path d="M10 5H5v14h14v-5" />
+    </svg>
+  );
+}
+
+function actionIconType(label: string) {
+  if (label.includes("概要")) return "document";
+  if (label.includes("成績")) return "trophy";
+  return "external";
+}
+
 function TournamentBoard({
   tournament,
   today
@@ -125,24 +213,28 @@ function TournamentBoard({
   return (
     <article className="tournament-board">
       <div className="tournament-board-header">
-        <time>{eventDateText || tournament.dateLabel || tournament.month || "日程確認中"}</time>
+        <div className="tournament-date-group">
+          <span className="tournament-date-icon"><BoardIcon type="calendar" /></span>
+          <time>{eventDateText || tournament.dateLabel || tournament.month || "日程確認中"}</time>
+        </div>
         <span className={isPast ? "tournament-countdown is-past" : "tournament-countdown"}>
+          <BoardIcon type="clock" />
           {tournamentTimingLabel(daysUntil, isPast)}
         </span>
       </div>
       <h2>{tournament.title}</h2>
       <dl className="tournament-board-meta" aria-label={`${tournament.title}の基本情報`}>
-        <div>
-          <dt>主催者</dt>
+        <div className="is-organizer">
+          <dt><BoardIcon type="organizer" />主催者</dt>
           <dd>{tournament.organizer || "確認中"}</dd>
         </div>
-        <div>
-          <dt>会場</dt>
+        <div className="is-venue">
+          <dt><BoardIcon type="venue" />会場</dt>
           <dd>{tournament.venue || tournament.area || "確認中"}</dd>
         </div>
       </dl>
       <div className="tournament-board-categories" aria-label="カテゴリー">
-        <span>カテゴリー</span>
+        <span><BoardIcon type="category" />カテゴリー</span>
         {tags.length ? tags.map((tag) => <em key={tag}>#{tag}</em>) : <em>#確認中</em>}
       </div>
       <div className="tournament-board-actions" aria-label={`${tournament.title}の関連リンク`}>
@@ -155,10 +247,12 @@ function TournamentBoard({
               target="_blank"
               rel="noreferrer"
             >
+              <BoardIcon type={actionIconType(link.label) as "external" | "document" | "trophy"} />
               {link.label}
             </a>
           ) : (
             <span key={link.label} className="tournament-board-button is-disabled" aria-disabled="true">
+              <BoardIcon type={actionIconType(link.label) as "external" | "document" | "trophy"} />
               {link.label}
             </span>
           )
