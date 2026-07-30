@@ -21080,10 +21080,11 @@ body:has(.shops-page-shell) .shops-hero-section {
 }
 
 #tournament-test .tournament-board-categories {
-  display: grid;
-  grid-template-columns: auto 1px minmax(0, 1fr);
+  display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 18px;
+  column-gap: 18px;
+  row-gap: 10px;
   min-width: 0;
   margin-top: -6px;
   padding-top: 16px;
@@ -21095,19 +21096,24 @@ body:has(.shops-page-shell) .shops-hero-section {
 }
 
 #tournament-test .tournament-board-categories::after {
-  grid-column: 2;
-  grid-row: 1;
+  flex: 0 0 1px;
+  order: 2;
 }
 
 #tournament-test .tournament-board-categories em {
-  grid-column: 3;
+  order: 3;
   min-width: 0;
+  margin-right: 0.7em;
   color: var(--tournament-board-ink);
   font-style: normal;
   font-size: clamp(18px, 1.3vw, 22px);
   font-weight: 850;
   line-height: 1.15;
   overflow-wrap: break-word;
+}
+
+#tournament-test .tournament-board-categories em:last-child {
+  margin-right: 0;
 }
 
 #tournament-test .tournament-board-description {
