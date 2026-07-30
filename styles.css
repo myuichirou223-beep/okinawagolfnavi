@@ -24802,6 +24802,39 @@ body:has(.junior-feature-page) .site-header.mobile-scroll-normal {
   }
 }
 
+/* Tournament mobile requested cleanup. */
+@media (max-width: 760px) {
+  body:has(.tournament-test-shell) #tournament-test .section-heading {
+    margin-bottom: 22px;
+  }
+
+  body:has(.tournament-test-shell) #tournament-test .section-heading .eyebrow {
+    gap: 0;
+  }
+
+  body:has(.tournament-test-shell) #tournament-test .section-heading .eyebrow svg,
+  body:has(.tournament-test-shell) #tournament-test .section-heading p:not(.eyebrow),
+  body:has(.tournament-test-shell) #tournament-test .tournament-tabs svg {
+    display: none !important;
+  }
+
+  body:has(.tournament-test-shell) #tournament-test .tournament-tabs button {
+    gap: 0;
+  }
+
+  body:has(.tournament-test-shell) #tournament-test .tournament-board-header {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    justify-items: start;
+    gap: 8px;
+  }
+
+  body:has(.tournament-test-shell) #tournament-test .tournament-countdown {
+    justify-self: start;
+    margin-left: 38px;
+  }
+}
+
 /* Final mobile header reset: one stable pill with logo left and menu right. */
 @media (max-width: 760px) {
   .site-header,
