@@ -173,6 +173,29 @@ function activateTournamentTestTab(tabButton) {
   });
 }
 
+function filterPastTournaments(searchInput) {
+  const panel = searchInput.closest("[data-tournament-panel='past']");
+  if (!panel) return;
+
+  const queryParts = searchInput.value
+    .trim()
+    .toLowerCase()
+    .split(/\s+/)
+    .filter(Boolean);
+  const cards = [...panel.querySelectorAll(".tournament-board")];
+  let visibleCount = 0;
+
+  cards.forEach((card) => {
+    const keywords = `${card.dataset.tournamentKeywords || ""} ${card.textContent || ""}`.toLowerCase();
+    const isVisible = !queryParts.length || queryParts.every((query) => keywords.includes(query));
+    card.hidden = !isVisible;
+    if (isVisible) visibleCount += 1;
+  });
+
+  const emptyMessage = panel.querySelector("[data-past-tournament-empty]");
+  if (emptyMessage) emptyMessage.hidden = visibleCount > 0;
+}
+
 document.addEventListener("click", (event) => {
   const target = event.target;
   if (!(target instanceof Element)) return;
@@ -273,6 +296,15 @@ document.addEventListener("click", (event) => {
     return;
   }
 
+});
+
+document.addEventListener("input", (event) => {
+  const target = event.target;
+  if (!(target instanceof HTMLInputElement)) return;
+
+  if (target.matches("#tournament-test [data-past-tournament-search]")) {
+    filterPastTournaments(target);
+  }
 });
 
 document.addEventListener("keydown", (event) => {

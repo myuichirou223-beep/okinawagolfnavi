@@ -4,6 +4,7 @@ import { DesktopSidebarLayout } from "../components/DesktopSidebarLayout";
 import {
   getTournaments,
   tournamentActionLinks,
+  tournamentKeywords,
   tournamentSortDate,
   tournamentTargetLabel
 } from "../../lib/microcms";
@@ -194,9 +195,10 @@ function TournamentBoard({
   const isPast = tournamentSortDate(tournament) < today.sortDate;
   const tags = tournamentCategoryTags(tournament);
   const actionLinks = tournamentActionLinks(tournament);
+  const keywords = tournamentKeywords(tournament);
 
   return (
-    <article className="tournament-board">
+    <article className="tournament-board" data-tournament-keywords={keywords}>
       <div className="tournament-board-header">
         <div className="tournament-date-group">
           <span className="tournament-date-icon"><BoardIcon type="calendar" /></span>
@@ -292,9 +294,22 @@ export default async function TournamentsPage() {
             </div>
             <div className="tournament-panel" data-tournament-panel="past" hidden>
               {past.length ? (
-                <div className="tournament-board-list">
-                  {past.map((tournament) => <TournamentBoard key={tournament.id} tournament={tournament} today={today} />)}
-                </div>
+                <>
+                  <div className="tournament-history-search" role="search" aria-label="過去大会のキーワード検索">
+                    <label htmlFor="past-tournament-search">過去大会を検索</label>
+                    <input
+                      id="past-tournament-search"
+                      type="search"
+                      placeholder="大会名・会場・主催者など"
+                      autoComplete="off"
+                      data-past-tournament-search
+                    />
+                  </div>
+                  <div className="tournament-board-list">
+                    {past.map((tournament) => <TournamentBoard key={tournament.id} tournament={tournament} today={today} />)}
+                  </div>
+                  <p className="empty-message" data-past-tournament-empty hidden>該当する過去大会はありません。</p>
+                </>
               ) : (
                 <p className="empty-message">開催済みの大会はまだありません。</p>
               )}
