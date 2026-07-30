@@ -21054,10 +21054,11 @@ body:has(.shops-page-shell) .shops-hero-section {
     linear-gradient(180deg, #2289ff, var(--tournament-board-blue));
   color: #ffffff;
   font-size: clamp(20px, 2.15vw, 30px);
-  font-weight: 950;
+  font-weight: 850;
   line-height: 1.15;
   text-align: center;
   text-decoration: none;
+  text-shadow: 0 1px 1px rgba(0, 64, 150, 0.18);
   text-overflow: ellipsis;
   white-space: nowrap;
   box-shadow:
