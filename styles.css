@@ -24831,7 +24831,22 @@ body:has(.junior-feature-page) .site-header.mobile-scroll-normal {
 
   body:has(.tournament-test-shell) #tournament-test .tournament-countdown {
     justify-self: start;
-    margin-left: 38px;
+    margin-left: 0;
+  }
+
+  body:has(.tournament-test-shell) #tournament-test .tournament-date-icon,
+  body:has(.tournament-test-shell) #tournament-test .tournament-board-meta dt svg,
+  body:has(.tournament-test-shell) #tournament-test .tournament-board-categories > span svg {
+    display: none !important;
+  }
+
+  body:has(.tournament-test-shell) #tournament-test .tournament-date-group {
+    gap: 0;
+  }
+
+  body:has(.tournament-test-shell) #tournament-test .tournament-board-meta dt,
+  body:has(.tournament-test-shell) #tournament-test .tournament-board-categories > span {
+    justify-content: center;
   }
 }
 
