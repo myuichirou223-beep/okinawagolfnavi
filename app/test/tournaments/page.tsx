@@ -1,6 +1,5 @@
 import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
-import { DesktopSidebarLayout } from "../../components/DesktopSidebarLayout";
 import {
   getTournaments,
   tournamentActionLinks,
@@ -104,7 +103,7 @@ function splitTournamentsByTiming(
   return { upcoming, past };
 }
 
-function BoardIcon({ type }: { type: "calendar" | "clock" | "organizer" | "venue" | "category" | "external" | "document" | "trophy" }) {
+function BoardIcon({ type }: { type: "calendar" | "clock" | "organizer" | "venue" | "category" | "external" | "document" | "trophy" | "info" }) {
   const commonProps = {
     "aria-hidden": true,
     fill: "none",
@@ -174,6 +173,15 @@ function BoardIcon({ type }: { type: "calendar" | "clock" | "organizer" | "venue
       <svg {...commonProps}>
         <path d="M8 4.5h8v5.2a4 4 0 0 1-8 0V4.5Z" />
         <path d="M8 6.5H5.5v2.2A3.2 3.2 0 0 0 8.7 12M16 6.5h2.5v2.2a3.2 3.2 0 0 1-3.2 3.3M12 14v3.2M8.8 20h6.4" />
+      </svg>
+    );
+  }
+
+  if (type === "info") {
+    return (
+      <svg {...commonProps}>
+        <circle cx="12" cy="12" r="8.6" />
+        <path d="M12 11.2v5M12 7.6h.01" />
       </svg>
     );
   }
@@ -262,21 +270,24 @@ export default async function TournamentTestPage() {
   return (
     <>
       <Header />
-      <DesktopSidebarLayout>
-        <section id="tournament-test" className="section" aria-labelledby="tournament-test-title">
+      <main id="main" className="tournament-test-shell">
+        <section id="tournament-test" aria-labelledby="tournament-test-title">
           <div className="section-heading">
-            <p className="eyebrow">Tournament Test</p>
+            <p className="eyebrow"><BoardIcon type="trophy" />Tournament Test</p>
             <h1 id="tournament-test-title">大会情報 テストページ</h1>
             <p>沖縄県内で開催される大会を新しい告知ボード型レイアウトで確認できます。</p>
-            <p className="schedule-note">
-              掲載している日程は変更される場合があります。参加・観戦前に、公式ページや主催者発表で最新情報を再確認してください。
-            </p>
+          </div>
+          <div className="schedule-note">
+            <BoardIcon type="info" />
+            <p>掲載している日程は変更される場合があります。参加・観戦前に、公式ページや主催者発表で最新情報を再確認してください。</p>
           </div>
           <div className="tournament-tabs" role="tablist" aria-label="大会表示の切り替え">
             <button className="is-active" type="button" role="tab" aria-selected="true" data-tournament-tab="upcoming">
+              <BoardIcon type="calendar" />
               これから開催
             </button>
             <button type="button" role="tab" aria-selected="false" data-tournament-tab="past">
+              <BoardIcon type="calendar" />
               過去大会
             </button>
           </div>
@@ -301,7 +312,7 @@ export default async function TournamentTestPage() {
             </div>
           </div>
         </section>
-      </DesktopSidebarLayout>
+      </main>
       <Footer />
     </>
   );
