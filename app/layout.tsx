@@ -57,7 +57,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="ja">
       <body>
         {children}
-        <Script src="/script.js" strategy="afterInteractive" />
+        <Script src="/script.js?v=20260730-search-fix" strategy="afterInteractive" />
         <Script src="https://www.googletagmanager.com/gtag/js?id=G-EMPPFFVKNR" strategy="afterInteractive" />
         <Script id="google-analytics" strategy="afterInteractive">
           {`
