@@ -24860,6 +24860,11 @@ body:has(.junior-feature-page) .site-header.mobile-scroll-normal {
     width: 100%;
     min-height: 46px;
   }
+
+  body:has(.tournament-test-shell) #tournament-test .tournament-board-button::before {
+    display: none !important;
+    content: none !important;
+  }
 }
 
 /* Final mobile header reset: one stable pill with logo left and menu right. */
