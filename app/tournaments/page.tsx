@@ -220,7 +220,13 @@ function TournamentBoard({
       </dl>
       <div className="tournament-board-categories" aria-label="カテゴリー">
         <span><BoardIcon type="category" />カテゴリー</span>
-        {tags.length ? tags.map((tag) => <em key={tag}>#{tag}</em>) : <em>#確認中</em>}
+        {tags.length ? (
+          tags.map((tag) => (
+            <em key={tag}><span className="tournament-tag-prefix" aria-hidden="true">#</span>{tag}</em>
+          ))
+        ) : (
+          <em><span className="tournament-tag-prefix" aria-hidden="true">#</span>確認中</em>
+        )}
       </div>
       <div className="tournament-board-actions" aria-label={`${tournament.title}の関連リンク`}>
         {actionLinks.map((link) => (
