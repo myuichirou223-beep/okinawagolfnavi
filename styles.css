@@ -24827,7 +24827,7 @@ body:has(.junior-feature-page) .site-header.mobile-scroll-normal {
   }
 
   body:has(.tournament-test-shell) #tournament-test .tournament-countdown {
-    order: 3;
+    order: 1;
     justify-self: start;
     margin-left: 0;
   }
@@ -24839,7 +24839,7 @@ body:has(.junior-feature-page) .site-header.mobile-scroll-normal {
   }
 
   body:has(.tournament-test-shell) #tournament-test .tournament-date-group {
-    order: 2;
+    order: 3;
     display: grid;
     grid-template-columns: 112px minmax(0, 1fr);
     width: 100%;
@@ -24871,7 +24871,7 @@ body:has(.junior-feature-page) .site-header.mobile-scroll-normal {
   }
 
   body:has(.tournament-test-shell) #tournament-test .tournament-board h2 {
-    order: 1;
+    order: 2;
   }
 
   body:has(.tournament-test-shell) #tournament-test .tournament-board-meta {
