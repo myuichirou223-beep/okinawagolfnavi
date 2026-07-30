@@ -24823,13 +24823,11 @@ body:has(.junior-feature-page) .site-header.mobile-scroll-normal {
   }
 
   body:has(.tournament-test-shell) #tournament-test .tournament-board-header {
-    display: grid !important;
-    grid-template-columns: minmax(0, 1fr) !important;
-    justify-items: start;
-    gap: 8px;
+    display: contents !important;
   }
 
   body:has(.tournament-test-shell) #tournament-test .tournament-countdown {
+    order: 3;
     justify-self: start;
     margin-left: 0;
   }
@@ -24841,7 +24839,51 @@ body:has(.junior-feature-page) .site-header.mobile-scroll-normal {
   }
 
   body:has(.tournament-test-shell) #tournament-test .tournament-date-group {
-    gap: 0;
+    order: 2;
+    display: grid;
+    grid-template-columns: 112px minmax(0, 1fr);
+    width: 100%;
+    align-items: center;
+    gap: 12px;
+  }
+
+  body:has(.tournament-test-shell) #tournament-test .tournament-date-group::before {
+    display: inline-flex;
+    min-height: 31px;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 12px;
+    border-radius: 7px !important;
+    background: linear-gradient(180deg, #f3f7ff, #e8effa);
+    color: #0f50b7;
+    font-size: 14px;
+    font-weight: 900;
+    line-height: 1;
+    white-space: nowrap;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.78);
+    content: "開催日";
+  }
+
+  body:has(.tournament-test-shell) #tournament-test .tournament-date-group time {
+    font-size: 16px;
+    font-weight: 560;
+    line-height: 1.45;
+  }
+
+  body:has(.tournament-test-shell) #tournament-test .tournament-board h2 {
+    order: 1;
+  }
+
+  body:has(.tournament-test-shell) #tournament-test .tournament-board-meta {
+    order: 4;
+  }
+
+  body:has(.tournament-test-shell) #tournament-test .tournament-board-categories {
+    order: 5;
+  }
+
+  body:has(.tournament-test-shell) #tournament-test .tournament-board-actions {
+    order: 6;
   }
 
   body:has(.tournament-test-shell) #tournament-test .tournament-board-meta dt,
