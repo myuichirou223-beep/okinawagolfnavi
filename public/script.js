@@ -156,6 +156,23 @@ function sortTournamentItems() {
   syncTournamentMonthGroups();
 }
 
+function activateTournamentTestTab(tabButton) {
+  const tabValue = tabButton.dataset.tournamentTab;
+  const section = tabButton.closest("#tournament-test");
+
+  section?.querySelectorAll("[data-tournament-tab]").forEach((button) => {
+    const isActive = button === tabButton;
+    button.classList.toggle("is-active", isActive);
+    button.setAttribute("aria-selected", String(isActive));
+  });
+
+  section?.querySelectorAll("[data-tournament-panel]").forEach((panel) => {
+    const isActive = panel.dataset.tournamentPanel === tabValue;
+    panel.classList.toggle("is-active", isActive);
+    panel.hidden = !isActive;
+  });
+}
+
 document.addEventListener("click", (event) => {
   const target = event.target;
   if (!(target instanceof Element)) return;
@@ -193,6 +210,12 @@ document.addEventListener("click", (event) => {
   const navLink = target.closest(".site-nav a");
   if (navLink) {
     setMobileMenu(false);
+  }
+
+  const tournamentTestTabButton = target.closest("#tournament-test [data-tournament-tab]");
+  if (tournamentTestTabButton) {
+    activateTournamentTestTab(tournamentTestTabButton);
+    return;
   }
 
   const sortButton = target.closest(".sort-button");
