@@ -20730,10 +20730,13 @@ body:has(.shops-page-shell) .shops-hero-section {
   --tournament-board-blue: #2578f4;
   --tournament-board-blue-dark: #1161d6;
   --tournament-board-muted: #d8dbe4;
+  box-sizing: border-box;
   width: 100%;
-  max-width: none;
-  padding-right: max(16px, calc((100% - 1180px) / 2));
-  padding-left: max(16px, calc((100% - 1180px) / 2));
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+  padding-right: clamp(18px, 2vw, 28px);
+  padding-left: clamp(18px, 2vw, 28px);
   background: #efefef;
 }
 
@@ -20748,6 +20751,7 @@ body:has(.shops-page-shell) .shops-hero-section {
 
 #tournament-test .section-heading h1 {
   color: var(--tournament-board-ink);
+  font-size: clamp(40px, 4vw, 56px);
   text-shadow: none;
 }
 
@@ -20823,8 +20827,12 @@ body:has(.shops-page-shell) .shops-hero-section {
 
 #tournament-test .tournament-board {
   display: grid;
-  gap: 20px;
-  padding: 22px 24px 12px;
+  box-sizing: border-box;
+  gap: 18px;
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  padding: 20px 22px 12px;
   border: 1px solid #d2d2d2;
   background: var(--tournament-board-paper);
   color: var(--tournament-board-ink);
@@ -20832,23 +20840,27 @@ body:has(.shops-page-shell) .shops-hero-section {
 }
 
 #tournament-test .tournament-board-header {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-items: start;
-  gap: 18px;
+  display: flex;
+  min-width: 0;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px 18px;
 }
 
 #tournament-test .tournament-board time {
+  min-width: 0;
   color: var(--tournament-board-ink);
-  font-size: clamp(28px, 4.4vw, 52px);
+  font-size: clamp(34px, 3.15vw, 46px);
   font-weight: 950;
   line-height: 1.05;
   letter-spacing: 0;
+  white-space: nowrap;
 }
 
 #tournament-test .tournament-countdown {
+  min-width: 0;
   color: #ff1f68;
-  font-size: clamp(22px, 3vw, 40px);
+  font-size: clamp(24px, 2.25vw, 32px);
   font-weight: 950;
   line-height: 1.1;
   text-align: right;
@@ -20861,18 +20873,22 @@ body:has(.shops-page-shell) .shops-hero-section {
 
 #tournament-test .tournament-board h2 {
   margin: -6px 0 0;
+  min-width: 0;
+  overflow: hidden;
   color: var(--tournament-board-ink);
-  font-size: 36px;
+  font-size: clamp(28px, 2.45vw, 34px);
   font-weight: 950;
   line-height: 1.15;
   letter-spacing: 0;
+  text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 #tournament-test .tournament-board-meta {
   display: flex;
   flex-wrap: wrap;
-  gap: 16px 32px;
+  gap: 12px 24px;
+  min-width: 0;
   margin: 0;
 }
 
@@ -20880,7 +20896,7 @@ body:has(.shops-page-shell) .shops-hero-section {
   display: inline-flex;
   min-width: 0;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
 }
 
 #tournament-test .tournament-board-meta dt,
@@ -20892,7 +20908,7 @@ body:has(.shops-page-shell) .shops-hero-section {
   padding: 5px 12px;
   background: #000000;
   color: #ffffff;
-  font-size: 21px;
+  font-size: 18px;
   font-weight: 950;
   line-height: 1;
   white-space: nowrap;
@@ -20900,11 +20916,13 @@ body:has(.shops-page-shell) .shops-hero-section {
 
 #tournament-test .tournament-board-meta dd {
   min-width: 0;
+  overflow: hidden;
   margin: 0;
   color: var(--tournament-board-ink);
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 950;
   line-height: 1.25;
+  text-overflow: ellipsis;
   white-space: nowrap;
 }
 
@@ -20912,18 +20930,19 @@ body:has(.shops-page-shell) .shops-hero-section {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 12px 26px;
+  gap: 10px 20px;
+  min-width: 0;
 }
 
 #tournament-test .tournament-board-categories span {
-  min-width: 216px;
+  min-width: 180px;
   border-radius: 999px;
 }
 
 #tournament-test .tournament-board-categories em {
   color: var(--tournament-board-ink);
   font-style: normal;
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 950;
   line-height: 1.15;
 }
@@ -20941,24 +20960,29 @@ body:has(.shops-page-shell) .shops-hero-section {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 10px;
-  margin: 6px -8px 0;
+  min-width: 0;
+  margin: 4px 0 0;
 }
 
 #tournament-test .tournament-board-button {
   display: inline-flex;
+  box-sizing: border-box;
   min-width: 0;
-  min-height: 84px;
+  min-height: 70px;
   align-items: center;
   justify-content: center;
-  padding: 12px 18px;
+  overflow: hidden;
+  padding: 10px 12px;
   border: 0;
   background: var(--tournament-board-blue);
   color: #ffffff;
-  font-size: clamp(20px, 2.4vw, 34px);
+  font-size: clamp(20px, 2vw, 28px);
   font-weight: 950;
   line-height: 1.15;
   text-align: center;
   text-decoration: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   transition: background 150ms ease, transform 150ms ease;
 }
 
