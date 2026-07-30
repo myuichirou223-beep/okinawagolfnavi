@@ -189,11 +189,9 @@ export default async function TournamentTestPage() {
           <div className="tournament-tabs" role="tablist" aria-label="大会表示の切り替え">
             <button className="is-active" type="button" role="tab" aria-selected="true" data-tournament-tab="upcoming">
               これから開催
-              <span>{upcoming.length}</span>
             </button>
             <button type="button" role="tab" aria-selected="false" data-tournament-tab="past">
               過去大会
-              <span>{past.length}</span>
             </button>
           </div>
           <div className="annual-schedule" aria-label="大会スケジュール">

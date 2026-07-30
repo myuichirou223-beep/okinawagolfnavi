@@ -20794,20 +20794,6 @@ body:has(.shops-page-shell) .shops-hero-section {
   color: #ffffff;
 }
 
-#tournament-test .tournament-tabs span {
-  min-width: 28px;
-  padding: 3px 8px;
-  background: currentColor;
-  color: #ffffff;
-  font-size: 13px;
-  line-height: 1.2;
-}
-
-#tournament-test .tournament-tabs button.is-active span {
-  background: #ffffff;
-  color: #111111;
-}
-
 #tournament-test .annual-schedule {
   margin-bottom: 0;
   padding: 0;
