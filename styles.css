@@ -21066,12 +21066,6 @@ body:has(.shops-page-shell) .shops-hero-section {
   transition: background 150ms ease, box-shadow 150ms ease, transform 150ms ease;
 }
 
-#tournament-test .tournament-board-button svg {
-  width: 28px;
-  min-width: 28px;
-  height: 28px;
-}
-
 #tournament-test a.tournament-board-button:hover,
 #tournament-test a.tournament-board-button:focus-visible {
   background: var(--tournament-board-blue-dark);

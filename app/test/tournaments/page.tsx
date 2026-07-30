@@ -186,12 +186,6 @@ function BoardIcon({ type }: { type: "calendar" | "clock" | "organizer" | "venue
   );
 }
 
-function actionIconType(label: string) {
-  if (label.includes("概要")) return "document";
-  if (label.includes("成績")) return "trophy";
-  return "external";
-}
-
 function TournamentBoard({
   tournament,
   today
@@ -247,12 +241,10 @@ function TournamentBoard({
               target="_blank"
               rel="noreferrer"
             >
-              <BoardIcon type={actionIconType(link.label) as "external" | "document" | "trophy"} />
               {link.label}
             </a>
           ) : (
             <span key={link.label} className="tournament-board-button is-disabled" aria-disabled="true">
-              <BoardIcon type={actionIconType(link.label) as "external" | "document" | "trophy"} />
               {link.label}
             </span>
           )
