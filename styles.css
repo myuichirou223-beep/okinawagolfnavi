@@ -20891,6 +20891,11 @@ body:has(.shops-page-shell) .shops-hero-section {
   display: none;
 }
 
+#tournament-test .tournament-board[hidden],
+#tournament-test .empty-message[hidden] {
+  display: none;
+}
+
 #tournament-test .tournament-history-search {
   display: grid;
   gap: 10px;
