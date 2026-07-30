@@ -20872,16 +20872,17 @@ body:has(.shops-page-shell) .shops-hero-section {
 }
 
 #tournament-test .tournament-board h2 {
-  margin: -6px 0 0;
+  margin: -4px 0 0;
   min-width: 0;
-  overflow: hidden;
+  overflow: visible;
   color: var(--tournament-board-ink);
   font-size: clamp(28px, 2.45vw, 34px);
   font-weight: 950;
-  line-height: 1.15;
+  line-height: 1.2;
   letter-spacing: 0;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  text-overflow: clip;
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 
 #tournament-test .tournament-board-meta {
