@@ -1,5 +1,6 @@
 import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
+import { DesktopSidebarLayout } from "../../components/DesktopSidebarLayout";
 import {
   getTournaments,
   tournamentActionLinks,
@@ -270,7 +271,7 @@ export default async function TournamentTestPage() {
   return (
     <>
       <Header />
-      <main id="main" className="tournament-test-shell">
+      <DesktopSidebarLayout mainClassName="tournament-test-shell">
         <section id="tournament-test" aria-labelledby="tournament-test-title">
           <div className="section-heading">
             <p className="eyebrow"><BoardIcon type="trophy" />Tournament Test</p>
@@ -312,7 +313,7 @@ export default async function TournamentTestPage() {
             </div>
           </div>
         </section>
-      </main>
+      </DesktopSidebarLayout>
       <Footer />
     </>
   );

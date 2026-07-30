@@ -20727,10 +20727,15 @@ body:has(.shops-page-shell) .shops-hero-section {
 .tournament-test-shell {
   width: 100%;
   min-height: 100vh;
-  padding: 42px 0 72px;
+  padding-top: 42px;
+  padding-bottom: 72px;
   background:
     radial-gradient(circle at 16% 0%, rgba(255, 255, 255, 0.96), transparent 420px),
     linear-gradient(180deg, #f7f8fa 0%, #f1f3f6 100%);
+}
+
+.tournament-test-shell .portal-page-layout {
+  width: min(1440px, 100%);
 }
 
 #tournament-test {
@@ -20744,10 +20749,10 @@ body:has(.shops-page-shell) .shops-hero-section {
   --tournament-board-pink: #ff1760;
   --tournament-board-pink-soft: #ffe7f0;
   box-sizing: border-box;
-  width: min(1740px, calc(100% - 96px));
+  width: 100%;
   min-width: 0;
   max-width: none;
-  margin: 0 auto;
+  margin: 0;
   overflow: visible;
   padding: 0;
   background: transparent;
@@ -20782,7 +20787,7 @@ body:has(.shops-page-shell) .shops-hero-section {
 #tournament-test .section-heading h1 {
   margin: 0;
   color: var(--tournament-board-ink);
-  font-size: clamp(58px, 5.3vw, 92px);
+  font-size: clamp(48px, 4.6vw, 70px);
   font-weight: 950;
   line-height: 1.04;
   letter-spacing: 0;
@@ -20792,7 +20797,7 @@ body:has(.shops-page-shell) .shops-hero-section {
 #tournament-test .section-heading p:not(.eyebrow) {
   margin: 22px 0 0;
   color: #333333;
-  font-size: clamp(20px, 1.6vw, 28px);
+  font-size: clamp(18px, 1.45vw, 23px);
   font-weight: 550;
   line-height: 1.55;
 }
@@ -20803,10 +20808,10 @@ body:has(.shops-page-shell) .shops-hero-section {
   width: 100%;
   max-width: none;
   align-items: center;
-  gap: 24px;
-  min-height: 94px;
+  gap: 18px;
+  min-height: 82px;
   margin: 0 0 34px;
-  padding: 18px 28px;
+  padding: 16px 22px;
   border: 1px solid #f0b46d;
   border-radius: 12px !important;
   background: rgba(255, 250, 244, 0.78);
@@ -20814,15 +20819,15 @@ body:has(.shops-page-shell) .shops-hero-section {
 }
 
 #tournament-test .schedule-note svg {
-  width: 42px;
-  min-width: 42px;
-  height: 42px;
+  width: 34px;
+  min-width: 34px;
+  height: 34px;
   color: #f0a020;
 }
 
 #tournament-test .schedule-note p {
   margin: 0;
-  font-size: clamp(18px, 1.35vw, 24px);
+  font-size: clamp(15px, 1.15vw, 18px);
   font-weight: 850;
   line-height: 1.6;
 }
@@ -20830,7 +20835,7 @@ body:has(.shops-page-shell) .shops-hero-section {
 #tournament-test .tournament-tabs {
   display: inline-flex;
   gap: 0;
-  width: min(640px, 100%);
+  width: min(520px, 100%);
   margin: 0 0 34px;
   padding: 4px;
   border: 1px solid #dfe3ea;
@@ -20842,17 +20847,17 @@ body:has(.shops-page-shell) .shops-hero-section {
 #tournament-test .tournament-tabs button {
   display: inline-flex;
   flex: 1;
-  min-height: 72px;
+  min-height: 58px;
   align-items: center;
   justify-content: center;
   gap: 12px;
-  padding: 16px 28px;
+  padding: 12px 22px;
   border: 0;
   border-radius: 8px !important;
   background: #ffffff;
   color: #111111;
   font: inherit;
-  font-size: clamp(18px, 1.45vw, 25px);
+  font-size: clamp(16px, 1.2vw, 20px);
   font-weight: 850;
   line-height: 1.2;
   letter-spacing: 0;
@@ -20894,11 +20899,11 @@ body:has(.shops-page-shell) .shops-hero-section {
 #tournament-test .tournament-board {
   display: grid;
   box-sizing: border-box;
-  gap: 22px;
+  gap: 18px;
   width: 100%;
   min-width: 0;
   overflow: visible;
-  padding: 34px 54px 38px;
+  padding: 28px 30px 30px;
   border: 1px solid rgba(218, 223, 232, 0.9);
   border-radius: 24px !important;
   background: var(--tournament-board-paper);
@@ -20913,21 +20918,21 @@ body:has(.shops-page-shell) .shops-hero-section {
   min-width: 0;
   align-items: center;
   justify-content: space-between;
-  gap: 18px 32px;
+  gap: 14px 24px;
 }
 
 #tournament-test .tournament-date-group {
   display: inline-flex;
   min-width: 0;
   align-items: center;
-  gap: 22px;
+  gap: 16px;
 }
 
 #tournament-test .tournament-date-icon {
   display: inline-flex;
-  width: 62px;
-  min-width: 62px;
-  height: 62px;
+  width: 50px;
+  min-width: 50px;
+  height: 50px;
   align-items: center;
   justify-content: center;
   border-radius: 12px !important;
@@ -20937,14 +20942,14 @@ body:has(.shops-page-shell) .shops-hero-section {
 }
 
 #tournament-test .tournament-date-icon svg {
-  width: 38px;
-  height: 38px;
+  width: 30px;
+  height: 30px;
 }
 
 #tournament-test .tournament-date-group time {
   min-width: 0;
   color: var(--tournament-board-ink);
-  font-size: clamp(44px, 3.75vw, 66px);
+  font-size: clamp(32px, 3.1vw, 48px);
   font-weight: 950;
   line-height: 1.05;
   letter-spacing: 0;
@@ -20954,15 +20959,15 @@ body:has(.shops-page-shell) .shops-hero-section {
 #tournament-test .tournament-countdown {
   display: inline-flex;
   min-width: 0;
-  min-height: 62px;
+  min-height: 50px;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 12px 28px;
+  padding: 9px 18px;
   border-radius: 12px !important;
   background: linear-gradient(180deg, #fff1f6, var(--tournament-board-pink-soft));
   color: #ff1f68;
-  font-size: clamp(24px, 2.35vw, 38px);
+  font-size: clamp(20px, 2vw, 30px);
   font-weight: 950;
   line-height: 1.1;
   text-align: right;
@@ -20971,8 +20976,8 @@ body:has(.shops-page-shell) .shops-hero-section {
 }
 
 #tournament-test .tournament-countdown svg {
-  width: 34px;
-  height: 34px;
+  width: 27px;
+  height: 27px;
   color: var(--tournament-board-pink);
 }
 
@@ -20990,7 +20995,7 @@ body:has(.shops-page-shell) .shops-hero-section {
   min-width: 0;
   overflow: visible;
   color: var(--tournament-board-ink);
-  font-size: clamp(52px, 4.9vw, 82px);
+  font-size: clamp(34px, 4vw, 56px);
   font-weight: 950;
   line-height: 1.12;
   letter-spacing: 0;
@@ -21001,11 +21006,11 @@ body:has(.shops-page-shell) .shops-hero-section {
 
 #tournament-test .tournament-board-meta {
   display: grid;
-  grid-template-columns: auto auto auto auto minmax(0, 1fr);
-  gap: 0 24px;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.2fr);
+  gap: 12px 20px;
   min-width: 0;
   align-items: center;
-  margin: 2px 0 0;
+  margin: 4px 0 0;
 }
 
 #tournament-test .tournament-board-meta div {
@@ -21017,11 +21022,11 @@ body:has(.shops-page-shell) .shops-hero-section {
 }
 
 #tournament-test .tournament-board-meta .is-organizer {
-  grid-column: 1 / span 2;
+  grid-column: auto;
 }
 
 #tournament-test .tournament-board-meta .is-venue {
-  grid-column: 3 / span 3;
+  grid-column: auto;
 }
 
 #tournament-test .tournament-board-meta div::after,
@@ -21048,7 +21053,7 @@ body:has(.shops-page-shell) .shops-hero-section {
   border-radius: 9px !important;
   background: linear-gradient(180deg, #f3f7ff, #e8effa);
   color: #0f50b7;
-  font-size: clamp(18px, 1.35vw, 24px);
+  font-size: clamp(16px, 1.15vw, 19px);
   font-weight: 950;
   line-height: 1;
   white-space: nowrap;
@@ -21057,8 +21062,8 @@ body:has(.shops-page-shell) .shops-hero-section {
 
 #tournament-test .tournament-board-meta dt svg,
 #tournament-test .tournament-board-categories span svg {
-  width: 26px;
-  height: 26px;
+  width: 22px;
+  height: 22px;
 }
 
 #tournament-test .tournament-board-meta dd {
@@ -21066,7 +21071,7 @@ body:has(.shops-page-shell) .shops-hero-section {
   overflow: visible;
   margin: 0;
   color: var(--tournament-board-ink);
-  font-size: clamp(20px, 1.35vw, 25px);
+  font-size: clamp(17px, 1.25vw, 21px);
   font-weight: 650;
   line-height: 1.25;
   text-overflow: clip;
@@ -21099,7 +21104,7 @@ body:has(.shops-page-shell) .shops-hero-section {
   min-width: 0;
   color: var(--tournament-board-ink);
   font-style: normal;
-  font-size: clamp(22px, 1.45vw, 28px);
+  font-size: clamp(18px, 1.3vw, 22px);
   font-weight: 850;
   line-height: 1.15;
   overflow-wrap: break-word;
@@ -21126,7 +21131,7 @@ body:has(.shops-page-shell) .shops-hero-section {
   display: inline-flex;
   box-sizing: border-box;
   min-width: 0;
-  min-height: 86px;
+  min-height: 66px;
   align-items: center;
   justify-content: center;
   gap: 10px;
@@ -21138,7 +21143,7 @@ body:has(.shops-page-shell) .shops-hero-section {
     linear-gradient(180deg, rgba(255, 255, 255, 0.2), transparent 44%),
     linear-gradient(180deg, #2289ff, var(--tournament-board-blue));
   color: #ffffff;
-  font-size: clamp(26px, 2vw, 36px);
+  font-size: clamp(20px, 1.8vw, 28px);
   font-weight: 850;
   line-height: 1.15;
   text-align: center;
