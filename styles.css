@@ -24848,6 +24848,18 @@ body:has(.junior-feature-page) .site-header.mobile-scroll-normal {
   body:has(.tournament-test-shell) #tournament-test .tournament-board-categories > span {
     justify-content: center;
   }
+
+  body:has(.tournament-test-shell) #tournament-test .tournament-board-actions {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 8px;
+  }
+
+  body:has(.tournament-test-shell) #tournament-test .tournament-board-button,
+  body:has(.tournament-test-shell) #tournament-test .tournament-board-button:nth-child(3) {
+    grid-column: auto;
+    width: 100%;
+    min-height: 46px;
+  }
 }
 
 /* Final mobile header reset: one stable pill with logo left and menu right. */
