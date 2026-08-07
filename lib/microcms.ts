@@ -836,6 +836,28 @@ function isPublishedTournament(tournament: Tournament) {
   return !["draft", "下書き", "archived", "非公開"].includes(tournament.status);
 }
 
+function applyTournamentCorrections(tournament: Tournament): Tournament {
+  const isKenminJunior =
+    tournament.id === "tournament-2026-023" ||
+    tournament.id === "okinawa-kenmin-junior-championship-2026" ||
+    tournament.title.includes("沖縄県民ゴルフジュニア選手権") ||
+    tournament.title.includes("沖縄県民ゴルフ ジュニア選手権");
+
+  if (!isKenminJunior) return tournament;
+
+  return {
+    ...tournament,
+    title: tournament.title.includes("順延") ? tournament.title : `${tournament.title}（順延大会）`,
+    month: "9月",
+    dateLabel: "2026年9月13日",
+    status: "順延",
+    description: tournament.description?.includes("2026年9月13日")
+      ? tournament.description
+      : `台風の影響により2026年8月7日から2026年9月13日へ順延となりました。${tournament.description || ""}`,
+    tags: [tournament.tags, "順延"].filter(Boolean).join(" ")
+  };
+}
+
 export async function getTournaments() {
   const data = await requestMicroCMS<MicroCMSListResponse<Tournament>>(
     "/tournaments?limit=100&orders=displayOrder,-dateLabel"
@@ -849,6 +871,7 @@ export async function getTournaments() {
       : fallbackTournaments;
   return tournaments
     .filter(isPublishedTournament)
+    .map(applyTournamentCorrections)
     .map(normalizeTournamentDateFields)
     .sort((a, b) => tournamentSortDate(a) - tournamentSortDate(b));
 }
@@ -1379,7 +1402,7 @@ export function tournamentFilterCategory(tournament: Tournament) {
   const status = tournament.status || "";
   const category = tournamentTargetLabel(tournament);
 
-  if (["募集中", "開催予定", "確認中", "予定", "published", "掲載OK", "公開"].includes(status)) values.push("upcoming");
+  if (["募集中", "開催予定", "順延", "延期", "確認中", "予定", "published", "掲載OK", "公開"].includes(status)) values.push("upcoming");
   if (["成績あり", "開催済み", "終了"].includes(status)) values.push("past");
 
   if (category.includes("一般") || category.includes("アマ")) values.push("general");

@@ -166,12 +166,12 @@ export default async function JuniorFeaturePage() {
     {
       id: "fallback-junior-prefecture-2026",
       type: "tournament" as const,
-      title: "第30回沖縄県民ゴルフ ジュニア選手権大会",
+      title: "第30回沖縄県民ゴルフ ジュニア選手権大会（順延大会）",
       audience: "ジュニア",
       venue: "オーシャンキャッスルカントリークラブ",
-      eventDate: "2026-08-07",
-      dateLabel: scheduleDateLabel(new Date(2026, 7, 7)),
-      countdownLabel: dateCountdownLabel(new Date(2026, 7, 7)),
+      eventDate: "2026-09-13",
+      dateLabel: `${scheduleDateLabel(new Date(2026, 8, 13))} 順延開催`,
+      countdownLabel: dateCountdownLabel(new Date(2026, 8, 13)),
       href: "http://www.okinawakengolfasc.jp/kensyusaikyogi/430-2026-2.html"
     },
     {
